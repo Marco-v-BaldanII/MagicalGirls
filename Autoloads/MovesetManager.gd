@@ -13,7 +13,3 @@ var movesets : Dictionary = {
 	"Ritsu" : Ritsu,
 	"Larissa" : Larissa
 }
-
-
-
-
