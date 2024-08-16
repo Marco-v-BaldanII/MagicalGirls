@@ -28,6 +28,7 @@ config/icon="res://icon.svg"
 
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MovesetManager="*res://Autoloads/MovesetManager.gd"
+Controls="*res://Autoloads/Controls.gd"
 
 [display]
 
@@ -85,7 +86,8 @@ w_kick={
 }
 s_kick={
 "deadzone": 0.5,
-"events": []
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
+]
 }
 
 [layer_names]

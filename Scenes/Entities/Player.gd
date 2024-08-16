@@ -1,14 +1,17 @@
 extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 
-const SPEED = 500.0
-const JUMP_VELOCITY = -1500.0
+@export var player_id : int = 0
+
+#These will get changet by a resource
+@export var SPEED = 500.0
+@export var JUMP_VELOCITY = -1500.0
 
 var moveset : Dictionary
 var input_buffer : Array[String]
 var input_made : bool = false
 
-const BUFFER_FRAMES = 12
+const BUFFER_FRAMES = 8
 
 var buffer_time =  0.01666 * BUFFER_FRAMES 
 
@@ -60,6 +63,25 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+var action_state : Dictionary = {
+	"move_left" : false,
+	"move_right" : false,
+	"crouch" : false,
+	"jump" : false,
+	"w_punch" : false,
+	"s_punch" : false,
+	"w_kick" : false,
+	"s_kick" : false
+}
+
+func is_joy_button_just_pressed(action_name : String):
+	if action_state[action_name] == false and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]):
+		action_state[action_name] = true
+		return true
+		
+	action_state[action_name] = false
+	return false
+
 func _input(event):
 	
 	if Input.is_action_just_pressed("move_left"):
@@ -74,16 +96,16 @@ func _input(event):
 	elif Input.is_action_just_pressed("jump"):
 		add_input_to_buffer("jump")
 		perform_move()
-	elif Input.is_action_just_pressed("s_punch"):
+	elif is_joy_button_just_pressed("s_punch"):
 		add_input_to_buffer("s_punch")
 		perform_move()
-	elif Input.is_action_just_pressed("w_punch"):
+	elif is_joy_button_just_pressed("w_punch"):
 		add_input_to_buffer("w_punch")
 		perform_move()
-	elif Input.is_action_just_pressed("s_kick"):
+	elif is_joy_button_just_pressed("s_kick"):
 		add_input_to_buffer("s_kick")
 		perform_move()
-	elif Input.is_action_just_pressed("w_kick"):
+	elif is_joy_button_just_pressed("w_kick"):
 		add_input_to_buffer("w_kick")
 		perform_move()
 	
@@ -101,7 +123,15 @@ func perform_move():
 			
 			clear_buffer()
 			print(specials)
+
+			return
 			
+	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
+		var move : String = input_buffer.back()
+		$AnimationTree["parameters/conditions/" + move] = true
+		await get_tree().create_timer(0.017 * 6).timeout
+		$AnimationTree["parameters/conditions/" + move] = false
+		clear_buffer()
 
 
 func has_subarray(array : Array, subarray : Array) -> bool:
