@@ -10,8 +10,9 @@ class_name Player
 
 #These will get changet by a resource
 @export var SPEED = 500.0
+@export var air_speed = 270
 @export var JUMP_VELOCITY = -1500.0
-@export var JUMP_LAG_FPS = 7
+@export var JUMP_LAG_FPS = 9
 @export var character_name : String = "Ritsu"
 
 var moveset : Dictionary
@@ -95,8 +96,6 @@ func _process(delta):
 
 func _physics_process(delta):
 
-
-
 	move_and_slide()
 
 func is_joy_button_just_pressed(action_name : String):
@@ -154,10 +153,16 @@ func perform_move():
 			
 	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
 		var move : String = input_buffer.back()
-		$AnimationTree["parameters/conditions/" + move] = true
-		await get_tree().create_timer(0.017 * 6).timeout
-		$AnimationTree["parameters/conditions/" + move] = false
-		clear_buffer()
+		if is_on_floor():
+			$AnimationTree["parameters/conditions/" + move] = true
+			await get_tree().create_timer(0.017 * 6).timeout
+			$AnimationTree["parameters/conditions/" + move] = false
+			clear_buffer()
+		else:
+			$AnimationTree["parameters/conditions/" + "air_" + move] = true
+			await get_tree().create_timer(0.017 * 6).timeout
+			$AnimationTree["parameters/conditions/" + "air_" + move] = false
+			clear_buffer()
 
 
 func has_subarray(array : Array, subarray : Array) -> bool:

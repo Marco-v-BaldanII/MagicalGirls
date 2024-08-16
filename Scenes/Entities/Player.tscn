@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cuin37tgeosf"]
+[gd_scene load_steps=53 format=3 uid="uid://cuin37tgeosf"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_b50ad"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="1_yqt7e"]
@@ -6,6 +6,18 @@
 [ext_resource type="Script" path="res://Scenes/Entities/knocked_state.gd" id="4_ka1tp"]
 [ext_resource type="Script" path="res://Scenes/Entities/ground_move_state.gd" id="5_gdwvv"]
 [ext_resource type="Script" path="res://Scenes/Entities/air_move_state.gd" id="6_6kbk4"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
+animation = &"air_s_kick"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_367wu"]
+animation = &"air_s_punch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8plag"]
+animation = &"air_w_kick"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8l6o7"]
+animation = &"air_w_punch"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2nsw"]
 animation = &"idle_anim"
@@ -68,22 +80,62 @@ advance_condition = &"land"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vs2yb"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ixyer"]
+advance_mode = 2
+advance_condition = &"air_s_kick"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lognw"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_scsg8"]
+advance_mode = 2
+advance_condition = &"air_w_kick"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d0fgt"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w6ggf"]
+advance_mode = 2
+advance_condition = &"air_s_punch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s33j6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m3lec"]
+advance_mode = 2
+advance_condition = &"air_w_punch"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_54ebg"]
-states/Start/position = Vector2(261, 51)
+states/Start/position = Vector2(266, 11)
+states/air_s_kick/node = SubResource("AnimationNodeAnimation_tcpvf")
+states/air_s_kick/position = Vector2(24, 244)
+states/air_s_punch/node = SubResource("AnimationNodeAnimation_367wu")
+states/air_s_punch/position = Vector2(387, 346)
+states/air_w_kick/node = SubResource("AnimationNodeAnimation_8plag")
+states/air_w_kick/position = Vector2(51, 176)
+states/air_w_punch/node = SubResource("AnimationNodeAnimation_8l6o7")
+states/air_w_punch/position = Vector2(492, 216)
 states/idle_anim/node = SubResource("AnimationNodeAnimation_h2nsw")
 states/idle_anim/position = Vector2(266, 208)
 states/land/node = SubResource("AnimationNodeAnimation_xdnet")
 states/land/position = Vector2(266, 346)
 states/s_kick/node = SubResource("AnimationNodeAnimation_jrex2")
-states/s_kick/position = Vector2(106, 281)
+states/s_kick/position = Vector2(106, 318)
 states/s_punch/node = SubResource("AnimationNodeAnimation_uc101")
 states/s_punch/position = Vector2(411, 281)
 states/w_kick/node = SubResource("AnimationNodeAnimation_apyy6")
-states/w_kick/position = Vector2(106, 133)
+states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
-transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav")]
-graph_offset = Vector2(-163, 130)
+transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec")]
+graph_offset = Vector2(-152, 115)
 
 [sub_resource type="Animation" id="Animation_h1eyv"]
 length = 0.001
@@ -177,6 +229,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_hxat6"]
 resource_name = "land"
+length = 0.166669
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -330,9 +383,128 @@ tracks/2/keys = {
 "values": [true, false, false]
 }
 
+[sub_resource type="Animation" id="Animation_ld7p7"]
+resource_name = "air_s_kick"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_boxes/strong_box/strong_attack:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/strong_box/strong_attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.533333, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-102, 82), Vector2(340, 34), Vector2(340, 34)]
+}
+
+[sub_resource type="Animation" id="Animation_c82t4"]
+resource_name = "air_w_kick"
+length = 0.200002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 5), Vector2(30, 25), Vector2(249, 114), Vector2(249, 114)]
+}
+
+[sub_resource type="Animation" id="Animation_br8n1"]
+resource_name = "air_w_punch"
+length = 0.200002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 5), Vector2(3, 5), Vector2(272, 66)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_5v44t"]
+resource_name = "air_s_punch"
+length = 0.283335
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_boxes/strong_box/strong_attack:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.216667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(221, -60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/strong_box/strong_attack:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.283333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_max1l"]
 _data = {
 "RESET": SubResource("Animation_h1eyv"),
+"air_s_kick": SubResource("Animation_ld7p7"),
+"air_s_punch": SubResource("Animation_5v44t"),
+"air_w_kick": SubResource("Animation_c82t4"),
+"air_w_punch": SubResource("Animation_br8n1"),
 "idle_anim": SubResource("Animation_ia5yg"),
 "land": SubResource("Animation_hxat6"),
 "s_kick": SubResource("Animation_bjtq4"),
@@ -369,6 +541,10 @@ frame = 7
 tree_root = SubResource("AnimationNodeStateMachine_54ebg")
 advance_expression_base_node = NodePath("")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/air_s_kick = false
+parameters/conditions/air_s_punch = false
+parameters/conditions/air_w_kick = false
+parameters/conditions/air_w_punch = false
 parameters/conditions/land = false
 parameters/conditions/s_kick = false
 parameters/conditions/s_punch = false

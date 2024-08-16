@@ -10,20 +10,24 @@ func enter():
 				e = e.get_parent()
 			player = e
 	player.grounded = false
+	player.velocity.x = 0
 
 
 func physics_update(delta : float):
 	
 	
 	if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
+		player.jump_lag = 100
 		player.velocity.y = player.JUMP_VELOCITY
 		if player.input_buffer.has("move_left"):
-				player.velocity.x = -player.SPEED*0.7
+				player.velocity.x = -player.air_speed
 		elif player.input_buffer.has("move_right"):
-				player.velocity.x = player.SPEED*0.7
+				player.velocity.x = player.air_speed
+				
+		print(player.velocity.x)
 	
 	#LAND	
-	if player.is_on_floor() and not player.grounded:
+	elif player.is_on_floor() and not player.grounded:
 		player.animation_tree["parameters/conditions/land"] = true
 		player.grounded = true
 		player.jump_lag = 0.01666 * player.JUMP_LAG_FPS
