@@ -95,5 +95,4 @@ func _on_join_button_button_down():
 		#node_instantiator.instantiate_node()
 
 func _process(delta):
-	pass
 	print(delta)
