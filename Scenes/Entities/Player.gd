@@ -3,6 +3,8 @@ class_name Player
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var state_machine: StateMachine = $StateMachine
 
 @export var player_id : int = 0
 
@@ -28,6 +30,8 @@ var jump_lag = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 3.2
 
+var strong_knock : bool = false
+
 var action_state : Dictionary = {
 	"move_left" : false,
 	"move_right" : false,
@@ -38,15 +42,34 @@ var action_state : Dictionary = {
 	"w_kick" : false,
 	"s_kick" : false
 }
+@onready var hit_box_1: Area2D = $hit_boxes/weak_box
+@onready var hit_box_2: Area2D = $hit_boxes/strong_box
+@onready var hurt_box: Area2D = $hurt_box
+
+var colliders : Array[CollisionShape2D]
+
+
 
 func _ready():
 	name = character_name
+	
+	if player_id == 0:
+		hit_box_1.set_collision_layer_value(2, true)
+		hit_box_2.set_collision_layer_value(2, true)
+		hurt_box.set_collision_mask_value(3, true)
+
+	else:
+		hit_box_1.set_collision_layer_value(3, true)
+		hit_box_2.set_collision_layer_value(3, true)
+		hurt_box.set_collision_mask_value(2, true)
+
+
 	#set_physics_process(false)
 	var animation = $AnimationPlayer.get_animation("idle_anim")
 	animation.loop_mode = Animation.LOOP_PINGPONG
 	
 	#Assign to each character their moveset
-	moveset = MovesetManager.movesets[name].duplicate()
+	moveset = MovesetManager.movesets[character_name].duplicate()
 	
 	if  oponent.global_position.x < global_position.x:
 		scale.x *= -1
@@ -71,44 +94,8 @@ func _process(delta):
 		direction = "left"
 
 func _physics_process(delta):
-	if not is_on_floor() :
-		grounded = false
-		
-	#LAND	
-	if is_on_floor() and not grounded:
-		$AnimationTree["parameters/conditions/land"] = true
-		grounded = true
-		jump_lag = 0.01666 * JUMP_LAG_FPS
-		await get_tree().create_timer(0.017 * 6).timeout
-		$AnimationTree["parameters/conditions/land"] = false
-	
-	# Add the gravity.
-	if not is_on_floor() :
-		velocity.y += gravity * delta
 
-	if input_buffer.has("jump") and is_on_floor() and jump_lag <= 0:
-		velocity.y = JUMP_VELOCITY
-		if input_buffer.has("move_left"):
-			velocity.x = -SPEED*0.7
-		elif input_buffer.has("move_right"):
-			velocity.x = SPEED*0.7
 
-	var _direction : int = 0
-	if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["move_right"]):
-		_direction += 1
-	if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["move_left"]):
-		_direction -= 1
-	if _direction and is_on_floor():
-		jump_lag -= delta
-		if(_direction > 0 and direction == "left") or (_direction < 0 and direction == "right"):
-			velocity.x = _direction * SPEED
-		else:
-			#move slower in your back direction
-			velocity.x = _direction * (SPEED*0.7)
-
-	elif is_on_floor():
-		jump_lag -= delta
-		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 
@@ -156,11 +143,12 @@ func add_input_to_buffer(input : String):
 
 	
 func perform_move():
-	for specials in MovesetManager.movesets[name].keys():
+	for specials in moveset:
 		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
-			
+			var dir = find_special_direction(moveset[specials])
+			if dir != direction:
+				print(specials + dir)
 			clear_buffer()
-			print(specials)
 
 			return
 			
@@ -187,3 +175,31 @@ func clear_buffer():
 	buffer_time = 0.01666 * BUFFER_FRAMES
 	print(input_buffer)
 	input_buffer.clear()
+	
+func find_special_direction(special : Array[String]) -> String:
+	for input in special:
+		if input.contains("move"):
+			if input == "move_right":
+				return "right"
+			else:
+				return "left"
+	return "none"
+
+var hit : bool = false
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+
+		hit = true
+		sprite_2d.modulate = Color.RED
+		
+		if area.is_in_group("strong"):
+			strong_knock = true
+		else:
+			strong_knock = false
+			
+		#Force a transition to the knocked state
+		state_machine.on_child_transition(state_machine.current_state, "knocked")
+		
+		await get_tree().create_timer(0.017 * 4).timeout
+		hit = false
+		sprite_2d.modulate = Color.WHITE

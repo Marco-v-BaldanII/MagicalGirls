@@ -13,7 +13,6 @@ oponent = NodePath("../Player2")
 [node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_wpecj")]
 position = Vector2(1183, 589)
 player_id = 1
-character_name = "Larissa"
 oponent = NodePath("../Player")
 
 [node name="Floor" type="StaticBody2D" parent="."]

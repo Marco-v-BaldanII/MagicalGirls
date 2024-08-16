@@ -48,6 +48,10 @@ project/assembly_name="test_jam2"
 
 enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg")
 
+[global_group]
+
+weak_=""
+
 [input]
 
 move_right={
@@ -94,6 +98,8 @@ s_kick={
 [layer_names]
 
 2d_physics/layer_1="Floor"
+2d_physics/layer_2="attacks_p1"
+2d_physics/layer_3="attacks_p2"
 
 [rendering]
 
