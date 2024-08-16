@@ -7,7 +7,14 @@ size = Vector2(1936, 135)
 
 [node name="TestMap" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_wpecj")]
+[node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_wpecj")]
+oponent = NodePath("../Player2")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_wpecj")]
+position = Vector2(1183, 589)
+player_id = 1
+character_name = "Larissa"
+oponent = NodePath("../Player")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0

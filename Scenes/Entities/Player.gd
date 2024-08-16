@@ -1,67 +1,32 @@
 extends CharacterBody2D
+class_name Player
+
 @onready var animation_player = $AnimationPlayer
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var player_id : int = 0
 
 #These will get changet by a resource
 @export var SPEED = 500.0
 @export var JUMP_VELOCITY = -1500.0
+@export var JUMP_LAG_FPS = 7
+@export var character_name : String = "Ritsu"
 
 var moveset : Dictionary
 var input_buffer : Array[String]
 var input_made : bool = false
+@export var oponent : Player
+@export var direction : String = "left"
 
 const BUFFER_FRAMES = 8
 
+var grounded : bool = false
+
 var buffer_time =  0.01666 * BUFFER_FRAMES 
+var jump_lag = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 3.2
-
-func _ready():
-	name = "Ritsu"
-	#set_physics_process(false)
-	var animation = $AnimationPlayer.get_animation("idle_anim")
-	animation.loop_mode = Animation.LOOP_PINGPONG
-	
-	#Assign to each character their moveset
-	moveset = MovesetManager.movesets[name].duplicate()
-
-
-func _process(delta):
-	
-	if input_made:
-		buffer_time -= delta
-	
-		if buffer_time <= 0:
-			clear_buffer()
-		
-	
-	#if Input.is_action_pressed("ui_down"):
-		#animation_player.play("idle_anim")
-
-func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction and is_on_floor():
-		if direction > 0:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = direction * (SPEED*0.7)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
-
 
 var action_state : Dictionary = {
 	"move_left" : false,
@@ -74,26 +39,99 @@ var action_state : Dictionary = {
 	"s_kick" : false
 }
 
+func _ready():
+	name = character_name
+	#set_physics_process(false)
+	var animation = $AnimationPlayer.get_animation("idle_anim")
+	animation.loop_mode = Animation.LOOP_PINGPONG
+	
+	#Assign to each character their moveset
+	moveset = MovesetManager.movesets[name].duplicate()
+	
+	if  oponent.global_position.x < global_position.x:
+		scale.x *= -1
+		direction = "right"
+
+
+
+func _process(delta):
+	
+	if input_made:
+		buffer_time -= delta
+	
+		if buffer_time <= 0:
+			clear_buffer()
+		
+	#Auto turn around logic
+	if direction == "left" and oponent.global_position.x < global_position.x:
+		scale.x *= -1
+		direction = "right"
+	elif direction == "right" and oponent.global_position.x > global_position.x:
+		scale.x *= -1
+		direction = "left"
+
+func _physics_process(delta):
+	if not is_on_floor() :
+		grounded = false
+		
+	#LAND	
+	if is_on_floor() and not grounded:
+		$AnimationTree["parameters/conditions/land"] = true
+		grounded = true
+		jump_lag = 0.01666 * JUMP_LAG_FPS
+		await get_tree().create_timer(0.017 * 6).timeout
+		$AnimationTree["parameters/conditions/land"] = false
+	
+	# Add the gravity.
+	if not is_on_floor() :
+		velocity.y += gravity * delta
+
+	if input_buffer.has("jump") and is_on_floor() and jump_lag <= 0:
+		velocity.y = JUMP_VELOCITY
+		if input_buffer.has("move_left"):
+			velocity.x = -SPEED*0.7
+		elif input_buffer.has("move_right"):
+			velocity.x = SPEED*0.7
+
+	var _direction : int = 0
+	if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["move_right"]):
+		_direction += 1
+	if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["move_left"]):
+		_direction -= 1
+	if _direction and is_on_floor():
+		jump_lag -= delta
+		if(_direction > 0 and direction == "left") or (_direction < 0 and direction == "right"):
+			velocity.x = _direction * SPEED
+		else:
+			#move slower in your back direction
+			velocity.x = _direction * (SPEED*0.7)
+
+	elif is_on_floor():
+		jump_lag -= delta
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+
 func is_joy_button_just_pressed(action_name : String):
 	if action_state[action_name] == false and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]):
 		action_state[action_name] = true
 		return true
-		
-	action_state[action_name] = false
+	if not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]):
+		action_state[action_name] = false
 	return false
 
 func _input(event):
 	
-	if Input.is_action_just_pressed("move_left"):
+	if is_joy_button_just_pressed("move_left"):
 		add_input_to_buffer("move_left")
 		perform_move()
-	elif Input.is_action_just_pressed("move_right"):
+	elif is_joy_button_just_pressed("move_right"):
 		add_input_to_buffer("move_right")
 		perform_move()
-	elif Input.is_action_just_pressed("crouch"):
+	elif is_joy_button_just_pressed("crouch"):
 		add_input_to_buffer("crouch")
 		perform_move()
-	elif Input.is_action_just_pressed("jump"):
+	elif is_joy_button_just_pressed("jump"):
 		add_input_to_buffer("jump")
 		perform_move()
 	elif is_joy_button_just_pressed("s_punch"):
