@@ -19,7 +19,7 @@ uniqueUsername=false
 [application]
 
 config/name="test_jam2"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Scenes/Stages/test_map.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -28,6 +28,15 @@ config/icon="res://icon.svg"
 
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=848
+window/size/window_height_override=480
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
+
 [dotnet]
 
 project/assembly_name="test_jam2"
@@ -35,6 +44,10 @@ project/assembly_name="test_jam2"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="Floor"
 
 [rendering]
 
