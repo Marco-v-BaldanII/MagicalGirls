@@ -92,7 +92,6 @@ func _ready():
 
 
 func _process(delta):
-	print(name)
 	if input_made:
 		buffer_time -= delta
 	
@@ -173,12 +172,19 @@ func perform_move():
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + move] = false
 			clear_buffer()
+			GDSync.call_func(_sync_move,[move])
 		else:
 			$AnimationTree["parameters/conditions/" + "air_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
 			clear_buffer()
 
+func _sync_move(animation : String):
+	print("GDSYNCCALLLLLLL")
+	$AnimationTree["parameters/conditions/" + animation] = true
+	await get_tree().create_timer(0.017 * 6).timeout
+	$AnimationTree["parameters/conditions/" + animation] = false
+	clear_buffer()
 
 func has_subarray(array : Array, subarray : Array) -> bool:
 	var subarray_size = subarray.size()
