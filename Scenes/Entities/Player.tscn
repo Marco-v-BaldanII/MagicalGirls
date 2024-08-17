@@ -1,8 +1,9 @@
-[gd_scene load_steps=58 format=3 uid="uid://cuin37tgeosf"]
+[gd_scene load_steps=59 format=3 uid="uid://cuin37tgeosf"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_b50ad"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="1_yqt7e"]
 [ext_resource type="Script" path="res://Scenes/Entities/state_machine.gd" id="3_m0e0u"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/SynchronizedAnimationPlayer.gd" id="3_yjjnu"]
 [ext_resource type="Script" path="res://Scenes/Entities/knocked_state.gd" id="4_ka1tp"]
 [ext_resource type="Script" path="res://Scenes/Entities/ground_move_state.gd" id="5_gdwvv"]
 [ext_resource type="Script" path="res://Scenes/Entities/air_move_state.gd" id="6_6kbk4"]
@@ -592,6 +593,7 @@ parameters/conditions/w_punch = false
 libraries = {
 "": SubResource("AnimationLibrary_max1l")
 }
+script = ExtResource("3_yjjnu")
 
 [node name="Feet" type="CollisionShape2D" parent="."]
 position = Vector2(19.5, 154.5)
