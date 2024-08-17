@@ -112,7 +112,7 @@ func is_joy_button_just_pressed(action_name : String):
 
 func _input(event):
 	
-	if GDSync.is_gdsync_owner(self):
+	if not GameManager.online or GDSync.is_gdsync_owner(self):
 	
 		if is_joy_button_just_pressed("move_left"):
 			add_input_to_buffer("move_left")

@@ -1,5 +1,6 @@
 extends Node2D
 @onready var canvas_layer = $CanvasLayer
+@onready var v_box_container: VBoxContainer = $CanvasLayer/VBoxContainer
 
 var online : bool:
 	set(value):
@@ -13,23 +14,14 @@ var player : PackedScene = preload("res://player.tscn")
 
 func _ready():
 	online = false
-	GDSync.connected.connect(connected)
-	GDSync.connection_failed.connect(connection_failed)
-	
-	GDSync.start_multiplayer()
-	
-	GDSync.lobby_created.connect(lobby_created)
-	GDSync.lobby_creation_failed.connect(lobby_creation_failed)
-	GDSync.lobby_joined.connect(lobby_joined)
-	GDSync.lobby_join_failed.connect(lobby_join_failed)
-	
-	GDSync.client_joined.connect(client_joined)
+
 	
 
 
 func connected():
 	print("You are now connected!")
 	online = true
+	v_box_container.show()
 
 
 func connection_failed(error : int):
@@ -65,6 +57,7 @@ func lobby_creation_failed(lobby_name : String, error : int):
 
 func lobby_joined(lobby_name : String):
 	print("Succesfully joined lobby "+lobby_name)
+	v_box_container.hide()
 
 func lobby_join_failed(lobby_name : String, error : int):
 	match(error):
@@ -94,7 +87,7 @@ func _on_host_button_button_down():
 		}
 		)
 		GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
-	canvas_layer.hide()
+	v_box_container.hide()
 
 @onready var node_instantiator := $NodeInstantiator
 
@@ -102,10 +95,34 @@ func _on_host_button_button_down():
 func _on_join_button_button_down():
 	if online:
 		GDSync.join_lobby("Lobby Name", "Password123")
-		canvas_layer.hide()
+		v_box_container.hide()
 		#node_instantiator.instantiate_node()
 
 
 func client_joined(client_id : int):
 	if !GDSync.is_host():
 		GDSync.set_gdsync_owner(player_2, client_id)
+
+
+func _on_online_button_button_down() -> void:
+	if not online:
+	
+		GDSync.connected.connect(connected)
+		GDSync.connection_failed.connect(connection_failed)
+		
+		GDSync.start_multiplayer()
+		
+		GDSync.lobby_created.connect(lobby_created)
+		GDSync.lobby_creation_failed.connect(lobby_creation_failed)
+		GDSync.lobby_joined.connect(lobby_joined)
+		GDSync.lobby_join_failed.connect(lobby_join_failed)
+		
+		GDSync.client_joined.connect(client_joined)
+	else:
+		GDSync.close_lobby()
+		GDSync.stop_multiplayer()
+		online = false
+		print("Exited lobby")
+		
+	
+	pass # Replace with function body.
