@@ -88,11 +88,13 @@ func _ready():
 	if  oponent and oponent.global_position.x < global_position.x:
 		scale.x *= -1
 		direction = "right"
+		
+	GDSync.expose_node(self)
 
 
 
 func _process(delta):
-	
+	print(name)
 	if input_made:
 		buffer_time -= delta
 	
@@ -120,6 +122,8 @@ func is_joy_button_just_pressed(action_name : String):
 	return false
 
 func _input(event):
+	$"."
+	GDSync.call_func(_input, [event])
 	
 	if is_joy_button_just_pressed("move_left"):
 		add_input_to_buffer("move_left")
