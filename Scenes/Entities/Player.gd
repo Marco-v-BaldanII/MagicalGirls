@@ -20,9 +20,11 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 			
 
 @export var player_id : int = 0
+@export var fly : bool = true
 
 #These will get changet by a resource
 @export var SPEED = 500.0
+@export var FLY_SPEED = 700.0
 @export var air_speed = 270
 @export var JUMP_VELOCITY = -1500.0
 @export var JUMP_LAG_FPS = 9
@@ -61,6 +63,8 @@ var action_state : Dictionary = {
 @onready var hit_box_1: Area2D = $hit_boxes/weak_box
 @onready var hit_box_2: Area2D = $hit_boxes/strong_box
 @onready var hurt_box: Area2D = $hurt_box
+@onready var head_hurt_box: Area2D = $head_hurt_box
+
 @onready var feet: CollisionShape2D = $Feet
 
 
@@ -216,39 +220,59 @@ func find_special_direction(special : Array[String]) -> String:
 	return "none"
 
 var hit : bool = false
+var head: bool = false
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-
+	
+	hit = true
+	sprite_2d.modulate = Color.RED
+	
+	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
-		print(hit_pos)
-		#print(area.get_child(0).global_position)
-		hit = true
-		sprite_2d.modulate = Color.RED
-		
+
 		print("I've been hit")
 		
-		if area.is_in_group("strong"):
-			strong_knock = true
+		if not crouching:
 			
-			if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
+			if area.is_in_group("strong"):
+				strong_knock = true
+				
+				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
+					hp -= 4
+					sprite_2d.modulate = Color.SKY_BLUE
+				else:
+					hp -= 15
+			else:
+				strong_knock = false
+				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
+					hp -= 2
+					sprite_2d.modulate = Color.SKY_BLUE
+				else:
+					hp -= 8
+		else : #Hit body while crouching
+			if area.is_in_group("strong"):
+				strong_knock = true
 				hp -= 4
 				sprite_2d.modulate = Color.SKY_BLUE
 			else:
-				hp -= 15
-		else:
-			strong_knock = false
-			if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
-				hp -= 2
+				strong_knock = false
 				sprite_2d.modulate = Color.SKY_BLUE
-			else:
-				hp -= 8
+				hp -= 2
+	else: #hit Head while crouching
+		if crouching:
 			
-		#Force a transition to the knocked state
-		state_machine.on_child_transition(state_machine.current_state, "knocked")
-		
-		await get_tree().create_timer(0.017 * 20).timeout
-		hit = false
-		sprite_2d.modulate = Color.WHITE
+			if area.is_in_group("strong"):
+				strong_knock = true
+				hp -= 15
+			else:
+				strong_knock = false
+				hp -= 8
+				
+	#Force a transition to the knocked state
+	state_machine.on_child_transition(state_machine.current_state, "knocked")
+	await get_tree().create_timer(0.017 * 20).timeout
+	hit = false
+	sprite_2d.modulate = Color.WHITE
 		
 func deactivate_collisions():
 	pass
@@ -269,8 +293,28 @@ func set_hitboxes(player_id : int):
 		hit_box_1.set_collision_layer_value(2, true)
 		hit_box_2.set_collision_layer_value(2, true)
 		hurt_box.set_collision_mask_value(3, true)
+		head_hurt_box.set_collision_mask_value(3,true)
 
 	else:
 		hit_box_1.set_collision_layer_value(3, true)
 		hit_box_2.set_collision_layer_value(3, true)
 		hurt_box.set_collision_mask_value(2, true)
+		head_hurt_box.set_collision_mask_value(2,true)
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if anim_name.contains("crouch"):
+		if not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and not animation_player.current_animation.contains("crouch"):
+			
+			animation_tree["parameters/conditions/crouch"] = false
+			animation_tree["parameters/conditions/not_crouch"] = true
+			await get_tree().create_timer(0.017 * 6).timeout
+			animation_tree["parameters/conditions/not_crouch"] = false
+	pass # Replace with function body.
+
+
+func _on_head_area_entered(area: Area2D) -> void:
+	head = true
+	_on_hurt_box_area_entered(area)
+	head = false
+	pass # Replace with function body.

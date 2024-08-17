@@ -15,15 +15,26 @@ func enter():
 
 func physics_update(delta : float):
 	
+	if player.fly and not player.is_on_floor():
+		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]):
+			player.input_direction = 1
+
+		elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]):
+			player.input_direction =  -1
+			
+		player.velocity.x = player.FLY_SPEED * player.input_direction
 	
 	if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
 		player.jump_lag = 100
-		player.velocity.y = player.JUMP_VELOCITY
+		if not player.fly:
+			player.velocity.y = player.JUMP_VELOCITY
+		else:
+			player.velocity.y = player.JUMP_VELOCITY*0.4
+			
 		if player.input_buffer.has("move_left"):
 				player.velocity.x = -player.air_speed
 		elif player.input_buffer.has("move_right"):
 				player.velocity.x = player.air_speed
-
 	
 	#LAND	
 	elif player.is_on_floor() and not player.grounded:
@@ -37,4 +48,10 @@ func physics_update(delta : float):
 	
 	# Add the gravity.
 	if not player.is_on_floor() :
-		player.velocity.y += player.gravity * delta
+		if player.fly and not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]):
+			if player.velocity.y < 0:
+				player.velocity.y += (player.gravity*0.2) * delta
+			else:
+				player.velocity.y += (player.gravity/5) * delta
+		else:
+			player.velocity.y += (player.gravity) * delta

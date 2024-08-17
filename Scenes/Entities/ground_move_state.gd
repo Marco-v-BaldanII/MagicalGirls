@@ -14,8 +14,7 @@ func enter():
 
 
 func physics_update(delta : float):
-	var e : String = player.animation_player.current_animation
-	print(e)
+
 	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]):
 		player.input_direction = 1
 
