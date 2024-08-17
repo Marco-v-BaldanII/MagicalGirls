@@ -27,6 +27,25 @@ property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
+[node name="PropertySynchronizer3" type="Node" parent="."]
+script = ExtResource("3_8yg0i")
+refresh_rate = 60
+node_path = NodePath("../Player")
+property_name = "input_buffer"
+interpolation = null
+interpolated = true
+interpolation_speed = 60.0
+
+[node name="PropertySynchronizer4" type="Node" parent="."]
+script = ExtResource("3_8yg0i")
+broadcast = 1
+refresh_rate = 60
+node_path = NodePath("../Player2")
+property_name = "input_buffer"
+interpolation = null
+interpolated = true
+interpolation_speed = 60.0
+
 [node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
 oponent = NodePath("../Player2")
 
