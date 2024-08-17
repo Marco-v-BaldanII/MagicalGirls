@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3khkvflved85"]
+
+[ext_resource type="PackedScene" uid="uid://cuin37tgeosf" path="res://Scenes/Entities/Player.tscn" id="1_ladyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
+size = Vector2(1936, 135)
+
+[node name="TestMap" type="Node2D"]
+
+[node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_ladyy")]
+oponent = NodePath("../Player2")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_ladyy")]
+position = Vector2(1183, 589)
+player_id = 1
+oponent = NodePath("../Player")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(968, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")

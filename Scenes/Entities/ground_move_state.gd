@@ -12,19 +12,26 @@ func enter():
 
 
 func physics_update(delta : float):
-	var _direction : int = 0
 	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]):
-		_direction += 1
-	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]):
-		_direction -= 1
-	if _direction and player.is_on_floor():
+		player.input_direction = 1
+
+	elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]):
+		player.input_direction =  -1
+	else:
+		player.input_direction -= 0.1
+		player.input_direction = clamp(player.input_direction, 0,1)
+
+	if player.is_on_floor():
 		player.jump_lag -= delta
-		if(_direction > 0 and player.direction == "left") or (_direction < 0 and player.direction == "right"):
-			player.velocity.x = _direction * player.SPEED
+		player.moving_backwards = false
+		if(player.input_direction >= 0 and player.direction == "left") or (player.input_direction <= 0 and player.direction == "right"):
+			player.velocity.x = player.input_direction * player.SPEED
+			
 		else:
 			#move slower in your back direction
-			player.velocity.x = _direction * (player.SPEED*0.7)
-
+			player.velocity.x = player.input_direction * (player.SPEED*0.55)
+			player.moving_backwards = true
+	
 	elif player.is_on_floor():
 		player.jump_lag -= delta
 		player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)
@@ -32,8 +39,7 @@ func physics_update(delta : float):
 	else:
 		player.grounded = false
 		Transitioned.emit(self, "air_move")
-	
-	
+
 	#Transition to jump
 	if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
 		Transitioned.emit(self, "air_move")

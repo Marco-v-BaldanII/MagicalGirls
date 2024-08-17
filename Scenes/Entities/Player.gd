@@ -5,6 +5,15 @@ class_name Player
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: StateMachine = $StateMachine
+@onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
+@export var hp : int = 100:
+	set(value ):
+		hp = clamp(value,0,100)
+		
+		while hp_bar.value != hp:
+			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
+			await get_tree().create_timer(0.1667).timeout
+			
 
 @export var player_id : int = 0
 
@@ -20,6 +29,7 @@ var input_buffer : Array[String]
 var input_made : bool = false
 @export var oponent : Player
 @export var direction : String = "left"
+var input_direction : float = 0
 
 const BUFFER_FRAMES = 8
 
@@ -32,6 +42,7 @@ var jump_lag = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 3.2
 
 var strong_knock : bool = false
+var moving_backwards : bool = false
 
 var action_state : Dictionary = {
 	"move_left" : false,
@@ -46,6 +57,8 @@ var action_state : Dictionary = {
 @onready var hit_box_1: Area2D = $hit_boxes/weak_box
 @onready var hit_box_2: Area2D = $hit_boxes/strong_box
 @onready var hurt_box: Area2D = $hurt_box
+@onready var feet: CollisionShape2D = $Feet
+
 
 var colliders : Array[CollisionShape2D]
 
@@ -72,7 +85,7 @@ func _ready():
 	#Assign to each character their moveset
 	moveset = MovesetManager.movesets[character_name].duplicate()
 	
-	if  oponent.global_position.x < global_position.x:
+	if  oponent and oponent.global_position.x < global_position.x:
 		scale.x *= -1
 		direction = "right"
 
@@ -87,10 +100,10 @@ func _process(delta):
 			clear_buffer()
 		
 	#Auto turn around logic
-	if direction == "left" and oponent.global_position.x < global_position.x:
+	if direction == "left" and oponent and oponent.global_position.x < global_position.x:
 		scale.x *= -1
 		direction = "right"
-	elif direction == "right" and oponent.global_position.x > global_position.x:
+	elif direction == "right" and oponent and oponent.global_position.x > global_position.x:
 		scale.x *= -1
 		direction = "left"
 
@@ -199,12 +212,36 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		
 		if area.is_in_group("strong"):
 			strong_knock = true
+			if not moving_backwards:
+				hp -= 15
+			else:
+				hp -= 4
+				sprite_2d.modulate = Color.SKY_BLUE
 		else:
 			strong_knock = false
+			if not moving_backwards:
+				hp -= 8
+			else:
+				hp -= 2
+				sprite_2d.modulate = Color.SKY_BLUE
 			
 		#Force a transition to the knocked state
 		state_machine.on_child_transition(state_machine.current_state, "knocked")
 		
-		await get_tree().create_timer(0.017 * 4).timeout
+		await get_tree().create_timer(0.017 * 20).timeout
 		hit = false
 		sprite_2d.modulate = Color.WHITE
+		
+func deactivate_collisions():
+	pass
+
+
+func _on_body_area_entered(area: Area2D) -> void:
+	
+	#Don't apply knock back if im not moving
+	if input_direction != 0:
+		oponent.strong_knock = true
+		oponent.state_machine.on_child_transition(oponent.state_machine.current_state, "knocked")
+		oponent.jump_lag = 0
+		jump_lag = 0
+	pass # Replace with function body.

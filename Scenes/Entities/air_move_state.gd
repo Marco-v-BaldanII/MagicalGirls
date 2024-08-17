@@ -23,8 +23,7 @@ func physics_update(delta : float):
 				player.velocity.x = -player.air_speed
 		elif player.input_buffer.has("move_right"):
 				player.velocity.x = player.air_speed
-				
-		print(player.velocity.x)
+
 	
 	#LAND	
 	elif player.is_on_floor() and not player.grounded:

@@ -22,9 +22,15 @@ func enter():
 			player = e
 	player.grounded = false
 	if player.strong_knock:
-		knocked_time = 0.0166 * STRONG_KNOCKED_FRAMES
+		if not player.moving_backwards:
+			knocked_time = 0.0166 * STRONG_KNOCKED_FRAMES
+		else:
+			knocked_time = 0.0166 * STRONG_KNOCKED_FRAMES/2
 	else:
-		knocked_time = 0.0166 * KNOCKED_FRAMES
+		if not player.moving_backwards:
+			knocked_time = 0.0166 * KNOCKED_FRAMES
+		else:
+			knocked_time = 0.0166 *  KNOCKED_FRAMES/2
 
 	
 func physics_update(delta : float):
