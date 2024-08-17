@@ -92,7 +92,7 @@ func _ready():
 
 
 func _process(delta):
-	
+	print(name)
 	if input_made:
 		buffer_time -= delta
 	

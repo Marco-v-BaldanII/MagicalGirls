@@ -12,24 +12,25 @@ script = ExtResource("1_wibys")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
+refresh_rate = 60
 node_path = NodePath("../Player")
 property_name = "position"
-interpolated = false
-interpolation_speed = 1.0
+interpolated = true
+interpolation_speed = 60.0
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
+refresh_rate = 60
 node_path = NodePath("../Player2")
 property_name = "position"
-interpolated = false
-interpolation_speed = 1.0
+interpolated = true
+interpolation_speed = 60.0
 
 [node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
 oponent = NodePath("../Player2")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
 position = Vector2(1183, 589)
-player_id = 1
 oponent = NodePath("../Player")
 
 [node name="Floor" type="StaticBody2D" parent="."]
