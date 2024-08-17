@@ -1,7 +1,10 @@
 extends Node2D
 @onready var canvas_layer = $CanvasLayer
 
-var online : bool = false
+var online : bool:
+	set(value):
+		GameManager.online = value
+		online = value
 
 var player : PackedScene = preload("res://player.tscn")
 @export var player_1: Player 
@@ -9,6 +12,7 @@ var player : PackedScene = preload("res://player.tscn")
 
 
 func _ready():
+	online = false
 	GDSync.connected.connect(connected)
 	GDSync.connection_failed.connect(connection_failed)
 	

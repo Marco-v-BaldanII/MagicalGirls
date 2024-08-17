@@ -67,18 +67,9 @@ var colliders : Array[CollisionShape2D]
 func _ready():
 	name = character_name
 	
-	if player_id == 0:
-		hit_box_1.set_collision_layer_value(2, true)
-		hit_box_2.set_collision_layer_value(2, true)
-		hurt_box.set_collision_mask_value(3, true)
+	set_hitboxes(player_id)
+	
 
-	else:
-		hit_box_1.set_collision_layer_value(3, true)
-		hit_box_2.set_collision_layer_value(3, true)
-		hurt_box.set_collision_mask_value(2, true)
-
-
-	#set_physics_process(false)
 	var animation = $AnimationPlayer.get_animation("idle_anim")
 	animation.loop_mode = Animation.LOOP_PINGPONG
 	
@@ -256,3 +247,14 @@ func _on_body_area_entered(area: Area2D) -> void:
 		oponent.jump_lag = 0
 		jump_lag = 0
 	pass # Replace with function body.
+
+func set_hitboxes(player_id : int):
+	if player_id == 0:
+		hit_box_1.set_collision_layer_value(2, true)
+		hit_box_2.set_collision_layer_value(2, true)
+		hurt_box.set_collision_mask_value(3, true)
+
+	else:
+		hit_box_1.set_collision_layer_value(3, true)
+		hit_box_2.set_collision_layer_value(3, true)
+		hurt_box.set_collision_mask_value(2, true)

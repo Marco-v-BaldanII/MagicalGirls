@@ -30,6 +30,7 @@ GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MovesetManager="*res://Autoloads/MovesetManager.gd"
 Controls="*res://Autoloads/Controls.gd"
 DebugUi="*res://Autoloads/DebugUI.tscn"
+GameManager="*res://Autoloads/GameManager.gd"
 
 [display]
 
