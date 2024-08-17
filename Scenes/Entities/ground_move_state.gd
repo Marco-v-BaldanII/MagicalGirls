@@ -43,3 +43,7 @@ func physics_update(delta : float):
 	#Transition to jump
 	if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
 		Transitioned.emit(self, "air_move")
+		
+	#Transition to crouch
+	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]):
+		Transitioned.emit(self, "crouch")

@@ -34,7 +34,7 @@ var input_direction : float = 0
 const BUFFER_FRAMES = 8
 
 var grounded : bool = false
-
+var crouching : bool = false
 var buffer_time =  0.01666 * BUFFER_FRAMES 
 var jump_lag = 0
 
@@ -159,20 +159,27 @@ func perform_move():
 			
 	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
 		var move : String = input_buffer.back()
-		if is_on_floor():
+		if is_on_floor() and not crouching:
 			$AnimationTree["parameters/conditions/" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + move] = false
 			clear_buffer()
 			GDSync.call_func(_sync_move,[move])
+		elif crouching:
+			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
+			await get_tree().create_timer(0.017 * 6).timeout
+			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
+			clear_buffer()
+			GDSync.call_func(_sync_move,["crouch_" + move])
 		else:
 			$AnimationTree["parameters/conditions/" + "air_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
 			clear_buffer()
+			GDSync.call_func(_sync_move,["air_" + move])
 
 func _sync_move(animation : String):
-	print("GDSYNCCALLLLLLL")
+	print("GDSYNC_CALLLLLLL")
 	$AnimationTree["parameters/conditions/" + animation] = true
 	await get_tree().create_timer(0.017 * 6).timeout
 	$AnimationTree["parameters/conditions/" + animation] = false
