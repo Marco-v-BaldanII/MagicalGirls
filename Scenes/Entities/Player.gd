@@ -88,7 +88,8 @@ func _ready():
 	if  oponent and oponent.global_position.x < global_position.x:
 		scale.x *= -1
 		direction = "right"
-
+	
+	GDSync.expose_node(self)
 
 
 func _process(delta):
@@ -217,6 +218,8 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 
 		hit = true
 		sprite_2d.modulate = Color.RED
+		
+		print("I've been hit")
 		
 		if area.is_in_group("strong"):
 			strong_knock = true
