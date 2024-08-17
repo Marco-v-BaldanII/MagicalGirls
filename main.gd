@@ -4,6 +4,7 @@ extends Node2D
 var online : bool = false
 
 var player : PackedScene = preload("res://player.tscn")
+@onready var player_2: Player = $Player2
 
 func _ready():
 	GDSync.connected.connect(connected)
@@ -15,6 +16,8 @@ func _ready():
 	GDSync.lobby_creation_failed.connect(lobby_creation_failed)
 	GDSync.lobby_joined.connect(lobby_joined)
 	GDSync.lobby_join_failed.connect(lobby_join_failed)
+	
+	GDSync.client_joined.connect(client_joined)
 
 
 func connected():
@@ -93,3 +96,7 @@ func _on_join_button_button_down():
 		GDSync.join_lobby("Lobby Name", "Password123")
 		canvas_layer.hide()
 		#node_instantiator.instantiate_node()
+
+
+func client_joined(client_id : int):
+	GDSync.set_gdsync_owner(player_2, client_id)

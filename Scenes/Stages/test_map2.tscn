@@ -20,6 +20,7 @@ interpolation_speed = 60.0
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
+broadcast = 1
 refresh_rate = 60
 node_path = NodePath("../Player2")
 property_name = "position"
