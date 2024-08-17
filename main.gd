@@ -99,4 +99,5 @@ func _on_join_button_button_down():
 
 
 func client_joined(client_id : int):
-	GDSync.set_gdsync_owner(player_2, client_id)
+	if !GDSync.is_host():
+		GDSync.set_gdsync_owner(player_2, client_id)
