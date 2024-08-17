@@ -66,9 +66,9 @@ var colliders : Array[CollisionShape2D]
 
 func _ready():
 	name = character_name
-	
+
 	set_hitboxes(player_id)
-	
+	GameManager.players.push_back(self)
 
 	var animation = $AnimationPlayer.get_animation("idle_anim")
 	animation.loop_mode = Animation.LOOP_PINGPONG
