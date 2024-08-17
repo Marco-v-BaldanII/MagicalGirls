@@ -1,11 +1,15 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
+
+#if an attack hits below this position it breacks guard
+const DOWN_HIT_POS_THRESHOLD : int = 860
+
 @export var hp : int = 100:
 	set(value ):
 		hp = clamp(value,0,100)
@@ -169,6 +173,7 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
+			
 			clear_buffer()
 			GDSync.call_func(_sync_move,["crouch_" + move])
 		else:
@@ -214,6 +219,9 @@ var hit : bool = false
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 
+		var hit_pos : int = area.get_child(0).global_position.y
+		print(hit_pos)
+		#print(area.get_child(0).global_position)
 		hit = true
 		sprite_2d.modulate = Color.RED
 		
@@ -221,18 +229,19 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		
 		if area.is_in_group("strong"):
 			strong_knock = true
-			if not moving_backwards:
-				hp -= 15
-			else:
+			
+			if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
 				hp -= 4
 				sprite_2d.modulate = Color.SKY_BLUE
+			else:
+				hp -= 15
 		else:
 			strong_knock = false
-			if not moving_backwards:
-				hp -= 8
-			else:
+			if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
 				hp -= 2
 				sprite_2d.modulate = Color.SKY_BLUE
+			else:
+				hp -= 8
 			
 		#Force a transition to the knocked state
 		state_machine.on_child_transition(state_machine.current_state, "knocked")

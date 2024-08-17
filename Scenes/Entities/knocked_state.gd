@@ -9,7 +9,7 @@ const STRONG_KNOCKED_FRAMES : int = 15
 
 const KNOCK_FORCE : int = 300
 
-const STRONG_KNOCK_FORCE : int = 600
+const STRONG_KNOCK_FORCE : int = 800
 
 var knocked_time : float
 

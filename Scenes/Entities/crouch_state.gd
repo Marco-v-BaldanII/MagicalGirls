@@ -16,9 +16,11 @@ func enter():
 
 
 func physics_update(delta : float):
-	
-	if not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]):
+	var e : String = player.animation_player.current_animation
+	print(e)
+	if not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]) and not player.animation_player.current_animation.contains("crouch"):
 		
+		print("DISAAAABLE CROUCH")
 		Transitioned.emit(self, "ground_move")
 		player.animation_tree["parameters/conditions/crouch"] = false
 		player.animation_tree["parameters/conditions/not_crouch"] = true
