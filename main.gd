@@ -93,6 +93,3 @@ func _on_join_button_button_down():
 		GDSync.join_lobby("Lobby Name", "Password123")
 		canvas_layer.hide()
 		#node_instantiator.instantiate_node()
-
-func _process(delta):
-	print(delta)

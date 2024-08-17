@@ -129,7 +129,7 @@ func _ready() -> void:
 		set_physics_process(false)
 		_refresh_property_list()
 	else:
-		assert(node != null, "PropertySynchronizer Node is null")
+		assert(node != null, "ProprtySynchronizer Node is null")
 		assert(property_name in node, "Node \""+node.name+"\" does not have property \""+property_name+ "\"")
 		
 		GDSync = get_node("/root/GDSync")

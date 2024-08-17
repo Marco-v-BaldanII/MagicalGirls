@@ -40,5 +40,7 @@ interpolation_speed = 40.0
 [node name="Player" parent="." instance=ExtResource("2_g54d4")]
 position = Vector2(355, 267)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]

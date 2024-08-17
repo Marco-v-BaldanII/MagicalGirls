@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhe6lj8x5nk7d"]
+
+[ext_resource type="PackedScene" uid="uid://cuin37tgeosf" path="res://Scenes/Entities/Player.tscn" id="1_qcimc"]
+[ext_resource type="Script" path="res://main.gd" id="1_wibys"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_8yg0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
+size = Vector2(1936, 135)
+
+[node name="TestMap" type="Node2D"]
+script = ExtResource("1_wibys")
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("3_8yg0i")
+node_path = NodePath("../Player")
+property_name = "position"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("3_8yg0i")
+node_path = NodePath("../Player2")
+property_name = "position"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
+oponent = NodePath("../Player2")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
+position = Vector2(1183, 589)
+player_id = 1
+oponent = NodePath("../Player")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(968, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 602.0
+offset_top = 106.0
+offset_right = 1304.0
+offset_bottom = 311.0
+theme_override_constants/separation = 50
+
+[node name="host_button" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Host"
+
+[node name="join_button" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Join"
+
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
