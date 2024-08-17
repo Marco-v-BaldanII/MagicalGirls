@@ -4,7 +4,9 @@ extends Node2D
 var online : bool = false
 
 var player : PackedScene = preload("res://player.tscn")
+@export var player_1: Player 
 @export var player_2: Player 
+
 
 func _ready():
 	GDSync.connected.connect(connected)
@@ -18,6 +20,7 @@ func _ready():
 	GDSync.lobby_join_failed.connect(lobby_join_failed)
 	
 	GDSync.client_joined.connect(client_joined)
+	
 
 
 func connected():
@@ -85,7 +88,8 @@ func _on_host_button_button_down():
 			"Map" : "Desert",
 			"Game Mode" : "Free For All"
 		}
-	)
+		)
+		GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
 	canvas_layer.hide()
 
 @onready var node_instantiator := $NodeInstantiator
