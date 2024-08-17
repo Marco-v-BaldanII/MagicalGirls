@@ -4,7 +4,7 @@ extends Node2D
 var online : bool = false
 
 var player : PackedScene = preload("res://player.tscn")
-@onready var player_2: Player = $Player2
+@export var player_2: Player 
 
 func _ready():
 	GDSync.connected.connect(connected)

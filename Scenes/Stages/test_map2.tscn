@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
 
-[node name="TestMap" type="Node2D"]
+[node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_2")]
 script = ExtResource("1_wibys")
+player_2 = NodePath("Player2")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_8yg0i")

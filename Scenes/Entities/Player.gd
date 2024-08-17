@@ -121,31 +121,33 @@ func is_joy_button_just_pressed(action_name : String):
 
 func _input(event):
 	
-	if is_joy_button_just_pressed("move_left"):
-		add_input_to_buffer("move_left")
-		perform_move()
-	elif is_joy_button_just_pressed("move_right"):
-		add_input_to_buffer("move_right")
-		perform_move()
-	elif is_joy_button_just_pressed("crouch"):
-		add_input_to_buffer("crouch")
-		perform_move()
-	elif is_joy_button_just_pressed("jump"):
-		add_input_to_buffer("jump")
-		perform_move()
-	elif is_joy_button_just_pressed("s_punch"):
-		add_input_to_buffer("s_punch")
-		perform_move()
-	elif is_joy_button_just_pressed("w_punch"):
-		add_input_to_buffer("w_punch")
-		perform_move()
-	elif is_joy_button_just_pressed("s_kick"):
-		add_input_to_buffer("s_kick")
-		perform_move()
-	elif is_joy_button_just_pressed("w_kick"):
-		add_input_to_buffer("w_kick")
-		perform_move()
+	if GDSync.is_gdsync_owner(self):
 	
+		if is_joy_button_just_pressed("move_left"):
+			add_input_to_buffer("move_left")
+			perform_move()
+		elif is_joy_button_just_pressed("move_right"):
+			add_input_to_buffer("move_right")
+			perform_move()
+		elif is_joy_button_just_pressed("crouch"):
+			add_input_to_buffer("crouch")
+			perform_move()
+		elif is_joy_button_just_pressed("jump"):
+			add_input_to_buffer("jump")
+			perform_move()
+		elif is_joy_button_just_pressed("s_punch"):
+			add_input_to_buffer("s_punch")
+			perform_move()
+		elif is_joy_button_just_pressed("w_punch"):
+			add_input_to_buffer("w_punch")
+			perform_move()
+		elif is_joy_button_just_pressed("s_kick"):
+			add_input_to_buffer("s_kick")
+			perform_move()
+		elif is_joy_button_just_pressed("w_kick"):
+			add_input_to_buffer("w_kick")
+			perform_move()
+		
 	
 func add_input_to_buffer(input : String):
 	if input_buffer.size() == 0 or input_buffer.back() != input:
