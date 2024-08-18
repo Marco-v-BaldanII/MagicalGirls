@@ -348,10 +348,10 @@ func set_hitboxes(player_id : int):
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	var joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 	var joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
-	print(anim_name)
+	print(anim_name + "01")
 	if anim_name.contains("crouch"):
 		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
-		not(joy_y ==  1 and abs(joy_x) < 0.4)) and not animation_player.current_animation.contains("crouch"):
+		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch"):
 			
 			animation_tree["parameters/conditions/crouch"] = false
 			animation_tree["parameters/conditions/not_crouch"] = true
