@@ -62,7 +62,7 @@ func physics_update(delta : float):
 				Transitioned.emit(self, "crouch")
 				crouching = true
 				
-			if GameManager.online and not GDSync.is_gdsync_owner(player):
+			if GameManager.online and GDSync.is_gdsync_owner(player):
 				GDSync.call_func(transition_to_crouch)
 			
 

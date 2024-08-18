@@ -14,6 +14,8 @@ func enter():
 	player.velocity.x = 0
 	player.animation_tree["parameters/conditions/crouch"] = true
 	player.crouching = true
+	
+	
 
 
 func physics_update(delta : float):
@@ -36,4 +38,5 @@ func transition_ground():
 	Transitioned.emit(self, "ground_move")
 	player.animation_tree["parameters/conditions/crouch"] = false
 	player.animation_tree["parameters/conditions/not_crouch"] = true
+	await  get_tree().create_timer(0.16*6).timeout
 	player.animation_tree["parameters/conditions/not_crouch"] = false
