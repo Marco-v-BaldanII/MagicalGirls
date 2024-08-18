@@ -172,15 +172,8 @@ func perform_move():
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 					
-					online_instantiate(special_scene)
 					GDSync.call_func(online_instantiate,[special_scene])
-					await get_tree().create_timer(0.2).timeout
-					
-					var instance = node_instantiator.instantiate_node()
-					get_tree().root.add_child(instance)
-					instance.global_position = global_position
-					if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
-					
+					online_instantiate(special_scene)
 					#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()
@@ -374,5 +367,7 @@ func _on_head_area_entered(area: Area2D) -> void:
 
 func online_instantiate(special_scene : PackedScene):
 	
-	print("CALL sync method")
-	node_instantiator.scene = special_scene
+	var instance = special_scene.instantiate()
+	get_tree().root.add_child(instance)
+	instance.global_position = global_position
+	if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
