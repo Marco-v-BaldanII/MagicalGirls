@@ -172,10 +172,9 @@ func perform_move():
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 					
-					node_instantiator.scene = special_scene
-					var instance = node_instantiator.instantiate_node()
+					GDSync.call_func(online_instantiate,[special_scene])
 					
-
+					var instance = node_instantiator.instantiate_node()
 					get_tree().root.add_child(instance)
 					instance.global_position = global_position
 					if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
@@ -370,3 +369,6 @@ func _on_head_area_entered(area: Area2D) -> void:
 	_on_hurt_box_area_entered(area)
 	head = false
 	pass # Replace with function body.
+
+func online_instantiate(special_scene : Node):
+	node_instantiator.scene = special_scene
