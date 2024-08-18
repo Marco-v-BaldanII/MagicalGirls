@@ -175,7 +175,7 @@ func perform_move():
 					print("caaaaalling")
 					#GDSync.call_func(_sync_move,["crouch"])
 					GDSync.call_func(online_instantiate,[special_scene])
-					
+					GDSync.call_func(random_shit)
 					#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()
@@ -373,3 +373,6 @@ func online_instantiate(special_scene : PackedScene):
 	get_tree().root.add_child(instance)
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
+	
+func random_shit():
+	print("shit")
