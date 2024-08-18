@@ -30,6 +30,7 @@ interpolated = true
 interpolation_speed = 60.0
 
 [node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
+fly = false
 oponent = NodePath("../Player2")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]

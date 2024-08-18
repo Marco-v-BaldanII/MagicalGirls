@@ -161,6 +161,16 @@ func perform_move():
 			var dir = find_special_direction(moveset[specials])
 			if dir != direction:
 				print(specials + dir)
+				
+				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
+					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+					var instance = special_scene.instantiate()
+					get_tree().root.add_child(instance)
+					instance.global_position = global_position
+					if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
+					
+					#Here will call the animation in the animation tree , which will have it's hitstun
+				
 			clear_buffer()
 
 			return
@@ -227,6 +237,15 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	hit = true
 	sprite_2d.modulate = Color.RED
 	
+	var parent = area.get_parent()
+	if parent.has_method("destroy_projectile"):
+		parent.destroy_projectile()
+	
+	#var i = hurt_box.collision_layer
+	#if i == 8: i = 4
+	#if i == 16: i = 5
+	#print(str(i) +" hit by " + str(area.get_collision_mask_value(i)))
+	
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
 
@@ -288,18 +307,24 @@ func _on_body_area_entered(area: Area2D) -> void:
 		jump_lag = 0
 	pass # Replace with function body.
 
+var hurt_box_layer : int = 0
+
 func set_hitboxes(player_id : int):
 	if player_id == 0:
 		hit_box_1.set_collision_layer_value(2, true)
 		hit_box_2.set_collision_layer_value(2, true)
 		hurt_box.set_collision_mask_value(3, true)
+		hurt_box.set_collision_layer_value(4,true)
 		head_hurt_box.set_collision_mask_value(3,true)
+		hurt_box_layer = 4
 
 	else:
 		hit_box_1.set_collision_layer_value(3, true)
 		hit_box_2.set_collision_layer_value(3, true)
 		hurt_box.set_collision_mask_value(2, true)
+		hurt_box.set_collision_layer_value(5,true)
 		head_hurt_box.set_collision_mask_value(2,true)
+		hurt_box_layer = 5
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:

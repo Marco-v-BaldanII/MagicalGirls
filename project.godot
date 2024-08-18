@@ -101,6 +101,8 @@ s_kick={
 2d_physics/layer_1="Floor"
 2d_physics/layer_2="attacks_p1"
 2d_physics/layer_3="attacks_p2"
+2d_physics/layer_4="hurt_box_p1"
+2d_physics/layer_5="hurt_box_p2"
 
 [rendering]
 
