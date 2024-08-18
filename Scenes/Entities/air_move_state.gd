@@ -3,6 +3,9 @@ class_name AirMoveState
 
 var player : Player
 
+var j_x : float
+var j_y : float
+
 func enter():
 	if not player:
 			var e = get_parent()
@@ -11,15 +14,24 @@ func enter():
 			player = e
 	player.grounded = false
 	player.velocity.x = 0
+	
+	j_x = player.joy_x
+	j_y = player.joy_y
 
+
+var air_buffer 
 
 func physics_update(delta : float):
+
+	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
+	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 	
 	if player.fly and not player.is_on_floor():
-		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]):
+		#print("so when jumping j_x is" + str(j_x))
+		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1:
 			player.input_direction = 1
 
-		elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]):
+		elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or joy_x < -0.1:
 			player.input_direction =  -1
 			
 		player.velocity.x = player.FLY_SPEED * player.input_direction
@@ -30,10 +42,10 @@ func physics_update(delta : float):
 			player.velocity.y = player.JUMP_VELOCITY
 		else:
 			player.velocity.y = player.JUMP_VELOCITY*0.4
-			
-		if player.input_buffer.has("move_left"):
+		print("while jumping axis is "+ str(joy_x))
+		if player.input_buffer.has("move_left") or j_x < -0.1:
 				player.velocity.x = -player.air_speed
-		elif player.input_buffer.has("move_right"):
+		elif player.input_buffer.has("move_right") or j_x > 0.1:
 				player.velocity.x = player.air_speed
 	
 	#LAND	

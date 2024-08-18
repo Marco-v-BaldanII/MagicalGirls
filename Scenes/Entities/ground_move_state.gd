@@ -4,6 +4,7 @@ class_name GroundMoveState
 var player : Player
 
 func enter():
+	crouching = false
 	if not player:
 			var e = get_parent()
 			while (e == null or not ( e is  Player)):
@@ -12,13 +13,14 @@ func enter():
 	await get_tree().create_timer(0.5).timeout
 	#player.animation_tree["parameters/conditions/not_crouch"] = true
 
+var crouching : bool = false
 
 func physics_update(delta : float):
 
-	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]):
+	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
 		player.input_direction = 1
 
-	elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]):
+	elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1:
 		player.input_direction =  -1
 	else:
 		player.input_direction -= 0.1
@@ -44,11 +46,13 @@ func physics_update(delta : float):
 		Transitioned.emit(self, "air_move")
 
 	#Transition to jump
-	if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
-		Transitioned.emit(self, "air_move")
-		
-
+	#if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
+		#Transitioned.emit(self, "air_move")
+		#
+	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
+	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 
 	#Transition to crouch
-	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]):
+	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])or (joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false:
 		Transitioned.emit(self, "crouch")
+		crouching = true

@@ -19,7 +19,7 @@ uniqueUsername=false
 [application]
 
 config/name="test_jam2"
-run/main_scene="res://Scenes/Stages/test_map2.tscn"
+run/main_scene="res://Scenes/Stages/test_map.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -58,6 +58,7 @@ weak_=""
 move_right={
 "deadzone": 0.5,
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":14,"pressure":0.0,"pressed":true,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
 move_left={
