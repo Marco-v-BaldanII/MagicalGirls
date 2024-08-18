@@ -162,7 +162,7 @@ func add_input_to_buffer(input : String):
 		input_buffer.push_back(input)
 		input_made = true
 
-	
+
 func perform_move():
 	for specials in moveset:
 		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
@@ -172,10 +172,9 @@ func perform_move():
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
-					print("caaaaalling")
-					#GDSync.call_func(_sync_move,["crouch"])
-					GDSync.call_func(online_instantiate,[special_scene])
-					GDSync.call_func(random_shit)
+
+					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
 					#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()
@@ -374,5 +373,10 @@ func online_instantiate(special_scene : PackedScene):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
 	
-func random_shit():
+func instanciate_projectile(Pname : String):
 	print("shit")
+	var special_scene = load(Pname)
+	var instance = special_scene.instantiate()
+	get_tree().root.add_child(instance)
+	instance.global_position = global_position
+	if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
