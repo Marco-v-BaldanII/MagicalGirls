@@ -4,6 +4,7 @@ class_name GroundMoveState
 var player : Player
 
 func enter():
+	GDSync.expose_node(self)
 	crouching = false
 	if not player:
 			var e = get_parent()
@@ -53,6 +54,20 @@ func physics_update(delta : float):
 	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 
 	#Transition to crouch
+	
+	
 	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])or (joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false:
-		Transitioned.emit(self, "crouch")
-		crouching = true
+			
+			if not GameManager.online or GDSync.is_gdsync_owner(player):
+				Transitioned.emit(self, "crouch")
+				crouching = true
+				
+			elif GameManager.online and not GDSync.is_gdsync_owner(player):
+				GDSync.call_func(transition_to_crouch)
+			
+
+
+
+func transition_to_crouch():
+	Transitioned.emit(self, "crouch")
+	crouching = true
