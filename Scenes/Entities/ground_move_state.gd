@@ -58,11 +58,11 @@ func physics_update(delta : float):
 	
 	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])or (joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false:
 			
-			if not GameManager.online or GDSync.is_gdsync_owner(player):
+			if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(player)):
 				Transitioned.emit(self, "crouch")
 				crouching = true
 				
-			elif GameManager.online and not GDSync.is_gdsync_owner(player):
+			if GameManager.online and not GDSync.is_gdsync_owner(player):
 				GDSync.call_func(transition_to_crouch)
 			
 
