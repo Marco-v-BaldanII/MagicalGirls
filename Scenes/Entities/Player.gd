@@ -37,7 +37,7 @@ var input_made : bool = false
 @export var direction : String = "left"
 var input_direction : float = 0
 
-const BUFFER_FRAMES = 8
+const BUFFER_FRAMES = 16
 
 var grounded : bool = false
 var crouching : bool = false
@@ -118,32 +118,38 @@ func is_joy_button_just_pressed(action_name : String):
 		action_state[action_name] = false
 	return false
 
+var joy_x : float
+var joy_y : float
+
 func _input(event):
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
-	
-		if is_joy_button_just_pressed("move_left"):
+		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+		joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
+		
+		if is_joy_button_just_pressed("move_left") or (joy_x == -1 and abs(joy_y) < 0.4):
 			add_input_to_buffer("move_left")
 			perform_move()
-		elif is_joy_button_just_pressed("move_right"):
+		if is_joy_button_just_pressed("move_right") or (joy_x == 1 and abs(joy_y) <0.4):
 			add_input_to_buffer("move_right")
 			perform_move()
-		elif is_joy_button_just_pressed("crouch"):
+		if is_joy_button_just_pressed("crouch") or (joy_y ==  1 and abs(joy_x) < 0.4):
 			add_input_to_buffer("crouch")
 			perform_move()
-		elif is_joy_button_just_pressed("jump"):
+		if is_joy_button_just_pressed("jump") or (joy_y < -0.6 and abs(joy_x) < 0.4 ):
+			#print("jump with a y of " + str(joy_y) +"and a x of " + str(joy_x))
 			add_input_to_buffer("jump")
 			perform_move()
-		elif is_joy_button_just_pressed("s_punch"):
+		if is_joy_button_just_pressed("s_punch"):
 			add_input_to_buffer("s_punch")
 			perform_move()
-		elif is_joy_button_just_pressed("w_punch"):
+		if is_joy_button_just_pressed("w_punch"):
 			add_input_to_buffer("w_punch")
 			perform_move()
-		elif is_joy_button_just_pressed("s_kick"):
+		if is_joy_button_just_pressed("s_kick"):
 			add_input_to_buffer("s_kick")
 			perform_move()
-		elif is_joy_button_just_pressed("w_kick"):
+		if is_joy_button_just_pressed("w_kick"):
 			add_input_to_buffer("w_kick")
 			perform_move()
 		
@@ -196,6 +202,12 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
 			clear_buffer()
 			GDSync.call_func(_sync_move,["air_" + move])
+			
+	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
+		print("SUUUUUUUPER JUMP")
+		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+		print(joy_x)
+		state_machine.on_child_transition(state_machine.current_state, "air_move")
 
 func _sync_move(animation : String):
 	print("GDSYNC_CALLLLLLL")
@@ -327,9 +339,14 @@ func set_hitboxes(player_id : int):
 		hurt_box_layer = 5
 
 
+
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	var joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+	var joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
+	print(anim_name)
 	if anim_name.contains("crouch"):
-		if not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and not animation_player.current_animation.contains("crouch"):
+		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
+		not(joy_y ==  1 and abs(joy_x) < 0.4)) and not animation_player.current_animation.contains("crouch"):
 			
 			animation_tree["parameters/conditions/crouch"] = false
 			animation_tree["parameters/conditions/not_crouch"] = true
