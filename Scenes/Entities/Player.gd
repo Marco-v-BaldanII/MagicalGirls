@@ -6,6 +6,7 @@ class_name Player
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
+@onready var node_instantiator := $NodeInstantiator
 
 #if an attack hits below this position it breacks guard
 const DOWN_HIT_POS_THRESHOLD : int = 860
@@ -170,7 +171,11 @@ func perform_move():
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
-					var instance = special_scene.instantiate()
+					
+					node_instantiator.scene = special_scene
+					var instance = node_instantiator.instantiate_node()
+					
+
 					get_tree().root.add_child(instance)
 					instance.global_position = global_position
 					if oponent : instance.assign_phys_layer(player_id + 2, oponent.hurt_box_layer)
@@ -267,25 +272,28 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			
 			if area.is_in_group("strong"):
 				strong_knock = true
-				
-				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
+				GameManager.hit_stop_long()
+				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
 					hp -= 4
 					sprite_2d.modulate = Color.SKY_BLUE
 				else:
 					hp -= 15
 			else:
+				GameManager.hit_stop_short()
 				strong_knock = false
-				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD :
+				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
 					hp -= 2
 					sprite_2d.modulate = Color.SKY_BLUE
 				else:
 					hp -= 8
 		else : #Hit body while crouching
 			if area.is_in_group("strong"):
+				GameManager.hit_stop_long()
 				strong_knock = true
 				hp -= 4
 				sprite_2d.modulate = Color.SKY_BLUE
 			else:
+				GameManager.hit_stop_short()
 				strong_knock = false
 				sprite_2d.modulate = Color.SKY_BLUE
 				hp -= 2
@@ -293,9 +301,11 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		if crouching:
 			
 			if area.is_in_group("strong"):
+				GameManager.hit_stop_long()
 				strong_knock = true
 				hp -= 15
 			else:
+				GameManager.hit_stop_short()
 				strong_knock = false
 				hp -= 8
 				

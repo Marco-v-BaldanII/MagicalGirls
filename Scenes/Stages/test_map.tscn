@@ -1,13 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgl7b405t4u1n"]
 
-[ext_resource type="PackedScene" uid="uid://cuin37tgeosf" path="res://Scenes/Entities/Player.tscn" id="1_wpecj"]
+[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="1_1edgw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
 
 [node name="TestMap" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_wpecj")]
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0
@@ -15,3 +13,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(968, 1013)
 shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="Ritsu" parent="." instance=ExtResource("1_1edgw")]
+position = Vector2(319, 668)

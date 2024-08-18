@@ -57,10 +57,11 @@ func physics_update(delta : float):
 		player.animation_tree["parameters/conditions/land"] = false
 		
 		Transitioned.emit(self, "ground_move")
-	
+	print(joy_y)
 	# Add the gravity.
 	if not player.is_on_floor() :
-		if player.fly and not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]):
+		if player.fly and not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]) and not joy_y > 0.7:
+			print("fall")
 			if player.velocity.y < 0:
 				player.velocity.y += (player.gravity*0.2) * delta
 			else:
