@@ -90,6 +90,7 @@ func _ready():
 		direction = "right"
 	
 	GDSync.expose_node(self)
+	GDSync.expose_func(online_instantiate)
 
 
 func _process(delta):
@@ -171,9 +172,10 @@ func perform_move():
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
-					
+					print("caaaaalling")
+					#GDSync.call_func(_sync_move,["crouch"])
 					GDSync.call_func(online_instantiate,[special_scene])
-					online_instantiate(special_scene)
+					
 					#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()
@@ -366,7 +368,7 @@ func _on_head_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
 
 func online_instantiate(special_scene : PackedScene):
-	
+	print("I have beeeeeeeen called")
 	var instance = special_scene.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = global_position
