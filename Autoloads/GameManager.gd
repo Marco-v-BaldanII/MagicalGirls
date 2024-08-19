@@ -17,6 +17,11 @@ var camera : Camera2D
 var shake_amount : float = 8
 var default_camera_pos : Vector2
 
+
+func add_player(player : Player):
+	players.push_back(player)
+	player.player_num = players.size()
+
 func hit_stop_short():
 	Engine.time_scale = 0
 	await get_tree().create_timer(0.08,true,false,true).timeout
