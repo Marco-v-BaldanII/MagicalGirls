@@ -77,9 +77,9 @@ var colliders : Array[CollisionShape2D]
 
 func _ready():
 	name = character_name
-
+	GameManager.add_player(self)
 	set_hitboxes(player_id)
-	GameManager.players.push_back(self)
+
 
 	var animation = $AnimationPlayer.get_animation("idle_anim")
 	animation.loop_mode = Animation.LOOP_PINGPONG
@@ -378,7 +378,5 @@ func instanciate_projectile(Pname : String):
 	var instance = special_scene.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = global_position
-	if oponent and not GameManager.online: instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
-	elif GameManager.online : 
-		#Both players share the id so the layers have to be different
-		pass
+	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
+	
