@@ -20,7 +20,8 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 			await get_tree().create_timer(0.1667).timeout
 			
 
-var player_num : int = 0
+
+var player_num : int = 0 #player_num is 1 or 2 and is independent of online or offline unlike player_id 
 @export var player_id : int = 0
 @export var fly : bool = true
 
@@ -325,7 +326,7 @@ func _on_body_area_entered(area: Area2D) -> void:
 var hurt_box_layer : int = 0
 
 func set_hitboxes(player_id : int):
-	if player_id == 0:
+	if player_num == 1:
 		hit_box_1.set_collision_layer_value(2, true)
 		hit_box_2.set_collision_layer_value(2, true)
 		hurt_box.set_collision_mask_value(3, true)
