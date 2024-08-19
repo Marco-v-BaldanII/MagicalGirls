@@ -14,5 +14,12 @@ collision_mask = 0
 position = Vector2(968, 1013)
 shape = SubResource("RectangleShape2D_2rhgy")
 
-[node name="Ritsu" parent="." instance=ExtResource("1_1edgw")]
+[node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_1edgw")]
 position = Vector2(319, 668)
+oponent = NodePath("../Ritsu2")
+
+[node name="Ritsu2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_1edgw")]
+position = Vector2(1625, 670)
+player_id = 1
+oponent = NodePath("../Ritsu")
+direction = ""

@@ -27,7 +27,7 @@ func physics_update(delta : float):
 		player.input_direction -= 0.1
 		player.input_direction = clamp(player.input_direction, 0,1)
 
-	if player.is_on_floor():
+	if player.is_on_floor() and player.can_move: #Can move is turned on by the animation finished method
 		player.jump_lag -= delta
 		player.moving_backwards = false
 		if(player.input_direction >= 0 and player.direction == "left") or (player.input_direction <= 0 and player.direction == "right"):

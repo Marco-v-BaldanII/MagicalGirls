@@ -5,6 +5,8 @@ class_name Projectile
 @onready var area_2d: Area2D = $Area2D
 @export var speed = 400
 
+@export var dmg : float = 8
+
 func _physics_process(delta: float) -> void:
 	alive_time -= delta
 	

@@ -63,6 +63,23 @@ var action_state : Dictionary = {
 	"w_kick" : false,
 	"s_kick" : false
 }
+
+@export var move_dmg : Dictionary = {
+	"w_punch" : 8,
+	"s_punch" : 15,
+	"crouch_w_punch" : 8,
+	"crouch_s_punch" : 15,
+	"air_w_punch" : 8,
+	"air_s_punch" : 15,
+	"w_kick" : 8,
+	"s_kick" : 15,
+	"crouch_w_kick" : 8,
+	"crouch_s_kick" : 15,
+	"air_w_kick" : 8,
+	"air_s_kick" : 15
+}
+var last_used_move : String
+
 @onready var hit_box_1: Area2D = $hit_boxes/weak_box
 @onready var hit_box_2: Area2D = $hit_boxes/strong_box
 @onready var hurt_box: Area2D = $hurt_box
@@ -164,6 +181,7 @@ func add_input_to_buffer(input : String):
 		input_buffer.push_back(input)
 		input_made = true
 
+var can_move : bool = true
 
 func perform_move():
 	for specials in moveset:
@@ -185,13 +203,17 @@ func perform_move():
 			
 	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
 		var move : String = input_buffer.back()
+		
 		if is_on_floor() and not crouching:
+			last_used_move = move
+			can_move = false #Can't move while ground attacks
 			$AnimationTree["parameters/conditions/" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + move] = false
 			clear_buffer()
 			GDSync.call_func(_sync_move,[move])
 		elif crouching:
+			last_used_move = "crouch_"+move
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
@@ -199,6 +221,7 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,["crouch_" + move])
 		else:
+			last_used_move = "air_" + move
 			$AnimationTree["parameters/conditions/" + "air_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
@@ -208,7 +231,6 @@ func perform_move():
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
 
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-		print(joy_x)
 		state_machine.on_child_transition(state_machine.current_state, "air_move")
 
 func _sync_move(animation : String):
@@ -257,52 +279,92 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	GameManager.camera_shake()
 	
+	
+	
+	
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
-
-		print("I've been hit")
 		
 		if not crouching:
 			
 			if area.is_in_group("strong"):
 				strong_knock = true
 				GameManager.hit_stop_long()
-				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
-					hp -= 4
-					sprite_2d.modulate = Color.SKY_BLUE
+				
+				if area.has_method("get_dmg"):
+					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
+						hp -= area.get_dmg()/3
+						sprite_2d.modulate = Color.SKY_BLUE
+					else:
+						hp -= area.get_dmg()
+						
 				else:
-					hp -= 15
+					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
+						hp -= oponent.move_dmg[oponent.last_used_move] /3
+						sprite_2d.modulate = Color.SKY_BLUE
+					else:
+						hp -= oponent.move_dmg[oponent.last_used_move]
 			else:
 				GameManager.hit_stop_short()
 				strong_knock = false
-				if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
-					hp -= 2
-					sprite_2d.modulate = Color.SKY_BLUE
+				if area.has_method("get_dmg"):
+					
+					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
+						hp -= area.get_dmg()/3
+						sprite_2d.modulate = Color.SKY_BLUE
+					else:
+						hp -= area.get_dmg()
+						
 				else:
-					hp -= 8
+					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
+						hp -= oponent.move_dmg[oponent.last_used_move] /3
+						sprite_2d.modulate = Color.SKY_BLUE
+					else:
+						hp -= oponent.move_dmg[oponent.last_used_move] 
 		else : #Hit body while crouching
-			if area.is_in_group("strong"):
-				GameManager.hit_stop_long()
-				strong_knock = true
-				hp -= 4
-				sprite_2d.modulate = Color.SKY_BLUE
+			if area.has_method("get_dmg"):
+				if area.is_in_group("strong"):
+					GameManager.hit_stop_long()
+					strong_knock = true
+					hp -= area.get_dmg()/3
+					sprite_2d.modulate = Color.SKY_BLUE
+				else:
+					GameManager.hit_stop_short()
+					strong_knock = false
+					sprite_2d.modulate = Color.SKY_BLUE
+					hp -= area.get_dmg() /3
 			else:
-				GameManager.hit_stop_short()
-				strong_knock = false
-				sprite_2d.modulate = Color.SKY_BLUE
-				hp -= 2
+				if area.is_in_group("strong"):
+					GameManager.hit_stop_long()
+					strong_knock = true
+					hp -= oponent.move_dmg[oponent.last_used_move] /3
+					sprite_2d.modulate = Color.SKY_BLUE
+				else:
+					GameManager.hit_stop_short()
+					strong_knock = false
+					sprite_2d.modulate = Color.SKY_BLUE
+					hp -= oponent.move_dmg[oponent.last_used_move] /3
 	else: #hit Head while crouching
 		if crouching:
-			
-			if area.is_in_group("strong"):
-				GameManager.hit_stop_long()
-				strong_knock = true
-				hp -= 15
+			if area.has_method("get_dmg"):
+				if area.is_in_group("strong"):
+					GameManager.hit_stop_long()
+					strong_knock = true
+					hp -= area.get_dmg()
+				else:
+					GameManager.hit_stop_short()
+					strong_knock = false
+					hp -= area.get_dmg()
 			else:
-				GameManager.hit_stop_short()
-				strong_knock = false
-				hp -= 8
-				
+				if area.is_in_group("strong"):
+					GameManager.hit_stop_long()
+					strong_knock = true
+					hp -= oponent.move_dmg[oponent.last_used_move]
+				else:
+					GameManager.hit_stop_short()
+					strong_knock = false
+					hp -= oponent.move_dmg[oponent.last_used_move] 
+					
 	#Force a transition to the knocked state
 	state_machine.on_child_transition(state_machine.current_state, "knocked")
 	await get_tree().create_timer(0.017 * 20).timeout
@@ -356,24 +418,29 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 			animation_tree["parameters/conditions/not_crouch"] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			animation_tree["parameters/conditions/not_crouch"] = false
-	pass # Replace with function body.
+			
+	#make it so that you CAN move after the animation has finished
+	if anim_name.contains("punch") or anim_name.contains("kick"):
+		can_move = true
+
 
 
 func _on_head_area_entered(area: Area2D) -> void:
 	head = true
 	_on_hurt_box_area_entered(area)
+	_on_hurt_box_area_entered(area)
 	head = false
 	pass # Replace with function body.
 
 func online_instantiate(special_scene : PackedScene):
-	print("I have beeeeeeeen called")
+
 	var instance = special_scene.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
 func instanciate_projectile(Pname : String):
-	print("shit")
+
 	var special_scene = load(Pname)
 	var instance = special_scene.instantiate()
 	get_tree().root.add_child(instance)

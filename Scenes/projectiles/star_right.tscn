@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://brgsiywi2g3y7"]
+
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_7dw7g"]
+[ext_resource type="Script" path="res://Scenes/projectiles/star.gd" id="2_tetoh"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_1lr3o"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_g1hxu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
+radius = 167.966
+
+[node name="Star" type="Sprite2D"]
+position = Vector2(113, 57)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_7dw7g")
+script = ExtResource("2_tetoh")
+
+[node name="Area2D" type="Area2D" parent="." groups=["weak"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_g1hxu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40, 0)
+shape = SubResource("CircleShape2D_xfwv1")
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("3_1lr3o")
+refresh_rate = 120
+node_path = NodePath("..")
+property_name = "position"
+interpolated = false
+interpolation_speed = 1.0

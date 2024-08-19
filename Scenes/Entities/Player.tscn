@@ -1,13 +1,15 @@
-[gd_scene load_steps=84 format=3 uid="uid://cuin37tgeosf"]
+[gd_scene load_steps=86 format=3 uid="uid://cuin37tgeosf"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_b50ad"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="1_yqt7e"]
 [ext_resource type="Script" path="res://Scenes/Entities/state_machine.gd" id="3_m0e0u"]
+[ext_resource type="Script" path="res://Scenes/hit_box.gd" id="3_mbkic"]
 [ext_resource type="Script" path="res://Scenes/Entities/knocked_state.gd" id="4_ka1tp"]
 [ext_resource type="Script" path="res://Scenes/Entities/ground_move_state.gd" id="5_gdwvv"]
 [ext_resource type="Script" path="res://Scenes/Entities/air_move_state.gd" id="6_6kbk4"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="7_2dnwv"]
 [ext_resource type="Script" path="res://Scenes/Entities/crouch_state.gd" id="7_niemg"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_siam7"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="9_y5gha"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
@@ -1155,6 +1157,7 @@ debug_color = Color(0.645236, 0, 0.331872, 0.42)
 [node name="weak_box" type="Area2D" parent="hit_boxes" groups=["weak"]]
 collision_layer = 0
 collision_mask = 0
+script = ExtResource("3_mbkic")
 
 [node name="weak_attack" type="CollisionShape2D" parent="hit_boxes/weak_box"]
 position = Vector2(3, 5)
@@ -1200,6 +1203,14 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
 script = ExtResource("7_2dnwv")
+
+[node name="PropertySynchronizer" type="Node" parent="CanvasLayer"]
+script = ExtResource("9_siam7")
+refresh_rate = 15
+node_path = NodePath("../hpBar")
+property_name = "value"
+interpolated = false
+interpolation_speed = 1.0
 
 [node name="Body" type="Area2D" parent="."]
 

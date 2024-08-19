@@ -33,15 +33,16 @@ func hit_stop_long():
 	Engine.time_scale = 1
 
 func camera_shake():
-	default_camera_pos = camera.position
-	var frames = 6
-	while frames > 0:
-		frames -= 1
-		shaking_cam()
-		await get_tree().create_timer(0.01667).timeout
-	while camera.position != default_camera_pos:
-		print("Tweeeeening")
-		camera.position = camera.position.move_toward(default_camera_pos, 0.1)
+	if camera != null:
+		default_camera_pos = camera.position
+		var frames = 6
+		while frames > 0:
+			frames -= 1
+			shaking_cam()
+			await get_tree().create_timer(0.01667).timeout
+		while camera.position != default_camera_pos:
+			
+			camera.position = camera.position.move_toward(default_camera_pos, 0.1)
 		
 var cam_offset = 0
 
