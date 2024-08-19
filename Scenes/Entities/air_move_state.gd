@@ -27,8 +27,9 @@ func physics_update(delta : float):
 	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 	
 	if player.fly and not player.is_on_floor():
-		#print("so when jumping j_x is" + str(j_x))
+		
 		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1:
+			print("horizontal jjjjjjjuuuuummmpppp")
 			player.input_direction = 1
 
 		elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or joy_x < -0.1:
@@ -43,9 +44,9 @@ func physics_update(delta : float):
 		else:
 			player.velocity.y = player.JUMP_VELOCITY*0.4
 		print("while jumping axis is "+ str(joy_x))
-		if player.input_buffer.has("move_left") or j_x < -0.1:
+		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or j_x < -0.1:
 				player.velocity.x = -player.air_speed
-		elif player.input_buffer.has("move_right") or j_x > 0.1:
+		elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or j_x > 0.1:
 				player.velocity.x = player.air_speed
 	
 	#LAND	
@@ -57,7 +58,7 @@ func physics_update(delta : float):
 		player.animation_tree["parameters/conditions/land"] = false
 		
 		Transitioned.emit(self, "ground_move")
-	print(joy_y)
+
 	# Add the gravity.
 	if not player.is_on_floor() :
 		if player.fly and not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]) and not joy_y > 0.7:

@@ -138,7 +138,7 @@ func _input(event):
 		if is_joy_button_just_pressed("crouch") or (joy_y ==  1 and abs(joy_x) < 0.4):
 			add_input_to_buffer("crouch")
 			perform_move()
-		if is_joy_button_just_pressed("jump") or (joy_y < -0.6 and abs(joy_x) < 0.4 ):
+		if is_joy_button_just_pressed("jump") or (joy_y < -0.2 and abs(joy_x) < 0.4 ):
 			#print("jump with a y of " + str(joy_y) +"and a x of " + str(joy_x))
 			add_input_to_buffer("jump")
 			perform_move()
@@ -204,13 +204,13 @@ func perform_move():
 			GDSync.call_func(_sync_move,["air_" + move])
 			
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
-		print("SUUUUUUUPER JUMP")
+
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 		print(joy_x)
 		state_machine.on_child_transition(state_machine.current_state, "air_move")
 
 func _sync_move(animation : String):
-	print("GDSYNC_CALLLLLLL")
+
 	$AnimationTree["parameters/conditions/" + animation] = true
 	await get_tree().create_timer(0.017 * 6).timeout
 	$AnimationTree["parameters/conditions/" + animation] = false
@@ -253,10 +253,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if parent.has_method("destroy_projectile"):
 		parent.destroy_projectile()
 	
-	#var i = hurt_box.collision_layer
-	#if i == 8: i = 4
-	#if i == 16: i = 5
-	#print(str(i) +" hit by " + str(area.get_collision_mask_value(i)))
+	GameManager.camera_shake()
 	
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y

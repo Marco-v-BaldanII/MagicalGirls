@@ -14,6 +14,7 @@ func enter():
 
 	player.velocity.x = 0
 	player.animation_tree["parameters/conditions/crouch"] = true
+	player.animation_tree["parameters/conditions/not_crouch"] = false
 	player.crouching = true
 	
 	
