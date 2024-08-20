@@ -13,6 +13,7 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 
 @export var hp : int = 100:
 	set(value ):
+		print("the hp was" + str(hp) + "but now is" + str(value))
 		if GDSync.is_gdsync_owner(self): GDSync.call_func(change_hp,[value])
 		hp = clamp(value,0,100)
 		hp_bar.value = hp
