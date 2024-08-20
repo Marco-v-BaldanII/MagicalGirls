@@ -43,7 +43,7 @@ func move_selection(offset: int):
 	elif new_index >= children_count:
 		new_index = children_count - 1
 
-	selected_index = new_index
+	selected_index = new_indexa
 	_update_selection()
 
 func _update_selection():
