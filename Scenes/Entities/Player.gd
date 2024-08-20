@@ -296,6 +296,8 @@ var hit : bool = false
 var head: bool = false
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if GDSync.is_gdsync_owner(self):
+		GDSync.call_func(_on_hurt_box_area_entered,[area])
 	
 	hit = true
 	sprite_2d.modulate = Color.RED
@@ -306,6 +308,8 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	GameManager.camera_shake()
 	
+func online_receive_dmg(area : Area2D):
+	pass
 
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
