@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_b50ad"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="1_yqt7e"]
-[ext_resource type="Script" path="res://Scenes/Entities/state_machine.gd" id="3_m0e0u"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="3_m0e0u"]
 [ext_resource type="Script" path="res://Scenes/hit_box.gd" id="3_mbkic"]
-[ext_resource type="Script" path="res://Scenes/Entities/knocked_state.gd" id="4_ka1tp"]
-[ext_resource type="Script" path="res://Scenes/Entities/ground_move_state.gd" id="5_gdwvv"]
-[ext_resource type="Script" path="res://Scenes/Entities/air_move_state.gd" id="6_6kbk4"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ka1tp"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_gdwvv"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_6kbk4"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="7_2dnwv"]
-[ext_resource type="Script" path="res://Scenes/Entities/crouch_state.gd" id="7_niemg"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_niemg"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_siam7"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="9_y5gha"]
 

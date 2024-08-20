@@ -1,22 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=7 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="PackedScene" uid="uid://cuin37tgeosf" path="res://Scenes/Entities/Player.tscn" id="1_qcimc"]
 [ext_resource type="Script" path="res://main.gd" id="1_wibys"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_8yg0i"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_sxd4x"]
+[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="5_t5vee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
 
 [node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
 script = ExtResource("1_wibys")
-player_1 = NodePath("Player")
+player_1 = NodePath("")
 player_2 = NodePath("Player2")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
 refresh_rate = 60
-node_path = NodePath("../Player")
+node_path = NodePath("../Ritsu")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
@@ -30,15 +31,16 @@ property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[node name="Player" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
-fly = false
+[node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("5_t5vee")]
+position = Vector2(348, 634)
+FLY_SPEED = 400.0
 oponent = NodePath("../Player2")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
 position = Vector2(1183, 589)
 player_id = 1
 FLY_SPEED = 300.0
-oponent = NodePath("../Player")
+oponent = NodePath("../Ritsu")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0
