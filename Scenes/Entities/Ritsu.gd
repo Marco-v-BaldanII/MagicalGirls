@@ -37,6 +37,10 @@ func _input(event):
 			add_input_to_buffer("w_kick")
 			perform_move()
 		
+func instanciate_star():
+	current_start_projectile = STAR_RIGHT.instantiate()
+	get_tree().root.add_child(current_start_projectile)
+	return current_start_projectile
 	
 func perform_move():
 	if not can_move: return
@@ -61,6 +65,7 @@ func perform_move():
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch"):
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
+			last_used_move =  move
 			can_move = false #Can't move while ground attacks
 			$AnimationTree["parameters/conditions/" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
@@ -68,6 +73,8 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,[move])
 		elif crouching:
+			last_used_move = "crouch_" + move
+
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
@@ -75,6 +82,7 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,["crouch_" + move])
 		else:
+			last_used_move = "air_" + move
 			$AnimationTree["parameters/conditions/" + "air_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
@@ -83,8 +91,8 @@ func perform_move():
 			
 	elif input_buffer.back().contains("w_punch") and current_start_projectile == null and  is_on_floor():
 
-		current_start_projectile = STAR_RIGHT.instantiate()
-		get_tree().root.add_child(current_start_projectile)
+		instanciate_star()
+		GDSync.call_func(instanciate_star)
 
 		
 	#diagonal non chargeable projectile on  air
@@ -104,7 +112,7 @@ func perform_move():
 				can_move = false
 				await get_tree().create_timer(0.01667).timeout
 		else:
-			while i < 10:
+			while i < 20:
 				velocity.x = FLY_SPEED * 0.4
 				i += 1
 				can_move = false
@@ -119,7 +127,7 @@ func perform_move():
 			current_start_projectile = null
 			
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-		print(joy_x)
+
 		state_machine.on_child_transition(state_machine.current_state, "air_move")
 
 

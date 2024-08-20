@@ -9,8 +9,8 @@ var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GDSync.expose_node(self)
 
-	pass # Replace with function body.
 
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null):
@@ -20,7 +20,9 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null):
 		speed *= -1
 	if player:
 		player.add_lag(current_frame*0.7)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	GDSync.call_func(shoot, [layer,mask,dir,player])
+
+
 func _process(delta: float) -> void:
 	pass
 
@@ -31,4 +33,4 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		
 	position.x += (speed*1.5) * delta
-	position.y += speed * delta
+	position.y += abs(speed * delta)

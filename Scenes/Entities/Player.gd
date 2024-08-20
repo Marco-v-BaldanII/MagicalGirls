@@ -80,6 +80,22 @@ var action_state : Dictionary = {
 	"air_w_kick" : 8,
 	"air_s_kick" : 15
 }
+
+@export var move_vulnerable_on_shield : Dictionary = {
+	"w_punch" : 8,
+	"s_punch" : 15,
+	"crouch_w_punch" : 8,
+	"crouch_s_punch" : 15,
+	"air_w_punch" : 8,
+	"air_s_punch" : 15,
+	"w_kick" : 8,
+	"s_kick" : 15,
+	"crouch_w_kick" : 8,
+	"crouch_s_kick" : 15,
+	"air_w_kick" : 8,
+	"air_s_kick" : 15
+}
+
 var last_used_move : String
 
 @onready var hit_box_1: Area2D = $hit_boxes/weak_box
@@ -297,6 +313,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
 						hp -= area.get_dmg()/3
 						sprite_2d.modulate = Color.SKY_BLUE
+						oponent.add_lag(10)
 					else:
 						hp -= area.get_dmg()
 						
@@ -304,6 +321,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
 						hp -= oponent.move_dmg[oponent.last_used_move] /3
 						sprite_2d.modulate = Color.SKY_BLUE
+						oponent.add_lag(4)
 					else:
 						hp -= oponent.move_dmg[oponent.last_used_move]
 			else:
@@ -314,6 +332,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
 						hp -= area.get_dmg()/3
 						sprite_2d.modulate = Color.SKY_BLUE
+						oponent.add_lag(10)
 					else:
 						hp -= area.get_dmg()
 						
@@ -321,6 +340,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
 						hp -= oponent.move_dmg[oponent.last_used_move] /3
 						sprite_2d.modulate = Color.SKY_BLUE
+						oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					else:
 						hp -= oponent.move_dmg[oponent.last_used_move] 
 		else : #Hit body while crouching
@@ -330,21 +350,25 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					strong_knock = true
 					hp -= area.get_dmg()/3
 					sprite_2d.modulate = Color.SKY_BLUE
+					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 				else:
 					GameManager.hit_stop_short()
 					strong_knock = false
 					sprite_2d.modulate = Color.SKY_BLUE
+					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					hp -= area.get_dmg() /3
 			else:
 				if area.is_in_group("strong"):
 					GameManager.hit_stop_long()
 					strong_knock = true
 					hp -= oponent.move_dmg[oponent.last_used_move] /3
+					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					sprite_2d.modulate = Color.SKY_BLUE
 				else:
 					GameManager.hit_stop_short()
 					strong_knock = false
 					sprite_2d.modulate = Color.SKY_BLUE
+					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					hp -= oponent.move_dmg[oponent.last_used_move] /3
 	else: #hit Head while crouching
 		if crouching:
@@ -411,7 +435,7 @@ func set_hitboxes(player_id : int):
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	var joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 	var joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
-	print(anim_name + "01")
+
 	if anim_name.contains("crouch"):
 		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
 		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch"):
