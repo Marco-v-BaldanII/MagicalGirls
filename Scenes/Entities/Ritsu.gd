@@ -132,6 +132,8 @@ func perform_move():
 
 
 func _physics_process(delta: float) -> void:
+	if not GDSync.is_gdsync_owner(self): return
+	
 	super._physics_process(delta)
 	
 	if is_on_floor():
