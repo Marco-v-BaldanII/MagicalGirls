@@ -44,7 +44,7 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null):
 func destroy_projectile():
 	#my_player.oponent.add_lag(4)
 	GDSync.call_func(destroy_projectile)
-	if current_frame < 20: my_player.oponent.weak_knock = true
+	if current_frame < 20 and my_player: my_player.oponent.weak_knock = true
 	await  get_tree().create_timer(0.017).timeout
 	queue_free()
 	
