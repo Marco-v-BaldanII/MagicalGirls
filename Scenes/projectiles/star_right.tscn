@@ -25,7 +25,6 @@ shape = SubResource("CircleShape2D_xfwv1")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_1lr3o")
-refresh_rate = 120
 node_path = NodePath("..")
 property_name = "position"
 interpolated = false

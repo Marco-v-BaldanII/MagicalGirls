@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://btaxewrgndcqd"]
 
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_bfalx"]
-[ext_resource type="Script" path="res://Scenes/Entities/projectile.gd" id="2_jyryr"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile.gd" id="2_jyryr"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_kj5qp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]

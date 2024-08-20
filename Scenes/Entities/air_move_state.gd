@@ -22,27 +22,29 @@ func enter():
 var air_buffer 
 
 func physics_update(delta : float):
-
+	if not player.can_move or player.lag: return
+	
 	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
 	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 	
-	if player.fly and not player.is_on_floor():
+	if player.fly and not player.is_on_floor() and player.can_move:
 		
 		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1:
-			print("horizontal jjjjjjjuuuuummmpppp")
+			if player.velocity.x < 0:player.velocity.x *= -0.5
 			player.input_direction = 1
 
 		elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or joy_x < -0.1:
+			if player.velocity.x > 0:player.velocity.x *= -0.5
 			player.input_direction =  -1
 			
-		player.velocity.x = player.FLY_SPEED * player.input_direction
+		player.velocity.x += (player.FLY_SPEED * player.input_direction)/100
 	
 	if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
 		player.jump_lag = 100
 		if not player.fly:
 			player.velocity.y = player.JUMP_VELOCITY
 		else:
-			player.velocity.y = player.JUMP_VELOCITY*0.4
+			player.velocity.y = player.JUMP_VELOCITY*0.47
 		print("while jumping axis is "+ str(joy_x))
 		if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or j_x < -0.1:
 				player.velocity.x = -player.air_speed

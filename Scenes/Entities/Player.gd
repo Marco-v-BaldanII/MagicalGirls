@@ -53,6 +53,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 3.2
 var strong_knock : bool = false
 var moving_backwards : bool = false
 
+var lag : bool = false
+
 var action_state : Dictionary = {
 	"move_left" : false,
 	"move_right" : false,
@@ -447,3 +449,13 @@ func instanciate_projectile(Pname : String):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
+
+
+func add_lag(frames : int):
+	print(str(frames) + "lag")
+	lag = true
+	set_process_input(false)
+	
+	await get_tree().create_timer(0.01667 * frames).timeout
+	lag = false
+	set_process_input(true)

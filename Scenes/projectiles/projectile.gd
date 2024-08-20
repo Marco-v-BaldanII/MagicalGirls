@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 	position.x += speed * delta
 
 func assign_phys_layer(layer : int, mask : int):
+	if not area_2d: area_2d = $Area2D
 	area_2d.set_collision_layer_value(layer,true)
 	area_2d.set_collision_mask_value(mask,true)
 

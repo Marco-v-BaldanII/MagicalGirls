@@ -17,7 +17,9 @@ func enter():
 var crouching : bool = false
 
 func physics_update(delta : float):
-
+	if player.can_move == false or player.lag: 
+		return
+	
 	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
 		player.input_direction = 1
 
@@ -56,7 +58,7 @@ func physics_update(delta : float):
 	#Transition to crouch
 	
 	
-	if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])or (joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false:
+	if player.can_move and Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])or (joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move:
 			
 			if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(player)):
 				Transitioned.emit(self, "crouch")

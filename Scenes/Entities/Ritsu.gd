@@ -2,8 +2,10 @@ extends Player
 
 var current_start_projectile : Projectile
 const STAR_RIGHT = preload("res://Scenes/projectiles/star_right.tscn")
+const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
 
 func _input(event):
+	if not can_move: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
@@ -37,6 +39,8 @@ func _input(event):
 		
 	
 func perform_move():
+	if not can_move: return
+	
 	for specials in moveset:
 		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
 			var dir = find_special_direction(moveset[specials])
@@ -77,14 +81,43 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,["air_" + move])
 			
-	elif input_buffer.back().contains("w_punch") and current_start_projectile == null:
+	elif input_buffer.back().contains("w_punch") and current_start_projectile == null and  is_on_floor():
 
 		current_start_projectile = STAR_RIGHT.instantiate()
 		get_tree().root.add_child(current_start_projectile)
+
 		
+	#diagonal non chargeable projectile on  air
+	elif not is_on_floor() and input_buffer.back().contains("w_punch") and not current_start_projectile:
+		current_start_projectile = STAR_DIAGONAL.instantiate()
+		current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+		current_start_projectile.global_position = global_position
+		get_tree().root.add_child(current_start_projectile)
+		current_start_projectile = null
+		var i = 0
+		
+		can_move = false
+		if direction == "left":
+			while i < 20:
+				velocity.x = FLY_SPEED * -0.4
+				i += 1
+				can_move = false
+				await get_tree().create_timer(0.01667).timeout
+		else:
+			while i < 10:
+				velocity.x = FLY_SPEED * 0.4
+				i += 1
+				can_move = false
+				await get_tree().create_timer(0.01667).timeout
+		can_move = true
+		input_direction = 0
 		
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
-
+		#Force the player to throw the projectile when jumping
+		if current_start_projectile != null:
+			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+			current_start_projectile = null
+			
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 		print(joy_x)
 		state_machine.on_child_transition(state_machine.current_state, "air_move")
@@ -93,9 +126,13 @@ func perform_move():
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
-	if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["w_punch"]):
-		current_start_projectile.charge(global_position)
-		pass
-	elif current_start_projectile != null:
-		current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction)
-		current_start_projectile = null
+	if is_on_floor():
+		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["w_punch"]):
+			current_start_projectile.charge(global_position)
+			pass
+		elif current_start_projectile != null:
+			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+			velocity.x = 0
+		
+			current_start_projectile = null
+			
