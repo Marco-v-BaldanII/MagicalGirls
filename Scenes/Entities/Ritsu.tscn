@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://ct7hitycb8c46"]
+[gd_scene load_steps=83 format=3 uid="uid://ct7hitycb8c46"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_hxmnc"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ohqq7"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_ib67o"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="8_psppn"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_t58ng"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
@@ -1213,14 +1212,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
 script = ExtResource("8_t58ng")
-
-[node name="PropertySynchronizer" type="Node" parent="CanvasLayer"]
-script = ExtResource("8_psppn")
-refresh_rate = 15
-node_path = NodePath("../hpBar")
-property_name = "value"
-interpolated = false
-interpolation_speed = 1.0
 
 [node name="Body" type="Area2D" parent="."]
 

@@ -13,6 +13,7 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 
 @export var hp : int = 100:
 	set(value ):
+		if GDSync.is_gdsync_owner(self): GDSync.call_func(change_hp,[value])
 		hp = clamp(value,0,100)
 		
 		while hp_bar.value != hp:
@@ -20,6 +21,12 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 			await get_tree().create_timer(0.1667).timeout
 			
 
+func change_hp(value : int):
+	hp = clamp(value,0,100)
+		
+	while hp_bar.value != hp:
+			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
+			await get_tree().create_timer(0.1667).timeout
 
 var player_num : int = 0 #player_num is 1 or 2 and is independent of online or offline unlike player_id 
 @export var player_id : int = 0
