@@ -43,7 +43,7 @@ func instanciate_star():
 	return current_start_projectile
 	
 func perform_move():
-	if not can_move: return
+	if not can_move and not lag: return
 	
 	for specials in moveset:
 		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
@@ -103,22 +103,21 @@ func perform_move():
 		get_tree().root.add_child(current_start_projectile)
 		current_start_projectile = null
 		var i = 0
-		
 		can_move = false
 		if direction == "left":
-			while i < 20:
-				velocity.x = FLY_SPEED * -0.4
+			while i < 8:
+				#velocity.x = FLY_SPEED * -0.4
 				i += 1
 				can_move = false
 				await get_tree().create_timer(0.01667).timeout
 		else:
-			while i < 20:
-				velocity.x = FLY_SPEED * 0.4
+			while i < 8:
+				#velocity.x = FLY_SPEED * 0.4
 				i += 1
 				can_move = false
 				await get_tree().create_timer(0.01667).timeout
 		can_move = true
-		input_direction = 0
+		#input_direction = 0
 		
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
 		#Force the player to throw the projectile when jumping

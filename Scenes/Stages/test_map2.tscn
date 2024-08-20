@@ -11,13 +11,13 @@ size = Vector2(1936, 135)
 
 [node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
 script = ExtResource("1_wibys")
-player_1 = NodePath("")
+player_1 = NodePath("Ritsu2")
 player_2 = NodePath("Player2")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
 refresh_rate = 60
-node_path = NodePath("../Ritsu")
+node_path = NodePath("../Ritsu2")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
@@ -31,16 +31,15 @@ property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("5_t5vee")]
-position = Vector2(348, 634)
-FLY_SPEED = 400.0
+[node name="Ritsu2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("5_t5vee")]
+position = Vector2(326, 639)
 oponent = NodePath("../Player2")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("1_qcimc")]
 position = Vector2(1183, 589)
 player_id = 1
 FLY_SPEED = 300.0
-oponent = NodePath("../Ritsu")
+oponent = NodePath("../Ritsu2")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0

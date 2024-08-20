@@ -42,7 +42,7 @@ func camera_shake():
 			await get_tree().create_timer(0.01667).timeout
 		while camera.position != default_camera_pos:
 			
-			camera.position = camera.position.move_toward(default_camera_pos, 0.1)
+			camera.position = camera.position.move_toward(default_camera_pos, 1)
 		
 var cam_offset = 0
 
