@@ -46,6 +46,6 @@ func destroy_projectile():
 	#my_player.oponent.add_lag(4)
 
 	if current_frame < 20 and my_player: my_player.oponent.weak_knock = true
-	await  get_tree().create_timer(0.2).timeout
+	await  get_tree().create_timer(0.017).timeout
 	queue_free()
 	
