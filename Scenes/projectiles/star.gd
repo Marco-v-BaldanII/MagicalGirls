@@ -1,4 +1,7 @@
 extends Projectile
+class_name Star
+
+var my_player : Player
 
 var power : int = 0
 @export var frame_charge_time : float =  100
@@ -30,11 +33,16 @@ func charge(position : Vector2):
 func shoot(layer : int , mask : int, dir : String, player : Player = null):
 	set_physics_process(true)
 	assign_phys_layer(layer, mask)
+	my_player = player
 	if dir == "right":
 		speed *= -1
 	if player:
 		var lag = current_frame*0.7
 		player.add_lag(clamp(lag,30,50))
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+func destroy_projectile():
+	#my_player.oponent.add_lag(4)
+	if current_frame < 20: my_player.oponent.weak_knock = true
+	await  get_tree().create_timer(0.017).timeout
+	queue_free()
+	

@@ -51,6 +51,7 @@ var jump_lag = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 3.2
 
 var strong_knock : bool = false
+var weak_knock : bool = false
 var moving_backwards : bool = false
 
 var lag : bool = false
@@ -297,9 +298,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	GameManager.camera_shake()
 	
-	
-	
-	
+
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
 		

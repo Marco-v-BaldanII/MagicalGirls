@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_uskfw"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_grr1i"]
-[ext_resource type="Script" path="res://Scenes/Entities/state_machine.gd" id="3_dfxhb"]
-[ext_resource type="Script" path="res://Scenes/Entities/knocked_state.gd" id="4_5k66o"]
-[ext_resource type="Script" path="res://Scenes/Entities/ground_move_state.gd" id="5_o26tm"]
-[ext_resource type="Script" path="res://Scenes/Entities/air_move_state.gd" id="6_tdwux"]
-[ext_resource type="Script" path="res://Scenes/Entities/crouch_state.gd" id="7_ubm5j"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="3_dfxhb"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_5k66o"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_o26tm"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_tdwux"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ubm5j"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_3hply"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]

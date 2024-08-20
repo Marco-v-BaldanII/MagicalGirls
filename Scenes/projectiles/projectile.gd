@@ -22,11 +22,6 @@ func assign_phys_layer(layer : int, mask : int):
 
 
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	await  get_tree().create_timer(0.017).timeout
-	queue_free()
-	pass # Replace with function body.
-
 func destroy_projectile():
 	await  get_tree().create_timer(0.017).timeout
 	queue_free()
