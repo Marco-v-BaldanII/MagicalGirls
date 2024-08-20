@@ -32,7 +32,7 @@ func charge(position : Vector2):
 		
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null):
-	
+	GDSync.call_func(assign_phys_layer,[layer,mask])
 	set_physics_process(true)
 	assign_phys_layer(layer, mask)
 	my_player = player
@@ -46,6 +46,6 @@ func destroy_projectile():
 	#my_player.oponent.add_lag(4)
 
 	if current_frame < 20 and my_player: my_player.oponent.weak_knock = true
-	await  get_tree().create_timer(0.017).timeout
+	await  get_tree().create_timer(0.2).timeout
 	queue_free()
 	

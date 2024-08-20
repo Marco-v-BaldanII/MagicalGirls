@@ -3,6 +3,7 @@ extends Node
 func _ready() -> void:
 	GDSync.expose_node(self)
 
+
 var online : bool:
 	set(value):
 		online = value
@@ -17,7 +18,7 @@ var online : bool:
 var players : Array[Player]
 var camera : Camera2D
 var shake_amount : float = 8
-var default_camera_pos : Vector2
+var default_camera_pos : Vector2 = Vector2(0,0)
 
 
 func add_player(player : Player):
@@ -39,7 +40,7 @@ func hit_stop_long():
 func camera_shake():
 	#GDSync.call_func(camera_shake)
 	if camera != null:
-		default_camera_pos = camera.position
+		if default_camera_pos == Vector2.ZERO : default_camera_pos = camera.position
 		var frames = 6
 		while frames > 0:
 			frames -= 1
@@ -47,7 +48,7 @@ func camera_shake():
 			await get_tree().create_timer(0.01667).timeout
 		while camera.position != default_camera_pos:
 			
-			camera.position = camera.position.move_toward(default_camera_pos, 1)
+			camera.position = camera.position.move_toward(default_camera_pos, 2)
 		
 var cam_offset = 0
 
