@@ -91,7 +91,8 @@ func perform_move():
 			
 	elif input_buffer.back().contains("w_punch") and current_start_projectile == null and  is_on_floor():
 
-		instanciate_star()
+		var star = instanciate_star()
+		GDSync.set_gdsync_owner(star,GDSync.get_client_id())
 		GDSync.call_func(instanciate_star)
 
 		

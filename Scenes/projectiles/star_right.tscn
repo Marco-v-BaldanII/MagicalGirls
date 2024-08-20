@@ -29,3 +29,10 @@ node_path = NodePath("..")
 property_name = "position"
 interpolated = false
 interpolation_speed = 1.0
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("3_1lr3o")
+node_path = NodePath("..")
+property_name = "scale"
+interpolated = false
+interpolation_speed = 1.0

@@ -6,7 +6,7 @@ class_name Player
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
-@onready var node_instantiator := $NodeInstantiator
+
 
 #if an attack hits below this position it breacks guard
 const DOWN_HIT_POS_THRESHOLD : int = 860
