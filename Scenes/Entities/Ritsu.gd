@@ -97,6 +97,8 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,["air_" + move])
 			
+		GDSync.call_func(store_last_used_move,[last_used_move])
+		
 	elif input_buffer.back().contains("w_punch") and current_start_projectile == null and  is_on_floor():
 
 		var star = instanciate_star()

@@ -15,7 +15,7 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 	set(value ):
 		if GDSync.is_gdsync_owner(self): GDSync.call_func(change_hp,[value])
 		hp = clamp(value,0,100)
-		
+		hp_bar.value = hp
 		while hp_bar.value != hp:
 			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
 			await get_tree().create_timer(0.1667).timeout
@@ -23,7 +23,7 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 
 func change_hp(value : int):
 	hp = clamp(value,0,100)
-		
+	hp_bar.value = hp
 	while hp_bar.value != hp:
 			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
 			await get_tree().create_timer(0.1667).timeout
@@ -253,7 +253,7 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
 			clear_buffer()
 			GDSync.call_func(_sync_move,["air_" + move])
-			
+		GDSync.call_func(store_last_used_move,[last_used_move])
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
 
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
@@ -479,7 +479,8 @@ func instanciate_projectile(Pname : String):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
-
+func store_last_used_move(move:String):
+	last_used_move = move
 
 func add_lag(frames : int):
 	print(str(frames) + "lag")
