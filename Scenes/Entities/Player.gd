@@ -307,16 +307,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		parent.destroy_projectile()
 	
 	GameManager.camera_shake()
-	
-func online_receive_dmg(area : Area2D):
-	hit = true
-	sprite_2d.modulate = Color.RED
-	
-	var parent = area.get_parent()
-	if parent.has_method("destroy_projectile"):
-		parent.destroy_projectile()
-	
-	GameManager.camera_shake()
 
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
@@ -418,6 +408,15 @@ func online_receive_dmg(area : Area2D):
 func deactivate_collisions():
 	pass
 
+func online_receive_dmg(area : Area2D):
+	hit = true
+	sprite_2d.modulate = Color.RED
+	
+	var parent = area.get_parent()
+	if parent.has_method("destroy_projectile"):
+		parent.destroy_projectile()
+	
+	GameManager.camera_shake()
 
 func _on_body_area_entered(area: Area2D) -> void:
 	
