@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 
 func destroy_projectile():
 	#my_player.oponent.add_lag(4)
+	GDSync.call_func(destroy_projectile)
 	my_player.oponent.weak_knock = true
 	await  get_tree().create_timer(0.017).timeout
 	queue_free()

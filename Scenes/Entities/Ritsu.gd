@@ -42,6 +42,14 @@ func instanciate_star():
 	get_tree().root.add_child(current_start_projectile)
 	return current_start_projectile
 	
+	
+func instanciate_diagonal_star():
+	current_start_projectile = STAR_DIAGONAL.instantiate()
+	current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+	current_start_projectile.global_position = global_position
+	get_tree().root.add_child(current_start_projectile)
+	current_start_projectile = null
+	
 func perform_move():
 	if not can_move and not lag: return
 	
@@ -98,11 +106,10 @@ func perform_move():
 		
 	#diagonal non chargeable projectile on  air
 	elif not is_on_floor() and input_buffer.back().contains("w_punch") and not current_start_projectile:
-		current_start_projectile = STAR_DIAGONAL.instantiate()
-		current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-		current_start_projectile.global_position = global_position
-		get_tree().root.add_child(current_start_projectile)
-		current_start_projectile = null
+		
+		instanciate_diagonal_star()
+		GDSync.call_func(instanciate_diagonal_star)
+		
 		var i = 0
 		can_move = false
 		if direction == "left":
