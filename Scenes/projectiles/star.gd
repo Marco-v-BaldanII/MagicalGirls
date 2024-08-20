@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func charge(position : Vector2):
-	
+	#GDSync.call_func(charge,[position])
 	
 	global_position = position
 	
@@ -32,6 +32,7 @@ func charge(position : Vector2):
 		
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null):
+	
 	set_physics_process(true)
 	assign_phys_layer(layer, mask)
 	my_player = player

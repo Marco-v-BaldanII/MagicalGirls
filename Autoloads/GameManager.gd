@@ -1,5 +1,7 @@
 extends Node
 
+func _ready() -> void:
+	GDSync.expose_node(self)
 
 var online : bool:
 	set(value):
@@ -23,16 +25,19 @@ func add_player(player : Player):
 	player.player_num = players.size()
 
 func hit_stop_short():
+	GDSync.call_func(hit_stop_short)
 	Engine.time_scale = 0
 	await get_tree().create_timer(0.08,true,false,true).timeout
 	Engine.time_scale = 1
 
 func hit_stop_long():
+	GDSync.call_func(hit_stop_long)
 	Engine.time_scale = 0
 	await get_tree().create_timer(0.16,true,false,true).timeout
 	Engine.time_scale = 1
 
 func camera_shake():
+	GDSync.call_func(camera_shake)
 	if camera != null:
 		default_camera_pos = camera.position
 		var frames = 6

@@ -23,16 +23,17 @@ script = ExtResource("3_g1hxu")
 position = Vector2(40, 0)
 shape = SubResource("CircleShape2D_xfwv1")
 
-[node name="PropertySynchronizer" type="Node" parent="."]
-script = ExtResource("3_1lr3o")
-node_path = NodePath("..")
-property_name = "position"
-interpolated = false
-interpolation_speed = 1.0
-
 [node name="PropertySynchronizer2" type="Node" parent="."]
 script = ExtResource("3_1lr3o")
 node_path = NodePath("..")
 property_name = "scale"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("3_1lr3o")
+refresh_rate = 120
+node_path = NodePath("..")
+property_name = "position"
 interpolated = false
 interpolation_speed = 1.0
