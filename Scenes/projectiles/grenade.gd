@@ -87,6 +87,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	speedY = og_speedY/num_bounce
 	speed = og_speedX/num_bounce
+	speedY = clamp(speedY, -1000,-60)
 	num_bounce += 1
 	pass # Replace with function body.
 

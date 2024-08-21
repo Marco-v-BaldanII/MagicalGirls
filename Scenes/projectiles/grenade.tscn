@@ -88,7 +88,6 @@ position = Vector2(113, 57)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_wf1yj")
 script = ExtResource("2_vrj3o")
-alive_time = 3
 lag_frames = 35
 
 [node name="Area2D" type="Area2D" parent="." groups=["weak"]]

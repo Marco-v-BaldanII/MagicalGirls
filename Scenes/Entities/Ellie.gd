@@ -1,39 +1,9 @@
 extends Player
-class_name Anastasia
+class_name EllieQuinn
 
 var current_start_projectile : Projectile
-const GRENADE = preload("res://Scenes/projectiles/grenade.tscn")
-const GUN_FIRE = preload("res://Scenes/projectiles/gun_fire.tscn")
-
-@export var recharge_frames : int = 40
-
-signal recharge_AK
-
-var dead_bullets :
-	set(value):
-		dead_bullets = value
-		if dead_bullets == max_shots:
-			recharge_AK.emit()
-
-var AK : Array
-@export var max_shots : int = 15
-var current_shot :
-	set(value):
-		if value > max_shots-1:
-			add_lag(recharge_frames)
-			
-			current_shot = 0
-		else:
-			current_shot = value
-
-func _ready() -> void:
-	current_shot = 0
-	dead_bullets = 0
-	super()
-	for i in range(max_shots):
-		AK.push_back(gun_fire())
-		get_tree().root.add_child.call_deferred(AK.back())
-		
+const STAR_RIGHT = preload("res://Scenes/projectiles/book_laser.tscn")
+const BOOK_FIRE = preload("res://Scenes/projectiles/book_fire.tscn")
 
 func _input(event):
 	if not can_move: return
@@ -68,20 +38,24 @@ func _input(event):
 			add_input_to_buffer("w_kick")
 			perform_move()
 		
-func instanciate_grenade():
-	current_start_projectile = GRENADE.instantiate()
+func instanciate_star():
+	current_start_projectile = STAR_RIGHT.instantiate()
 	get_tree().root.add_child(current_start_projectile)
+	charging_laser = true
 	return current_start_projectile
 	
 	
-func gun_fire():
-	current_start_projectile = GUN_FIRE.instantiate()
+func instanciate_fire():
+	var projectile = BOOK_FIRE.instantiate()
 	#current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-	current_start_projectile.global_position = global_position
-	#get_tree().root.add_child(current_start_projectile)
+	projectile.global_position = global_position
+	projectile.global_position.y -= 200
+	get_tree().root.add_child(projectile)
 	
-	return current_start_projectile
-	#current_start_projectile = null
+	return projectile
+	
+var charging_laser : bool = false
+var started_charge : bool = false
 	
 func perform_move():
 	if not can_move and not lag: return
@@ -103,7 +77,7 @@ func perform_move():
 
 			return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch") and not input_buffer.back().contains("s_punch"):
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick"):
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
 			last_used_move =  move
@@ -129,57 +103,65 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false
 			clear_buffer()
 			GDSync.call_func(_sync_move,["air_" + move])
-			
+		charging_laser = false
+		if current_start_projectile:
+				current_start_projectile.deactivate()
+				
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
-	elif input_buffer.back().contains("w_punch") and current_start_projectile == null :
+	elif  input_buffer.is_empty() == false and input_buffer.back().contains("jump") and is_on_floor() and not crouching:
+				
+			joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 
-		var grenade = instanciate_grenade()
-		GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
-		GDSync.call_func(instanciate_grenade)
+			state_machine.on_child_transition(state_machine.current_state, "air_move")
 
-
-		
-	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
-
-			
-		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-
-		state_machine.on_child_transition(state_machine.current_state, "air_move")
 
 
 func _physics_process(delta: float) -> void:
-		
 	
-		super._physics_process(delta)
-		if not GDSync.is_gdsync_owner(self) or lag: return
-		
-		if  Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_punch"]) and not lag:
-			#get_tree().root.add_child(AK[current_shot])
-			var has_shot : bool = false
-			for i in AK.size():
-				if not AK[i].active:
-					AK[i].shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-					has_shot = true
-					current_shot += 1
-					break
-			
-			#AK[current_shot].shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-			
-
-
-		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["w_punch"]):
+	super._physics_process(delta)
+	
+	if not GDSync.is_gdsync_owner(self) or lag: return
+	
+	if is_on_floor() and charging_laser:
+		if current_start_projectile != null and charging_laser:
 			current_start_projectile.charge(global_position)
-			#the fixed update is "charging" the grenade
+			pass
+	if is_on_floor() and not crouching:
+		
+		book_laser()
+		
+		
+	elif is_on_floor() and crouching:
+		
+		if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]) and current_start_projectile == null:
+			var fire_projectile = instanciate_fire()
+			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+			add_lag(30)
+			pass
+		
+	return	
 
-		elif current_start_projectile != null:
-			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 
-			if crouching: 
-				#The crouching grenade get's thrown at a more horizontal lower angle
-				current_start_projectile.speed *= 2
-				current_start_projectile.og_speedX *= 2
-				current_start_projectile.speedY *= 0.6
-				
-			current_start_projectile = null
+func book_laser():
+		if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]) and current_start_projectile == null and  is_on_floor() and not charging_laser:
+
+			var star = instanciate_star()
+			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
+			GDSync.call_func(instanciate_star)
+			charging_laser = false
+			started_charge = true	
+		
+		if not charging_laser and started_charge and not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
 			
+			charging_laser = true
+			started_charge = false
+			
+		elif not charging_laser and not started_charge and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
+			charging_laser = false; started_charge = true;
+
+		elif  charging_laser  and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
+			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+			charging_laser = false
+			current_start_projectile = null
+			add_lag(10)

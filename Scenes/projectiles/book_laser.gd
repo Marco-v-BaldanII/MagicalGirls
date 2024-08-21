@@ -1,20 +1,20 @@
 extends Projectile
-class_name GunFire
+class_name Book_Laser
 
 var my_player : Player
 
-var active : bool = false
+var power : int = 0
+@export var frame_charge_time : float =  100
+var current_frame : int = 0
 
 var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	area_2d = $Area2D
-	hide()
-	alive_time = 1.0
 	GDSync.expose_node(self)
-	dmg = 1
-	speed = 1200
+	dmg = 4
+
+	power_multiply = dmg/(frame_charge_time/4) #max charge is 3 times stronger
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)
 	pass # Replace with function body.
@@ -22,49 +22,33 @@ func _ready() -> void:
 
 func charge(position : Vector2):
 	#GDSync.call_func(charge,[position])
-	
+	show()
 	global_position = position
 	
-var _layer = 0
-var _mask = 0
+	if current_frame < frame_charge_time:
+		current_frame += 1
+		dmg += power_multiply
+		scale += Vector2(0.005,0.005)
+		
+
 func shoot(layer : int , mask : int, dir : String, player : Player = null):
 	GDSync.call_func(assign_phys_layer,[layer,mask])
-	_layer = layer; _mask = mask
-	set_physics_process(true)
-	$Area2D.set_monitoring(true)
 	show()
-	active = true
+	set_physics_process(true)
 	assign_phys_layer(layer, mask)
 	my_player = player
-	global_position = my_player.position
 	if dir == "right":
 		speed *= -1
 	if player:
-		player.add_lag(10)
-
-
+		var lag = current_frame*0.7
+		player.add_lag(clamp(lag,30,50))
 
 func destroy_projectile():
 	#my_player.oponent.add_lag(4)
 
-	if my_player: 
-		my_player.oponent.weak_knock = true
-		my_player.dead_bullets += 1
+	if current_frame < 20 and my_player: my_player.oponent.weak_knock = true
 	await  get_tree().create_timer(0.017).timeout
-	deativate()
+	queue_free()
 	
-func _physics_process(delta: float) -> void:
-	position.x += speed * delta
-	alive_time -= delta
-	
-	if alive_time < 0:
-		destroy_projectile()
-		pass
-		
-func deativate():
-	$Area2D.set_collision_layer_value(_layer,false)
-	$Area2D.set_collision_mask_value(_mask,false)
-	$Area2D.set
-	active = false
+func deactivate():
 	hide()
-	_ready()

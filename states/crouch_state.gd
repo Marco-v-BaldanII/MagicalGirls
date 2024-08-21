@@ -4,7 +4,7 @@ class_name CrouchState
 var player : Player
 
 func enter():
-	print("ENTER CROUCH")
+
 	GDSync.expose_node(self)
 	if not player:
 			var e = get_parent()
