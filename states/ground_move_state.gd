@@ -4,6 +4,7 @@ class_name GroundMoveState
 var player : Player
 
 func enter():
+
 	GDSync.expose_node(self)
 	crouching = false
 	if not player:
@@ -11,8 +12,8 @@ func enter():
 			while (e == null or not ( e is  Player)):
 				e = e.get_parent()
 			player = e
-	await get_tree().create_timer(0.5).timeout
-	#player.animation_tree["parameters/conditions/not_crouch"] = true
+	else:
+		player.animation_tree["parameters/conditions/not_crouch"] = true
 
 var crouching : bool = false
 

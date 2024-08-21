@@ -61,6 +61,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 3.2
 var strong_knock : bool = false
 var weak_knock : bool = false
 var moving_backwards : bool = false
+var launch_knock : bool = false
 
 var lag : bool = false
 
@@ -232,6 +233,7 @@ func perform_move():
 		var move : String = input_buffer.back()
 		
 		if is_on_floor() and not crouching:
+			velocity.x = 0
 			last_used_move = move
 			can_move = false #Can't move while ground attacks
 			$AnimationTree["parameters/conditions/" + move] = true
@@ -295,6 +297,8 @@ func find_special_direction(special : Array[String]) -> String:
 var hit : bool = false
 var head: bool = false
 
+var blocked : bool = false
+
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 
 	GDSync.call_func(online_receive_dmg,[area])
@@ -321,16 +325,19 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
 						hp -= area.get_dmg()/3
 						sprite_2d.modulate = Color.SKY_BLUE
+						blocked = true
 						oponent.add_lag(10)
 					else:
 						hp -= area.get_dmg()
-						
+						blocked = false
 				else:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
 						hp -= oponent.move_dmg[oponent.last_used_move] /3
 						sprite_2d.modulate = Color.SKY_BLUE
 						oponent.add_lag(4)
+						blocked = true
 					else:
+						blocked = false
 						hp -= oponent.move_dmg[oponent.last_used_move]
 			else:
 				GameManager.hit_stop_short()
@@ -341,17 +348,21 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 						hp -= area.get_dmg()/3
 						sprite_2d.modulate = Color.SKY_BLUE
 						oponent.add_lag(10)
+						blocked = true
 					else:
 						hp -= area.get_dmg()
-						
+						blocked = false
 				else:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
 						hp -= oponent.move_dmg[oponent.last_used_move] /3
 						sprite_2d.modulate = Color.SKY_BLUE
 						oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
+						blocked = true
 					else:
 						hp -= oponent.move_dmg[oponent.last_used_move] 
+						blocked = false
 		else : #Hit body while crouching
+			blocked = true
 			if area.has_method("get_dmg"):
 				if area.is_in_group("strong"):
 					GameManager.hit_stop_long()
@@ -359,12 +370,14 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					hp -= area.get_dmg()/3
 					sprite_2d.modulate = Color.SKY_BLUE
 					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
+
 				else:
 					GameManager.hit_stop_short()
 					strong_knock = false
 					sprite_2d.modulate = Color.SKY_BLUE
 					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					hp -= area.get_dmg() /3
+
 			else:
 				if area.is_in_group("strong"):
 					GameManager.hit_stop_long()
@@ -380,6 +393,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					hp -= oponent.move_dmg[oponent.last_used_move] /3
 	else: #hit Head while crouching
 		if crouching:
+			blocked = false
 			if area.has_method("get_dmg"):
 				if area.is_in_group("strong"):
 					GameManager.hit_stop_long()
@@ -400,6 +414,11 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					hp -= oponent.move_dmg[oponent.last_used_move] 
 					
 	#Force a transition to the knocked state
+	if not blocked and area.is_in_group("special"):
+		launch_knock = true
+	else:
+		launch_knock = false
+	
 	state_machine.on_child_transition(state_machine.current_state, "knocked")
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false

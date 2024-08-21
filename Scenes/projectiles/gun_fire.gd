@@ -25,11 +25,13 @@ func charge(position : Vector2):
 	
 	global_position = position
 	
-
+var _layer = 0
+var _mask = 0
 func shoot(layer : int , mask : int, dir : String, player : Player = null):
 	GDSync.call_func(assign_phys_layer,[layer,mask])
+	_layer = layer; _mask = mask
 	set_physics_process(true)
-	$Area2D.monitoring = true
+	$Area2D.set_monitoring(true)
 	show()
 	active = true
 	assign_phys_layer(layer, mask)
@@ -59,7 +61,9 @@ func _physics_process(delta: float) -> void:
 		pass
 		
 func deativate():
-	$Area2D.monitoring = false
+	$Area2D.set_collision_layer_value(_layer,false)
+	$Area2D.set_collision_mask_value(_mask,false)
+	$Area2D.set
 	active = false
 	hide()
 	_ready()

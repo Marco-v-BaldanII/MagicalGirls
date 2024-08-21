@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cuin37tgeosf"]
+[gd_scene load_steps=88 format=3 uid="uid://cuin37tgeosf"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_b50ad"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="1_yqt7e"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_6kbk4"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="7_2dnwv"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_niemg"]
+[ext_resource type="Script" path="res://Scenes/Entities/fallen.gd" id="9_qxdjp"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_siam7"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="9_y5gha"]
 
@@ -314,6 +315,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ld7p7"]
@@ -846,6 +859,21 @@ tracks/4/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_bvvlb"]
+resource_name = "fallen"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
 [sub_resource type="Animation" id="Animation_ia5yg"]
 resource_name = "idle_anim"
 tracks/0/type = "value"
@@ -1066,6 +1094,7 @@ _data = {
 "crouch_w_kick": SubResource("Animation_pd1os"),
 "crouch_w_punch": SubResource("Animation_a78xc"),
 "crouching": SubResource("Animation_m0rv4"),
+"fallen": SubResource("Animation_bvvlb"),
 "idle_anim": SubResource("Animation_ia5yg"),
 "land": SubResource("Animation_hxat6"),
 "s_kick": SubResource("Animation_bjtq4"),
@@ -1100,7 +1129,6 @@ height = 210.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
 [node name="Player" type="CharacterBody2D"]
-visible = false
 position = Vector2(290, 583)
 collision_layer = 0
 script = ExtResource("1_b50ad")
@@ -1189,6 +1217,9 @@ script = ExtResource("6_6kbk4")
 
 [node name="crouch" type="Node2D" parent="StateMachine"]
 script = ExtResource("7_niemg")
+
+[node name="fallen" type="Node2D" parent="StateMachine"]
+script = ExtResource("9_qxdjp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
