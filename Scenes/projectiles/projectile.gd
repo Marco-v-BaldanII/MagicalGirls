@@ -2,6 +2,7 @@ extends Sprite2D
 class_name Projectile
 
 @export var alive_time = 5
+@export var lag_frames : int = 20
 @onready var area_2d: Area2D = $Area2D
 @export var speed = 400
 

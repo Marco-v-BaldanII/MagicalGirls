@@ -69,5 +69,6 @@ func physics_update(delta : float):
 				player.velocity.y += (player.gravity*0.2) * delta
 			else:
 				player.velocity.y += (player.gravity/5) * delta
+		
 		else:
 			player.velocity.y += (player.gravity) * delta

@@ -8,6 +8,33 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 373.363
 
+[sub_resource type="Animation" id="Animation_7w5es"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_y3wse"]
 resource_name = "explode"
 length = 0.150002
@@ -37,33 +64,6 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(-3.21672, -3.21672)]
 }
 
-[sub_resource type="Animation" id="Animation_7w5es"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h842j"]
 _data = {
 "RESET": SubResource("Animation_7w5es"),
@@ -89,9 +89,11 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_wf1yj")
 script = ExtResource("2_vrj3o")
 alive_time = 3
+lag_frames = 35
 
 [node name="Area2D" type="Area2D" parent="." groups=["weak"]]
 collision_layer = 0
+collision_mask = 25
 script = ExtResource("3_sb1y7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -132,5 +134,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/explode = false
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

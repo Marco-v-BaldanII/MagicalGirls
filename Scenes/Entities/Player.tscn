@@ -1100,6 +1100,7 @@ height = 210.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
 [node name="Player" type="CharacterBody2D"]
+visible = false
 position = Vector2(290, 583)
 collision_layer = 0
 script = ExtResource("1_b50ad")
@@ -1212,7 +1213,7 @@ property_name = "value"
 interpolated = false
 interpolation_speed = 1.0
 
-[node name="Body" type="Area2D" parent="."]
+[node name="Body" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 position = Vector2(27, 33)

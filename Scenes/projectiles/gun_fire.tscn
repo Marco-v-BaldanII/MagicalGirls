@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv5duukk7luyc"]
+
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_aoqdy"]
+[ext_resource type="Script" path="res://Scenes/projectiles/gun_fire.gd" id="2_n5cou"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_2di8l"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_1osyk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
+radius = 167.966
+
+[node name="gun_fire" type="Sprite2D"]
+position = Vector2(113, 57)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_aoqdy")
+script = ExtResource("2_n5cou")
+
+[node name="Area2D" type="Area2D" parent="." groups=["weak"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_2di8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40, 0)
+shape = SubResource("CircleShape2D_xfwv1")
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("4_1osyk")
+node_path = NodePath("..")
+property_name = "scale"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("4_1osyk")
+refresh_rate = 120
+node_path = NodePath("..")
+property_name = "position"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer3" type="Node" parent="."]
+script = ExtResource("4_1osyk")
+refresh_rate = 60
+node_path = NodePath("..")
+property_name = "dmg"
+interpolated = false
+interpolation_speed = 1.0

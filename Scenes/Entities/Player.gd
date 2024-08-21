@@ -494,6 +494,11 @@ func store_last_used_move(move:String):
 	last_used_move = move
 
 func add_lag(frames : int):
+	if is_on_floor():
+		velocity.x = 0
+	
+	while lag:
+		await get_tree().create_timer(0.01667).timeout
 	print(str(frames) + "lag")
 	lag = true
 	set_process_input(false)

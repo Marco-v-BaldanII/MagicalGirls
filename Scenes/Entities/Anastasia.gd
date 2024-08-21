@@ -3,7 +3,36 @@ class_name Anastasia
 
 var current_start_projectile : Projectile
 const GRENADE = preload("res://Scenes/projectiles/grenade.tscn")
-const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
+const GUN_FIRE = preload("res://Scenes/projectiles/gun_fire.tscn")
+
+@export var recharge_frames : int = 35
+
+signal recharge_AK
+
+var dead_bullets :
+	set(value):
+		dead_bullets = value
+		if dead_bullets == max_shots:
+			recharge_AK.emit()
+
+var AK : Array
+@export var max_shots : int = 15
+var current_shot :
+	set(value):
+		if value > max_shots-1:
+			add_lag(recharge_frames)
+			current_shot = 0
+		else:
+			current_shot = value
+
+func _ready() -> void:
+	current_shot = 0
+	dead_bullets = 0
+	super()
+	for i in range(max_shots):
+		AK.push_back(gun_fire())
+		get_tree().root.add_child.call_deferred(AK.back())
+		
 
 func _input(event):
 	if not can_move: return
@@ -44,12 +73,14 @@ func instanciate_grenade():
 	return current_start_projectile
 	
 	
-func instanciate_diagonal_star():
-	current_start_projectile = STAR_DIAGONAL.instantiate()
-	current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+func gun_fire():
+	current_start_projectile = GUN_FIRE.instantiate()
+	#current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 	current_start_projectile.global_position = global_position
-	get_tree().root.add_child(current_start_projectile)
-	current_start_projectile = null
+	#get_tree().root.add_child(current_start_projectile)
+	
+	return current_start_projectile
+	#current_start_projectile = null
 	
 func perform_move():
 	if not can_move and not lag: return
@@ -71,7 +102,7 @@ func perform_move():
 
 			return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch"):
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch") and not input_buffer.back().contains("s_punch"):
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
 			last_used_move =  move
@@ -100,41 +131,16 @@ func perform_move():
 			
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
-	elif input_buffer.back().contains("w_punch") and current_start_projectile == null and  is_on_floor():
+	elif input_buffer.back().contains("w_punch") and current_start_projectile == null :
 
 		var grenade = instanciate_grenade()
 		GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
 		GDSync.call_func(instanciate_grenade)
 
-		
-	#diagonal non chargeable projectile on  air
-	elif not is_on_floor() and input_buffer.back().contains("w_punch") and not current_start_projectile:
-		
-		instanciate_diagonal_star()
-		GDSync.call_func(instanciate_diagonal_star)
-		
-		var i = 0
-		can_move = false
-		if direction == "left":
-			while i < 8:
-				#velocity.x = FLY_SPEED * -0.4
-				i += 1
-				can_move = false
-				await get_tree().create_timer(0.01667).timeout
-		else:
-			while i < 8:
-				#velocity.x = FLY_SPEED * 0.4
-				i += 1
-				can_move = false
-				await get_tree().create_timer(0.01667).timeout
-		can_move = true
-		#input_direction = 0
+
 		
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
-		#Force the player to throw the projectile when jumping
-		if current_start_projectile != null:
-			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-			current_start_projectile = null
+
 			
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 
@@ -142,22 +148,36 @@ func perform_move():
 
 
 func _physics_process(delta: float) -> void:
-	if not GDSync.is_gdsync_owner(self): return
+		
 	
-	super._physics_process(delta)
-	
-	if is_on_floor():
+		super._physics_process(delta)
+		if not GDSync.is_gdsync_owner(self) or lag: return
+		
+		if  Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_punch"]) and not lag:
+			#get_tree().root.add_child(AK[current_shot])
+			var has_shot : bool = false
+			for i in AK.size():
+				if not AK[i].active:
+					AK[i].shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+					has_shot = true
+					break
+			
+			#AK[current_shot].shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+			current_shot += 1
+
+
 		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["w_punch"]):
 			current_start_projectile.charge(global_position)
 			#the fixed update is "charging" the grenade
-			pass
+
 		elif current_start_projectile != null:
 			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-			velocity.x = 0
+
 			if crouching: 
 				#The crouching grenade get's thrown at a more horizontal lower angle
 				current_start_projectile.speed *= 2
 				current_start_projectile.og_speedX *= 2
 				current_start_projectile.speedY *= 0.6
+				
 			current_start_projectile = null
 			

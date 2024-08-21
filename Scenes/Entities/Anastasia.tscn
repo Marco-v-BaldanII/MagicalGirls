@@ -1214,7 +1214,7 @@ value = 100.0
 show_percentage = false
 script = ExtResource("8_3hply")
 
-[node name="Body" type="Area2D" parent="."]
+[node name="Body" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 position = Vector2(27, 33)
