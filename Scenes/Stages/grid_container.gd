@@ -4,6 +4,11 @@ extends Control
 @export var grid_width : int = 3 
 @onready var grid_container : GridContainer = $GridContainer
 @onready var banner_texture_rect : TextureRect = $TextureRect
+@onready var texture_rect = $TextureRect
+
+var move_speed: float = 300.0  
+var offscreen_position: Vector2 = Vector2(-500, 100)  
+var target_position: Vector2  
 
 var character_banners = {
 	"TextureRect1": preload("res://Assets/PlaceHolders/bomb.png"),
@@ -16,8 +21,17 @@ var character_banners = {
 
 func _ready():
 	_update_selection()
+	texture_rect.position = offscreen_position  
+	target_position = texture_rect.position 
 
 func _process(delta: float) -> void:
+	if texture_rect.position != target_position:
+		var direction = (target_position - texture_rect.position).normalized()
+		texture_rect.position += direction * move_speed * delta
+
+		if (texture_rect.position - target_position).length() < move_speed * delta:
+			texture_rect.position = target_position
+
 	if Input.is_action_just_pressed("ui_up"):
 		move_selection(-grid_width)  
 	elif Input.is_action_just_pressed("ui_down"):
@@ -66,6 +80,9 @@ func _update_selection():
 	var selected_child = children[selected_index]
 	if character_banners.has(selected_child.name):
 		banner_texture_rect.texture = character_banners[selected_child.name]
+
+	texture_rect.position = offscreen_position
+	target_position = Vector2(100, 100) 
 
 func _select_fighter():
 	var children = grid_container.get_children()

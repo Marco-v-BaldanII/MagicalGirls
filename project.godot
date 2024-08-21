@@ -19,7 +19,7 @@ uniqueUsername=false
 [application]
 
 config/name="test_jam2"
-run/main_scene="res://Scenes/Stages/test_map2.tscn"
+run/main_scene="res://Scenes/Stages/CharacterSelectionScreen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -51,7 +51,7 @@ enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg")
 
 [global_group]
 
-special=""
+weak_=""
 
 [input]
 
