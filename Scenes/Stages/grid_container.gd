@@ -3,17 +3,27 @@ extends Control
 @export var selected_index : int = 0
 @export var grid_width : int = 3 
 @onready var grid_container : GridContainer = $GridContainer
+@onready var banner_texture_rect : TextureRect = $TextureRect
+
+var character_banners = {
+	"TextureRect1": preload("res://Assets/PlaceHolders/bomb.png"),
+	"TextureRect2": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
+	"TextureRect3": preload("res://Assets/PlaceHolders/bomb.png"),
+	"TextureRect4": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
+	"TextureRect5": preload("res://Assets/PlaceHolders/bomb.png"),
+	"TextureRect6": preload("res://Assets/PlaceHolders/bomb.png"),
+}
 
 func _ready():
 	_update_selection()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_up"):
-		move_selection(-grid_width) 
+		move_selection(-grid_width)  
 	elif Input.is_action_just_pressed("ui_down"):
-		move_selection(grid_width) 
+		move_selection(grid_width)  
 	elif Input.is_action_just_pressed("ui_left"):
-		move_selection(-1)
+		move_selection(-1) 
 	elif Input.is_action_just_pressed("ui_right"):
 		move_selection(1) 
 	elif Input.is_action_just_pressed("ui_select"):
@@ -43,7 +53,7 @@ func move_selection(offset: int):
 	elif new_index >= children_count:
 		new_index = children_count - 1
 
-	selected_index = new_indexa
+	selected_index = new_index
 	_update_selection()
 
 func _update_selection():
@@ -52,6 +62,10 @@ func _update_selection():
 		children[i].modulate = Color(1, 1, 1, 0.5) 
 	if children.size() > 0 and selected_index < children.size():
 		children[selected_index].modulate = Color(1, 1, 1, 1)  
+	
+	var selected_child = children[selected_index]
+	if character_banners.has(selected_child.name):
+		banner_texture_rect.texture = character_banners[selected_child.name]
 
 func _select_fighter():
 	var children = grid_container.get_children()

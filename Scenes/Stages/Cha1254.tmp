@@ -16,6 +16,8 @@ scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_iyl6b")
+selected_index = null
+grid_width = null
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
