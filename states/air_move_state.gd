@@ -29,11 +29,11 @@ func physics_update(delta : float):
 	if  player.can_move and not player.lag: 
 		if player.fly and not player.is_on_floor() and player.can_move:
 			
-			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1:
+			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1 or player.is_input_pressed("move_right"):
 				if player.velocity.x < 0:player.velocity.x *= -0.5
 				player.input_direction = 1
 
-			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or joy_x < -0.1:
+			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or joy_x < -0.1 or player.is_input_pressed("move_left"):
 				if player.velocity.x > 0:player.velocity.x *= -0.5
 				player.input_direction =  -1
 				
@@ -46,9 +46,9 @@ func physics_update(delta : float):
 			else:
 				player.velocity.y = player.JUMP_VELOCITY*0.47
 
-			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or j_x < -0.1:
+			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or j_x < -0.1 or player.is_input_pressed("move_left"):
 					player.velocity.x = -player.air_speed
-			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or j_x > 0.1:
+			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or j_x > 0.1 or player.is_input_pressed("move_right"):
 					player.velocity.x = player.air_speed
 		
 		#LAND	

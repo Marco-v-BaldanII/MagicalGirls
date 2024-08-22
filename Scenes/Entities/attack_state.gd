@@ -43,7 +43,7 @@ func physics_update(delta : float):
 		pass
 		
 	if current_direction != "none" and not player.crouching:
-			player.press_input(current_direction)
+			player.press_input(current_direction,10)
 			
 
 func perform_attack():
@@ -76,5 +76,27 @@ func move() :
 			current_direction = "move_right"
 		2:
 			current_direction = "none"
+			
+	var jump_rand : int = randi_range(0,1)
+	
+	match  jump_rand:
+		0:
+			if not player.crouching:  
+				player.press_input("jump"); 
+				var atk_id = randi_range(0,3)
+				
+				match atk_id:
+					0:
+						attack_input = "s_punch"
+					1:
+						attack_input = "w_punch"
+					2:
+						attack_input = "s_kick"
+					3: 
+						attack_input = "w_kick"
+						
+		1:
+			if not player.crouching : player.press_input("jump")
+			return
 	
 	pass

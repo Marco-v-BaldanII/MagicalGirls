@@ -1111,6 +1111,7 @@ height = 210.0
 position = Vector2(290, 583)
 collision_layer = 0
 script = ExtResource("1_c47be")
+fly = false
 
 [node name="AI_StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_resk2")

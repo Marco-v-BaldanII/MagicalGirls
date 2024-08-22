@@ -16,14 +16,17 @@ func exit():
 
 	
 func physics_update(delta : float):
-	if player.crouching : return
-
+	if player.crouching or player.lag: return
+	player.animation_tree["parameters/conditions/crouch"] = false
+	player.animation_tree["parameters/conditions/not_crouch"] = true
+	player.can_move = true
+	
 	if abs(player.oponent.global_position.x - player.global_position.x) > player.attack_distance:
 		if player.oponent.direction == "left":
-			player.press_input("move_left")
+			player.press_input("move_left",2)
 			player.input_buffer.push_back("move_left")
 		else:
-			player.press_input("move_right")
+			player.press_input("move_right",2)
 			player.input_buffer.push_back("move_right")
 	else:
 		Transitioned.emit(self, "attack")
