@@ -76,6 +76,9 @@ var action_state : Dictionary = {
 	"s_kick" : false
 }
 
+func is_input_pressed(input : String) -> bool:
+	return action_state[input]
+
 @export var move_dmg : Dictionary = {
 	"w_punch" : 8,
 	"s_punch" : 15,

@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://c50safjv72t6x"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_wqhdr"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_xm6mx"]
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_1mkbp"]
+[ext_resource type="PackedScene" uid="uid://dcnr1ch67xghk" path="res://Scenes/Entities/AIPlayer.tscn" id="4_m6wa3"]
+[ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="5_0w2pn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
+size = Vector2(1936, 135)
+
+[node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
+script = ExtResource("1_wqhdr")
+player_1 = NodePath("PlayerAI")
+player_2 = NodePath("Anastasia")
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("2_xm6mx")
+refresh_rate = 60
+node_path = NodePath("../PlayerAI")
+property_name = "position"
+interpolated = true
+interpolation_speed = 60.0
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("2_xm6mx")
+broadcast = 1
+refresh_rate = 60
+node_path = NodePath("../Anastasia")
+property_name = "position"
+interpolated = true
+interpolation_speed = 60.0
+
+[node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_1mkbp")]
+position = Vector2(1581, 643)
+oponent = NodePath("../PlayerAI")
+
+[node name="PlayerAI" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_m6wa3")]
+oponent = NodePath("../Anastasia")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(968, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
+offset_left = 602.0
+offset_top = 106.0
+offset_right = 1304.0
+offset_bottom = 311.0
+theme_override_constants/separation = 50
+
+[node name="host_button" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Host"
+
+[node name="join_button" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Join"
+
+[node name="OnlineButton" type="CheckButton" parent="CanvasLayer"]
+offset_left = 818.0
+offset_top = 271.0
+offset_right = 924.0
+offset_bottom = 313.0
+scale = Vector2(2.52, 2.52)
+theme_override_font_sizes/font_size = 18
+text = "Online"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 541)
+script = ExtResource("5_0w2pn")
+
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
