@@ -1157,7 +1157,6 @@ libraries = {
 }
 
 [node name="Feet" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(19.5, 154.5)
 shape = SubResource("RectangleShape2D_b73rv")
 debug_color = Color(0.560753, 0.461845, 0.825999, 0.42)

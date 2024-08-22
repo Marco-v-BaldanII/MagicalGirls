@@ -12,6 +12,9 @@ func enter():
 			while (e == null or not ( e is  Player)):
 				e = e.get_parent()
 			player = e
+	else:
+		player.animation_tree["parameters/conditions/not_crouch"] = true
+		player.animation_tree["parameters/conditions/crouch"] = false
 	player.grounded = false
 	player.velocity.x = 0
 	
@@ -26,8 +29,8 @@ func physics_update(delta : float):
 	
 	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
 	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
-	if  player.can_move and not player.lag: 
-		if player.fly and not player.is_on_floor() and player.can_move:
+	if  player.can_move : 
+		if player.fly and not player.is_on_floor() and player.can_move and not player.lag:
 			
 			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1 or player.is_input_pressed("move_right"):
 				if player.velocity.x < 0:player.velocity.x *= -0.5
@@ -39,7 +42,7 @@ func physics_update(delta : float):
 				
 			player.velocity.x += (player.FLY_SPEED * player.input_direction)/100
 		
-		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
+		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0 and not player.lag:
 			player.jump_lag = 100
 			if not player.fly:
 				player.velocity.y = player.JUMP_VELOCITY

@@ -6,6 +6,7 @@ const GRENADE = preload("res://Scenes/projectiles/grenade.tscn")
 const GUN_FIRE = preload("res://Scenes/projectiles/gun_fire.tscn")
 
 @export var recharge_frames : int = 40
+@export var fire_rate_frames : int = 12
 
 signal recharge_AK
 

@@ -14,11 +14,12 @@ func enter():
 			player = e
 	else:
 		player.animation_tree["parameters/conditions/not_crouch"] = true
+		player.animation_tree["parameters/conditions/crouch"] = false
 
 var crouching : bool = false
 
 func physics_update(delta : float):
-	if player.can_move == false or player.lag: 
+	if  player.lag: 
 		return
 	
 	if (player.is_input_pressed("move_right") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
@@ -35,12 +36,12 @@ func physics_update(delta : float):
 		player.moving_backwards = false
 		if(player.input_direction >= 0 and player.direction == "left") or (player.input_direction <= 0 and player.direction == "right"):
 			player.velocity.x = player.input_direction * player.SPEED
-			print("velocity X " + str(player.velocity.x))
+
 			
 		else:
 			#move slower in your back direction
 			player.velocity.x = player.input_direction * (player.SPEED*0.55)
-			print("velocity X " + str(player.velocity.x))
+
 			player.moving_backwards = true
 	
 	elif player.is_on_floor():

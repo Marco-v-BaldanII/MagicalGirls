@@ -40,7 +40,7 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null):
 	if dir == "right":
 		speed *= -1
 	if player:
-		player.add_lag(10)
+		player.add_lag(lag_frames)
 
 
 

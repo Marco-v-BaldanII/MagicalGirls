@@ -214,8 +214,8 @@ func add_input_to_buffer(input : String):
 		input_buffer.push_back(input)
 		input_made = true
 
-var can_move : bool = true
-
+var can_move :bool = true
+	
 func perform_move():
 	for specials in moveset:
 		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
@@ -316,8 +316,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	var parent = area.get_parent()
 	if parent.has_method("destroy_projectile"):
 		parent.destroy_projectile()
-	
-	GameManager.camera_shake()
 
 	if not head:
 		var hit_pos : int = area.get_child(0).global_position.y
@@ -326,7 +324,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			
 			if area.is_in_group("strong"):
 				strong_knock = true
-				GameManager.hit_stop_long()
+
 				
 				if area.has_method("get_dmg"):
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
@@ -348,7 +346,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 						hp -= oponent.move_dmg[oponent.last_used_move]
 						hit_position = "body"
 			else:
-				GameManager.hit_stop_short()
+
 				strong_knock = false
 				if area.has_method("get_dmg"):
 					
@@ -374,28 +372,28 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			blocked = true
 			if area.has_method("get_dmg"):
 				if area.is_in_group("strong"):
-					GameManager.hit_stop_long()
+
 					strong_knock = true
 					hp -= area.get_dmg()/3
 					sprite_2d.modulate = Color.SKY_BLUE
-					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
+					#oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 
 				else:
-					GameManager.hit_stop_short()
+
 					strong_knock = false
 					sprite_2d.modulate = Color.SKY_BLUE
-					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
+					#oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					hp -= area.get_dmg() /3
 
 			else:
 				if area.is_in_group("strong"):
-					GameManager.hit_stop_long()
+
 					strong_knock = true
 					hp -= oponent.move_dmg[oponent.last_used_move] /3
 					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					sprite_2d.modulate = Color.SKY_BLUE
 				else:
-					GameManager.hit_stop_short()
+
 					strong_knock = false
 					sprite_2d.modulate = Color.SKY_BLUE
 					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
@@ -430,7 +428,16 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	else:
 		launch_knock = false
 	
-	state_machine.on_child_transition(state_machine.current_state, "knocked")
+	if  area.is_in_group("super_weak"):
+		pass
+	elif area.is_in_group("weak"):
+		if not blocked : GameManager.camera_shake()
+		GameManager.hit_stop_short()
+		state_machine.on_child_transition(state_machine.current_state, "knocked")
+	elif area.is_in_group("strong") or area.is_in_group("special"):
+		if not blocked : GameManager.camera_shake()
+		GameManager.hit_stop_long()
+		state_machine.on_child_transition(state_machine.current_state, "knocked")
 	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false
@@ -483,8 +490,12 @@ func set_hitboxes(player_id : int):
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	var joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 	var joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
+	
+		#make it so that you CAN move after the animation has finished
+	if anim_name.contains("punch") or anim_name.contains("kick"):
+		can_move = true
 
-	if anim_name.contains("crouch"):
+	if anim_name == "crouch":
 		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
 		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch"):
 			
@@ -493,9 +504,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 			await get_tree().create_timer(0.017 * 6).timeout
 			animation_tree["parameters/conditions/not_crouch"] = false
 			
-	#make it so that you CAN move after the animation has finished
-	if anim_name.contains("punch") or anim_name.contains("kick"):
-		can_move = true
+
 
 
 
@@ -530,6 +539,7 @@ func add_lag(frames : int):
 	
 	while lag:
 		await get_tree().create_timer(0.01667).timeout
+		lag = false
 	print(str(frames) + "lag")
 	lag = true
 	set_process_input(false)

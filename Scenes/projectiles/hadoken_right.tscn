@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://btaxewrgndcqd"]
+[gd_scene load_steps=6 format=3 uid="uid://btaxewrgndcqd"]
 
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_bfalx"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile.gd" id="2_jyryr"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_bgkeb"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_kj5qp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
@@ -17,6 +18,7 @@ speed = 500
 [node name="Area2D" type="Area2D" parent="." groups=["special"]]
 collision_layer = 0
 collision_mask = 0
+script = ExtResource("3_bgkeb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(40, 0)

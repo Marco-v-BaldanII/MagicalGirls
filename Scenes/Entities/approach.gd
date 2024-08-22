@@ -16,7 +16,7 @@ func exit():
 
 	
 func physics_update(delta : float):
-	if player.crouching or player.lag: return
+	if player.crouching : return
 	player.animation_tree["parameters/conditions/crouch"] = false
 	player.animation_tree["parameters/conditions/not_crouch"] = true
 	player.can_move = true

@@ -14,7 +14,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_aoqdy")
 script = ExtResource("2_n5cou")
 
-[node name="Area2D" type="Area2D" parent="." groups=["weak"]]
+[node name="Area2D" type="Area2D" parent="." groups=["super_weak"]]
 collision_layer = 0
 collision_mask = 0
 monitoring = false

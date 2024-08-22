@@ -13,7 +13,7 @@ const KNOCK_FORCE : int = 300
 
 const STRONG_KNOCK_FORCE : int = 800
 
-const WEAK_KNOCK_FORCE : int = 20
+const WEAK_KNOCK_FORCE : int = 300
 
 var knocked_time : float
 
@@ -31,17 +31,17 @@ func enter():
 			player = e
 	player.grounded = false
 	if player.strong_knock:
-		if not player.moving_backwards:
+		if not player.blocked:
 			knocked_time = 0.0166 * STRONG_KNOCKED_FRAMES
 		else:
 			knocked_time = 0.0166 * STRONG_KNOCKED_FRAMES/2
 	elif player.weak_knock:
-		if not player.moving_backwards:
+		if not player.blocked:
 			knocked_time = 0.0166 * WEAK_KNOCK_FRAMES
 		else:
 			knocked_time = 0.0166 * WEAK_KNOCK_FRAMES/2
 	else:
-		if not player.moving_backwards:
+		if not player.blocked:
 			knocked_time = 0.0166 * KNOCKED_FRAMES
 		else:
 			knocked_time = 0.0166 *  KNOCKED_FRAMES/2
@@ -97,3 +97,9 @@ func physics_update(delta : float):
 		Transitioned.emit(self, "ground_move")
 	
 	pass
+
+func exit():
+	player.can_move = true
+	player.lag = false
+	pass
+	
