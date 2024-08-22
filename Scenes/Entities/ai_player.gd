@@ -3,11 +3,17 @@ class_name AI_Player
 
 @export var attack_distance : int = 380
 
-func press_input(input : String):
+func _ready() -> void:
+	super()
+	ai_player = true
+	pass
+
+func press_input(input : String, frames : float = 1):
+	
 	action_state[input] = true
 	input_buffer.push_back(input)
 	perform_move()
-	await get_tree().create_timer(0.01667).timeout
+	await get_tree().create_timer(0.01667 * frames).timeout
 	action_state[input] = false
 
 func _process(delta):
@@ -60,3 +66,45 @@ func _input(event):
 			add_input_to_buffer("w_kick")
 			perform_move()
 		
+
+
+func on_hit():
+
+	
+	if hit_position == "body" and not blocked and not crouching and velocity.x >  0:
+		var action_id : int = randi_range(0,1)
+		if action_id == 0:
+			press_input("crouch",randi_range(40,100))
+		else:
+			var atk_id = randi_range(0,4)
+				
+			match atk_id:
+					0:
+						press_input("s_punch")
+					1:
+						press_input("w_punch")
+					2:
+						press_input("s_kick")
+					3: 
+						press_input("w_kick")
+					4:
+						press_input("crouch")
+			pass
+	
+	pass
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+
+	super(area)
+	on_hit()
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	super(anim_name)
+	
+	return
+	if anim_name == "crouch":
+		
+		state_machine.on_child_transition(state_machine.current_state, "ground_move")
+		
+		pass

@@ -78,6 +78,9 @@ func perform_move():
 			return
 			
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick"):
+		
+		velocity.x = 0
+		
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
 			last_used_move =  move

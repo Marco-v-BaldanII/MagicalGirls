@@ -8,6 +8,8 @@ class_name Player
 @onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
 
 
+var ai_player : bool = false
+
 #if an attack hits below this position it breacks guard
 const DOWN_HIT_POS_THRESHOLD : int = 860
 
@@ -234,7 +236,7 @@ func perform_move():
 			
 	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
 		var move : String = input_buffer.back()
-		
+		velocity.x
 		if is_on_floor() and not crouching:
 			velocity.x = 0
 			last_used_move = move
@@ -302,10 +304,12 @@ var head: bool = false
 
 var blocked : bool = false
 
+var hit_position : String 
+
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 
 	GDSync.call_func(online_receive_dmg,[area])
-	
+	hit_position = "none"
 	hit = true
 	sprite_2d.modulate = Color.RED
 	
@@ -342,6 +346,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					else:
 						blocked = false
 						hp -= oponent.move_dmg[oponent.last_used_move]
+						hit_position = "body"
 			else:
 				GameManager.hit_stop_short()
 				strong_knock = false
@@ -364,6 +369,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					else:
 						hp -= oponent.move_dmg[oponent.last_used_move] 
 						blocked = false
+						hit_position = "body"
 		else : #Hit body while crouching
 			blocked = true
 			if area.has_method("get_dmg"):
@@ -411,10 +417,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					GameManager.hit_stop_long()
 					strong_knock = true
 					hp -= oponent.move_dmg[oponent.last_used_move]
+					hit_position = "head"
 				else:
 					GameManager.hit_stop_short()
 					strong_knock = false
 					hp -= oponent.move_dmg[oponent.last_used_move] 
+					hit_position = "head"
 					
 	#Force a transition to the knocked state
 	if not blocked and area.is_in_group("special"):
@@ -423,6 +431,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		launch_knock = false
 	
 	state_machine.on_child_transition(state_machine.current_state, "knocked")
+	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false
 	sprite_2d.modulate = Color.WHITE

@@ -16,6 +16,7 @@ func exit():
 
 	
 func physics_update(delta : float):
+	if player.crouching : return
 
 	if abs(player.oponent.global_position.x - player.global_position.x) > player.attack_distance:
 		if player.oponent.direction == "left":
