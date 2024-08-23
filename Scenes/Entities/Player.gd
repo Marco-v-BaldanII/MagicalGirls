@@ -161,7 +161,9 @@ func _process(delta):
 		direction = "left"
 
 func _physics_process(delta):
-
+	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move:
+				can_move = true
+				crouching = false
 	move_and_slide()
 
 func is_joy_button_just_pressed(action_name : String):
@@ -213,6 +215,8 @@ func add_input_to_buffer(input : String):
 		buffer_time =  0.01666 * BUFFER_FRAMES
 		input_buffer.push_back(input)
 		input_made = true
+		
+		InputViewer.add_input(input)
 
 var can_move :bool = true
 	
@@ -236,7 +240,8 @@ func perform_move():
 			
 	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
 		var move : String = input_buffer.back()
-		velocity.x
+
+
 		if is_on_floor() and not crouching:
 			velocity.x = 0
 			last_used_move = move
@@ -247,6 +252,8 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,[move])
 		elif crouching:
+			can_move = false #Can't move while ground attacks
+			
 			last_used_move = "crouch_"+move
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
@@ -254,6 +261,11 @@ func perform_move():
 			
 			clear_buffer()
 			GDSync.call_func(_sync_move,["crouch_" + move])
+			
+			await get_tree().create_timer(0.01667*4)
+			if is_on_floor() and not crouching and not can_move:
+				can_move = true
+			
 		else:
 			last_used_move = "air_" + move
 			$AnimationTree["parameters/conditions/" + "air_" + move] = true

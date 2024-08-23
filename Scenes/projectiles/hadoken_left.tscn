@@ -1,12 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cemjbrd2i1i0t"]
+[gd_scene load_steps=2 format=3 uid="uid://cemjbrd2i1i0t"]
 
 [ext_resource type="PackedScene" uid="uid://btaxewrgndcqd" path="res://Scenes/projectiles/hadoken_right.tscn" id="1_3fq16"]
-[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="2_37to4"]
 
 [node name="Hadoken" instance=ExtResource("1_3fq16")]
 speed = -500
-
-[node name="Area2D" parent="." index="0"]
-script = ExtResource("2_37to4")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

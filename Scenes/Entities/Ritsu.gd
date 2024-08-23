@@ -1,4 +1,5 @@
 extends Player
+class_name Ritsu
 
 var current_start_projectile : Projectile
 const STAR_RIGHT = preload("res://Scenes/projectiles/star_right.tscn")

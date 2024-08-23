@@ -62,7 +62,7 @@ func physics_update(delta : float):
 	#Transition to crouch
 	
 	
-	if (player.can_move and Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) or (player.can_move and player.is_input_pressed("crouch")):
+	if (player.can_move and Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) or (player.ai_player and player.can_move and player.is_input_pressed("crouch")):
 			
 			if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(player)):
 				Transitioned.emit(self, "crouch")

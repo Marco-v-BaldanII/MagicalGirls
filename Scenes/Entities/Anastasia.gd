@@ -118,7 +118,7 @@ func perform_move():
 			GDSync.call_func(_sync_move,[move])
 		elif crouching:
 			last_used_move = "crouch_" + move
-
+			can_move = false
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
@@ -175,7 +175,7 @@ func _physics_process(delta: float) -> void:
 			current_start_projectile.charge(global_position)
 			#the fixed update is "charging" the grenade
 
-		elif current_start_projectile != null:
+		elif current_start_projectile != null and oponent:
 			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 
 			if crouching: 
