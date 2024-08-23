@@ -20,7 +20,7 @@ uniqueUsername=false
 
 config/name="I wanna be a Magical Girl!"
 config/description="uwu"
-run/main_scene="res://Scenes/Stages/test_map.tscn"
+run/main_scene="res://Scenes/ReMapControls.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -34,6 +34,9 @@ DebugUi="*res://Autoloads/DebugUI.tscn"
 GameManager="*res://Autoloads/GameManager.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 InputViewer="*res://Scenes/Input_Viewer.tscn"
+Scene_Manager="*res://addons/scene_manager/autoload/scene_manager.tscn"
+SceneWrapper="*res://Autoloads/SceneWrapper.gd"
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 
 [display]
 
@@ -50,7 +53,7 @@ project/assembly_name="test_jam2"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [global_group]
 

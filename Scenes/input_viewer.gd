@@ -8,6 +8,11 @@ var curret_order :
 	set(value):
 		reset_time = 2.0
 		curret_order = value
+		for i in order.size():
+			if order[i] == curret_order-1:
+				buttons[i].modulate.a = 1
+			else:
+				buttons[i].modulate.a = 0.5
 
 var reset_time:
 	set(value):
@@ -41,13 +46,19 @@ func _process(delta: float) -> void:
 	pass
 
 func add_input(input : String):
+	
+	#traducirlo
+	var id = id_to_button(Controls.p1[input])
+	
 	for i in buttons.size():
 		if buttons[i].texture == null:
 			var res : ControllerIconTexture = ControllerIconTexture.new()
-			if input == "s_kick":input = "s_punch"
-			elif input == "s_punch":input = "w_punch"
-			elif input == "w_punch" : input = "w_kick"
-			elif input == "w_kick" : input = "s_kick"
+			
+			#This is the translation bc the pluggin actually doesnt work super well
+			if id == "s_kick":input = "s_punch"
+			elif id == "s_punch":input = "w_punch"
+			elif id == "w_punch" : input = "w_kick"
+			elif id == "w_kick" : input = "s_kick"
 			res.path = input
 			buttons[i].texture = res
 			
@@ -70,11 +81,24 @@ func add_input(input : String):
 	curret_order += 1
 	
 	var res : ControllerIconTexture = ControllerIconTexture.new()
-	if input == "s_kick":input = "s_punch"
-	elif input == "s_punch":input = "w_punch"
-	elif input == "w_punch" : input = "w_kick"
-	elif input == "w_kick" : input = "s_kick"
+	if id == "s_kick":input = "s_punch"
+	elif id == "s_punch":input = "w_punch"
+	elif id == "w_punch" : input = "w_kick"
+	elif id == "w_kick" : input = "s_kick"
 	res.path = input
 	button_new.texture = res
 	
 	pass
+
+#	"w_punch" : 2,
+	#"s_punch" : 3,
+	#"w_kick" : 0,
+	#"s_kick" : 1
+
+func id_to_button(id : int) -> String:
+	match id:
+		0: return "w_kick"
+		1: return "s_kick"
+		2: return "w_punch"
+		3: return "s_punch"
+	return "none"

@@ -15,7 +15,6 @@ collision_mask = 0
 position = Vector2(968, 1013)
 shape = SubResource("RectangleShape2D_2rhgy")
 
-[node name="InputViewer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_gl5cr")]
-player = NodePath("")
+[node name="InputViewer" parent="." instance=ExtResource("2_gl5cr")]
 
 [node name="Player" parent="." instance=ExtResource("2_r8ajd")]

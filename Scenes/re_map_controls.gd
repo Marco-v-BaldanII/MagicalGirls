@@ -1,0 +1,104 @@
+extends CanvasLayer
+@onready var cursor: Sprite2D = $cursor
+@onready var grid_container: GridContainer = $GridContainer
+
+var input_boxes : Array
+@onready var button: Button = $Button
+
+var index : int = 0
+
+var listening_input : bool = false
+
+var action_state : Dictionary = {
+	"move_left" : false,
+	"move_right" : false,
+	"move_down" : false,
+	"move_up" : false,
+	"w_punch" : false,
+	"s_punch" : false,
+	"w_kick" : false,
+	"s_kick" : false,
+	"accept" : false,
+	"go_back" : false
+}
+
+func is_joy_button_just_pressed(action_name : String):
+	if action_state[action_name] == false and Input.is_joy_button_pressed(0, Controls.ui[action_name]):
+		action_state[action_name] = true
+		return true
+	if not Input.is_joy_button_pressed(0, Controls.ui[action_name]):
+		action_state[action_name] = false
+	return false
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for child in grid_container.get_children():
+		if child is InputMapBox:
+			input_boxes.push_back(child)
+			
+	input_boxes.push_back(button)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _input(event: InputEvent) -> void:
+	if not listening_input:
+		if is_joy_button_just_pressed("move_up"):
+			index -= 1
+			
+		elif is_joy_button_just_pressed("move_down"):
+			index += 1
+		
+		cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y+  40
+		
+		if is_joy_button_just_pressed("accept"):
+			if input_boxes[index % input_boxes.size()] is not Button:
+				listening_input = true
+				input_boxes[index % input_boxes.size()].modulate = Color.YELLOW
+			else:
+				_on_button_button_down()
+	else:
+		
+		if is_joy_button_just_pressed("s_punch"):
+			reMap("s_punch")
+		elif is_joy_button_just_pressed("w_punch"):
+			reMap("w_punch")
+		elif is_joy_button_just_pressed("s_kick"):
+			reMap("s_kick")
+		elif is_joy_button_just_pressed("w_kick"):
+			reMap("w_kick")
+			pass
+
+func traduce_action(action : String) -> String:
+
+	if action == "s_kick":return "s_punch"
+	elif action == "s_punch":return  "w_punch"
+	elif action == "w_punch" : return  "w_kick"
+	elif action == "w_kick" : return  "s_kick"
+
+	return action
+
+func traduce_back(action : String) -> String:
+	if action == "s_punch" : return "s_kick"
+	elif action == "w_punch" : return "s_punch"
+	elif action == "w_kick": return "w_punch"
+	elif action == "s_kick": return "w_kick"
+	
+	return action
+
+func reMap(action : String):
+		for i in input_boxes:
+			if i.my_action == traduce_action(action):
+				i.re_map(traduce_back( input_boxes[index % input_boxes.size()].my_action))
+				break
+		input_boxes[index % input_boxes.size()].re_map(action)
+		listening_input = false
+		input_boxes[index % input_boxes.size()].modulate = Color.WHITE
+
+func _on_button_button_down() -> void:
+	SceneWrapper.change_scene(load("res://Scenes/Stages/test_map.tscn"))
+	
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://cuin37tgeosf"]
+[gd_scene load_steps=87 format=3 uid="uid://cuin37tgeosf"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_b50ad"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="1_yqt7e"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_niemg"]
 [ext_resource type="Script" path="res://Scenes/Entities/fallen.gd" id="9_qxdjp"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_siam7"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="9_y5gha"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -1261,14 +1260,6 @@ position = Vector2(-9, 13)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
-
-[node name="NodeInstantiator" type="Node" parent="."]
-script = ExtResource("9_y5gha")
-target_location = NodePath("")
-scene = null
-replicate_on_join = true
-sync_starting_changes = true
-excluded_properties = PackedStringArray()
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

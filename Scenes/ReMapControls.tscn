@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2p0yqjtabr84"]
+
+[ext_resource type="Script" path="res://Scenes/re_map_controls.gd" id="1_02rww"]
+[ext_resource type="PackedScene" uid="uid://bpv7if73lqpnv" path="res://Scenes/input_map_field.tscn" id="1_5t4au"]
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="2_14xmh"]
+
+[node name="ReMapControls" type="CanvasLayer"]
+script = ExtResource("1_02rww")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+clip_contents = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -602.0
+offset_top = 160.2
+offset_right = 602.0
+offset_bottom = 572.2
+grow_horizontal = 2
+columns = 2
+
+[node name="ColorRect" type="ColorRect" parent="GridContainer"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/ColorRect"]
+layout_mode = 0
+offset_right = 599.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "weak punch
+"
+horizontal_alignment = 1
+
+[node name="input_map_field" parent="GridContainer" instance=ExtResource("1_5t4au")]
+layout_mode = 2
+mapped_action = "w_punch"
+
+[node name="ColorRect3" type="ColorRect" parent="GridContainer"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/ColorRect3"]
+layout_mode = 0
+offset_right = 599.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "strong punch
+"
+horizontal_alignment = 1
+
+[node name="input_map_field2" parent="GridContainer" instance=ExtResource("1_5t4au")]
+layout_mode = 2
+my_action = "s_punch"
+mapped_action = "s_punch"
+
+[node name="ColorRect5" type="ColorRect" parent="GridContainer"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/ColorRect5"]
+layout_mode = 0
+offset_right = 599.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "weak kick"
+horizontal_alignment = 1
+
+[node name="input_map_field3" parent="GridContainer" instance=ExtResource("1_5t4au")]
+layout_mode = 2
+my_action = "w_kick"
+mapped_action = "w_kick"
+
+[node name="ColorRect7" type="ColorRect" parent="GridContainer"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/ColorRect7"]
+layout_mode = 0
+offset_right = 599.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "strong kick
+"
+horizontal_alignment = 1
+
+[node name="input_map_field4" parent="GridContainer" instance=ExtResource("1_5t4au")]
+layout_mode = 2
+my_action = "s_kick"
+mapped_action = "s_kick"
+
+[node name="cursor" type="Sprite2D" parent="."]
+position = Vector2(306, 211.2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_14xmh")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(400, 90)
+offset_left = 764.0
+offset_top = 625.0
+offset_right = 1164.0
+offset_bottom = 715.0
+theme_override_font_sizes/font_size = 50
+text = "Done"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
