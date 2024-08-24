@@ -37,6 +37,7 @@ InputViewer="*res://Scenes/Input_Viewer.tscn"
 Scene_Manager="*res://addons/scene_manager/autoload/scene_manager.tscn"
 SceneWrapper="*res://Autoloads/SceneWrapper.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
@@ -53,7 +54,7 @@ project/assembly_name="test_jam2"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/thoth/plugin.cfg")
 
 [global_group]
 
