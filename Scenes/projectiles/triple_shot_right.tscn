@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo7oim88ogfj"]
+
+[ext_resource type="PackedScene" uid="uid://c6klg87wrxfhg" path="res://Scenes/projectiles/star_diagonal.tscn" id="1_kmsq5"]
+[ext_resource type="Script" path="res://Scenes/projectiles/triple_shot.gd" id="1_rxymf"]
+[ext_resource type="PackedScene" uid="uid://btaxewrgndcqd" path="res://Scenes/projectiles/hadoken_right.tscn" id="3_ngl5a"]
+
+[node name="TripleShot" type="Node2D"]
+script = ExtResource("1_rxymf")
+
+[node name="Star3" parent="." instance=ExtResource("1_kmsq5")]
+position = Vector2(120.4, -151.6)
+lag_frames = 0
+speedY = 300
+
+[node name="Hadoken" parent="." instance=ExtResource("3_ngl5a")]
+position = Vector2(119.4, -154.6)
+lag_frames = 0
+speed = 600
+
+[node name="Star2" parent="." instance=ExtResource("1_kmsq5")]
+position = Vector2(120.4, -151.6)
+lag_frames = 0
+speedY = -300

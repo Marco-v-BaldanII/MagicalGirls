@@ -61,7 +61,7 @@ func perform_move():
 	if not can_move and not lag: return
 	
 	for specials in moveset:
-		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
+		if moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
 			var dir = find_special_direction(moveset[specials])
 			if dir != direction:
 				print(specials + dir)
@@ -71,6 +71,8 @@ func perform_move():
 
 					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
 					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
+					
+					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
 					#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()

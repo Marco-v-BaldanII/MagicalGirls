@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgl7b405t4u1n"]
 
 [ext_resource type="PackedScene" uid="uid://c0teawxhcves6" path="res://Scenes/Input_Viewer.tscn" id="2_gl5cr"]
-[ext_resource type="PackedScene" uid="uid://cuin37tgeosf" path="res://Scenes/Entities/Player.tscn" id="2_r8ajd"]
+[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="2_oe085"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
@@ -17,4 +17,5 @@ shape = SubResource("RectangleShape2D_2rhgy")
 
 [node name="InputViewer" parent="." instance=ExtResource("2_gl5cr")]
 
-[node name="Player" parent="." instance=ExtResource("2_r8ajd")]
+[node name="Ritsu" parent="." instance=ExtResource("2_oe085")]
+position = Vector2(361, 710)

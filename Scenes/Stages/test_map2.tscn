@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_wibys"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_8yg0i"]
-[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="4_5dccq"]
+[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="4_rqy1e"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_sxd4x"]
 [ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie.tscn" id="4_toe0k"]
 
@@ -12,7 +12,7 @@ size = Vector2(1936, 135)
 [node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
 script = ExtResource("1_wibys")
 player_1 = NodePath("Ellie")
-player_2 = NodePath("Anastasia")
+player_2 = NodePath("Ritsu")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
@@ -26,18 +26,19 @@ interpolation_speed = 60.0
 script = ExtResource("3_8yg0i")
 broadcast = 1
 refresh_rate = 60
-node_path = NodePath("../Anastasia")
+node_path = NodePath("../Ritsu")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_5dccq")]
-position = Vector2(1581, 643)
-oponent = NodePath("../Ellie")
-
 [node name="Ellie" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_toe0k")]
-position = Vector2(334, 636)
-oponent = NodePath("../Anastasia")
+position = Vector2(1607, 591)
+oponent = NodePath("../Ritsu")
+
+[node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_rqy1e")]
+visible = true
+position = Vector2(313, 569)
+oponent = NodePath("../Ellie")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0

@@ -88,7 +88,12 @@ position = Vector2(113, 57)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_wf1yj")
 script = ExtResource("2_vrj3o")
+speedY = 0
+gravity = null
+alive_time = null
 lag_frames = 35
+speed = null
+dmg = null
 
 [node name="Area2D" type="Area2D" parent="." groups=["weak"]]
 collision_layer = 0
@@ -119,6 +124,7 @@ script = ExtResource("4_fhs8o")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "dmg"
+interpolation = null
 interpolated = false
 interpolation_speed = 1.0
 

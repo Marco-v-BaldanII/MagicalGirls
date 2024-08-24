@@ -6,7 +6,6 @@ var power : int = 0
 var current_frame : int = 0
 
 var power_multiply : float
-var my_player : Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,7 +35,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		
 	position.x += (speed*1.5) * delta
-	position.y += abs(speed * delta)
+	position.y += speedY * delta
 
 
 func destroy_projectile():

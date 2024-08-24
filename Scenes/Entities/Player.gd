@@ -222,7 +222,7 @@ var can_move :bool = true
 	
 func perform_move():
 	for specials in moveset:
-		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
+		if moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
 			var dir = find_special_direction(moveset[specials])
 			if dir != direction:
 				print(specials + dir)
@@ -232,6 +232,8 @@ func perform_move():
 
 					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
 					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
+					
+					add_lag(MovesetManager.movesets[name][specials + "_lag"])
 					#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()
@@ -540,12 +542,18 @@ func instanciate_projectile(Pname : String):
 	var instance = special_scene.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = global_position
-	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
+	
+	
+	if instance.has_method("shoot"):
+		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self)
+		else: instance.shoot((player_num-1) + 2, 0 , direction, self)
 	
 func store_last_used_move(move:String):
 	last_used_move = move
 
 func add_lag(frames : int):
+	if frames == 0: return
+	
 	if is_on_floor():
 		velocity.x = 0
 	

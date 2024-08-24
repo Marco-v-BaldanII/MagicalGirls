@@ -1,8 +1,6 @@
 extends Projectile
 class_name Star
 
-var my_player : Player
-
 var power : int = 0
 @export var frame_charge_time : float =  100
 var current_frame : int = 0

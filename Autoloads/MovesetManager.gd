@@ -4,8 +4,10 @@ var hadoken_input_l : Array[String] = ["crouch", "move_left", "w_punch"]
 
 var Ritsu : Dictionary = {
 	
-	"hadoken_right" : hadoken_input_r,
-	"hadoken_left" : hadoken_input_l
+	"triple_shot_right" : hadoken_input_r,
+	"triple_shot_right_lag" : 40,
+	"triple_shot_left" : hadoken_input_l,
+	"triple_shot_left_lag" : 40
 	
 }
 var Larissa : Dictionary = {}

@@ -1111,6 +1111,7 @@ height = 210.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
 [node name="Ritsu" type="CharacterBody2D"]
+visible = false
 position = Vector2(303, 871)
 collision_layer = 0
 script = ExtResource("1_h8qxx")
