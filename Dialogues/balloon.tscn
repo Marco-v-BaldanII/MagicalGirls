@@ -78,27 +78,30 @@ grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
 [node name="Panel" type="Panel" parent="Balloon"]
+self_modulate = Color(1, 0, 1, 1)
 clip_children = 2
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0
-offset_top = -183.0
-offset_right = -19.0
-offset_bottom = -19.0
+offset_left = 19.0
+offset_top = -275.0
+offset_right = -21.0
+offset_bottom = -111.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
 [node name="Dialogue" type="MarginContainer" parent="Balloon/Panel"]
+modulate = Color(0.713726, 0.533333, 0.792157, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.61, 1.61)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/Panel/Dialogue"]
 layout_mode = 2
@@ -148,11 +151,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 script = ExtResource("3_72ixx")
-response_template = NodePath("ResponseExample")
-
-[node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu"]
-layout_mode = 2
-text = "Response example"
+response_template = NodePath("")
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
