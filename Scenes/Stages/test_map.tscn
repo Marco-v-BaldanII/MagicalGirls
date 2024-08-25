@@ -18,4 +18,5 @@ shape = SubResource("RectangleShape2D_2rhgy")
 [node name="InputViewer" parent="." instance=ExtResource("2_gl5cr")]
 
 [node name="Ritsu" parent="." instance=ExtResource("2_oe085")]
+visible = true
 position = Vector2(361, 710)

@@ -29,7 +29,13 @@ func charge(position : Vector2):
 		scale += Vector2(0.005,0.005)
 		
 
-func shoot(layer : int , mask : int, dir : String, player : Player = null):
+func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	if startup != 0:
+		player.add_lag(startup)
+		await get_tree().create_timer(0.01667 * startup).timeout
+	else:
+		player.lag_finished.emit() #No startup lag, so start end_lag
+	
 	GDSync.call_func(assign_phys_layer,[layer,mask])
 	show()
 	set_physics_process(true)

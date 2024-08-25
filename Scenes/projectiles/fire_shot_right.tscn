@@ -1,38 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv5duukk7luyc"]
+[gd_scene load_steps=6 format=3 uid="uid://cy4skm66vjb23"]
 
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_aoqdy"]
-[ext_resource type="Script" path="res://Scenes/projectiles/gun_fire.gd" id="2_n5cou"]
-[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_2di8l"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_1osyk"]
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_0jpp2"]
+[ext_resource type="Script" path="res://Scenes/projectiles/fire_shot.gd" id="2_excbd"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_isww1"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_mee6n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 167.966
 
-[node name="gun_fire" type="Sprite2D"]
+[node name="FireShot" type="Sprite2D"]
 position = Vector2(113, 57)
+rotation = 1.57004
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_aoqdy")
-script = ExtResource("2_n5cou")
+texture = ExtResource("1_0jpp2")
+script = ExtResource("2_excbd")
+alive_time = 4.0
+speed = 550
 
 [node name="Area2D" type="Area2D" parent="." groups=["super_weak"]]
 collision_layer = 0
 collision_mask = 0
-monitoring = false
-script = ExtResource("3_2di8l")
+script = ExtResource("3_isww1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(40, 0)
 shape = SubResource("CircleShape2D_xfwv1")
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
-script = ExtResource("4_1osyk")
+script = ExtResource("4_mee6n")
 node_path = NodePath("..")
 property_name = "scale"
 interpolated = false
 interpolation_speed = 1.0
 
 [node name="PropertySynchronizer" type="Node" parent="."]
-script = ExtResource("4_1osyk")
+script = ExtResource("4_mee6n")
 refresh_rate = 120
 node_path = NodePath("..")
 property_name = "position"
@@ -40,10 +42,11 @@ interpolated = false
 interpolation_speed = 1.0
 
 [node name="PropertySynchronizer3" type="Node" parent="."]
-script = ExtResource("4_1osyk")
+script = ExtResource("4_mee6n")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "dmg"
-interpolation = null
 interpolated = false
 interpolation_speed = 1.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

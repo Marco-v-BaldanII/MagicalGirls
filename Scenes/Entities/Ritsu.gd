@@ -57,7 +57,7 @@ func perform_move():
 	
 	for specials in moveset:
 		if  moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size()  and  has_subarray(moveset[specials], input_buffer):
-			var dir = find_special_direction(moveset[specials])
+			var dir = find_special_direction(specials)
 			if dir != direction:
 				print(specials + dir)
 				
@@ -65,14 +65,16 @@ func perform_move():
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
+					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+					
+					clear_buffer()
+					
+					await lag_finished
 					
 					add_lag(MovesetManager.movesets[name][specials + "_lag"])
 					#Here will call the animation in the animation tree , which will have it's hitstun
-				
-			clear_buffer()
 
-			return
+					return
 			
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch"):
 		

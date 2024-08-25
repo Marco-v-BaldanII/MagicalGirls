@@ -70,7 +70,7 @@ func perform_move():
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
+					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn", specials)
 					
 					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
 					#Here will call the animation in the animation tree , which will have it's hitstun

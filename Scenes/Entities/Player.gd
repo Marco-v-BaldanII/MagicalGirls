@@ -223,7 +223,7 @@ var can_move :bool = true
 func perform_move():
 	for specials in moveset:
 		if moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
-			var dir = find_special_direction(moveset[specials])
+			var dir = find_special_direction(specials)
 			if dir != direction:
 				print(specials + dir)
 				
@@ -231,7 +231,7 @@ func perform_move():
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
+					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn", specials)
 					
 					add_lag(MovesetManager.movesets[name][specials + "_lag"])
 					#Here will call the animation in the animation tree , which will have it's hitstun
@@ -304,14 +304,14 @@ func clear_buffer():
 	print(input_buffer)
 	input_buffer.clear()
 	
-func find_special_direction(special : Array[String]) -> String:
-	for input in special:
-		if input.contains("move"):
-			if input == "move_right":
+func find_special_direction(special : String) -> String:
+
+		if special.contains("right"):
+			
 				return "right"
-			else:
+		else:
 				return "left"
-	return "none"
+		return "none"
 
 var hit : bool = false
 var head: bool = false
@@ -536,20 +536,24 @@ func online_instantiate(special_scene : PackedScene):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
-func instanciate_projectile(Pname : String):
+func instanciate_projectile(path : String, p_name : String):
 
-	var special_scene = load(Pname)
+	var special_scene = load(path)
 	var instance = special_scene.instantiate()
 	get_tree().root.add_child(instance)
 	instance.global_position = global_position
 	
+
+	var startup : int = MovesetManager.movesets[character_name][p_name + "_startup"]
 	
 	if instance.has_method("shoot"):
-		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self)
-		else: instance.shoot((player_num-1) + 2, 0 , direction, self)
+		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self,startup)
+		else: instance.shoot((player_num-1) + 2, 0 , direction, self, startup)
 	
 func store_last_used_move(move:String):
 	last_used_move = move
+
+signal lag_finished
 
 func add_lag(frames : int):
 	if frames == 0: return
@@ -566,4 +570,7 @@ func add_lag(frames : int):
 	
 	await get_tree().create_timer(0.01667 * frames).timeout
 	lag = false
+	
+	lag_finished.emit()
+	
 	set_process_input(true)

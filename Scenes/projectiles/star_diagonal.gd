@@ -11,11 +11,20 @@ var power_multiply : float
 func _ready() -> void:
 	dmg = 2
 	GDSync.expose_node(self)
+	set_physics_process(false)
+	hide()
 
 
 
-func shoot(layer : int , mask : int, dir : String, player : Player = null):
+func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	if startup != 0:
+		player.add_lag(startup)
+		await get_tree().create_timer(0.01667 * startup).timeout
+	else:
+		player.lag_finished.emit() #No startup lag, so start end_lag
+	
 	set_physics_process(true)
+	show()
 	assign_phys_layer(layer, mask)
 	if dir == "right":
 		speed *= -1

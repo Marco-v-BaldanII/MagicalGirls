@@ -15,7 +15,13 @@ func assign_phys_layer(layer : int, mask : int):
 		projectile.assign_phys_layer(layer, mask)
 	
 
-func shoot(layer : int , mask : int, dir : String, player : Player = null):
+func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	if startup != 0:
+		player.add_lag(startup)
+		await get_tree().create_timer(0.01667 * startup).timeout
+	else:
+		player.lag_finished.emit() #No startup lag, so start end_lag
+	
 	for projectile in projectiles:
 		if projectile.has_method("shoot"):
 			projectile.shoot(layer,mask,dir,player)
