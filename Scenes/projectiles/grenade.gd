@@ -1,21 +1,20 @@
 extends Projectile
 class_name Grenade
 
-var my_player : Player
-
-
 var power_multiply : float
 var explode_timer : float = 3.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 
-var og_speedY = -600
-var og_speedX = -500
+var og_speedY : int
+var og_speedX : int
 var num_bounce = 2
-@export var speedY = -600
+
 @export var gravity = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+
 	GDSync.expose_node(self)
 	dmg = 10
 
@@ -36,7 +35,13 @@ func charge(_position : Vector2):
 		
 
 
-func shoot(layer : int , mask : int, dir : String, player : Player = null):
+func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	if startup != 0:
+		player.add_lag(startup)
+		await get_tree().create_timer(0.01667 * startup).timeout
+	else:
+		player.lag_finished.emit() #No startup lag, so start end_lag
+	
 	#GDSync.call_func(assign_phys_layer,[layer,mask])
 	set_physics_process(true)
 	#assign_phys_layer(layer, mask)
@@ -45,6 +50,8 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null):
 		speed *= -1
 	else:
 		og_speedX *= -1
+		
+	og_speedY = speedY; og_speedX = speed
 	if player:
 		player.add_lag(lag_frames)
 
@@ -87,7 +94,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	speedY = og_speedY/num_bounce
 	speed = og_speedX/num_bounce
-	speedY = clamp(speedY, -1000,-60)
+	speedY = clamp(speedY, -1000,-100)
 	num_bounce += 1
 	pass # Replace with function body.
 

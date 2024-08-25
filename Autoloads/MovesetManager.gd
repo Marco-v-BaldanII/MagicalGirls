@@ -23,10 +23,24 @@ var Ritsu : Dictionary = {
 	
 }
 var Larissa : Dictionary = {}
-var Anastasia : Dictionary = {}
+
+var triple_bombardment_right : Array[String] = ["move_left", "move_right", "move_left", "move_right" , "s_kick"]
+var triple_bombardment_left : Array[String] =  ["move_right", "move_left", "move_right" , "move_left", "s_kick"]
+
+var Anastasia : Dictionary = {
+	
+	"triple_bombardment_right" : triple_bombardment_right,
+	"triple_bombardment_right_startup" : 10,
+	"triple_bombardment_right_lag" : 10,
+	"triple_bombardment_left" : triple_bombardment_left,
+	"triple_bombardment_left_startup" : 10,
+	"triple_bombardment_left_lag" : 10,
+	
+}
 var Ellie : Dictionary = {}
 
 var movesets : Dictionary = {
 	"Ritsu" : Ritsu,
-	"Larissa" : Larissa
+	"Larissa" : Larissa,
+	"Anastasia" : Anastasia
 }

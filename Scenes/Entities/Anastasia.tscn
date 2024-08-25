@@ -1115,21 +1115,7 @@ height = 210.0
 position = Vector2(303, 871)
 collision_layer = 0
 script = ExtResource("1_lv1x0")
-recharge_frames = null
-fire_rate_frames = null
-max_shots = null
-hp = null
-player_id = null
-fly = null
-SPEED = null
-FLY_SPEED = null
-air_speed = null
-JUMP_VELOCITY = null
-JUMP_LAG_FPS = null
-character_name = null
-direction = null
-move_dmg = null
-move_vulnerable_on_shield = null
+character_name = "Anastasia"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

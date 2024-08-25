@@ -44,6 +44,5 @@ script = ExtResource("4_1osyk")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "dmg"
-interpolation = null
 interpolated = false
 interpolation_speed = 1.0

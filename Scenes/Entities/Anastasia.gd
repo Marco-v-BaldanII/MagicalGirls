@@ -90,23 +90,27 @@ func perform_move():
 	velocity.x = 0
 	
 	for specials in moveset:
-		if moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
-			var dir = find_special_direction(moveset[specials])
-			if dir != direction:
-				print(specials + dir)
-				
-				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
-					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+			if  moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size()  and  has_subarray(moveset[specials], input_buffer):
+				var dir = find_special_direction(specials)
+				if dir != direction:
+					print(specials + dir)
+					
+					if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
+						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
-					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn")
-					#Here will call the animation in the animation tree , which will have it's hitstun
-				
-			clear_buffer()
+						GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+						instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+						
+						clear_buffer()
+						
+						await lag_finished
+						
+						add_lag(MovesetManager.movesets[name][specials + "_lag"])
+						#Here will call the animation in the animation tree , which will have it's hitstun
 
-			return
+						return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch") and not input_buffer.back().contains("s_punch"):
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") and not input_buffer.back().contains("s_punch"):
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
 			last_used_move =  move
@@ -135,7 +139,7 @@ func perform_move():
 			
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
-	elif input_buffer.back().contains("w_punch") and current_start_projectile == null :
+	elif input_buffer.back().contains("s_kick") and current_start_projectile == null :
 
 		var grenade = instanciate_grenade()
 		GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
@@ -171,7 +175,7 @@ func _physics_process(delta: float) -> void:
 			
 
 
-		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["w_punch"]):
+		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
 			current_start_projectile.charge(global_position)
 			#the fixed update is "charging" the grenade
 
