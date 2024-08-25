@@ -1,20 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=8 format=3 uid="uid://dt3yecot8i8l3"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_wibys"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_8yg0i"]
-[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="4_rqy1e"]
-[ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_sxd4x"]
-[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="4_yjh0o"]
+[ext_resource type="Script" path="res://main.gd" id="1_m308w"]
+[ext_resource type="Script" path="res://Scenes/Stages/dialogues.gd" id="2_6smhs"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_v4qx6"]
+[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="3_1avyo"]
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="4_dba7l"]
+[ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="5_ipbs5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
 
 [node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_2")]
-script = ExtResource("1_wibys")
+script = ExtResource("1_m308w")
 player_2 = NodePath("Ritsu")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
-script = ExtResource("3_8yg0i")
+script = ExtResource("2_v4qx6")
 refresh_rate = 60
 node_path = NodePath("../Anastasia")
 property_name = "position"
@@ -22,7 +23,7 @@ interpolated = true
 interpolation_speed = 60.0
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
-script = ExtResource("3_8yg0i")
+script = ExtResource("2_v4qx6")
 broadcast = 1
 refresh_rate = 60
 node_path = NodePath("../Ritsu")
@@ -30,11 +31,14 @@ property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_rqy1e")]
+[node name="Dialogues" type="Node" parent="."]
+script = ExtResource("2_6smhs")
+
+[node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_1avyo")]
 position = Vector2(1523, 569)
 oponent = NodePath("../Anastasia")
 
-[node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_yjh0o")]
+[node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_dba7l")]
 position = Vector2(323, 574)
 oponent = NodePath("../Ritsu")
 
@@ -76,7 +80,7 @@ text = "Online"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 541)
-script = ExtResource("4_sxd4x")
+script = ExtResource("5_ipbs5")
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
