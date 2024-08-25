@@ -32,11 +32,10 @@ interpolated = true
 interpolation_speed = 60.0
 
 [node name="Ellie" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_toe0k")]
-position = Vector2(1607, 591)
+position = Vector2(1300, 591)
 oponent = NodePath("../Ritsu")
 
 [node name="Ritsu" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_rqy1e")]
-visible = true
 position = Vector2(313, 569)
 oponent = NodePath("../Ellie")
 

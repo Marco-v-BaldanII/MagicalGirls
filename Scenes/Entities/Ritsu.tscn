@@ -238,7 +238,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(67, -150)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -336,10 +336,10 @@ tracks/1/path = NodePath("hit_boxes/strong_box/strong_attack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.416667),
+"times": PackedFloat32Array(0, 0.15, 0.400001),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(114, 309), Vector2(-67, 321)]
+"values": [Vector2(63, -143), Vector2(195, 125), Vector2(-105, 152)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -380,7 +380,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.283333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_c82t4"]
@@ -553,7 +553,7 @@ tracks/3/path = NodePath("hit_boxes/strong_box/strong_attack:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.45),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -565,10 +565,10 @@ tracks/4/path = NodePath("hit_boxes/strong_box/strong_attack:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.45, 0.583334),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.383334),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(19, 74), Vector2(-88, 121), Vector2(174, 92), Vector2(272, 89)]
+"values": [Vector2(60, -39), Vector2(-15, -15), Vector2(231, -19)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -630,10 +630,10 @@ tracks/3/path = NodePath("hit_boxes/strong_box/strong_attack:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.133333, 0.333333, 0.566667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.283334),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(19, 74), Vector2(-57, 74), Vector2(-57, 74), Vector2(246, -24), Vector2(-18, 75)]
+"values": [Vector2(55, -74), Vector2(-62, -27), Vector2(300, -36)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -935,10 +935,10 @@ tracks/0/path = NodePath("hit_boxes/strong_box/strong_attack:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.316667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.316667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(22, 27), Vector2(22, 27), Vector2(246, 129)]
+"values": [Vector2(70, -145), Vector2(246, 129)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1088,7 +1088,7 @@ _data = {
 size = Vector2(77, 23)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_76ytc"]
-radius = 10.1586
+radius = 4.70426e+06
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_52f0o"]
 radius = 39.0
@@ -1111,7 +1111,6 @@ height = 210.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
 [node name="Ritsu" type="CharacterBody2D"]
-visible = false
 position = Vector2(303, 871)
 collision_layer = 0
 script = ExtResource("1_h8qxx")
@@ -1157,10 +1156,12 @@ debug_color = Color(0.560753, 0.461845, 0.825999, 0.42)
 [node name="hit_boxes" type="Node2D" parent="."]
 
 [node name="strong_box" type="Area2D" parent="hit_boxes" groups=["strong"]]
+position = Vector2(-42, 169)
 collision_layer = 0
 collision_mask = 0
 
 [node name="strong_attack" type="CollisionShape2D" parent="hit_boxes/strong_box"]
+position = Vector2(67, -150)
 scale = Vector2(1e-05, 1e-05)
 shape = SubResource("CircleShape2D_76ytc")
 debug_color = Color(0.645236, 0, 0.331872, 0.42)
