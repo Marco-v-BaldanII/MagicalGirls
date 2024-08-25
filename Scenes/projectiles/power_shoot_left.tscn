@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://buivs1yoj8wmn"]
+
+[ext_resource type="PackedScene" uid="uid://btaxewrgndcqd" path="res://Scenes/projectiles/hadoken_right.tscn" id="1_jwjp2"]
+
+[node name="Hadoken" instance=ExtResource("1_jwjp2")]
+scale = Vector2(0.32, 0.32)
+alive_time = 1.0
+lag_frames = 0
+speed = 1300
+dmg = 14.0
+
+[node name="CollisionShape2D" parent="Area2D" index="0" groups=["strong"]]

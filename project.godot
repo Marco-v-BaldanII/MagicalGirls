@@ -64,6 +64,7 @@ enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/contr
 
 weak_=""
 super_weak=""
+strong=""
 
 [input]
 
