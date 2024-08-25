@@ -26,6 +26,11 @@ var Larissa : Dictionary = {}
 
 var triple_bombardment_right : Array[String] = ["move_left", "move_right", "move_left", "move_right" , "s_kick"]
 var triple_bombardment_left : Array[String] =  ["move_right", "move_left", "move_right" , "move_left", "s_kick"]
+var power_shoot_left : Array[String] = ["crouch" , "move_left", "s_punch"]
+var power_shoot_right : Array[String] = ["crouch" , "move_right", "s_punch"]
+
+var molotov_left : Array[String] = ["crouch","move_right","s_punch"]
+var molotov_right : Array[String] = ["crouch","move_left","s_punch"]
 
 var Anastasia : Dictionary = {
 	
@@ -36,6 +41,22 @@ var Anastasia : Dictionary = {
 	"triple_bombardment_left_startup" : 10,
 	"triple_bombardment_left_lag" : 10,
 	
+	"power_shoot_left" : power_shoot_left,
+	"power_shoot_left_lag" : 50,
+	"power_shoot_left_startup" : 10,
+
+	"power_shoot_right" : power_shoot_right,
+	"power_shoot_right_lag" : 50,
+	"power_shoot_right_startup" : 10,
+	
+	
+	"molotov_left" : molotov_left,
+	"molotov_left_lag" : 30,
+	"molotov_left_startup" : 8,
+	
+	"molotov_right" : molotov_right,
+	"molotov_right_lag" : 30,
+	"molotov_right_startup" : 8,
 }
 var Ellie : Dictionary = {}
 
