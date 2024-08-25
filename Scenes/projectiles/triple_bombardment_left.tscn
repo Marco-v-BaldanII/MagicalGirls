@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnrljmedi6s7d"]
+
+[ext_resource type="PackedScene" uid="uid://e4qcrme7tpuv" path="res://Scenes/projectiles/triple_bombardment_right.tscn" id="1_ups6h"]
+
+[node name="TripleBombardmentRight" instance=ExtResource("1_ups6h")]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo7oim88ogfj"]
 
 [ext_resource type="PackedScene" uid="uid://c6klg87wrxfhg" path="res://Scenes/projectiles/star_diagonal.tscn" id="1_kmsq5"]
-[ext_resource type="Script" path="res://Scenes/projectiles/triple_shot.gd" id="1_rxymf"]
+[ext_resource type="Script" path="res://Scenes/projectiles/compound_rpojectile.gd" id="1_rxymf"]
 [ext_resource type="PackedScene" uid="uid://btaxewrgndcqd" path="res://Scenes/projectiles/hadoken_right.tscn" id="3_ngl5a"]
 
 [node name="TripleShot" type="Node2D"]
