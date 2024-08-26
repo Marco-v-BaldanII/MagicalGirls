@@ -182,7 +182,8 @@ func _physics_process(delta: float) -> void:
 			var has_shot : bool = false
 			for i in AK.size():
 				if not AK[i].active:
-					AK[i].shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+					#AK[i].shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+					shoot_projectile(AK[i])
 					has_shot = true
 					current_shot += 1
 					break

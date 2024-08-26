@@ -597,3 +597,10 @@ func add_lag(frames : int):
 	lag_finished.emit()
 	
 	set_process_input(true)
+
+func shoot_projectile_wrap(projectile : Projectile):
+	shoot_projectile(projectile)
+	GDSync.call_func(shoot_projectile,[projectile])
+
+func shoot_projectile(projectile : Projectile):
+	projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
