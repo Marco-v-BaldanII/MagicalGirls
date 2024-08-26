@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="5_ipbs5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
-size = Vector2(1936, 135)
+size = Vector2(1901, 135)
 
 [node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_2")]
 script = ExtResource("1_m308w")
@@ -81,6 +81,14 @@ text = "Online"
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 541)
 script = ExtResource("5_ipbs5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(2814, 870)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-920, 885)
+shape = SubResource("RectangleShape2D_2rhgy")
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]

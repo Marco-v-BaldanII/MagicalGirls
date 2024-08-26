@@ -14,11 +14,7 @@ var player : PackedScene = preload("res://player.tscn")
 
 func _ready():
 	online = false
-	
-	await get_tree().create_timer(0.8).timeout	
-	DialogueManager.show_dialogue_balloon(load("res://Dialogues/test.dialogue"), "start")
 
-	
 
 
 func connected():

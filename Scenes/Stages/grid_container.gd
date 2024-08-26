@@ -5,10 +5,16 @@ extends Control
 @onready var grid_container : GridContainer = $GridContainer
 @onready var banner_texture_rect : TextureRect = $TextureRect
 @onready var texture_rect = $TextureRect
+@onready var positionn = $Position
+@onready var position_down = $PositionDown
 
-var move_speed: float = 300.0  
-var offscreen_position: Vector2 = Vector2(-500, 100)  
+var move_speed: float = 7000  
+var choose_cooldown: float = 0  
+var offscreen_position: Vector2
+var real_target_position: Vector2
 var target_position: Vector2  
+
+
 
 var character_banners = {
 	"TextureRect1": preload("res://Assets/PlaceHolders/bomb.png"),
@@ -21,8 +27,11 @@ var character_banners = {
 
 func _ready():
 	_update_selection()
+	offscreen_position = position_down.position
 	texture_rect.position = offscreen_position  
 	target_position = texture_rect.position 
+	real_target_position = positionn.position
+
 
 func _process(delta: float) -> void:
 	if texture_rect.position != target_position:
@@ -31,17 +40,28 @@ func _process(delta: float) -> void:
 
 		if (texture_rect.position - target_position).length() < move_speed * delta:
 			texture_rect.position = target_position
-
-	if Input.is_action_just_pressed("ui_up"):
-		move_selection(-grid_width)  
-	elif Input.is_action_just_pressed("ui_down"):
-		move_selection(grid_width)  
-	elif Input.is_action_just_pressed("ui_left"):
-		move_selection(-1) 
-	elif Input.is_action_just_pressed("ui_right"):
-		move_selection(1) 
-	elif Input.is_action_just_pressed("ui_select"):
-		_select_fighter()
+	choose_cooldown += delta
+	if(choose_cooldown >= .3):
+		
+		if Input.is_action_just_pressed("ui_up"):
+			$SelectCharacter.play()
+			move_selection(-grid_width)  
+			choose_cooldown = 0
+		elif Input.is_action_just_pressed("ui_down"):
+			$SelectCharacter.play()
+			choose_cooldown = 0
+			move_selection(grid_width)  
+		elif Input.is_action_just_pressed("ui_left"):
+			$SelectCharacter.play()
+			choose_cooldown = 0
+			move_selection(-1) 
+		elif Input.is_action_just_pressed("ui_right"):
+			$SelectCharacter.play()
+			choose_cooldown = 0
+			move_selection(1) 
+		elif Input.is_action_just_pressed("ui_select"):
+			$MenuSelect.play()
+			_select_fighter()
 
 func move_selection(offset: int):
 	var children_count = grid_container.get_child_count()
@@ -82,7 +102,7 @@ func _update_selection():
 		banner_texture_rect.texture = character_banners[selected_child.name]
 
 	texture_rect.position = offscreen_position
-	target_position = Vector2(100, 100) 
+	target_position = real_target_position
 
 func _select_fighter():
 	var children = grid_container.get_children()
