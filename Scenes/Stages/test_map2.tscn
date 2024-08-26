@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=6 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_wibys"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_8yg0i"]
-[ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie.tscn" id="4_0gh20"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_sxd4x"]
 [ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="4_yjh0o"]
 
@@ -11,13 +10,13 @@ size = Vector2(1936, 135)
 
 [node name="TestMap2" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
 script = ExtResource("1_wibys")
-player_1 = NodePath("Ellie")
+player_1 = NodePath("Anastasia2")
 player_2 = NodePath("Anastasia")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_8yg0i")
 refresh_rate = 60
-node_path = NodePath("../Ellie")
+node_path = NodePath("../Anastasia2")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
@@ -31,14 +30,12 @@ property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[node name="Ellie" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_0gh20")]
-position = Vector2(1546, 618)
-character_name = "Ellie"
-oponent = NodePath("../Anastasia")
-
 [node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_yjh0o")]
 position = Vector2(261, 627)
-oponent = NodePath("../Ellie")
+oponent = NodePath("")
+
+[node name="Anastasia2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_yjh0o")]
+oponent = NodePath("../Anastasia")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0
