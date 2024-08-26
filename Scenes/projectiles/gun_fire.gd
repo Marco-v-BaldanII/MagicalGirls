@@ -16,7 +16,7 @@ var power_multiply : float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	area_2d = $Area2D
-	hide()
+	is_visible = false
 	alive_time = 1.0
 	GDSync.expose_node(self)
 	dmg = 1
@@ -32,30 +32,31 @@ func charge(position : Vector2):
 	global_position = position
 	
 
-#func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
-	#
-	#called_shoot(layer, mask, dir, player, startup)
-	#GDSync.call_func(called_shoot,[layer, mask, dir, player, startup])
-#
-#func called_shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
-	#if startup != 0:
-		#player.add_lag(startup)
-		#await get_tree().create_timer(0.01667 * startup).timeout
-	#else:
-		#player.lag_finished.emit() #No startup lag, so start end_lag
-#
-	#_layer = layer; _mask = mask
-	#set_physics_process(true)
-	#$Area2D.set_monitoring(true)
-	#show()
-	#active = true
-	#assign_phys_layer(layer, mask)
-	#my_player = player
-	#global_position = my_player.position
-	#if dir == "right":
-		#speed *= -1
-	#if player:
-		#player.add_lag(lag_frames)
+func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	
+	called_shoot(layer, mask, dir, player, startup)
+	GDSync.call_func(called_shoot,[layer, mask, dir, player, startup])
+
+func called_shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	if startup != 0:
+		player.add_lag(startup)
+		await get_tree().create_timer(0.01667 * startup).timeout
+	else:
+		player.lag_finished.emit() #No startup lag, so start end_lag
+
+	_layer = layer; _mask = mask
+	set_physics_process(true)
+	$Area2D.set_monitoring(true)
+	show()
+	is_visible = true
+	active = true
+	assign_phys_layer(layer, mask)
+	my_player = player
+	global_position = my_player.position
+	if dir == "right":
+		speed *= -1
+	if player:
+		player.add_lag(lag_frames)
 
 func destroy_wraped():
 	#my_player.oponent.add_lag(4)
@@ -84,5 +85,6 @@ func deativate():
 	$Area2D.set_collision_mask_value(_mask,false)
 	$Area2D.set
 	active = false
-	hide()
+
+	is_visible = false
 	_ready()
