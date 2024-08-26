@@ -10,7 +10,7 @@ class_name Projectile
 @export var dmg : float = 8
 
 var my_player : Player
-
+var active : bool = false
 
 func _ready() -> void:
 	dmg = 2
@@ -31,22 +31,33 @@ func assign_phys_layer(layer : int, mask : int):
 	area_2d.set_collision_layer_value(layer,true)
 	area_2d.set_collision_mask_value(mask,true)
 
+var _layer = 0
+var _mask = 0
+
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	
+	called_shoot(layer, mask, dir, player, startup)
+	GDSync.call_func(called_shoot,[layer, mask, dir, player, startup])
+
+func called_shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
 	if startup != 0:
 		player.add_lag(startup)
 		await get_tree().create_timer(0.01667 * startup).timeout
 	else:
 		player.lag_finished.emit() #No startup lag, so start end_lag
-	
+
+	_layer = layer; _mask = mask
 	set_physics_process(true)
+	$Area2D.set_monitoring(true)
 	show()
+	active = true
 	assign_phys_layer(layer, mask)
+	my_player = player
+	global_position = my_player.position
 	if dir == "right":
 		speed *= -1
 	if player:
-		my_player = player
-
-	GDSync.call_func(shoot, [layer,mask,dir,player])
+		player.add_lag(lag_frames)
 
 func destroy_projectile():
 	await  get_tree().create_timer(0.017).timeout
