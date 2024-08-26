@@ -8,7 +8,7 @@ extends CanvasLayer
 
 @onready var balloon: Control = %Balloon
 @onready var character_label: RichTextLabel = %CharacterLabel
-@onready var portrait = $Balloon/Panel/Dialogue/HBoxContainer/Portrait
+@onready var portrait = $Balloon/Portrait
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
 
@@ -26,17 +26,22 @@ var will_hide_balloon: bool = false
 
 var _locale: String = TranslationServer.get_locale()
 
-## The current line
 var dialogue_line: DialogueLine:
 	set(next_dialogue_line):
 		is_waiting_for_input = false
 		balloon.focus_mode = Control.FOCUS_ALL
 		balloon.grab_focus()
+		
+
 
 		# The dialogue has finished so close the balloon
 		if not next_dialogue_line:
+			#SceneWrapper.cutscene = false
+			#finish_dialogue.emit()
 			queue_free()
 			return
+		
+		
 
 		# If the node isn't ready yet then none of the labels will be ready yet either
 		if not is_node_ready():
@@ -46,11 +51,14 @@ var dialogue_line: DialogueLine:
 
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
-		var portrait_path: String = "res:://characters/%s.png" % dialogue_line.character.to_lower()
-		if FileAccess.file_exists(portrait_path):
-			portrait.texture = load(portrait_path)
-		else:
-			portrait.texture = null
+		
+		if dialogue_line != null:
+			var portrait_path : String = "res://Assets/characters/%s.png" % dialogue_line.character
+			
+			if FileAccess.file_exists(portrait_path):
+				portrait.texture = load(portrait_path)
+			else:
+				portrait.texture = null
 
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
@@ -81,6 +89,7 @@ var dialogue_line: DialogueLine:
 			balloon.grab_focus()
 	get:
 		return dialogue_line
+
 
 
 func _ready() -> void:

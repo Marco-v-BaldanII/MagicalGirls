@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b21yay5prs51n"
-path="res://.godot/imported/Ritsu.png-0a8627abc3f796d319dbf3d501ea69b5.ctex"
+uid="uid://bp4cf5s2wcvx5"
+path="res://.godot/imported/ritsu.png-45f3586c98df17ab5ad3f86bbb3c93dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Ritsu.png"
-dest_files=["res://.godot/imported/Ritsu.png-0a8627abc3f796d319dbf3d501ea69b5.ctex"]
+source_file="res://Assets/characters/ritsu.png"
+dest_files=["res://.godot/imported/ritsu.png-45f3586c98df17ab5ad3f86bbb3c93dc.ctex"]
 
 [params]
 
