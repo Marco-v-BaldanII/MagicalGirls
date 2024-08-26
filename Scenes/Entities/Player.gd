@@ -511,16 +511,18 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 
 	if anim_name == "crouch":
 		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
-		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch"):
+		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch") :
 			
-			animation_tree["parameters/conditions/crouch"] = false
-			animation_tree["parameters/conditions/not_crouch"] = true
-			await get_tree().create_timer(0.017 * 6).timeout
-			animation_tree["parameters/conditions/not_crouch"] = false
+			stay_crouched()
+			GDSync.call_func(stay_crouched)
 			
 
 
-
+func stay_crouched():
+	animation_tree["parameters/conditions/crouch"] = false
+	animation_tree["parameters/conditions/not_crouch"] = true
+	await get_tree().create_timer(0.017 * 6).timeout
+	animation_tree["parameters/conditions/not_crouch"] = false
 
 func _on_head_area_entered(area: Area2D) -> void:
 	head = true
