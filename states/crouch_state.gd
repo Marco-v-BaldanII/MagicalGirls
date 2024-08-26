@@ -25,7 +25,7 @@ func enter():
 
 func physics_update(delta : float):
 	
-	if  not GDSync.is_multiplayer_authority(): 
+	if  not GDSync.is_gdsync_owner(player): 
 		return
 	
 	
