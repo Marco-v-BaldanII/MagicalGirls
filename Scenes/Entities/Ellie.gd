@@ -10,6 +10,10 @@ const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
 func _ready() -> void:
 	super()
 	GDSync.expose_node(self)
+	GDSync.expose_func(hello)
+
+func hello():
+	pass
 
 func instanciate_projectile_online(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
 
@@ -92,7 +96,7 @@ func perform_move():
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
-					GDSync.call_func(instanciate_projectile_online,["res://Scenes/projectiles/"+specials+".tscn"])
+					#GDSync.call_func(instanciate_projectile_online,["res://Scenes/projectiles/"+specials+".tscn"])
 					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn", specials)
 					
 					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])

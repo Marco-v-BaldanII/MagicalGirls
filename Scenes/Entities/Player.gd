@@ -550,6 +550,10 @@ func online_instantiate(special_scene : PackedScene):
 	
 func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
 
+	projectile_instanciation(path, p_name, position_offset, my_self)
+	GDSync.call_func(projectile_instanciation,[path, p_name, position_offset, my_self])
+	
+func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
 	var special_scene = load(path)
 	var instance = special_scene.instantiate()
 	if my_self == null :get_tree().root.add_child(instance)
@@ -564,7 +568,7 @@ func instanciate_projectile(path : String, p_name : String, position_offset : Ve
 	if instance.has_method("shoot"):
 		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self,startup)
 		else: instance.shoot((player_num-1) + 2, 0 , direction, self, startup)
-	
+
 func store_last_used_move(move:String):
 	last_used_move = move
 
