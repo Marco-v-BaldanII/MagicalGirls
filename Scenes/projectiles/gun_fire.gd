@@ -2,7 +2,15 @@ extends Projectile
 class_name GunFire
 
 
-
+var is_visible : bool:
+	set(value):
+		if value != is_visible:
+			is_visible = value
+			if not is_visible:
+				hide()
+			else:
+				show()
+	
 var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
