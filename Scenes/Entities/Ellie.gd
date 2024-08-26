@@ -5,6 +5,8 @@ var current_start_projectile : Projectile
 const STAR_RIGHT = preload("res://Scenes/projectiles/book_laser.tscn")
 const BOOK_FIRE = preload("res://Scenes/projectiles/book_fire.tscn")
 
+const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
+
 func _input(event):
 	if not can_move: return
 	
@@ -61,9 +63,9 @@ func perform_move():
 	if not can_move and not lag: return
 	
 	for specials in moveset:
-		if moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
-			var dir = find_special_direction(moveset[specials])
-			if dir != direction:
+		if  moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size()  and  has_subarray(moveset[specials], input_buffer):
+			var dir = find_special_direction(specials)
+			if dir != direction or dir == "none":
 				print(specials + dir)
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
@@ -79,7 +81,7 @@ func perform_move():
 
 			return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick"):
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") :
 		
 		velocity.x = 0
 		
@@ -144,7 +146,12 @@ func _physics_process(delta: float) -> void:
 			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
 			add_lag(30)
 			pass
-		
+	
+	
+	#if not input_buffer.is_empty() and input_buffer.back().contains("s_punch"):
+		#instanciate_projectile("res://Scenes/projectiles/orbiting_book.tscn","", Vector2(200,0), self)
+		#input_buffer.clear()
+	#
 	return	
 
 

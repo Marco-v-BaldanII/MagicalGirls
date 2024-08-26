@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnlk1sk24x6db"]
+
+[ext_resource type="Script" path="res://Scenes/projectiles/compound_rpojectile.gd" id="1_v2xtq"]
+[ext_resource type="PackedScene" uid="uid://dhtkrdigh6gpd" path="res://Scenes/projectiles/orbiting_book.tscn" id="2_f06cy"]
+
+[node name="BookShield" type="Node2D"]
+script = ExtResource("1_v2xtq")
+delayed = true
+
+[node name="book" parent="." instance=ExtResource("2_f06cy")]
+
+[node name="book2" parent="." instance=ExtResource("2_f06cy")]
+
+[node name="book3" parent="." instance=ExtResource("2_f06cy")]
+
+[node name="book4" parent="." instance=ExtResource("2_f06cy")]

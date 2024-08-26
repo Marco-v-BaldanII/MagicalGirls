@@ -58,10 +58,19 @@ var Anastasia : Dictionary = {
 	"molotov_right_lag" : 30,
 	"molotov_right_startup" : 8,
 }
-var Ellie : Dictionary = {}
+
+var shield : Array[String] = ["crouch","jump" ,"s_kick"]
+
+var Ellie : Dictionary = {
+	
+	"book_shield" : shield,
+	"book_shield_lag" : 40,
+	"book_shield_startup" : 20
+}
 
 var movesets : Dictionary = {
 	"Ritsu" : Ritsu,
 	"Larissa" : Larissa,
-	"Anastasia" : Anastasia
+	"Anastasia" : Anastasia,
+	"Ellie" : Ellie
 }

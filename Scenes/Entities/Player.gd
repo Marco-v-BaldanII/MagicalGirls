@@ -224,7 +224,7 @@ func perform_move():
 	for specials in moveset:
 		if moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size() and  has_subarray(moveset[specials], input_buffer):
 			var dir = find_special_direction(specials)
-			if dir != direction:
+			if dir != direction or dir == "none":
 				print(specials + dir)
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
@@ -309,7 +309,7 @@ func find_special_direction(special : String) -> String:
 		if special.contains("right"):
 			
 				return "right"
-		else:
+		elif special.contains("left"):
 				return "left"
 		return "none"
 
@@ -536,15 +536,18 @@ func online_instantiate(special_scene : PackedScene):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
-func instanciate_projectile(path : String, p_name : String):
+func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
 
 	var special_scene = load(path)
 	var instance = special_scene.instantiate()
-	get_tree().root.add_child(instance)
+	if my_self == null :get_tree().root.add_child(instance)
+	else: my_self.add_child(instance)
 	instance.global_position = global_position
 	
-
-	var startup : int = MovesetManager.movesets[character_name][p_name + "_startup"]
+	instance.global_position += position_offset
+	
+	var startup : int = 0
+	if p_name != "": startup = MovesetManager.movesets[character_name][p_name + "_startup"]
 	
 	if instance.has_method("shoot"):
 		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self,startup)
