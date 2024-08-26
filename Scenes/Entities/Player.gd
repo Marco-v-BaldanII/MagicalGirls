@@ -466,9 +466,10 @@ func online_receive_dmg(area : Area2D):
 	hit = true
 	sprite_2d.modulate = Color.RED
 	
-	var parent = area.get_parent()
-	if parent.has_method("destroy_projectile"):
-		parent.destroy_projectile()
+	if not area == null:
+		var parent = area.get_parent()
+		if parent.has_method("destroy_projectile"):
+			parent.destroy_projectile()
 	
 	GameManager.camera_shake()
 
@@ -550,8 +551,10 @@ func online_instantiate(special_scene : PackedScene):
 	
 func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
 
-	projectile_instanciation(path, p_name, position_offset, my_self)
+	var instance = projectile_instanciation(path, p_name, position_offset, my_self)
 	GDSync.call_func(projectile_instanciation,[path, p_name, position_offset, my_self])
+	
+	return instance
 	
 func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
 	var special_scene = load(path)
@@ -568,6 +571,7 @@ func projectile_instanciation(path : String, p_name : String, position_offset : 
 	if instance.has_method("shoot"):
 		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self,startup)
 		else: instance.shoot((player_num-1) + 2, 0 , direction, self, startup)
+	return instance
 
 func store_last_used_move(move:String):
 	last_used_move = move
