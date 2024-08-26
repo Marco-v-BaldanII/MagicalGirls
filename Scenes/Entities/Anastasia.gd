@@ -34,7 +34,10 @@ func _ready() -> void:
 	for i in range(max_shots):
 		AK.push_back(gun_fire())
 		get_tree().root.add_child.call_deferred(AK.back())
-		
+	
+	move_dmg["2knife_attack"] = 10
+	move_vulnerable_on_shield["2knife_attack"] = 6
+
 
 func _input(event):
 	if not can_move: return
@@ -106,8 +109,19 @@ func perform_move():
 						await lag_finished
 						
 						add_lag(MovesetManager.movesets[name][specials + "_lag"])
+						return
 						#Here will call the animation in the animation tree , which will have it's hitstun
-
+					else:
+						#this means that the special is a melee attack
+						last_used_move =  specials
+						can_move = false #Can't move while ground attacks
+						$AnimationTree["parameters/conditions/" + specials] = true
+						await get_tree().create_timer(0.017 * 6).timeout
+						$AnimationTree["parameters/conditions/" + specials] = false
+						clear_buffer()
+						GDSync.call_func(_sync_move,[specials])
+						
+						
 						return
 			
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") and not input_buffer.back().contains("s_punch"):

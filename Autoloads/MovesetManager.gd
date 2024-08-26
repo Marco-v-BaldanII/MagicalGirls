@@ -32,6 +32,8 @@ var power_shoot_right : Array[String] = ["crouch" , "move_right", "s_punch"]
 var molotov_left : Array[String] = ["crouch","move_right","s_punch"]
 var molotov_right : Array[String] = ["crouch","move_left","s_punch"]
 
+var two_kinfe_attack : Array[String] = ["move_right","w_punch"]
+
 var Anastasia : Dictionary = {
 	
 	"triple_bombardment_right" : triple_bombardment_right,
@@ -57,9 +59,13 @@ var Anastasia : Dictionary = {
 	"molotov_right" : molotov_right,
 	"molotov_right_lag" : 30,
 	"molotov_right_startup" : 8,
+	
+	"2knife_attack" : two_kinfe_attack,
+	"2knife_attack_lag" : 10,
+	"2knife_attack_startup" : 5
 }
 
-var shield : Array[String] = ["crouch","jump" ,"s_kick"]
+var shield : Array[String] = ["crouch","move_right" ,"s_kick"]
 
 var Ellie : Dictionary = {
 	
