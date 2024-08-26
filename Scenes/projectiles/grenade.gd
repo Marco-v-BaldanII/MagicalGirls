@@ -80,6 +80,9 @@ func _physics_process(delta: float) -> void:
 	
 	if alive_time < 0:
 		animation_tree["parameters/conditions/explode"] = true
+		GDSync.call_func(change_animation,["explode"])
+		GDSync.call_func(assign_phys_layer,[3,4])
+		GDSync.call_func(assign_phys_layer,[2,5])
 		assign_phys_layer(2,5)
 		assign_phys_layer(3,4)
 		
