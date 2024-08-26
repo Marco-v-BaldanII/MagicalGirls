@@ -182,3 +182,20 @@ func book_laser():
 			charging_laser = false
 			current_start_projectile = null
 			add_lag(10)
+
+func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
+
+	var special_scene = load(path)
+	var instance = special_scene.instantiate()
+	if my_self == null :get_tree().root.add_child(instance)
+	else: my_self.add_child(instance)
+	instance.global_position = global_position
+	
+	instance.global_position += position_offset
+	
+	var startup : int = 0
+	if p_name != "": startup = MovesetManager.movesets[character_name][p_name + "_startup"]
+	
+	if instance.has_method("shoot"):
+		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self,startup)
+		else: instance.shoot((player_num-1) + 2, 0 , direction, self, startup)
