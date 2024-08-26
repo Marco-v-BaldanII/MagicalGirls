@@ -139,6 +139,7 @@ advance_condition = &"crouch"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d6iw6"]
 switch_mode = 2
 advance_mode = 2
+advance_condition = &"crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y58wf"]
 advance_mode = 2
@@ -1161,6 +1162,7 @@ parameters/conditions/crouch_s_kick = false
 parameters/conditions/crouch_s_punch = false
 parameters/conditions/crouch_w_kick = false
 parameters/conditions/crouch_w_punch = false
+parameters/conditions/crouching = false
 parameters/conditions/land = false
 parameters/conditions/not_crouch = false
 parameters/conditions/s_kick = false

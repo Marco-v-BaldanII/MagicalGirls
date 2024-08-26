@@ -518,14 +518,16 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 			stand_up()
 			GDSync.call_func(stand_up)
 		else:
-			pass
-			#play_crouching()
+			
+			play_crouching()
+			GDSync.call_func(play_crouching)
 			#state_machine.on_child_transition(state_machine.current_state, "crouch")
 
 func play_crouching():
-	animation_player.play("crouching")
+	animation_tree["parameters/conditions/crouching"] = true
 
 func stand_up():
+	animation_player.play("idle")
 	animation_tree["parameters/conditions/crouch"] = false
 	animation_tree["parameters/conditions/not_crouch"] = true
 	await get_tree().create_timer(0.017 * 6).timeout

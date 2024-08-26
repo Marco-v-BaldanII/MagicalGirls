@@ -142,6 +142,7 @@ advance_condition = &"crouch"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d6iw6"]
 switch_mode = 2
 advance_mode = 2
+advance_condition = &"crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y58wf"]
 advance_mode = 2
@@ -224,7 +225,7 @@ states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
 transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_76fnt"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_d6iw6"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_y58wf"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_dpwar"), "2knife_attack", "idle_anim", SubResource("AnimationNodeStateMachineTransition_yhvjk")]
-graph_offset = Vector2(-325, -10)
+graph_offset = Vector2(-125, -116)
 
 [sub_resource type="Animation" id="Animation_vp1kp"]
 resource_name = "2knife_attack"
@@ -1182,6 +1183,7 @@ parameters/conditions/crouch_s_kick = false
 parameters/conditions/crouch_s_punch = false
 parameters/conditions/crouch_w_kick = false
 parameters/conditions/crouch_w_punch = false
+parameters/conditions/crouching = false
 parameters/conditions/land = false
 parameters/conditions/not_crouch = false
 parameters/conditions/s_kick = false
