@@ -515,12 +515,15 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
 		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch") :
 			
-			stay_crouched()
-			GDSync.call_func(stay_crouched)
-			
+			stand_up()
+			GDSync.call_func(stand_up)
+	else:
+		play_crouching()
 
+func play_crouching():
+	animation_player.play("crouching")
 
-func stay_crouched():
+func stand_up():
 	animation_tree["parameters/conditions/crouch"] = false
 	animation_tree["parameters/conditions/not_crouch"] = true
 	await get_tree().create_timer(0.017 * 6).timeout
