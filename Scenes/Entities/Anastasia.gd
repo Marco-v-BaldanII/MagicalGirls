@@ -101,7 +101,7 @@ func perform_move():
 					if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
-						GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+						#GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
 						instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
 						
 						clear_buffer()
