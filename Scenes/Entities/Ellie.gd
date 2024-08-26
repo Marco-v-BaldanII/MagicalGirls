@@ -7,6 +7,10 @@ const BOOK_FIRE = preload("res://Scenes/projectiles/book_fire.tscn")
 
 const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
 
+func _ready() -> void:
+	super()
+	GDSync.expose_node(self)
+
 func _input(event):
 	if not can_move: return
 	
@@ -143,6 +147,7 @@ func _physics_process(delta: float) -> void:
 		
 		if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]) and current_start_projectile == null:
 			var fire_projectile = instanciate_fire()
+			GDSync.call_func(instanciate_fire)
 			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
 			add_lag(30)
 			pass
