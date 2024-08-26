@@ -13,12 +13,21 @@ var num_bounce = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	
 
 	GDSync.expose_node(self)
 	dmg = 10
 
 	set_physics_process(false)
+	await get_tree().create_timer(0.01667).timeout
+	
+	if GDSync.is_gdsync_owner(self):
+		
+		if GDSync.is_host():
+			$PropertySynchronizer.broadcast = 	0
+		else:
+			$PropertySynchronizer.broadcast = 	1
+	
 	pass # Replace with function body.
 
 
@@ -92,9 +101,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	speedY = og_speedY/num_bounce
-	speed = og_speedX/num_bounce
-	speedY = clamp(speedY, -1000,-100)
+	speedY = og_speedY*1.5/num_bounce
+	speed = og_speedX*1.5/num_bounce
+	speedY = clamp(speedY, -1000,-200)
 	num_bounce += 1
 	pass # Replace with function body.
 
