@@ -50,8 +50,7 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	if player:
 		player.add_lag(lag_frames)
 
-
-func destroy_projectile():
+func destroy_wraped():
 	#my_player.oponent.add_lag(4)
 
 	if my_player: 
@@ -59,6 +58,11 @@ func destroy_projectile():
 		my_player.dead_bullets += 1
 	await  get_tree().create_timer(0.017).timeout
 	deativate()
+
+func destroy_projectile():
+	
+	destroy_wraped()
+	GDSync.call_func(destroy_wraped)
 	
 func _physics_process(delta: float) -> void:
 	position.x += speed * delta

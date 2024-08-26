@@ -89,7 +89,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	queue_free()
+	GDSync.call_func(destroy)
+	destroy()
 	pass # Replace with function body.
 
 var can_bounce : bool = false
@@ -112,3 +113,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	can_bounce = true
 	pass # Replace with function body.
 "res://Scenes/projectiles/grenade.tscn"
+
+func destroy():
+	queue_free()
