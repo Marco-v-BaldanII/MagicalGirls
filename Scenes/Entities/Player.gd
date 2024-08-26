@@ -517,8 +517,10 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 			
 			stand_up()
 			GDSync.call_func(stand_up)
-	else:
-		play_crouching()
+		else:
+			pass
+			#play_crouching()
+			#state_machine.on_child_transition(state_machine.current_state, "crouch")
 
 func play_crouching():
 	animation_player.play("crouching")

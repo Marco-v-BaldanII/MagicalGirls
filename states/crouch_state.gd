@@ -25,7 +25,7 @@ func enter():
 
 func physics_update(delta : float):
 	
-	if  not GDSync.is_gdsync_owner(player): 
+	if GameManager.online and   not GDSync.is_gdsync_owner(player): 
 		return
 	
 	
