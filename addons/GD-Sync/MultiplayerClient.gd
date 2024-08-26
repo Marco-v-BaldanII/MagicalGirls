@@ -254,6 +254,7 @@ func sync_var_on(client_id : int, node : Node, variable_name : String, reliable 
 ##[br][b]reliable -[/b] If reliable, if the request fails to deliver it will reattempt until succesful. 
 ##This may introduce more latency. Use unreliable if the function call is non-essential.
 func call_func(callable : Callable, parameters = null, reliable = true) -> void:
+	print(callable)
 	_request_processor.create_function_call_request(callable, parameters, -1, reliable)
 
 ##Calls a function on a Node on a specific client in the current lobby.

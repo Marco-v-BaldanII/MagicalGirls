@@ -16,7 +16,7 @@ var power_multiply : float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	area_2d = $Area2D
-	is_visible = false
+	#is_visible = false
 	alive_time = 1.0
 	GDSync.expose_node(self)
 	dmg = 1
@@ -47,8 +47,8 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	_layer = layer; _mask = mask
 	set_physics_process(true)
 	$Area2D.set_monitoring(true)
-	show()
-	is_visible = true
+	#show()
+	#is_visible = true
 	active = true
 	assign_phys_layer(layer, mask)
 	my_player = player
