@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
 [ext_resource type="AudioStream" uid="uid://4rr7p1ang0k" path="res://Assets/SFX/UI/SelectCharacter.wav" id="3_gyvyi"]
-[ext_resource type="AudioStream" uid="uid://dpvq2jduey8ej" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
+[ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 
 [node name="CharacterSelectionScreen" type="Control"]
 layout_mode = 3
@@ -106,3 +106,4 @@ stream = ExtResource("3_gyvyi")
 
 [node name="MenuSelect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_8ix2s")
+volume_db = -11.243
