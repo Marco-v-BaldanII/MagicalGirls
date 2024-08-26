@@ -24,13 +24,6 @@ script = ExtResource("3_2di8l")
 position = Vector2(40, 0)
 shape = SubResource("CircleShape2D_xfwv1")
 
-[node name="PropertySynchronizer2" type="Node" parent="."]
-script = ExtResource("4_1osyk")
-node_path = NodePath("..")
-property_name = "scale"
-interpolated = false
-interpolation_speed = 1.0
-
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("4_1osyk")
 refresh_rate = 120
@@ -43,6 +36,7 @@ interpolation_speed = 1.0
 script = ExtResource("4_1osyk")
 refresh_rate = 60
 node_path = NodePath("..")
-property_name = "dmg"
+property_name = "visible"
+interpolation = null
 interpolated = false
 interpolation_speed = 1.0
