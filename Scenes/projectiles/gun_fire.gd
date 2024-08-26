@@ -23,6 +23,18 @@ func _ready() -> void:
 	speed = 1200
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)
+	
+	await get_tree().create_timer(0.01667).timeout
+	
+	if GDSync.is_gdsync_owner(self):
+		
+		if GDSync.is_host():
+			$PropertySynchronizer.broadcast = 	0
+			$PropertySynchronizer2.broadcast = 0
+		else:
+			$PropertySynchronizer.broadcast = 	1
+			$PropertySynchronizer2.broadcast = 1
+			
 	pass # Replace with function body.
 
 

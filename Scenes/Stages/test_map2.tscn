@@ -32,9 +32,10 @@ interpolation_speed = 60.0
 
 [node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_yjh0o")]
 position = Vector2(261, 627)
-oponent = NodePath("")
+oponent = NodePath("../Anastasia2")
 
 [node name="Anastasia2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("4_yjh0o")]
+position = Vector2(995, 631)
 oponent = NodePath("../Anastasia")
 
 [node name="Floor" type="StaticBody2D" parent="."]
