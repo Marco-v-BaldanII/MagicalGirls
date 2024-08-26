@@ -24,6 +24,11 @@ func enter():
 
 
 func physics_update(delta : float):
+	
+	if  not GDSync.is_multiplayer_authority(): 
+		return
+	
+	
 	#player.animation_tree["parameters/conditions/crouch"] = true
 	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
 	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
