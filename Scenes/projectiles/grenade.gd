@@ -39,10 +39,13 @@ func charge(_position : Vector2):
 		assign_phys_layer(2,5)
 		assign_phys_layer(3,4)
 		animation_tree["parameters/conditions/explode"] = true
+		GDSync.call_func(change_animation,["explode"])
 		
 	pass
 		
 
+func change_animation(anim):
+	animation_tree["parameters/conditions/" + anim] = true
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
 	if startup != 0:
