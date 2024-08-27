@@ -33,7 +33,8 @@ func _ready() -> void:
 
 func charge(_position : Vector2):
 	#GDSync.call_func(charge,[position])
-
+	alive_time -= 0.01667
+	
 	global_position = _position
 	if alive_time < 0:
 		assign_phys_layer(2,5)
@@ -76,15 +77,9 @@ func destroy_projectile():
 	
 	
 func _process(delta: float) -> void:
-	alive_time -= delta
+	pass
 
-	if alive_time < 0:
-		animation_tree["parameters/conditions/explode"] = true
-		GDSync.call_func(change_animation,["explode"])
-		GDSync.call_func(assign_phys_layer,[3,4])
-		GDSync.call_func(assign_phys_layer,[2,5])
-		assign_phys_layer(2,5)
-		assign_phys_layer(3,4)
+
 		
 	
 func _physics_process(delta: float) -> void:
@@ -96,6 +91,15 @@ func _physics_process(delta: float) -> void:
 	speedY += 15
 	#fall faster
 	if speedY > 0:speedY += 20
+	
+	if alive_time < 0:
+		animation_tree["parameters/conditions/explode"] = true
+		GDSync.call_func(change_animation,["explode"])
+		GDSync.call_func(assign_phys_layer,[3,4])
+		GDSync.call_func(assign_phys_layer,[2,5])
+		assign_phys_layer(2,5)
+		assign_phys_layer(3,4)
+
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
