@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func charge(_position : Vector2):
 	#GDSync.call_func(charge,[position])
-	alive_time -= 0.01667
+
 	global_position = _position
 	if alive_time < 0:
 		assign_phys_layer(2,5)
