@@ -57,6 +57,7 @@ func lobby_creation_failed(lobby_name : String, error : int):
 func lobby_joined(lobby_name : String):
 	print("Succesfully joined lobby "+lobby_name)
 	v_box_container.hide()
+	GameManager.joined_lobby.emit()
 
 func lobby_join_failed(lobby_name : String, error : int):
 	match(error):

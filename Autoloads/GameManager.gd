@@ -3,6 +3,7 @@ extends Node
 func _ready() -> void:
 	GDSync.expose_node(self)
 
+signal joined_lobby
 
 var online : bool:
 	set(value):

@@ -15,6 +15,8 @@ var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.joined_lobby.connect(_ready)
+	
 	area_2d = $Area2D
 	#is_visible = false
 	alive_time = 1.0
@@ -30,10 +32,10 @@ func _ready() -> void:
 		
 		if GDSync.is_host():
 			$PropertySynchronizer.broadcast = 	0
-			$PropertySynchronizer2.broadcast = 0
+			$PropertySynchronizer3.broadcast = 0
 		else:
 			$PropertySynchronizer.broadcast = 	1
-			$PropertySynchronizer2.broadcast = 1
+			$PropertySynchronizer3.broadcast = 1
 			
 	pass # Replace with function body.
 
