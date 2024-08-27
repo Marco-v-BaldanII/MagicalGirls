@@ -27,8 +27,9 @@ func _ready() -> void:
 			$PropertySynchronizer.broadcast = 	0
 		else:
 			$PropertySynchronizer.broadcast = 	1
-	
-	pass # Replace with function body.
+			
+	emergency_difuse()
+
 
 var working : bool = false
 
@@ -48,6 +49,7 @@ func charge(_position : Vector2):
 
 func change_animation(anim):
 	animation_tree["parameters/conditions/" + anim] = true
+
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
 	if startup != 0:
@@ -77,10 +79,13 @@ func destroy_projectile():
 	queue_free()
 	
 	
-func _process(delta: float) -> void:
-	if not working: queue_free()
+func emergency_difuse():
+	await get_tree().create_timer(alive_time + 0.2).timeout
 	
-	working = false
+	if not is_physics_processing():
+		queue_free()
+		
+	
 
 
 		
