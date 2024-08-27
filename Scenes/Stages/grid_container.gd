@@ -61,8 +61,10 @@ func _process(delta: float) -> void:
 			
 	if(choose_cooldown2 >= .3):
 		#Player 2
-		if not GameManager.online or not GameManager.is_host:
+		if not GameManager.online:
 			input_movement(1)
+		elif  not GameManager.is_host:
+			input_movement(0)
 
 
 func input_movement(character_id : int):
