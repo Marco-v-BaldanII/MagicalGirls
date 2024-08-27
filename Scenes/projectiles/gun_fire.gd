@@ -15,10 +15,11 @@ var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	is_visible = true
 	GameManager.joined_lobby.connect(_ready)
 	
 	area_2d = $Area2D
-	#is_visible = false
+	is_visible = false
 	alive_time = 1.0
 	GDSync.expose_node(self)
 	dmg = 1
@@ -61,7 +62,7 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	set_physics_process(true)
 	$Area2D.set_monitoring(true)
 	#show()
-	#is_visible = true
+	is_visible = true
 	active = true
 	assign_phys_layer(layer, mask)
 	my_player = player
@@ -83,7 +84,7 @@ func destroy_wraped():
 func destroy_projectile():
 	
 	destroy_wraped()
-	GDSync.call_func(destroy_wraped)
+	#GDSync.call_func(destroy_wraped)
 	
 func _physics_process(delta: float) -> void:
 	position.x += speed * delta

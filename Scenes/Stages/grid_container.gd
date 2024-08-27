@@ -1,20 +1,29 @@
 extends Control
 
 @export var selected_index : int = 0
+@export var selected_index2 : int = 0
+
 @export var grid_width : int = 3 
 @onready var grid_container : GridContainer = $GridContainer
 @onready var banner_texture_rect : TextureRect = $TextureRect
+
+
 @onready var texture_rect = $TextureRect
 @onready var positionn = $Position
 @onready var position_down = $PositionDown
 
+@export var current_map : PackedScene 
+
 var move_speed: float = 7000  
 var choose_cooldown: float = 0  
+var choose_cooldown2: float = 0  
+
 var offscreen_position: Vector2
 var real_target_position: Vector2
 var target_position: Vector2  
 
-
+var selected_fighter : String = ""
+var selected_fighter2 : String = ""
 
 var character_banners = {
 	"TextureRect1": preload("res://Assets/PlaceHolders/bomb.png"),
@@ -26,7 +35,9 @@ var character_banners = {
 }
 
 func _ready():
-	_update_selection()
+	GDSync.expose_node(self)
+	_update_selection(0)
+	_update_selection(1)
 	offscreen_position = position_down.position
 	texture_rect.position = offscreen_position  
 	target_position = texture_rect.position 
@@ -41,71 +52,125 @@ func _process(delta: float) -> void:
 		if (texture_rect.position - target_position).length() < move_speed * delta:
 			texture_rect.position = target_position
 	choose_cooldown += delta
+	choose_cooldown2 += delta
+	
 	if(choose_cooldown >= .3):
-		
-		if Input.is_action_just_pressed("ui_up"):
+		#Player 1
+		if not GameManager.online or GameManager.is_host:
+			input_movement(0)
+			
+	if(choose_cooldown2 >= .3):
+		#Player 2
+		if not GameManager.online:
+			input_movement(1)
+		elif not GameManager.is_host:
+			input_movement(0)
+
+func input_movement(character_id : int):
+	
+		if Input.is_joy_button_pressed(character_id, Controls.ui["move_up"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5:
 			$SelectCharacter.play()
-			move_selection(-grid_width)  
-			choose_cooldown = 0
-		elif Input.is_action_just_pressed("ui_down"):
+			move_selection(-grid_width,character_id)  
+			if character_id == 0: choose_cooldown = 0
+			else: choose_cooldown2 = 0
+		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_down"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) > 0.5:
 			$SelectCharacter.play()
-			choose_cooldown = 0
-			move_selection(grid_width)  
-		elif Input.is_action_just_pressed("ui_left"):
+			if character_id == 0: choose_cooldown = 0
+			else: choose_cooldown2 = 0
+			move_selection(grid_width,character_id)  
+		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_left"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) < -0.5:
 			$SelectCharacter.play()
-			choose_cooldown = 0
-			move_selection(-1) 
-		elif Input.is_action_just_pressed("ui_right"):
+			if character_id == 0: choose_cooldown = 0
+			else: choose_cooldown2 = 0
+			move_selection(-1,character_id) 
+		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_right"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) > 0.5:
 			$SelectCharacter.play()
-			choose_cooldown = 0
-			move_selection(1) 
-		elif Input.is_action_just_pressed("ui_select"):
+			if character_id == 0: choose_cooldown = 0
+			else: choose_cooldown2 = 0
+			move_selection(1,character_id) 
+		elif Input.is_joy_button_pressed(character_id, Controls.ui["accept"]):
 			$MenuSelect.play()
-			_select_fighter()
+			_select_fighter(character_id)
 
-func move_selection(offset: int):
+func move_selection(offset: int, player : int = 0):
 	var children_count = grid_container.get_child_count()
+	var new_index : int
+	var actual_player_index : int
 	
-	var new_index = selected_index + offset
+	if player == 0:
+		new_index = selected_index + offset
+		actual_player_index = selected_index
+	else:
+		new_index = selected_index2 + offset
+		actual_player_index = selected_index2
 
-	if offset == -1 and selected_index % grid_width == 0:
-		new_index = selected_index + (grid_width - 1)
+	if offset == -1 and actual_player_index % grid_width == 0:
+		new_index = actual_player_index + (grid_width - 1)
 	
-	elif offset == 1 and (selected_index + 1) % grid_width == 0:
-		new_index = selected_index - (grid_width - 1)
+	elif offset == 1 and (actual_player_index + 1) % grid_width == 0:
+		new_index = actual_player_index - (grid_width - 1)
 	
 	elif offset == -grid_width and new_index < 0:
-		new_index = (children_count - grid_width) + (selected_index % grid_width)
+		new_index = (children_count - grid_width) + (actual_player_index % grid_width)
 		if new_index >= children_count:
 			new_index -= grid_width
 	
 	elif offset == grid_width and new_index >= children_count:
-		new_index = selected_index % grid_width
+		new_index = actual_player_index % grid_width
 
 	if new_index < 0:
 		new_index = 0
 	elif new_index >= children_count:
 		new_index = children_count - 1
+	
+	if player == 0:
+		selected_index = new_index
+	else:
+		selected_index2 = new_index
+	_update_selection(player)
 
-	selected_index = new_index
-	_update_selection()
-
-func _update_selection():
+func _update_selection(player : int = 0):
+	var actual_player_index : int
+	
+	if player == 0:
+		actual_player_index = selected_index
+	else:
+		actual_player_index = selected_index2
+	
+	
 	var children = grid_container.get_children()
 	for i in range(children.size()):
-		children[i].modulate = Color(1, 1, 1, 0.5) 
-	if children.size() > 0 and selected_index < children.size():
-		children[selected_index].modulate = Color(1, 1, 1, 1)  
+		if children[i] != children[selected_index] and children[i] != children[selected_index2]:
+		
+			children[i].modulate = Color(1, 1, 1, 0.5) 
+	if children.size() > 0 and actual_player_index < children.size():
+		children[actual_player_index].modulate = Color(1, 1, 1, 1)  
 	
-	var selected_child = children[selected_index]
+	var selected_child = children[actual_player_index]
 	if character_banners.has(selected_child.name):
 		banner_texture_rect.texture = character_banners[selected_child.name]
 
 	texture_rect.position = offscreen_position
 	target_position = real_target_position
 
-func _select_fighter():
+func _select_fighter(player : int = 0):
 	var children = grid_container.get_children()
 	if children.size() > 0 and selected_index < children.size():
-		var selected_fighter = children[selected_index]
-		print("Selected fighter: ", selected_fighter.name)
+		if player == 0:
+			selected_fighter = children[selected_index].name
+			print("Selected fighter: ", selected_fighter)
+		else:
+			selected_fighter2 = children[selected_index2].name
+			print("Selected fighter: ", selected_fighter2)
+
+
+func _on_start_button_button_down() -> void:
+	if selected_fighter != "" and selected_fighter2 != "":
+		if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter2+".tscn"):
+			
+			GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
+			GameManager.p2 = load("res://Scenes/Entities/"+selected_fighter2+".tscn")
+			
+			SceneWrapper.change_scene(current_map)
+	
+	pass # Replace with function body.

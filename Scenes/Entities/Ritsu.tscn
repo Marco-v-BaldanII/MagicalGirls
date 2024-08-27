@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://ct7hitycb8c46"]
+[gd_scene load_steps=84 format=3 uid="uid://ct7hitycb8c46"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_hxmnc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_ib67o"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_t58ng"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_wgxbo"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -1234,6 +1235,14 @@ position = Vector2(-9, 13)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
+
+[node name="PositionSynchronizer" type="Node" parent="."]
+script = ExtResource("9_wgxbo")
+refresh_rate = 60
+node_path = NodePath("..")
+property_name = "position"
+interpolated = true
+interpolation_speed = 60.0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

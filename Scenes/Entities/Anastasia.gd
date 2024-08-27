@@ -26,11 +26,18 @@ var current_shot :
 			current_shot = 0
 		else:
 			current_shot = value
+			
 
 func _ready() -> void:
 	current_shot = 0
 	dead_bullets = 0
 	super()
+	await fully_instanciated
+	
+	if player_num == 1:
+		$PositionSynchronizer.broadcast = 0
+	else: $PositionSynchronizer.broadcast = 1
+		
 	for i in range(max_shots):
 		AK.push_back(gun_fire())
 		get_tree().root.add_child.call_deferred(AK.back())
@@ -88,6 +95,7 @@ func instanciate_grenade():
 	
 func gun_fire():
 	current_start_projectile = GUN_FIRE.instantiate()
+	current_start_projectile.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	#current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 	current_start_projectile.global_position = global_position
 	#get_tree().root.add_child(current_start_projectile)

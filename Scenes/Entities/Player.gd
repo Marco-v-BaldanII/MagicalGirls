@@ -35,6 +35,9 @@ var player_num : int = 0 #player_num is 1 or 2 and is independent of online or o
 @export var player_id : int = 0
 @export var fly : bool = true
 
+
+signal fully_instanciated
+
 #These will get changet by a resource
 @export var SPEED = 500.0
 @export var FLY_SPEED = 700.0
@@ -128,6 +131,8 @@ var colliders : Array[CollisionShape2D]
 
 
 func _ready():
+	await fully_instanciated
+	
 	name = character_name
 	GameManager.add_player(self)
 	set_hitboxes(player_id)

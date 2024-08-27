@@ -7,6 +7,9 @@ signal joined_lobby
 
 var is_host : bool = false
 
+var p1 : PackedScene
+var p2 : PackedScene
+
 var online : bool:
 	set(value):
 		online = value

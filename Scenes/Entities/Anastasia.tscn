@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bm75grpsstvdy"]
+[gd_scene load_steps=88 format=3 uid="uid://bm75grpsstvdy"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_lv1x0"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_grr1i"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_tdwux"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ubm5j"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_3hply"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_2s2cp"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_va8ie"]
 animation = &"2knife_attack"
@@ -1278,6 +1279,14 @@ position = Vector2(-9, 13)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
+
+[node name="PositionSynchronizer" type="Node" parent="."]
+script = ExtResource("9_2s2cp")
+refresh_rate = 60
+node_path = NodePath("..")
+property_name = "position"
+interpolated = true
+interpolation_speed = 60.0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

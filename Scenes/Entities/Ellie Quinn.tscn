@@ -1,13 +1,14 @@
-[gd_scene load_steps=83 format=3 uid="uid://cw2grg2ehu335"]
+[gd_scene load_steps=84 format=3 uid="uid://cw2grg2ehu335"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_5tgxa"]
-[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_50rog"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="3_lop4u"]
-[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_tdr0a"]
-[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_524i3"]
-[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_eybhu"]
-[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_jn2pj"]
-[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_npw4x"]
+[ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
+[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_gqrgg"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="3_lmxlw"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_r3xtr"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ivl1b"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_8hb6d"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ynsb0"]
+[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_4dgrw"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_11ku0"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -1139,13 +1140,13 @@ height = 210.0
 [node name="Ellie" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_5tgxa")
+script = ExtResource("1_r7jln")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-3, 0)
 scale = Vector2(9, 9)
-texture = ExtResource("2_50rog")
+texture = ExtResource("2_gqrgg")
 hframes = 8
 frame = 7
 
@@ -1210,20 +1211,20 @@ shape = SubResource("RectangleShape2D_4w7ad")
 debug_color = Color(0, 0.77905, 0.257128, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_lop4u")
+script = ExtResource("3_lmxlw")
 initial_state = NodePath("ground_move")
 
 [node name="knocked" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_tdr0a")
+script = ExtResource("4_r3xtr")
 
 [node name="ground_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_524i3")
+script = ExtResource("5_ivl1b")
 
 [node name="air_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_eybhu")
+script = ExtResource("6_8hb6d")
 
 [node name="crouch" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_jn2pj")
+script = ExtResource("7_ynsb0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1238,7 +1239,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_a7xf5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
-script = ExtResource("8_npw4x")
+script = ExtResource("8_4dgrw")
 
 [node name="Body" type="Area2D" parent="."]
 
@@ -1257,6 +1258,14 @@ position = Vector2(-8, 98)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
+
+[node name="PositionSynchronizer" type="Node" parent="."]
+script = ExtResource("9_11ku0")
+refresh_rate = 60
+node_path = NodePath("..")
+property_name = "position"
+interpolated = true
+interpolation_speed = 60.0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

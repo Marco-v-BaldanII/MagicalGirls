@@ -1263,6 +1263,14 @@ scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
 
+[node name="PositionSynchronizer" type="Node" parent="."]
+script = ExtResource("9_siam7")
+refresh_rate = 60
+node_path = NodePath("..")
+property_name = "position"
+interpolated = true
+interpolation_speed = 60.0
+
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
