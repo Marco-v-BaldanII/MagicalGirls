@@ -30,11 +30,12 @@ func _ready() -> void:
 	
 	pass # Replace with function body.
 
+var working : bool = false
 
 func charge(_position : Vector2):
 	#GDSync.call_func(charge,[position])
 	alive_time -= 0.01667
-	
+	working = true
 	global_position = _position
 	if alive_time < 0:
 		assign_phys_layer(2,5)
@@ -54,7 +55,7 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 		await get_tree().create_timer(0.01667 * startup).timeout
 	else:
 		player.lag_finished.emit() #No startup lag, so start end_lag
-	
+	working = true
 	#GDSync.call_func(assign_phys_layer,[layer,mask])
 	set_physics_process(true)
 	#assign_phys_layer(layer, mask)
@@ -77,7 +78,9 @@ func destroy_projectile():
 	
 	
 func _process(delta: float) -> void:
-	pass
+	if not working: queue_free()
+	
+	working = false
 
 
 		
@@ -85,7 +88,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	alive_time -= delta
-		
+	working = true
 	position.x += speed * delta
 	position.y += speedY * delta
 	speedY += 15
