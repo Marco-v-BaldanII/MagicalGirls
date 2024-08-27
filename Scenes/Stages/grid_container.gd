@@ -42,7 +42,14 @@ func _ready():
 	texture_rect.position = offscreen_position  
 	target_position = texture_rect.position 
 	real_target_position = positionn.position
+	
+	await GameManager.online_setup
+	
+	reset_indexes()
+	GDSync.call_func(reset_indexes)
 
+func reset_indexes():
+	selected_index = 0; selected_index2 = 0;
 
 func _process(delta: float) -> void:
 	if texture_rect.position != target_position:
@@ -63,41 +70,40 @@ func _process(delta: float) -> void:
 		#Player 2
 		if not GameManager.online:
 			input_movement(1)
-		elif not GameManager.is_host:
-			input_movement(0)
+		elif  not GameManager.is_host:
+			input_movement(0, true)
 
-func input_movement(character_id : int):
+
+func input_movement(character_id : int, second_onlineP : bool = false):
 	
 		if Input.is_joy_button_pressed(character_id, Controls.ui["move_up"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5:
 			$SelectCharacter.play()
-			move_selection(-grid_width,character_id)  
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
+			move_selection(-grid_width,character_id, second_onlineP) 
+			GDSync.call_func(move_selection,[-grid_width,character_id,second_onlineP])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_down"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) > 0.5:
 			$SelectCharacter.play()
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
-			move_selection(grid_width,character_id)  
+			move_selection(grid_width,character_id,second_onlineP)  
+			GDSync.call_func(move_selection,[grid_width,character_id,second_onlineP])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_left"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) < -0.5:
 			$SelectCharacter.play()
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
-			move_selection(-1,character_id) 
+			move_selection(-1,character_id,second_onlineP) 
+			GDSync.call_func(move_selection,[-1,character_id,second_onlineP],)
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_right"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) > 0.5:
 			$SelectCharacter.play()
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
-			move_selection(1,character_id) 
+			move_selection(1,character_id,second_onlineP) 
+			GDSync.call_func(move_selection,[1,character_id,second_onlineP])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["accept"]):
 			$MenuSelect.play()
-			_select_fighter(character_id)
+			_select_fighter(character_id, second_onlineP)
+			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 
-func move_selection(offset: int, player : int = 0):
+func move_selection(offset: int, player : int = 0, second_onlineP : bool = false):
+	
 	var children_count = grid_container.get_child_count()
 	var new_index : int
 	var actual_player_index : int
 	
-	if player == 0:
+	if player == 0 and not second_onlineP:
 		new_index = selected_index + offset
 		actual_player_index = selected_index
 	else:
@@ -123,16 +129,19 @@ func move_selection(offset: int, player : int = 0):
 	elif new_index >= children_count:
 		new_index = children_count - 1
 	
-	if player == 0:
+	if player == 0 and not second_onlineP:
 		selected_index = new_index
 	else:
 		selected_index2 = new_index
-	_update_selection(player)
+	_update_selection(player, second_onlineP)
+	
+	if player == 0 and not second_onlineP: choose_cooldown = 0
+	else: choose_cooldown2 = 0
 
-func _update_selection(player : int = 0):
+func _update_selection(player : int = 0, second_onlineP : bool = false):
 	var actual_player_index : int
 	
-	if player == 0:
+	if player == 0 and not second_onlineP:
 		actual_player_index = selected_index
 	else:
 		actual_player_index = selected_index2
@@ -153,10 +162,10 @@ func _update_selection(player : int = 0):
 	texture_rect.position = offscreen_position
 	target_position = real_target_position
 
-func _select_fighter(player : int = 0):
+func _select_fighter(player : int = 0, second_onlineP : bool = false):
 	var children = grid_container.get_children()
 	if children.size() > 0 and selected_index < children.size():
-		if player == 0:
+		if player == 0 and not second_onlineP:
 			selected_fighter = children[selected_index].name
 			print("Selected fighter: ", selected_fighter)
 		else:

@@ -1,22 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=2 format=3 uid="uid://dhe6lj8x5nk7d"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_wibys"]
-[ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_sxd4x"]
+[ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
-size = Vector2(1936, 135)
-
-[node name="TestMap2" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
+[node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
-player_1 = NodePath("")
-player_2 = NodePath("")
-
-[node name="Floor" type="StaticBody2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(968, 1013)
-shape = SubResource("RectangleShape2D_2rhgy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -46,16 +33,6 @@ offset_bottom = 313.0
 scale = Vector2(2.52, 2.52)
 theme_override_font_sizes/font_size = 18
 text = "Online"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 541)
-script = ExtResource("4_sxd4x")
-
-[node name="spawn_p1" type="Node2D" parent="."]
-position = Vector2(200, 794)
-
-[node name="spawn_p2" type="Node2D" parent="."]
-position = Vector2(1718, 794)
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]

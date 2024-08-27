@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c50safjv72t6x"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_wqhdr"]
+[ext_resource type="Script" path="res://online_menu.gd" id="1_wqhdr"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_xm6mx"]
 [ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_1mkbp"]
 [ext_resource type="PackedScene" uid="uid://dcnr1ch67xghk" path="res://Scenes/Entities/AIPlayer.tscn" id="4_m6wa3"]
@@ -12,10 +12,8 @@ size = Vector2(1936, 135)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drngi"]
 size = Vector2(141, 1093)
 
-[node name="TestMap" type="Node2D" node_paths=PackedStringArray("player_1", "player_2")]
+[node name="TestMap" type="Node2D"]
 script = ExtResource("1_wqhdr")
-player_1 = NodePath("PlayerAI")
-player_2 = NodePath("Anastasia")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("2_xm6mx")

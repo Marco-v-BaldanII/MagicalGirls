@@ -133,6 +133,11 @@ var colliders : Array[CollisionShape2D]
 func _ready():
 	await fully_instanciated
 	
+	if GameManager.is_host and player_num == 1:
+		GDSync.set_gdsync_owner(self,GDSync.get_client_id())
+	elif not GameManager.is_host and player_num == 2:
+		GDSync.set_gdsync_owner(self,GDSync.get_client_id())
+
 	name = character_name
 	GameManager.add_player(self)
 	set_hitboxes(player_id)

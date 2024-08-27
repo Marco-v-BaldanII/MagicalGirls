@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt3yecot8i8l3"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_m308w"]
+[ext_resource type="Script" path="res://online_menu.gd" id="1_m308w"]
 [ext_resource type="Script" path="res://Scenes/Stages/dialogues.gd" id="2_6smhs"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_v4qx6"]
 [ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="3_1avyo"]
@@ -10,9 +10,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1901, 135)
 
-[node name="TestMap3" type="Node2D" node_paths=PackedStringArray("player_2")]
+[node name="TestMap3" type="Node2D"]
 script = ExtResource("1_m308w")
-player_2 = NodePath("Ritsu")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("2_v4qx6")

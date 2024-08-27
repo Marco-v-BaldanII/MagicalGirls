@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=7 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
-[ext_resource type="PackedScene" uid="uid://dhe6lj8x5nk7d" path="res://Scenes/Stages/test_map2.tscn" id="2_sth4x"]
+[ext_resource type="PackedScene" uid="uid://dhe6lj8x5nk7d" path="res://Scenes/Stages/Online_Menu.tscn" id="2_sth4x"]
+[ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_xooqk"]
 [ext_resource type="AudioStream" uid="uid://4rr7p1ang0k" path="res://Assets/SFX/UI/SelectCharacter.wav" id="3_gyvyi"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 
@@ -19,7 +20,7 @@ scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_iyl6b")
-current_map = ExtResource("2_sth4x")
+current_map = ExtResource("2_xooqk")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -132,5 +133,8 @@ offset_right = 255.0
 offset_bottom = 815.0
 theme_override_font_sizes/font_size = 120
 text = "Start"
+
+[node name="OnlineMenu" parent="." instance=ExtResource("2_sth4x")]
+position = Vector2(0, -230)
 
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
