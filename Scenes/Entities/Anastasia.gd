@@ -45,7 +45,7 @@ func _ready() -> void:
 	move_dmg["2knife_attack"] = 10
 	move_vulnerable_on_shield["2knife_attack"] = 6
 	
-	GameManager.joined_lobby.connect(sync_AK)
+	sync_AK()
 
 func sync_AK():
 	if GameManager.online and GDSync.is_gdsync_owner(self):
