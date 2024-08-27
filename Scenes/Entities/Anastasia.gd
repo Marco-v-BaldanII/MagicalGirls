@@ -44,7 +44,6 @@ func sync_AK():
 	if GameManager.online and GDSync.is_gdsync_owner(self):
 		for A in AK:
 		
-			
 			GDSync.set_gdsync_owner(A,GDSync.get_client_id())
 			A.sync_broadcast()
 

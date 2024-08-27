@@ -57,7 +57,7 @@ func lobby_creation_failed(lobby_name : String, error : int):
 func lobby_joined(lobby_name : String):
 	print("Succesfully joined lobby "+lobby_name)
 	v_box_container.hide()
-	GameManager.joined_lobby.emit()
+	
 
 func lobby_join_failed(lobby_name : String, error : int):
 	match(error):
@@ -87,10 +87,9 @@ func _on_host_button_button_down():
 		}
 		)
 		GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
+		GameManager.joined_lobby.emit()
 		#i could loop through all it's children and set gdsync owner
 	v_box_container.hide()
-
-@onready var node_instantiator := $NodeInstantiator
 
 
 func _on_join_button_button_down():
@@ -103,7 +102,7 @@ func _on_join_button_button_down():
 func client_joined(client_id : int):
 	if !GDSync.is_host():
 		GDSync.set_gdsync_owner(player_2, client_id)
-
+		GameManager.joined_lobby.emit()
 
 func _on_online_button_button_down() -> void:
 	if not online:
