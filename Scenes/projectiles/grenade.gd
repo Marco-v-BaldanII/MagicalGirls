@@ -74,10 +74,10 @@ func destroy_projectile():
 	await  get_tree().create_timer(0.017).timeout
 	queue_free()
 	
-func _physics_process(delta: float) -> void:
 	
+func _process(delta: float) -> void:
 	alive_time -= delta
-	
+
 	if alive_time < 0:
 		animation_tree["parameters/conditions/explode"] = true
 		GDSync.call_func(change_animation,["explode"])
@@ -86,6 +86,10 @@ func _physics_process(delta: float) -> void:
 		assign_phys_layer(2,5)
 		assign_phys_layer(3,4)
 		
+	
+func _physics_process(delta: float) -> void:
+	
+	alive_time -= delta
 		
 	position.x += speed * delta
 	position.y += speedY * delta
