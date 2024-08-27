@@ -30,6 +30,10 @@ var camera : Camera2D
 var shake_amount : float = 8
 var default_camera_pos : Vector2 = Vector2(0,0)
 
+var character_selection_mode : int = 0
+#0 = LOCAL_2P , 1 = ONLINE_2P , 2 = CPU
+
+	
 
 func add_player(player : Player):
 	players.push_back(player)

@@ -14,6 +14,16 @@ extends Control
 
 @export var current_map : PackedScene 
 
+enum match_mode {
+	
+	LOCAL_2P,
+	ONLINE_2P,
+	CPU,
+	
+}
+
+var mode : match_mode = match_mode.CPU
+
 var move_speed: float = 7000  
 var choose_cooldown: float = 0  
 var choose_cooldown2: float = 0  
@@ -43,6 +53,8 @@ func _ready():
 	target_position = texture_rect.position 
 	real_target_position = positionn.position
 	
+	mode = GameManager.character_selection_mode
+	
 	await GameManager.online_setup
 	
 	reset_indexes()
@@ -68,9 +80,12 @@ func _process(delta: float) -> void:
 			
 	if(choose_cooldown2 >= .3):
 		#Player 2
-		if not GameManager.online:
+		if not GameManager.online and mode == match_mode.LOCAL_2P:
 			input_movement(1)
-		elif  not GameManager.is_host:
+		elif  not GameManager.is_host and mode == match_mode.ONLINE_2P:
+			input_movement(0, true)
+			
+		elif selected_fighter != "" and mode == match_mode.CPU:
 			input_movement(0, true)
 
 
@@ -92,18 +107,22 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			$SelectCharacter.play()
 			move_selection(1,character_id,second_onlineP) 
 			GDSync.call_func(move_selection,[1,character_id,second_onlineP])
-		elif Input.is_joy_button_pressed(character_id, Controls.ui["accept"]):
+		elif is_joy_button_just_pressed("accept",character_id):
 			$MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 	else:
 		if Input.is_joy_button_pressed(character_id, Controls.ui["go_back"]):
 			$MenuSelect.play()
-			
-			if character_id == 0 and not second_onlineP:
-				selected_fighter = ""
+			if mode == match_mode.CPU:
+				if selected_fighter2 != "": selected_fighter2 = ""
+				else: selected_fighter = ""
 			else:
-				selected_fighter2 = ""
+				
+				if character_id == 0 and not second_onlineP:
+					selected_fighter = ""
+				else:
+					selected_fighter2 = ""
 
 func move_selection(offset: int, player : int = 0, second_onlineP : bool = false):
 	
@@ -194,3 +213,26 @@ func start_match():
 			GameManager.p2 = load("res://Scenes/Entities/"+selected_fighter2+".tscn")
 			
 			SceneWrapper.change_scene(current_map)
+
+
+
+var action_state : Dictionary = {
+	"move_left" : false,
+	"move_right" : false,
+	"move_down" : false,
+	"move_up" : false,
+	"w_punch" : false,
+	"s_punch" : false,
+	"w_kick" : false,
+	"s_kick" : false,
+	"accept" : false,
+	"go_back" : false
+}
+
+func is_joy_button_just_pressed(action_name : String, device : int = 0):
+	if action_state[action_name] == false and Input.is_joy_button_pressed(device, Controls.ui[action_name]):
+		action_state[action_name] = true
+		return true
+	if not Input.is_joy_button_pressed(device, Controls.ui[action_name]):
+		action_state[action_name] = false
+	return false
