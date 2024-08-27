@@ -13,9 +13,14 @@ func _ready():
 	p1.global_position = $spawn_p1.global_position
 	p2.global_position = $spawn_p2.global_position
 	
-	p1.oponent = p2; p2.oponent = p1;
-	p1.player_id = 0; p2.player_id = 1
 	p1.player_num = 1; p2.player_num = 2
+	p1.oponent = p2; p2.oponent = p1;
+	
+	if not GameManager.online:
+		p1.player_id = 0; p2.player_id = 1
+	else:
+		p1.player_id = 0; p2.player_id = 0
+
 	
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 

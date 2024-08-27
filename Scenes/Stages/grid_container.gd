@@ -175,11 +175,14 @@ func _select_fighter(player : int = 0, second_onlineP : bool = false):
 
 func _on_start_button_button_down() -> void:
 	if selected_fighter != "" and selected_fighter2 != "":
-		if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter2+".tscn"):
+		
+		start_match()
+		GDSync.call_func(start_match)
+
+func start_match():
+	if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter2+".tscn"):
 			
 			GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
 			GameManager.p2 = load("res://Scenes/Entities/"+selected_fighter2+".tscn")
 			
 			SceneWrapper.change_scene(current_map)
-	
-	pass # Replace with function body.
