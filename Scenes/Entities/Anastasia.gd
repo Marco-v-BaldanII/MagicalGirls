@@ -45,7 +45,7 @@ func sync_AK():
 		for A in AK:
 		
 			GDSync.set_gdsync_owner(A,GDSync.get_client_id())
-			A.sync_broadcast()
+			A.sync_broadcast(GDSync.get_client_id())
 
 func _input(event):
 	if not can_move: return

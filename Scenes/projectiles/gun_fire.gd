@@ -28,10 +28,10 @@ func _ready() -> void:
 
 
 
-func sync_broadcast():
+func sync_broadcast(client_id : int):
 	if GDSync.is_gdsync_owner(self):
 		
-		if GDSync.is_host():
+		if GameManager.is_host:
 			$PropertySynchronizer.broadcast = 	0
 			$PropertySynchronizer3.broadcast = 0
 		else:

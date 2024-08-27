@@ -87,6 +87,7 @@ func _on_host_button_button_down():
 		}
 		)
 		GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
+		GameManager.is_host = true
 		GameManager.joined_lobby.emit()
 		#i could loop through all it's children and set gdsync owner
 	v_box_container.hide()

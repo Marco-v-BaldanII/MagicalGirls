@@ -5,6 +5,8 @@ func _ready() -> void:
 
 signal joined_lobby
 
+var is_host : bool = false
+
 var online : bool:
 	set(value):
 		online = value
