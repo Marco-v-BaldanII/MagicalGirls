@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 
 
 func input_movement(character_id : int, second_onlineP : bool = false):
-	
+	if (character_id == 0 and selected_fighter == "") or (character_id == 1 and selected_fighter2 == ""):
 		if Input.is_joy_button_pressed(character_id, Controls.ui["move_up"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5:
 			$SelectCharacter.play()
 			move_selection(-grid_width,character_id, second_onlineP) 
@@ -96,6 +96,14 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			$MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
+	else:
+		if Input.is_joy_button_pressed(character_id, Controls.ui["go_back"]):
+			$MenuSelect.play()
+			
+			if character_id == 0 and not second_onlineP:
+				selected_fighter = ""
+			else:
+				selected_fighter2 = ""
 
 func move_selection(offset: int, player : int = 0, second_onlineP : bool = false):
 	

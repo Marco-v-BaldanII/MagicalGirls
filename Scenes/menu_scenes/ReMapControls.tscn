@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2p0yqjtabr84"]
 
-[ext_resource type="Script" path="res://Scenes/re_map_controls.gd" id="1_02rww"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/re_map_controls.gd" id="1_02rww"]
 [ext_resource type="PackedScene" uid="uid://bpv7if73lqpnv" path="res://Scenes/input_map_field.tscn" id="1_5t4au"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="2_14xmh"]
+
 
 [node name="ReMapControls" type="CanvasLayer"]
 script = ExtResource("1_02rww")

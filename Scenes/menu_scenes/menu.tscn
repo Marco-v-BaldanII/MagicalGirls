@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://2ri16duvgw33"]
+
+[ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
+[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="2_t6vsj"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/options/local_match_option.gd" id="3_yq44x"]
+
+[sub_resource type="Gradient" id="Gradient_qwghj"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kmppu"]
+gradient = SubResource("Gradient_qwghj")
+
+[node name="menu" type="Node2D"]
+script = ExtResource("1_klk57")
+
+[node name="cursor" type="Sprite2D" parent="."]
+position = Vector2(165, 299)
+texture = ExtResource("2_t6vsj")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 256.0
+offset_top = 256.0
+offset_right = 906.0
+offset_bottom = 976.0
+theme_override_constants/v_separation = 24
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_kmppu")
+
+[node name="Label" type="Label" parent="GridContainer/TextureRect"]
+layout_mode = 0
+offset_top = -7.0
+offset_right = 650.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Arcade"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_kmppu")
+
+[node name="Label" type="Label" parent="GridContainer/TextureRect2"]
+layout_mode = 0
+offset_top = -7.0
+offset_right = 650.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "CPU match"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_kmppu")
+script = ExtResource("3_yq44x")
+
+[node name="Label" type="Label" parent="GridContainer/TextureRect3"]
+layout_mode = 0
+offset_top = -7.0
+offset_right = 650.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Local match"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_kmppu")
+
+[node name="Label" type="Label" parent="GridContainer/TextureRect4"]
+layout_mode = 0
+offset_top = -7.0
+offset_right = 650.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Online"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect5" type="TextureRect" parent="GridContainer"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_kmppu")
+
+[node name="Label" type="Label" parent="GridContainer/TextureRect5"]
+layout_mode = 0
+offset_top = -7.0
+offset_right = 650.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Training Mode
+"
+horizontal_alignment = 1
+vertical_alignment = 1
