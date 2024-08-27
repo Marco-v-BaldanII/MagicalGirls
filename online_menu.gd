@@ -107,6 +107,7 @@ func client_joined(client_id : int):
 	if !GDSync.is_host():
 		#GDSync.set_gdsync_owner(player_2, client_id)
 		GameManager.joined_lobby.emit()
+		GameManager.online_setup.emit()
 
 func _on_online_button_button_down() -> void:
 	if not online:

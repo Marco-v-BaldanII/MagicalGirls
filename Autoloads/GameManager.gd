@@ -4,6 +4,7 @@ func _ready() -> void:
 	GDSync.expose_node(self)
 
 signal joined_lobby
+signal online_setup
 
 var is_host : bool = false
 

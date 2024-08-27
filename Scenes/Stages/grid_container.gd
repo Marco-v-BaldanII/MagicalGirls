@@ -42,7 +42,14 @@ func _ready():
 	texture_rect.position = offscreen_position  
 	target_position = texture_rect.position 
 	real_target_position = positionn.position
+	
+	await GameManager.online_setup
+	
+	reset_indexes()
+	GDSync.call_func(reset_indexes)
 
+func reset_indexes():
+	selected_index = 0; selected_index2 = 0;
 
 func _process(delta: float) -> void:
 	if texture_rect.position != target_position:
@@ -71,24 +78,24 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 	
 		if Input.is_joy_button_pressed(character_id, Controls.ui["move_up"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5:
 			$SelectCharacter.play()
-			move_selection(-grid_width,character_id) 
-			GDSync.call_func(move_selection,[-grid_width,character_id])
+			move_selection(-grid_width,character_id, second_onlineP) 
+			GDSync.call_func(move_selection,[-grid_width,character_id,second_onlineP])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_down"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) > 0.5:
 			$SelectCharacter.play()
-			move_selection(grid_width,character_id)  
-			GDSync.call_func(move_selection,[grid_width,character_id])
+			move_selection(grid_width,character_id,second_onlineP)  
+			GDSync.call_func(move_selection,[grid_width,character_id,second_onlineP])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_left"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) < -0.5:
 			$SelectCharacter.play()
-			move_selection(-1,character_id) 
-			GDSync.call_func(move_selection,[-1,character_id])
+			move_selection(-1,character_id,second_onlineP) 
+			GDSync.call_func(move_selection,[-1,character_id,second_onlineP],)
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_right"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) > 0.5:
 			$SelectCharacter.play()
-			move_selection(1,character_id) 
-			GDSync.call_func(move_selection,[1,character_id])
+			move_selection(1,character_id,second_onlineP) 
+			GDSync.call_func(move_selection,[1,character_id,second_onlineP])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["accept"]):
 			$MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
-			GDSync.call_func(_select_fighter,[character_id])
+			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 
 func move_selection(offset: int, player : int = 0, second_onlineP : bool = false):
 	
@@ -128,7 +135,7 @@ func move_selection(offset: int, player : int = 0, second_onlineP : bool = false
 		selected_index2 = new_index
 	_update_selection(player, second_onlineP)
 	
-	if player == 0: choose_cooldown = 0
+	if player == 0 and not second_onlineP: choose_cooldown = 0
 	else: choose_cooldown2 = 0
 
 func _update_selection(player : int = 0, second_onlineP : bool = false):
