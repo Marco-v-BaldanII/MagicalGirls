@@ -8,8 +8,10 @@ var is_visible : bool:
 			is_visible = value
 			if not is_visible:
 				hide()
+				$Area2D.monitorable = false
 			else:
 				show()
+				$Area2D.monitorable = true
 	
 var power_multiply : float
 
@@ -26,7 +28,8 @@ func _ready() -> void:
 	speed = 1200
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)	
-	$Area2D.monitoring = false
+	#$Area2D.monitoring = false
+	#$Area2D.monitorable = false
 
 
 func sync_broadcast(client_id : int):
@@ -47,11 +50,12 @@ func charge(position : Vector2):
 	
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
-	$Area2D.monitoring = true
+
 	called_shoot(layer, mask, dir, player, startup)
 	GDSync.call_func(called_shoot,[layer, mask, dir, player, startup])
 
 func called_shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
+	
 	if startup != 0:
 		player.add_lag(startup)
 		await get_tree().create_timer(0.01667 * startup).timeout
@@ -60,7 +64,7 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 
 	_layer = layer; _mask = mask
 	set_physics_process(true)
-	$Area2D.set_monitoring(true)
+	#$Area2D.set_monitoring(true)
 	#show()
 	is_visible = true
 	active = true
@@ -95,9 +99,9 @@ func _physics_process(delta: float) -> void:
 		pass
 		
 func deativate():
-	$Area2D.set_collision_layer_value(_layer,false)
-	$Area2D.set_collision_mask_value(_mask,false)
-	
+	#$Area2D.set_collision_layer_value(_layer,false)
+	#$Area2D.set_collision_mask_value(_mask,false)
+	#
 	active = false
 
 	is_visible = false
