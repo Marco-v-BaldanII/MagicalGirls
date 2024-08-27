@@ -1141,6 +1141,7 @@ height = 210.0
 position = Vector2(303, 871)
 collision_layer = 0
 script = ExtResource("1_r7jln")
+character_name = "Ellie"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -46,10 +46,12 @@ func instanciate_star():
 	
 func instanciate_diagonal_star():
 	current_start_projectile = STAR_DIAGONAL.instantiate()
+	get_tree().root.add_child(current_start_projectile)
 	current_start_projectile.speedY = 400
 	current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+	
 	current_start_projectile.global_position = global_position
-	get_tree().root.add_child(current_start_projectile)
+	
 	current_start_projectile = null
 	
 func perform_move():
@@ -162,6 +164,9 @@ func _physics_process(delta: float) -> void:
 			if oponent : current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 			else : current_start_projectile.shoot((player_num-1) + 2, 0 ,direction, self)
 			velocity.x = 0
+			
+			if crouching: 
+				current_start_projectile.position.y += 82
 		
 			current_start_projectile = null
 			

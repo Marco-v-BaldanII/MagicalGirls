@@ -171,6 +171,9 @@ func _process(delta):
 	elif direction == "right" and oponent and oponent.global_position.x > global_position.x:
 		scale.x *= -1
 		direction = "left"
+		
+	if not crouching and animation_tree["parameters/conditions/not_crouch"] == false:
+		animation_tree["parameters/conditions/not_crouch"] = true
 
 func _physics_process(delta):
 	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move:

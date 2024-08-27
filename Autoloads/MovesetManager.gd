@@ -65,13 +65,18 @@ var Anastasia : Dictionary = {
 	"2knife_attack_startup" : 5
 }
 
-var shield : Array[String] = ["crouch","move_right" ,"s_kick"]
+var shield : Array[String] = ["crouch","move_left" ,"s_kick"]
+var shield_left : Array[String] = ["crouch","move_right" ,"s_kick"]
 
 var Ellie : Dictionary = {
 	
-	"book_shield" : shield,
-	"book_shield_lag" : 40,
-	"book_shield_startup" : 20
+	"book_shield_right" : shield,
+	"book_shield_right_lag" : 40,
+	"book_shield_right_startup" : 20,
+	
+	"book_shield_left" : shield_left,
+	"book_shield_left_lag" : 40,
+	"book_shield_left_startup" : 20
 }
 
 var movesets : Dictionary = {
