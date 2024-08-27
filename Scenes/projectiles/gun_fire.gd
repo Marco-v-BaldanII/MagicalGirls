@@ -24,10 +24,11 @@ func _ready() -> void:
 	dmg = 1
 	speed = 1200
 	scale = Vector2(0.2,0.2)
-	set_physics_process(false)
-	
-	await get_tree().create_timer(0.01667).timeout
-	
+	set_physics_process(false)	
+
+
+
+func sync_broadcast():
 	if GDSync.is_gdsync_owner(self):
 		
 		if GDSync.is_host():
@@ -37,8 +38,6 @@ func _ready() -> void:
 			$PropertySynchronizer.broadcast = 	1
 			$PropertySynchronizer3.broadcast = 1
 			
-	pass # Replace with function body.
-
 
 func charge(position : Vector2):
 	#GDSync.call_func(charge,[position])
