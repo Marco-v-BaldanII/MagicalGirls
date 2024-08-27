@@ -171,7 +171,7 @@ func perform_move():
 		
 	elif input_buffer.back().contains("s_kick") and current_start_projectile == null :
 
-		var grenade = instanciate_projectile("res://Scenes/projectiles/grenade.tscn","",Vector2.ZERO ,null , false)
+		var grenade = instanciate_projectile("res://Scenes/projectiles/grenade.tscn","",Vector2.ZERO ,null , false, player_num)
 		current_start_projectile = grenade
 		#var grenade = instanciate_grenade()
 		GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())

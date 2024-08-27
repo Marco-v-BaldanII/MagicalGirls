@@ -11,6 +11,9 @@ var is_host : bool = false
 var p1 : PackedScene
 var p2 : PackedScene
 
+var p1_spawns : Node2D
+var p2_spawns : Node2D
+
 var online : bool:
 	set(value):
 		online = value

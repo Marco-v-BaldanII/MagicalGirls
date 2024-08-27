@@ -27,6 +27,9 @@ func _ready():
 		GDSync.set_gdsync_owner(p2, GDSync.get_client_id())
 	
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
+	
+	#These are basically so that online nodes dont get confused when spawning 2 simoultaneous instance of the same projectile
+	GameManager.p1_spawns = $player1_spawns; GameManager.p2_spawns = $player2_spawns2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

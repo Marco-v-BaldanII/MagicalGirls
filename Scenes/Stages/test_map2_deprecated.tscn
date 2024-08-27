@@ -25,3 +25,7 @@ position = Vector2(200, 794)
 
 [node name="spawn_p2" type="Node2D" parent="."]
 position = Vector2(1718, 794)
+
+[node name="player1_spawns" type="Node2D" parent="."]
+
+[node name="player2_spawns2" type="Node2D" parent="."]

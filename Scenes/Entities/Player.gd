@@ -562,17 +562,21 @@ func online_instantiate(special_scene : PackedScene):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
-func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true):
+func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1):
 
 	var instance = projectile_instanciation(path, p_name, position_offset, my_self , shoot)
 	GDSync.call_func(projectile_instanciation,[path, p_name, position_offset, my_self, shoot])
 	
 	return instance
 	
-func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true):
+func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1):
 	var special_scene = load(path)
 	var instance = special_scene.instantiate()
-	if my_self == null :get_tree().root.add_child(instance)
+	if my_self == null :
+		if spawn == 1:
+			GameManager.p1_spawns.add_child(instance)
+		else:
+			GameManager.p2_spawns.add_child(instance)
 	else: my_self.add_child(instance)
 	instance.global_position = global_position
 	
