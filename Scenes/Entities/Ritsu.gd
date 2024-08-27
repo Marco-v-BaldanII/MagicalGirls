@@ -71,7 +71,7 @@ func perform_move():
 					
 					await lag_finished
 					
-					add_lag(MovesetManager.movesets[name][specials + "_lag"])
+					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
 					#Here will call the animation in the animation tree , which will have it's hitstun
 
 					return

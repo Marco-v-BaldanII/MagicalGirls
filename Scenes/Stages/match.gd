@@ -20,7 +20,11 @@ func _ready():
 		p1.player_id = 0; p2.player_id = 1
 	else:
 		p1.player_id = 0; p2.player_id = 0
-
+	
+	if GameManager.is_host:
+		GDSync.set_gdsync_owner(p1, GDSync.get_client_id())
+	else:
+		GDSync.set_gdsync_owner(p2, GDSync.get_client_id())
 	
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 

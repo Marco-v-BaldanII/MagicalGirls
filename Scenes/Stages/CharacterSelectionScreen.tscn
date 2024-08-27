@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
 [ext_resource type="PackedScene" uid="uid://dhe6lj8x5nk7d" path="res://Scenes/Stages/Online_Menu.tscn" id="2_sth4x"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_xooqk"]
-[ext_resource type="AudioStream" uid="uid://4rr7p1ang0k" path="res://Assets/SFX/UI/SelectCharacter.wav" id="3_gyvyi"]
+[ext_resource type="AudioStream" path="res://Assets/SFX/UI/SelectCharacter.wav" id="3_gyvyi"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 
 [node name="CharacterSelectionScreen" type="Control"]
