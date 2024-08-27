@@ -26,7 +26,7 @@ func _ready() -> void:
 	speed = 1200
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)	
-
+	$Area2D.monitoring = false
 
 
 func sync_broadcast(client_id : int):
@@ -47,7 +47,7 @@ func charge(position : Vector2):
 	
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
-	
+	$Area2D.monitoring = true
 	called_shoot(layer, mask, dir, player, startup)
 	GDSync.call_func(called_shoot,[layer, mask, dir, player, startup])
 
@@ -97,7 +97,7 @@ func _physics_process(delta: float) -> void:
 func deativate():
 	$Area2D.set_collision_layer_value(_layer,false)
 	$Area2D.set_collision_mask_value(_mask,false)
-	$Area2D.set
+	
 	active = false
 
 	is_visible = false

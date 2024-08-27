@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dathjtg8kvqkn"]
+[gd_scene load_steps=6 format=3 uid="uid://b2etg4402kw8c"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_7axgn"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_37hnv"]
