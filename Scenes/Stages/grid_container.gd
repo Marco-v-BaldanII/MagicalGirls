@@ -61,36 +61,32 @@ func _process(delta: float) -> void:
 			
 	if(choose_cooldown2 >= .3):
 		#Player 2
-		if not GameManager.online:
+		if not GameManager.online or not GameManager.is_host:
 			input_movement(1)
-		elif not GameManager.is_host:
-			input_movement(0)
+
 
 func input_movement(character_id : int):
 	
 		if Input.is_joy_button_pressed(character_id, Controls.ui["move_up"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5:
 			$SelectCharacter.play()
-			move_selection(-grid_width,character_id)  
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
+			move_selection(-grid_width,character_id) 
+			GDSync.call_func(move_selection,[-grid_width,character_id])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_down"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) > 0.5:
 			$SelectCharacter.play()
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
 			move_selection(grid_width,character_id)  
+			GDSync.call_func(move_selection,[grid_width,character_id])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_left"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) < -0.5:
 			$SelectCharacter.play()
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
 			move_selection(-1,character_id) 
+			GDSync.call_func(move_selection,[-1,character_id])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["move_right"]) or Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) > 0.5:
 			$SelectCharacter.play()
-			if character_id == 0: choose_cooldown = 0
-			else: choose_cooldown2 = 0
 			move_selection(1,character_id) 
+			GDSync.call_func(move_selection,[1,character_id])
 		elif Input.is_joy_button_pressed(character_id, Controls.ui["accept"]):
 			$MenuSelect.play()
 			_select_fighter(character_id)
+			GDSync.call_func(_select_fighter,[character_id])
 
 func move_selection(offset: int, player : int = 0):
 	var children_count = grid_container.get_child_count()
@@ -128,6 +124,9 @@ func move_selection(offset: int, player : int = 0):
 	else:
 		selected_index2 = new_index
 	_update_selection(player)
+	
+	if player == 0: choose_cooldown = 0
+	else: choose_cooldown2 = 0
 
 func _update_selection(player : int = 0):
 	var actual_player_index : int

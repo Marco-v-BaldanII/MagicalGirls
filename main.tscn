@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://brxdigh48vv4i"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_nujdw"]
+[ext_resource type="Script" path="res://online_menu.gd" id="1_nujdw"]
 [ext_resource type="PackedScene" uid="uid://b8npfm3okr3jq" path="res://player.tscn" id="2_g54d4"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_pa6ve"]
 

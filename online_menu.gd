@@ -1,4 +1,6 @@
 extends Node2D
+class_name OnlineMenu
+
 @onready var canvas_layer = $CanvasLayer
 @onready var v_box_container: VBoxContainer = $CanvasLayer/VBoxContainer
 
@@ -7,26 +9,10 @@ var online : bool:
 		GameManager.online = value
 		online = value
 
-var player : PackedScene = preload("res://player.tscn")
-@export var player_1: Player 
-@export var player_2: Player 
-
 
 func _ready():
 	online = false
 	
-	var p1 : Player = GameManager.p1.instantiate()
-	var p2 : Player = GameManager.p2.instantiate()
-	
-	add_child(p1); add_child(p2);
-	p1.global_position = $spawn_p1.global_position
-	p2.global_position = $spawn_p2.global_position
-	
-	p1.oponent = p2; p2.oponent = p1;
-	p1.player_id = 0; p2.player_id = 1
-	p1.player_num = 1; p2.player_num = 2
-	
-	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 
 	#
 	#$PropertySynchronizer.node_path = p1
@@ -103,7 +89,7 @@ func _on_host_button_button_down():
 			"Game Mode" : "Free For All"
 		}
 		)
-		GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
+		#GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
 		GameManager.is_host = true
 		GameManager.joined_lobby.emit()
 		#i could loop through all it's children and set gdsync owner
@@ -119,7 +105,7 @@ func _on_join_button_button_down():
 
 func client_joined(client_id : int):
 	if !GDSync.is_host():
-		GDSync.set_gdsync_owner(player_2, client_id)
+		#GDSync.set_gdsync_owner(player_2, client_id)
 		GameManager.joined_lobby.emit()
 
 func _on_online_button_button_down() -> void:

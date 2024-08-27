@@ -1,10 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://c50safjv72t6x"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_wqhdr"]
+[ext_resource type="Script" path="res://online_menu.gd" id="1_wqhdr"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_xm6mx"]
 [ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_1mkbp"]
 [ext_resource type="PackedScene" uid="uid://dcnr1ch67xghk" path="res://Scenes/Entities/AIPlayer.tscn" id="4_m6wa3"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="5_0w2pn"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
