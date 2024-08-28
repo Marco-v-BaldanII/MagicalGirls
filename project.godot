@@ -20,7 +20,7 @@ uniqueUsername=false
 
 config/name="I wanna be a Magical Girl!"
 config/description="uwu"
-run/main_scene="res://Scenes/menu_scenes/ReMapControls.tscn"
+run/main_scene="res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -33,7 +33,7 @@ Controls="*res://Autoloads/Controls.gd"
 DebugUi="*res://Autoloads/DebugUI.tscn"
 GameManager="*res://Autoloads/GameManager.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
-InputViewer="*res://Scenes/menu_scenes/Input_Viewer.tscn"
+InputViewer="res://Scenes/menu_scenes/Input_Viewer.tscn"
 Scene_Manager="*res://addons/scene_manager/autoload/scene_manager.tscn"
 SceneWrapper="*res://Autoloads/SceneWrapper.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"

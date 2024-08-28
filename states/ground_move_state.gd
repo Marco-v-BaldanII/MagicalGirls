@@ -22,10 +22,10 @@ func physics_update(delta : float):
 	if  player.lag: 
 		return
 	
-	if (player.is_input_pressed("move_right") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1 or Input.is_action_pressed("move_right"):
+	if (player.is_input_pressed("move_right") and player.ai_player) or player.is_mapped_action_pressed("move_right") or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
 		player.input_direction = 1
 
-	elif (player.is_input_pressed("move_left") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1  or Input.is_action_pressed("move_left"):
+	elif (player.is_input_pressed("move_left") and player.ai_player) or player.is_mapped_action_pressed("move_left") or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1:
 		player.input_direction =  -1
 	else:
 		player.input_direction -= 0.2
@@ -56,13 +56,15 @@ func physics_update(delta : float):
 	#if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
 		#Transitioned.emit(self, "air_move")
 		#
-	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
-	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
+	var joy_x := .0; var joy_y := .0;
+	if player.input_method != 2: #Not using keyboard
+		joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
+		joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 
 	#Transition to crouch
 	
 	
-	if (player.can_move and Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"])) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) or (player.ai_player and player.can_move and player.is_input_pressed("crouch")):
+	if (player.can_move and player.is_mapped_action_pressed("crouch")) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) or (player.ai_player and player.can_move and player.is_input_pressed("crouch")):
 			
 			if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(player)):
 				Transitioned.emit(self, "crouch")

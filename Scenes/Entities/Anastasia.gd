@@ -193,7 +193,7 @@ func _physics_process(delta: float) -> void:
 		super._physics_process(delta)
 		if not GDSync.is_gdsync_owner(self) or lag: return
 		
-		if  Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_punch"]) and not lag:
+		if  is_mapped_action_pressed("s_punch") and not lag:
 			#get_tree().root.add_child(AK[current_shot])
 			var has_shot : bool = false
 			for i in AK.size():
@@ -208,7 +208,7 @@ func _physics_process(delta: float) -> void:
 			
 
 
-		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
+		if current_start_projectile != null and is_mapped_action_pressed("s_kick"):
 			current_start_projectile.charge(global_position)
 			#the fixed update is "charging" the grenade
 

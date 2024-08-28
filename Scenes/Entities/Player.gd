@@ -211,13 +211,35 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func is_joy_button_just_pressed(action_name : String):
-	if action_state[action_name] == false and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]) :
-		action_state[action_name] = true
-		return true
-	if not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]):
-		action_state[action_name] = false
-	return false
+func is_joy_button_just_pressed(action_name : String) -> bool:
+	if input_method != INPUT_METHOD.KEYBOARD:
+		if action_state[action_name] == false and Input.is_joy_button_pressed( input_method, Controls.mapping[player_id][action_name][0]) :
+			action_state[action_name] = true
+			return true
+		if not Input.is_joy_button_pressed(input_method, Controls.mapping[input_method][action_name][0]):
+			action_state[action_name] = false
+		return false
+	else:
+		if action_state[action_name] == false and Input.is_physical_key_pressed(Controls.mapping[player_id][action_name][1]) :
+			action_state[action_name] = true
+			return true
+		if not Input.is_physical_key_pressed(Controls.mapping[player_id][action_name][1]):
+			action_state[action_name] = false
+		return false
+
+
+func is_mapped_action_pressed(action_name : String) -> bool:
+	if input_method != INPUT_METHOD.KEYBOARD:
+		if Input.is_joy_button_pressed( input_method, Controls.mapping[player_id][action_name][0]):
+			return true
+		else:
+			return false
+			
+	else:
+		if Input.is_physical_key_pressed(Controls.mapping[player_id][action_name][1]):
+			return true
+		else:
+			return false
 
 var joy_x : float
 var joy_y : float
@@ -261,7 +283,7 @@ func add_input_to_buffer(input : String):
 		input_buffer.push_back(input)
 		input_made = true
 		
-		InputViewer.add_input(input)
+		#InputViewer.add_input(input)
 
 var can_move :bool:
 	set(value):
@@ -558,7 +580,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		can_move = true
 
 	if anim_name == "crouch" and GDSync.is_gdsync_owner(self):
-		if  (not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["crouch"]) and 
+		if  (not is_mapped_action_pressed("crouch") and 
 		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch") :
 			
 			stand_up()

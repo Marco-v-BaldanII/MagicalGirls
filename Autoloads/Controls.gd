@@ -2,24 +2,24 @@ extends Node
 
 
 var p1 : Dictionary = {
-	"move_left" : 13,
-	"move_right" : 14,
-	"crouch" : 12,
-	"jump" : 11,
-	"w_punch" : 2,
-	"s_punch" : 3,
-	"w_kick" : 0,
-	"s_kick" : 1
+	"move_left" : [13, KEY_A],
+	"move_right" : [14, KEY_D],
+	"crouch" : [12, KEY_S],
+	"jump" : [11, KEY_W],
+	"w_punch" : [2, KEY_J],
+	"s_punch" : [3, KEY_U],
+	"w_kick" : [0, KEY_K],
+	"s_kick" : [1, KEY_I]
 }
 var p2 : Dictionary = {
-	"move_left" : 13,
-	"move_right" : 14,
-	"crouch" : 12,
-	"jump" : 11,
-	"w_punch" : 2,
-	"s_punch" : 3,
-	"w_kick" : 0,
-	"s_kick" : 1
+	"move_left" : [13, KEY_A],
+	"move_right" : [14, KEY_D],
+	"crouch" : [12, KEY_S],
+	"jump" : [11, KEY_W],
+	"w_punch" : [2, KEY_J],
+	"s_punch" : [3, KEY_U],
+	"w_kick" : [0, KEY_K],
+	"s_kick" : [1, KEY_I]
 }
 
 var default : Dictionary = {
@@ -52,3 +52,14 @@ var ui: Dictionary = {
 	"w_kick" : [0, KEY_K],
 	"s_kick" : [1, KEY_I]
 }
+signal changed_controllers
+
+var connected_controllers : int = 0
+
+func _ready() -> void:
+
+	Input.joy_connection_changed.connect(change_controllers)
+	
+func change_controllers(device: int, connected: bool):
+	connected_controllers = Input.get_connected_joypads().size()
+	changed_controllers.emit()

@@ -25,18 +25,21 @@ func enter():
 var air_buffer 
 
 func physics_update(delta : float):
-
 	
-	var joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
-	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
+	var joy_x := .0; var joy_y := .0;
+	
+	if player.input_method != 2 :#Not using keyboard
+		joy_x = Input.get_joy_axis(player.input_method, JOY_AXIS_LEFT_X)
+		joy_y = Input.get_joy_axis(player.input_method, JOY_AXIS_LEFT_Y)
+	
 	if  player.can_move : 
 		if player.fly and not player.is_on_floor() and player.can_move and not player.lag:
 			
-			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or joy_x > 0.1 or player.is_input_pressed("move_right"):
+			if player.is_mapped_action_pressed("move_right") or joy_x > 0.1 :
 				if player.velocity.x < 0:player.velocity.x *= -0.5
 				player.input_direction = 1
 
-			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or joy_x < -0.1 or player.is_input_pressed("move_left"):
+			elif player.is_mapped_action_pressed("move_left") or joy_x < -0.1 :
 				if player.velocity.x > 0:player.velocity.x *= -0.5
 				player.input_direction =  -1
 				
@@ -51,9 +54,9 @@ func physics_update(delta : float):
 			else:
 				player.velocity.y = player.JUMP_VELOCITY*0.47
 
-			if Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or j_x < -0.1 or player.is_input_pressed("move_left"):
+			if player.is_mapped_action_pressed("move_left") or  j_x < -0.1 :
 					player.velocity.x = -player.air_speed
-			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or j_x > 0.1 or player.is_input_pressed("move_right"):
+			elif player.is_mapped_action_pressed("move_right") or j_x > 0.1 :
 					player.velocity.x = player.air_speed
 
 		
@@ -69,7 +72,7 @@ func physics_update(delta : float):
 
 	# Add the gravity.
 	if not player.is_on_floor() :
-		if player.fly and not (Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]) or Input.is_action_pressed("crouch")) and not joy_y > 0.7:
+		if player.fly and not player.is_mapped_action_pressed("crouch") and not joy_y > 0.7:
 
 			if player.velocity.y < 0:
 				player.velocity.y += (player.gravity*0.2) * delta

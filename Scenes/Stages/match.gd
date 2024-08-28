@@ -35,17 +35,31 @@ func _ready():
 	var connected_controllers = Input.get_connected_joypads()
 	var num_connected = connected_controllers.size()
 	
-	match connected_controllers:
-		0: p1.input_method = 3 #Player1 uses keyboard
-		1: p1.input_method = 0; p2.input_method = 3; #Player1 uses controller and p2 uses keyboard
-		2: p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
+	match num_connected:
+		0: 
+			p1.input_method = 2 #Player1 uses keyboard
+		1: 
+			p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
+		2: 
+			p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
 
 
 	
 	#These are basically so that online nodes dont get confused when spawning 2 simoultaneous instance of the same projectile
 	GameManager.p1_spawns = $player1_spawns; GameManager.p2_spawns = $player2_spawns2
 	GameManager.initialized_players.emit(p1 ,p2)
+	
+	Controls.changed_controllers.connect(remap_controllers)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func remap_controllers():
+	match Controls.connected_controllers:
+		0: 
+			p1.input_method = 2 #Player1 uses keyboard
+		1: 
+			p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
+		2: 
+			p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller

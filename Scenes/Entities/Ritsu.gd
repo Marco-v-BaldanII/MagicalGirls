@@ -9,8 +9,9 @@ func _input(event):
 	if not can_move: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
-		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-		joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
+		if input_method != 3: #not using keyboard
+			joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+			joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
 		
 		if is_joy_button_just_pressed("move_left") or (joy_x == -1 and abs(joy_y) < 0.4):
 			add_input_to_buffer("move_left")
@@ -157,7 +158,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
 	if is_on_floor():
-		if current_start_projectile != null and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["w_punch"]):
+		if current_start_projectile != null and is_mapped_action_pressed("w_punch"):
 			current_start_projectile.charge(global_position)
 			pass
 		elif current_start_projectile != null:
