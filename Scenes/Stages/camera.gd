@@ -1,16 +1,16 @@
 extends Camera2D
 
-@export var player1: Node2D
-@export var player2: Node2D
+@onready var player1: Node2D
+@onready var player2: Node2D
 
 @export var horizontal_margin := 500.0 
 @export var camera_speed := 1.0
 
 @export var level_bounds: Rect2 = Rect2(Vector2(), Vector2(2048, 2048)) 
 
-func _ready() -> void:
-	player1 = get_node("Anastasia")
-	player2 = get_node("Anastasia2")
+func _ready():
+	player1 = $"../Anastasia"
+	player2 = $"../Anastasia2"
 
 func _process(delta: float) -> void:
 	if not player1 or not player2:
@@ -24,15 +24,20 @@ func _process(delta: float) -> void:
 	if abs(midpoint_x - global_position.x) > horizontal_margin:
 		target_position.x = midpoint_x
 
-	var new_position_x :float = lerp(global_position.x, target_position.x, camera_speed * delta)
+	var new_position_x: float = lerp(global_position.x, target_position.x, camera_speed * delta)
 
-	var level_min_x :float= level_bounds.position.x + get_viewport().size.x / 2
-	var level_max_x :float= level_bounds.size.x - get_viewport().size.x / 2
+	var level_min_x: float = level_bounds.position.x + get_viewport().size.x / 2
+	var level_max_x: float = level_bounds.position.x + level_bounds.size.x - get_viewport().size.x / 2
 
+	if level_min_x > level_bounds.position.x:
+		level_min_x = level_bounds.position.x
+	if level_max_x < level_bounds.position.x + level_bounds.size.x:
+		level_max_x = level_bounds.position.x + level_bounds.size.x
+	
 	new_position_x = clamp(new_position_x, level_min_x, level_max_x)
 
 	global_position.x = new_position_x
-	
+
 	print("Player1 Position:", player1.global_position)
 	print("Player2 Position:", player2.global_position)
 	print("Midpoint:", midpoint_x)

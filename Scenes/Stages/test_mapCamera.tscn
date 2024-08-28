@@ -15,18 +15,18 @@ script = ExtResource("1_7axgn")
 position = Vector2(960, 541)
 script = ExtResource("4_1ty7x")
 
-[node name="Anastasia" parent="Camera2D" node_paths=PackedStringArray("oponent") instance=ExtResource("3_y2wxc")]
-position = Vector2(-483, 140)
+[node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_y2wxc")]
+position = Vector2(477, 681)
 oponent = NodePath("../Anastasia2")
 
-[node name="Anastasia2" parent="Camera2D" node_paths=PackedStringArray("oponent") instance=ExtResource("3_y2wxc")]
-position = Vector2(552, 155)
+[node name="Anastasia2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_y2wxc")]
+position = Vector2(1512, 696)
 oponent = NodePath("../Anastasia")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("2_37hnv")
 refresh_rate = 60
-node_path = NodePath("../Camera2D/Anastasia2")
+node_path = NodePath("../Anastasia2")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
@@ -35,7 +35,7 @@ interpolation_speed = 60.0
 script = ExtResource("2_37hnv")
 broadcast = 1
 refresh_rate = 60
-node_path = NodePath("../Camera2D/Anastasia")
+node_path = NodePath("../Anastasia")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0

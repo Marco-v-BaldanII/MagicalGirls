@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://e5r8ue0d8n1g"]
+[gd_scene load_steps=10 format=3 uid="uid://e5r8ue0d8n1g"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_dlesn"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_cm7gu"]
 [ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_g6si5"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_qucke"]
+[ext_resource type="Texture2D" uid="uid://dobkyxsqc46jr" path="res://Assets/Backgrounds/japan 3.png" id="5_4thlc"]
+[ext_resource type="Texture2D" uid="uid://d3tp1cunvr3ui" path="res://Assets/Backgrounds/japan 4.png" id="5_yux5p"]
+[ext_resource type="Texture2D" uid="uid://vnd5bdtkaq6h" path="res://Assets/Backgrounds/japan 2.png" id="6_4nadu"]
+[ext_resource type="Texture2D" uid="uid://dq0hyrwlyuo7i" path="res://Assets/Backgrounds/japan 1.png" id="7_jpw6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
@@ -29,11 +33,11 @@ interpolated = true
 interpolation_speed = 60.0
 
 [node name="Anastasia" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_g6si5")]
-position = Vector2(261, 627)
+position = Vector2(1003, 741)
 oponent = NodePath("../Anastasia2")
 
 [node name="Anastasia2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_g6si5")]
-position = Vector2(995, 631)
+position = Vector2(1737, 745)
 oponent = NodePath("../Anastasia")
 
 [node name="Floor" type="StaticBody2D" parent="."]
@@ -41,6 +45,14 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(968, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
+position = Vector2(3, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
+position = Vector2(1939, 1013)
 shape = SubResource("RectangleShape2D_2rhgy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -71,6 +83,54 @@ offset_bottom = 313.0
 scale = Vector2(2.52, 2.52)
 theme_override_font_sizes/font_size = 18
 text = "Online"
+
+[node name="Background" type="Node" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+
+[node name="Background" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+position = Vector2(22, -45.52)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("5_yux5p")
+
+[node name="City" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+position = Vector2(22, -45.52)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/City"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("5_4thlc")
+
+[node name="Foliage" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+position = Vector2(22, -43)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Foliage"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("6_4nadu")
+
+[node name="Ground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+position = Vector2(33, -46)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Ground"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("7_jpw6o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 541)
