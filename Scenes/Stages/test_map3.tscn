@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://e5r8ue0d8n1g"]
+[gd_scene load_steps=11 format=3 uid="uid://e5r8ue0d8n1g"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_dlesn"]
+[ext_resource type="Script" path="res://Scenes/Stages/center_pos.gd" id="2_7fe1t"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_cm7gu"]
 [ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_g6si5"]
-[ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_qucke"]
+[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="3_jnvgd"]
 [ext_resource type="Texture2D" uid="uid://dobkyxsqc46jr" path="res://Assets/Backgrounds/japan 3.png" id="5_4thlc"]
 [ext_resource type="Texture2D" uid="uid://d3tp1cunvr3ui" path="res://Assets/Backgrounds/japan 4.png" id="5_yux5p"]
 [ext_resource type="Texture2D" uid="uid://vnd5bdtkaq6h" path="res://Assets/Backgrounds/japan 2.png" id="6_4nadu"]
@@ -14,6 +15,18 @@ size = Vector2(1936, 135)
 
 [node name="TestMap2" type="Node2D"]
 script = ExtResource("1_dlesn")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1737, 745)
+script = ExtResource("2_7fe1t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("3_jnvgd")
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+drag_horizontal_enabled = true
+drag_left_margin = 0.3
+drag_right_margin = 0.3
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("2_cm7gu")
@@ -38,6 +51,7 @@ oponent = NodePath("../Anastasia2")
 
 [node name="Anastasia2" parent="." node_paths=PackedStringArray("oponent") instance=ExtResource("3_g6si5")]
 position = Vector2(1737, 745)
+player_id = 1
 oponent = NodePath("../Anastasia")
 
 [node name="Floor" type="StaticBody2D" parent="."]
@@ -131,10 +145,6 @@ z_index = -10
 position = Vector2(937, 531)
 scale = Vector2(0.6, 0.461)
 texture = ExtResource("7_jpw6o")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 541)
-script = ExtResource("4_qucke")
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]

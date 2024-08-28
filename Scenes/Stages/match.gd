@@ -1,7 +1,11 @@
 extends Node2D
+class_name Match
 
 var p1 : Player
 var p2 : Player
+
+@onready var camera: CharacterBody2D = $Camera
+
 
 func _ready():
 	
@@ -24,7 +28,7 @@ func _ready():
 		GDSync.set_gdsync_owner(p1, GDSync.get_client_id())
 	else:
 		GDSync.set_gdsync_owner(p2, GDSync.get_client_id())
-	
+	p1.match_setting = self; p2.match_setting = self;
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 	
 	#These are basically so that online nodes dont get confused when spawning 2 simoultaneous instance of the same projectile

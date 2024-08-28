@@ -4,7 +4,7 @@ extends Camera2D
 @onready var player2: Node2D
 
 @export var horizontal_margin := 500.0 
-@export var camera_speed := 1.0
+@export var camera_speed := 300
 
 @export var level_bounds: Rect2 = Rect2(Vector2(), Vector2(2048, 2048)) 
 
@@ -23,9 +23,11 @@ func _process(delta: float) -> void:
 	var midpoint_x := (player1.global_position.x + player2.global_position.x) / 2.0
 
 	var target_position := global_position
-
-	if abs(midpoint_x - global_position.x) > horizontal_margin:
+	#if abs(player1.global_position.x - player2.global_position.x) > 1800:
+	if abs(midpoint_x - global_position.x) > get_viewport().size.x * 0.08:
 		target_position.x = midpoint_x
+			
+	#target_position.x = midpoint_x
 
 	var new_position_x: float = lerp(global_position.x, target_position.x, camera_speed * delta)
 
@@ -38,9 +40,12 @@ func _process(delta: float) -> void:
 		level_max_x = level_bounds.position.x + level_bounds.size.x
 	
 	new_position_x = clamp(new_position_x, level_min_x, level_max_x)
+	
+	global_position.x = move_toward(global_position.x, target_position.x ,delta * camera_speed)
+	
 
-	global_position.x = new_position_x
-#
+	#global_position.x = new_position_x
+##
 	#print("Player1 Position:", player1.global_position)
 	#print("Player2 Position:", player2.global_position)
 	#print("Midpoint:", midpoint_x)

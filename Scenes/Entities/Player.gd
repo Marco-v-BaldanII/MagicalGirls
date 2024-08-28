@@ -7,6 +7,7 @@ class_name Player
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
 
+var match_setting : Match
 
 var ai_player : bool = false
 
@@ -182,14 +183,24 @@ func _physics_process(delta):
 				crouching = false
 				
 				
-	#Prevent moving outside the screen
-	#if oponent and abs((global_position.x + velocity.x) - oponent.global_position.x) > DisplayServer.screen_get_size().x + 60:
-		#velocity.x = 0
-	#if velocity.x != 0:
-		#var mod = velocity.x 
-				#
-		#if oponent and abs((global_position.x + mod) - oponent.global_position.x) > DisplayServer.screen_get_size().x -200:
-			#velocity.x = 0
+	
+	var distance_to_cam : int = abs(global_position.x - match_setting.camera.center_pos)
+	var distance_to_rival : int = abs(global_position.x - oponent.global_position.x)
+	#var t = get_viewport().size.x
+	#var d = DisplayServer.screen_get_size().x
+	if distance_to_cam > DisplayServer.screen_get_size().x * 0.35 and velocity.x != 0:
+		#moving frontwards
+		if (direction == "left" and velocity.x > 0) or (direction == "right" and velocity.x < 0):
+			#if far away from rival
+			if distance_to_rival > DisplayServer.screen_get_size().x * 0.3:
+				match_setting.camera.velocity.x = velocity.x*0.6
+		
+		#moving backwards
+		elif velocity.x != 0 and distance_to_rival < DisplayServer.screen_get_size().x * 0.95:
+			
+			match_setting.camera.velocity.x = velocity.x*0.6
+
+
 	move_and_slide()
 
 func is_joy_button_just_pressed(action_name : String):
