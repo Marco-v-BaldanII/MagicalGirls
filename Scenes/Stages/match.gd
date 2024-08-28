@@ -1,13 +1,12 @@
 extends Node2D
 
-@export var player_1: Player 
-@export var player_2: Player 
-
+var p1 : Player
+var p2 : Player
 
 func _ready():
 	
-	var p1 : Player = GameManager.p1.instantiate()
-	var p2 : Player = GameManager.p2.instantiate()
+	p1 = GameManager.p1.instantiate()
+	p2  = GameManager.p2.instantiate()
 	
 	add_child(p1); add_child(p2);
 	p1.global_position = $spawn_p1.global_position
@@ -30,6 +29,7 @@ func _ready():
 	
 	#These are basically so that online nodes dont get confused when spawning 2 simoultaneous instance of the same projectile
 	GameManager.p1_spawns = $player1_spawns; GameManager.p2_spawns = $player2_spawns2
+	GameManager.initialized_players.emit(p1 ,p2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

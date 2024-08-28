@@ -43,7 +43,7 @@ func physics_update(delta : float):
 			player.velocity.x = player.input_direction * (player.SPEED*0.55)
 
 			player.moving_backwards = true
-	
+			
 	elif player.is_on_floor():
 		player.jump_lag -= delta
 		player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)

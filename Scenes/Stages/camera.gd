@@ -9,12 +9,15 @@ extends Camera2D
 @export var level_bounds: Rect2 = Rect2(Vector2(), Vector2(2048, 2048)) 
 
 func _ready():
-	player1 = $"../Anastasia"
-	player2 = $"../Anastasia2"
+
+	GameManager.initialized_players.connect(init)
+	
+func init(p1 : Player , p2: Player):
+	player1 = p1; player2 = p2;
 
 func _process(delta: float) -> void:
 	if not player1 or not player2:
-		print("One or both players are not assigned!")
+		#print("One or both players are not assigned!")
 		return 
 
 	var midpoint_x := (player1.global_position.x + player2.global_position.x) / 2.0
@@ -37,9 +40,9 @@ func _process(delta: float) -> void:
 	new_position_x = clamp(new_position_x, level_min_x, level_max_x)
 
 	global_position.x = new_position_x
-
-	print("Player1 Position:", player1.global_position)
-	print("Player2 Position:", player2.global_position)
-	print("Midpoint:", midpoint_x)
-	print("Target Position:", target_position)
-	print("New Camera Position:", global_position)
+#
+	#print("Player1 Position:", player1.global_position)
+	#print("Player2 Position:", player2.global_position)
+	#print("Midpoint:", midpoint_x)
+	#print("Target Position:", target_position)
+	#print("New Camera Position:", global_position)

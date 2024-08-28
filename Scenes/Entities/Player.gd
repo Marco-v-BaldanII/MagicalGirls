@@ -174,11 +174,22 @@ func _process(delta):
 		
 	if not crouching and animation_tree["parameters/conditions/not_crouch"] == false:
 		animation_tree["parameters/conditions/not_crouch"] = true
+		
 
 func _physics_process(delta):
 	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move:
 				can_move = true
 				crouching = false
+				
+				
+	#Prevent moving outside the screen
+	#if oponent and abs((global_position.x + velocity.x) - oponent.global_position.x) > DisplayServer.screen_get_size().x + 60:
+		#velocity.x = 0
+	#if velocity.x != 0:
+		#var mod = velocity.x 
+				#
+		#if oponent and abs((global_position.x + mod) - oponent.global_position.x) > DisplayServer.screen_get_size().x -200:
+			#velocity.x = 0
 	move_and_slide()
 
 func is_joy_button_just_pressed(action_name : String):

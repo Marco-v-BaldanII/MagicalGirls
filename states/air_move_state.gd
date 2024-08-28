@@ -40,7 +40,9 @@ func physics_update(delta : float):
 				if player.velocity.x > 0:player.velocity.x *= -0.5
 				player.input_direction =  -1
 				
+
 			player.velocity.x += (player.FLY_SPEED * player.input_direction)/100
+
 		
 		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0 and not player.lag:
 			player.jump_lag = 100
@@ -53,6 +55,7 @@ func physics_update(delta : float):
 					player.velocity.x = -player.air_speed
 			elif Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or j_x > 0.1 or player.is_input_pressed("move_right"):
 					player.velocity.x = player.air_speed
+
 		
 		#LAND	
 		elif player.is_on_floor() and not player.grounded:
