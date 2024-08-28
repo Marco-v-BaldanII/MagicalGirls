@@ -69,7 +69,7 @@ func physics_update(delta : float):
 
 	# Add the gravity.
 	if not player.is_on_floor() :
-		if player.fly and not Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]) and not joy_y > 0.7:
+		if player.fly and not (Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["crouch"]) or Input.is_action_pressed("crouch")) and not joy_y > 0.7:
 
 			if player.velocity.y < 0:
 				player.velocity.y += (player.gravity*0.2) * delta

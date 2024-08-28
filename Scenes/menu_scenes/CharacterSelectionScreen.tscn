@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=11 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_xooqk"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/controler_menu.gd" id="7_5016i"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="7_hiedg"]
+[ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
+[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 
 [node name="CharacterSelectionScreen" type="Control"]
 layout_mode = 3
@@ -137,4 +141,39 @@ text = "Start"
 [node name="OnlineMenu" parent="." instance=ExtResource("2_sth4x")]
 position = Vector2(0, -230)
 
+[node name="cursor" type="Sprite2D" parent="."]
+position = Vector2(-926.667, -522.667)
+texture = ExtResource("9_n26ix")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = -1502.0
+offset_top = -579.0
+offset_right = -845.0
+offset_bottom = 7.0
+script = ExtResource("7_hiedg")
+cursor_offset = 16
+_is_active = false
+num_of_options_fit = 5
+scroll_offset = 120
+
+[node name="ControlerMenu1" type="GridContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(500, 1000)
+layout_mode = 2
+theme_override_constants/v_separation = 20
+script = ExtResource("7_5016i")
+
+[node name="Controler_Option" parent="ScrollContainer/ControlerMenu1" instance=ExtResource("8_ll86b")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -1547.0
+offset_top = -863.0
+offset_right = -1164.0
+offset_bottom = -706.0
+theme_override_font_sizes/font_size = 60
+text = "Change Control Scheme"
+
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="Button" to="ScrollContainer" method="_on_button_button_down"]

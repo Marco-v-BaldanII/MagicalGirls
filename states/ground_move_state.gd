@@ -22,10 +22,10 @@ func physics_update(delta : float):
 	if  player.lag: 
 		return
 	
-	if (player.is_input_pressed("move_right") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
+	if (player.is_input_pressed("move_right") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_right"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1 or Input.is_action_pressed("move_right"):
 		player.input_direction = 1
 
-	elif (player.is_input_pressed("move_left") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1:
+	elif (player.is_input_pressed("move_left") and player.ai_player) or Input.is_joy_button_pressed(player.player_id, Controls.mapping[player.player_id]["move_left"]) or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1  or Input.is_action_pressed("move_left"):
 		player.input_direction =  -1
 	else:
 		player.input_direction -= 0.2

@@ -1,11 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2p0yqjtabr84"]
+[gd_scene load_steps=6 format=3 uid="uid://b2p0yqjtabr84"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/re_map_controls.gd" id="1_02rww"]
 [ext_resource type="PackedScene" uid="uid://bpv7if73lqpnv" path="res://Scenes/input_map_field.tscn" id="1_5t4au"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="2_14xmh"]
 
+[sub_resource type="Gradient" id="Gradient_hknml"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aub08"]
+gradient = SubResource("Gradient_hknml")
+
 [node name="ReMapControls" type="CanvasLayer"]
 script = ExtResource("1_02rww")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 666.0
+offset_top = 728.0
+offset_right = 1270.0
+offset_bottom = 784.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "                      Insert Control Tag"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 clip_contents = true
@@ -106,5 +120,14 @@ offset_right = 1164.0
 offset_bottom = 715.0
 theme_override_font_sizes/font_size = 50
 text = "Done"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_right = 494.0
+offset_bottom = 618.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_aub08")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

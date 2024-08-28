@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ControlSource" load_steps=2 format=3 uid="uid://26qwd10yhd1g"]
+
+[ext_resource type="Script" path="res://Resources+/ControlResource.gd" id="1_8lfvk"]
+
+[resource]
+script = ExtResource("1_8lfvk")
+Controls = {
+"crouch": 12,
+"jump": 11,
+"move_left": 13,
+"move_right": 14,
+"s_kick": 1,
+"s_punch": 3,
+"w_kick": 0,
+"w_punch": 2
+}

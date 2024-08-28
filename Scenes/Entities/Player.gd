@@ -82,6 +82,14 @@ var action_state : Dictionary = {
 	"s_kick" : false
 }
 
+enum INPUT_METHOD{
+	CONTROLLER_1,
+	CONTROLLER_2,
+	KEYBOARD
+}
+
+var input_method : INPUT_METHOD = INPUT_METHOD.KEYBOARD
+
 func is_input_pressed(input : String) -> bool:
 	return action_state[input]
 
@@ -133,7 +141,7 @@ var colliders : Array[CollisionShape2D]
 
 func _ready():
 	await fully_instanciated
-	
+	can_move = true
 	if GameManager.is_host and player_num == 1:
 		GDSync.set_gdsync_owner(self,GDSync.get_client_id())
 	elif not GameManager.is_host and player_num == 2:
@@ -178,7 +186,7 @@ func _process(delta):
 		
 
 func _physics_process(delta):
-	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move:
+	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move and animation_player.current_animation == "idle":
 				can_move = true
 				crouching = false
 				
@@ -204,7 +212,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func is_joy_button_just_pressed(action_name : String):
-	if action_state[action_name] == false and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]):
+	if action_state[action_name] == false and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]) :
 		action_state[action_name] = true
 		return true
 	if not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id][action_name]):
@@ -255,7 +263,9 @@ func add_input_to_buffer(input : String):
 		
 		InputViewer.add_input(input)
 
-var can_move :bool = true
+var can_move :bool:
+	set(value):
+		can_move = value
 	
 func perform_move():
 	for specials in moveset:

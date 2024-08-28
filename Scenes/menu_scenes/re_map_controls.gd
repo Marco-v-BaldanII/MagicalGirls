@@ -4,6 +4,7 @@ extends CanvasLayer
 
 var input_boxes : Array
 @onready var button: Button = $Button
+@onready var text_edit: TextEdit = $TextEdit
 
 var index : int = 0
 
@@ -22,16 +23,20 @@ var action_state : Dictionary = {
 	"go_back" : false
 }
 
+@onready var current_controls : ControlSource = ControlSource.new()
+
 func is_joy_button_just_pressed(action_name : String):
-	if action_state[action_name] == false and Input.is_joy_button_pressed(0, Controls.ui[action_name]):
+	if action_state[action_name] == false and Input.is_joy_button_pressed(0, Controls.ui[action_name][0]) or Input.is_physical_key_pressed(Controls.ui[action_name][1]):
 		action_state[action_name] = true
 		return true
-	if not Input.is_joy_button_pressed(0, Controls.ui[action_name]):
+	if not Input.is_joy_button_pressed(0, Controls.ui[action_name][0]) and not Input.is_physical_key_pressed(Controls.ui[action_name][1]) :
 		action_state[action_name] = false
 	return false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#current_controls = ControlSource.new()
+	
 	for child in grid_container.get_children():
 		if child is InputMapBox:
 			input_boxes.push_back(child)
@@ -52,7 +57,7 @@ func _input(event: InputEvent) -> void:
 		elif is_joy_button_just_pressed("move_down"):
 			index += 1
 		
-		cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y+  40
+		cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y +  40
 		
 		if is_joy_button_just_pressed("accept"):
 			if input_boxes[index % input_boxes.size()] is not Button:
@@ -68,7 +73,7 @@ func _input(event: InputEvent) -> void:
 			reMap("w_punch")
 		elif is_joy_button_just_pressed("s_kick"):
 			reMap("s_kick")
-		elif is_joy_button_just_pressed("w_kick"):
+		#elif is_joy_button_just_pressed("w_kick"):
 			reMap("w_kick")
 			pass
 
@@ -99,6 +104,20 @@ func reMap(action : String):
 		input_boxes[index % input_boxes.size()].modulate = Color.WHITE
 
 func _on_button_button_down() -> void:
-	SceneWrapper.change_scene(load("res://Scenes/Stages/test_map.tscn"))
+	#SceneWrapper.change_scene(load("res://Scenes/Stages/test_map.tscn"))
+	
+		# Define the path where you want to save the resource
+	current_controls.my_name = text_edit.text
+	
+	var save_path = "res://ControlSchemes/" + text_edit.text + ".tres"
+
+	# Save the resource to the specified path
+	var error = ResourceSaver.save( current_controls ,save_path)
+
+	# Check if the save was successful
+	if error == OK:
+		print("Resource saved successfully!")
+	else:
+		print("Failed to save resource with error code: ", error)
 	
 	pass # Replace with function body.
