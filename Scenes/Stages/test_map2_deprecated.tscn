@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cf18ypury8705"]
+[gd_scene load_steps=18 format=3 uid="uid://cf18ypury8705"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/match.gd" id="1_to0e0"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="2_3djuc"]
@@ -8,12 +8,22 @@
 [ext_resource type="Texture2D" uid="uid://dobkyxsqc46jr" path="res://Assets/Backgrounds/japan 3.png" id="4_ybu1r"]
 [ext_resource type="Texture2D" uid="uid://vnd5bdtkaq6h" path="res://Assets/Backgrounds/japan 2.png" id="5_dogpq"]
 [ext_resource type="Texture2D" uid="uid://dq0hyrwlyuo7i" path="res://Assets/Backgrounds/japan 1.png" id="6_ghpru"]
+[ext_resource type="Texture2D" uid="uid://cgdlqd1pu3qni" path="res://Assets/Backgrounds/rusia 5.png" id="8_d8e1s"]
+[ext_resource type="Texture2D" uid="uid://cgnlqtksv6spe" path="res://Assets/Backgrounds/dotdos.png" id="8_t155g"]
+[ext_resource type="Texture2D" uid="uid://r02g0pmf3xs2" path="res://Assets/Backgrounds/rusia 4.png" id="9_b1qn1"]
+[ext_resource type="Texture2D" uid="uid://ycw6c503gggs" path="res://Assets/Backgrounds/rusia 3.png" id="10_830t5"]
+[ext_resource type="Texture2D" uid="uid://crpk8uxvaur8q" path="res://Assets/Backgrounds/rusia 2.png" id="11_d77tp"]
+[ext_resource type="Texture2D" uid="uid://d3sqtq6485t4l" path="res://Assets/Backgrounds/rusia 1.png" id="12_bjw3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj0l7"]
+size = Vector2(116, 1024)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(3516, 135)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj0l7"]
-size = Vector2(116, 1024)
+[sub_resource type="Gradient" id="Gradient_2m5qm"]
+offsets = PackedFloat32Array(0.0347826, 0.504348, 1)
+colors = PackedColorArray(1, 1, 1, 0.486275, 1, 1, 1, 0.32549, 1, 1, 1, 0)
 
 [node name="TestMap2" type="Node2D"]
 script = ExtResource("1_to0e0")
@@ -21,8 +31,24 @@ script = ExtResource("1_to0e0")
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_mask = 0
 
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-607, 509)
+shape = SubResource("RectangleShape2D_cj0l7")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Floor"]
+position = Vector2(2781, 509)
+shape = SubResource("RectangleShape2D_cj0l7")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(1091, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-665, 1013)
+shape = SubResource("RectangleShape2D_2rhgy")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
+position = Vector2(2850, 1013)
 shape = SubResource("RectangleShape2D_2rhgy")
 
 [node name="Camera" type="CharacterBody2D" parent="."]
@@ -60,51 +86,126 @@ z_index = 2
 
 [node name="Background" type="Node" parent="."]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+[node name="RitsuBG" type="ParallaxBackground" parent="Background"]
+visible = false
 
-[node name="Background" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+[node name="Background" type="ParallaxLayer" parent="Background/RitsuBG"]
 position = Vector2(22, -45.52)
 scale = Vector2(1.04, 1.2)
 motion_scale = Vector2(0.1, 0.1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/RitsuBG/Background"]
 z_index = -10
 position = Vector2(937, 531)
 scale = Vector2(0.6, 0.461)
 texture = ExtResource("3_xdl0d")
 
-[node name="City" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+[node name="City" type="ParallaxLayer" parent="Background/RitsuBG"]
 position = Vector2(22, -45.52)
 scale = Vector2(1.04, 1.2)
 motion_scale = Vector2(0.1, 0.1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/City"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/RitsuBG/City"]
 z_index = -10
 position = Vector2(937, 531)
 scale = Vector2(0.6, 0.461)
 texture = ExtResource("4_ybu1r")
 
-[node name="Foliage" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+[node name="Foliage" type="ParallaxLayer" parent="Background/RitsuBG"]
 position = Vector2(22, -43)
 scale = Vector2(1.04, 1.2)
 motion_scale = Vector2(0.15, 0.15)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Foliage"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/RitsuBG/Foliage"]
 z_index = -10
 position = Vector2(937, 531)
 scale = Vector2(0.6, 0.461)
 texture = ExtResource("5_dogpq")
 
-[node name="Ground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+[node name="Ground" type="ParallaxLayer" parent="Background/RitsuBG"]
 position = Vector2(33, -46)
 scale = Vector2(1.04, 1.2)
 motion_scale = Vector2(0.2, 0.2)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Ground"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/RitsuBG/Ground"]
 z_index = -10
 position = Vector2(937, 531)
 scale = Vector2(0.6, 0.461)
 texture = ExtResource("6_ghpru")
+
+[node name="AnastasiaBG" type="ParallaxBackground" parent="Background"]
+
+[node name="snow" type="CPUParticles2D" parent="Background/AnastasiaBG"]
+position = Vector2(954, -20)
+amount = 60
+lifetime = 5.0
+texture = ExtResource("8_t155g")
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+gravity = Vector2(0, 200)
+linear_accel_max = 4.9
+radial_accel_min = -1.0
+radial_accel_max = -1.0
+damping_min = 5.0
+damping_max = 5.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color_ramp = SubResource("Gradient_2m5qm")
+
+[node name="Background" type="ParallaxLayer" parent="Background/AnastasiaBG"]
+position = Vector2(22, -45.52)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/AnastasiaBG/Background"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("8_d8e1s")
+
+[node name="City" type="ParallaxLayer" parent="Background/AnastasiaBG"]
+position = Vector2(22, -45.52)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/AnastasiaBG/City"]
+z_index = -9
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("9_b1qn1")
+
+[node name="Foliage" type="ParallaxLayer" parent="Background/AnastasiaBG"]
+position = Vector2(22, -43)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/AnastasiaBG/Foliage"]
+z_index = -8
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("10_830t5")
+
+[node name="Ground" type="ParallaxLayer" parent="Background/AnastasiaBG"]
+position = Vector2(33, -46)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.16, 0.16)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/AnastasiaBG/Ground"]
+z_index = -7
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("11_d77tp")
+
+[node name="Ground2" type="ParallaxLayer" parent="Background/AnastasiaBG"]
+position = Vector2(33, -46)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/AnastasiaBG/Ground2"]
+z_index = -6
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("12_bjw3k")
 
 [node name="Camera2D2" type="Camera2D" parent="."]
 position = Vector2(960, 541)
