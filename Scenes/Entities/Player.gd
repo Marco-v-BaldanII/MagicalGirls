@@ -183,14 +183,22 @@ func _process(delta):
 		
 	if not crouching and animation_tree["parameters/conditions/not_crouch"] == false:
 		animation_tree["parameters/conditions/not_crouch"] = true
-		
+	if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
+		can_move = true
 
 func _physics_process(delta):
-	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move and animation_player.current_animation == "idle":
+	#Safety conditions to prevent can't move softlock
+	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move and animation_player.current_animation == "idle_anim":
 				can_move = true
 				crouching = false
 				
-				
+	if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
+		can_move = true
+	
+	var s = animation_player.current_animation
+	
+	#if not crouching and animation_tree["parameters/conditions/not_crouch"] == true and (animation_player.current_animation == "crouching" or animation_player.current_animation == ""):
+		#animation_player.play("idle_anim")
 	
 	var distance_to_cam : int = abs(global_position.x - match_setting.camera.center_pos)
 	var distance_to_rival : int = abs(global_position.x - oponent.global_position.x)

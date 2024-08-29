@@ -33,6 +33,8 @@ func instanciate_projectile_online(path : String, p_name : String, position_offs
 		else: instance.shoot((player_num-1) + 2, 0 , direction, self, startup)
 
 func _input(event):
+
+	
 	if not can_move: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
@@ -82,7 +84,17 @@ func instanciate_fire():
 	
 	return projectile
 	
-var charging_laser : bool = false
+var charging_laser : bool:
+	set(value):
+		charging_laser = value
+		
+		if current_start_projectile is Book_Laser:
+			if value == false and current_start_projectile:
+				current_start_projectile.deactivate()
+			elif value == true and current_start_projectile.fully_charged:
+				shoot_laser()
+
+
 var started_charge : bool = false
 	
 func perform_move():
@@ -156,10 +168,12 @@ func _physics_process(delta: float) -> void:
 	
 	if not GDSync.is_gdsync_owner(self) or lag: return
 	
-	if is_on_floor() and charging_laser:
+	if is_on_floor() and charging_laser and not (is_mapped_action_pressed("move_right") or is_mapped_action_pressed("move_left")):
 		if current_start_projectile != null and charging_laser:
 			current_start_projectile.charge(global_position)
 			pass
+	elif charging_laser:
+		charging_laser = false
 	if is_on_floor() and not crouching:
 		
 		book_laser()
@@ -183,7 +197,7 @@ func _physics_process(delta: float) -> void:
 
 
 func book_laser():
-		if is_mapped_action_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser:
+		if is_mapped_action_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser :
 
 			var star = instanciate_star()
 			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
@@ -199,8 +213,14 @@ func book_laser():
 		elif not charging_laser and not started_charge and is_mapped_action_pressed("s_kick"):
 			charging_laser = false; started_charge = true;
 
-		elif  charging_laser  and is_mapped_action_pressed("s_kick"):
-			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-			charging_laser = false
-			current_start_projectile = null
-			add_lag(10)
+		elif current_start_projectile and charging_laser  and is_mapped_action_pressed("s_kick"):
+			
+			shoot_laser()
+			
+
+func shoot_laser():
+	current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+	
+	current_start_projectile = null
+	charging_laser = false
+	add_lag(10)

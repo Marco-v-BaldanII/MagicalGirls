@@ -7,11 +7,13 @@ var current_frame : int = 0
 
 var power_multiply : float
 
+var fully_charged: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GDSync.expose_node(self)
 	dmg = 4
-
+	area_2d.monitorable = false; area_2d.monitoring = false;
 	power_multiply = dmg/(frame_charge_time/4) #max charge is 3 times stronger
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)
@@ -27,7 +29,8 @@ func charge(position : Vector2):
 		current_frame += 1
 		dmg += power_multiply
 		scale += Vector2(0.005,0.005)
-		
+	elif not current_frame < frame_charge_time:
+		fully_charged = true
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
 	if startup != 0:
@@ -38,6 +41,9 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	
 	GDSync.call_func(assign_phys_layer,[layer,mask])
 	show()
+	
+	area_2d.monitorable = true; area_2d.monitoring = true;
+	
 	set_physics_process(true)
 	assign_phys_layer(layer, mask)
 	my_player = player
@@ -56,3 +62,4 @@ func destroy_projectile():
 	
 func deactivate():
 	hide()
+	area_2d.monitorable = false; area_2d.monitoring = false;
