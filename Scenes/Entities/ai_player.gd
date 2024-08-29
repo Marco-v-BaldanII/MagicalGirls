@@ -71,7 +71,7 @@ func _input(event):
 func on_hit():
 
 	
-	if hit_position == "body" and not blocked and not crouching and velocity.x >  0:
+	if hit_position == "body" and not blocked and not crouching :
 		var action_id : int = randi_range(0,1)
 		if action_id == 0:
 			press_input("crouch",randi_range(40,100))
@@ -88,7 +88,7 @@ func on_hit():
 					3: 
 						press_input("w_kick")
 					4:
-						press_input("crouch")
+						press_input("crouch",30)
 			pass
 	
 	pass
@@ -100,7 +100,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	on_hit()
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	super(anim_name)
+	#super(anim_name)
 	
 	return
 	if anim_name == "crouch":

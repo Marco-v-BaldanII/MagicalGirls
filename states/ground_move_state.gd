@@ -64,15 +64,18 @@ func physics_update(delta : float):
 	#Transition to crouch
 	
 	
-	if (player.can_move and player.is_mapped_action_pressed("crouch")) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) or (player.ai_player and player.can_move and player.is_input_pressed("crouch")):
+	if (player.can_move and player.is_mapped_action_pressed("crouch")) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) :
+			if not player.ai_player:
 			
-			if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(player)):
-				Transitioned.emit(self, "crouch")
-				crouching = true
-				
-			if GameManager.online and GDSync.is_gdsync_owner(player):
-				GDSync.call_func(transition_to_crouch)
-			
+				if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(player)):
+					Transitioned.emit(self, "crouch")
+					crouching = true
+					
+				if GameManager.online and GDSync.is_gdsync_owner(player):
+					GDSync.call_func(transition_to_crouch)
+					
+	if (player.ai_player and player.can_move and player.is_input_pressed("crouch")):
+		Transitioned.emit(self, "crouch")	
 
 
 
