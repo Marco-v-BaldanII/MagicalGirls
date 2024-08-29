@@ -11,7 +11,7 @@ var options : Array;
 var num_options : int = 0
 var current_option 
 
-
+@export var player_id : int
 
 var _index: int = 0
 @export var _is_active : bool = true
@@ -53,7 +53,11 @@ func _ready():
 		current_option = options[0]
 		await get_tree().create_timer(0.2).timeout
 		_change_cursor_pos()
-	
+		
+	Controls.changed_controllers.connect(change_in_controllers)
+	change_in_controllers()
+
+
 func activate():
 	cursor.show()
 	show()
@@ -70,6 +74,11 @@ func deactivate():
 	cursor.hide()
 
 func _input(event):
+		
+		if is_joy_button_just_pressed("start"):
+			if _is_active: deactivate()
+			else: activate()
+		
 
 		if _is_active and options.size() > 0:
 			
@@ -78,7 +87,7 @@ func _input(event):
 					options.remove_at(i)
 					break
 
-			if Input.is_action_just_pressed("crouch") :
+			if is_joy_button_just_pressed("move_down") :
 				_index += 1
 				if _index % options.size() == 0:
 					_index = 0
@@ -91,7 +100,7 @@ func _input(event):
 				await get_tree().create_timer(0.017).timeout
 				_change_cursor_pos()
 					
-			if Input.is_action_just_pressed("jump"):
+			if is_joy_button_just_pressed("move_up"):
 				_index -= 1
 				if _index < 0:
 					_index = num_options-1
@@ -105,14 +114,20 @@ func _input(event):
 				await get_tree().create_timer(0.017).timeout
 				_change_cursor_pos()
 				
-			if Input.is_action_just_pressed("accept") and current_option != null:
+			if is_joy_button_just_pressed("accept") and current_option != null:
 				
 				var control_resource : ControlSource = load("res://ControlSchemes/"+current_option.label.text+".tres")
-				Controls.p1 = control_resource.controls.duplicate()
-				Controls.mapping[0] = Controls.p1
+				if player_id == 0:
+					Controls.p1 = control_resource.controls.duplicate()
+					Controls.mapping[0] = Controls.p1
+				else:
+					Controls.p2 = control_resource.controls.duplicate()
+					Controls.mapping[1] = Controls.p2
 				
 				#current_option.execute_option()
 				option_selected.emit()
+				$"../tag_panel/tag_label".text = current_option.label.text
+				deactivate()
 			
 
 
@@ -150,3 +165,64 @@ func _on_button_button_down() -> void:
 	else:
 		deactivate()
 	pass # Replace with function body.
+
+enum INPUT_METHOD{
+	CONTROLLER_1,
+	CONTROLLER_2,
+	KEYBOARD
+}
+
+var input_method : INPUT_METHOD = INPUT_METHOD.KEYBOARD
+
+var action_state : Dictionary = {
+	"move_left" : false,
+	"move_right" : false,
+	"move_down" : false,
+	"move_up" : false,
+	"accept" : false,
+	"go_back" : false,
+	"start" : false
+
+}
+
+func is_joy_button_just_pressed(action_name : String) -> bool:
+	if input_method != INPUT_METHOD.KEYBOARD:
+		if action_state[action_name] == false and Input.is_joy_button_pressed( input_method, Controls.ui[action_name][0]) :
+			action_state[action_name] = true
+			return true
+		if not Input.is_joy_button_pressed(input_method, Controls.ui[action_name][0]):
+			action_state[action_name] = false
+		return false
+	else:
+		if action_state[action_name] == false and Input.is_physical_key_pressed(Controls.ui[action_name][1]) :
+			action_state[action_name] = true
+			return true
+		if not Input.is_physical_key_pressed(Controls.ui[action_name][1]):
+			action_state[action_name] = false
+		return false
+
+
+func is_mapped_action_pressed(action_name : String) -> bool:
+	if input_method != INPUT_METHOD.KEYBOARD:
+		if Input.is_joy_button_pressed( input_method, Controls.ui[action_name][0]):
+			return true
+		else:
+			return false
+			
+	else:
+		if Input.is_physical_key_pressed(Controls.ui[action_name][1]):
+			return true
+		else:
+			return false
+
+
+func change_in_controllers():
+		match Controls.connected_controllers:
+			0: 
+				if player_id == 0: input_method = 2
+			1: 
+				if player_id == 0: input_method = 0;
+				elif player_id == 1: input_method = 2;
+			2: 
+				if player_id == 0: input_method = 0;
+				elif player_id == 1: input_method = 1

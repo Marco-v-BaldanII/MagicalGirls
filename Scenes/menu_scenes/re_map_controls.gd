@@ -73,7 +73,7 @@ func _input(event: InputEvent) -> void:
 			reMap("w_punch")
 		elif is_joy_button_just_pressed("s_kick"):
 			reMap("s_kick")
-		#elif is_joy_button_just_pressed("w_kick"):
+		elif is_joy_button_just_pressed("w_kick"):
 			reMap("w_kick")
 			pass
 

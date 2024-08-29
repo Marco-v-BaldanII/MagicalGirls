@@ -50,14 +50,15 @@ var ui: Dictionary = {
 	"w_punch" : [2, KEY_J],
 	"s_punch" : [3, KEY_U],
 	"w_kick" : [0, KEY_K],
-	"s_kick" : [1, KEY_I]
+	"s_kick" : [1, KEY_I],
+	"start" : [6,KEY_R]
 }
 signal changed_controllers
 
 var connected_controllers : int = 0
 
 func _ready() -> void:
-
+	connected_controllers = Input.get_connected_joypads().size()
 	Input.joy_connection_changed.connect(change_controllers)
 	
 func change_controllers(device: int, connected: bool):

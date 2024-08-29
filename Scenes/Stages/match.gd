@@ -1,8 +1,8 @@
 extends Node2D
 class_name Match
 
-var p1 
-var p2 
+var p1 : Player
+var p2 : Player 
 
 @onready var camera: CharacterBody2D = $Camera
 
