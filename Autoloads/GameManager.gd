@@ -8,8 +8,8 @@ signal online_setup
 
 var is_host : bool = false
 
-var p1 : PackedScene
-var p2 : PackedScene
+@onready var p1 : PackedScene = preload("res://Scenes/Entities/Larissa.tscn")
+@onready var p2 : PackedScene = preload("res://Scenes/Entities/Ellie Quinn.tscn")
 
 var p1_spawns : Node2D
 var p2_spawns : Node2D

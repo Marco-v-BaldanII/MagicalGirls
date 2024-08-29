@@ -36,8 +36,9 @@ func _input(event):
 	if not can_move: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
-		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-		joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
+		if input_method != 2:
+			joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+			joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
 		
 		if is_joy_button_just_pressed("move_left") or (joy_x == -1 and abs(joy_y) < 0.4):
 			add_input_to_buffer("move_left")
@@ -142,8 +143,8 @@ func perform_move():
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
 	elif  input_buffer.is_empty() == false and input_buffer.back().contains("jump") and is_on_floor() and not crouching:
-				
-			joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+			if input_method != 2:
+				joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 
 			state_machine.on_child_transition(state_machine.current_state, "air_move")
 
@@ -166,7 +167,7 @@ func _physics_process(delta: float) -> void:
 		
 	elif is_on_floor() and crouching:
 		
-		if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]) and current_start_projectile == null:
+		if is_mapped_action_pressed("s_kick") and current_start_projectile == null:
 			var fire_projectile = instanciate_fire()
 			GDSync.call_func(instanciate_fire)
 			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
@@ -182,7 +183,7 @@ func _physics_process(delta: float) -> void:
 
 
 func book_laser():
-		if Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]) and current_start_projectile == null and  is_on_floor() and not charging_laser:
+		if is_mapped_action_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser:
 
 			var star = instanciate_star()
 			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
@@ -190,15 +191,15 @@ func book_laser():
 			charging_laser = false
 			started_charge = true	
 		
-		if not charging_laser and started_charge and not Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
+		if not charging_laser and started_charge and not is_mapped_action_pressed("s_kick"):
 			
 			charging_laser = true
 			started_charge = false
 			
-		elif not charging_laser and not started_charge and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
+		elif not charging_laser and not started_charge and is_mapped_action_pressed("s_kick"):
 			charging_laser = false; started_charge = true;
 
-		elif  charging_laser  and Input.is_joy_button_pressed(player_id, Controls.mapping[player_id]["s_kick"]):
+		elif  charging_laser  and is_mapped_action_pressed("s_kick"):
 			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 			charging_laser = false
 			current_start_projectile = null
