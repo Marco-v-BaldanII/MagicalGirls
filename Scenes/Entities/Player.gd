@@ -729,3 +729,17 @@ func ai_press_input(input : String, frames : float = 1):
 	perform_move()
 	await get_tree().create_timer(0.01667 * frames).timeout
 	action_state[input] = false
+
+func choose_random_special() -> Array[String]:
+							# Choose a random special
+						var current_scpecial : Array[String]
+						input_buffer.clear()
+						
+						var possible_specials : Array[String]
+						
+						for special in moveset:
+							if moveset[special] is Array[String]  and direction != find_special_direction(special):
+								
+								possible_specials.push_back(special)
+								
+						return possible_specials

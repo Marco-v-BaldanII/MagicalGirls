@@ -6,4 +6,7 @@
 [node name="Anastasia ai" instance=ExtResource("1_d8mit")]
 ai_player = true
 
+[node name="AnimationTree" parent="." index="1"]
+parameters/conditions/2knife_attack = false
+
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_8opys")]

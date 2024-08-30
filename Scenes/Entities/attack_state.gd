@@ -51,21 +51,21 @@ func physics_update(delta : float):
 			
 
 func perform_attack():
-	var attack_id = randi_range(0,4)
+	var attack_id = randi_range(0,5)
 	match attack_id:
 		0:
-			attack_input = "s_punch"
+			first_atk_option()
 		1:
-			attack_input = "w_punch"
+			second_atk_option()
 		2:
-			attack_input = "s_kick"
+			third_atk_option()
 		3: 
-			attack_input = "w_kick"
+			fourth_atk_option()
 		4:
-			attack_input = "crouch"
-	if attack_id == 4 :
-		pass
-	else: player.ai_press_input(attack_input)
+			fith_atk_option()
+		5:
+			sixth_atk_option()
+
 	move_performed = true
 
 func move() :
@@ -87,35 +87,27 @@ func move() :
 	match  jump_rand:
 		0:
 			if not player.crouching:  
-				player.ai_press_input("jump"); 
-				var atk_id = randi_range(0,4)
+				player.ai_press_input("jump");
+				var id = randi_range(0,1)
+				if id == 0: player.ai_press_input("move_left")
+				else: player.ai_press_input("move_right")
+				 
+				var atk_id = randi_range(0,5)
 				
 				match atk_id:
 					0:
-						attack_input = "s_punch"
+						first_atk_option()
 					1:
-						attack_input = "w_punch"
+						second_atk_option()
 					2:
-						attack_input = "s_kick"
+						third_atk_option()
 					3: 
-						attack_input = "w_kick"
+						fourth_atk_option()
 					4:
-						# Choose a random special
-						var current_scpecial : Array[String]
-						var used : bool = false
-						player.input_buffer.clear()
-						
-						for special in player.moveset:
-							if player.moveset[special] is Array[String]  and player.direction != player.find_special_direction(special):
-								var use : int = randi_range(0,1)
-								current_scpecial = player.moveset[special]
-								if use == 0:
-									player.input_buffer.append_array(player.moveset[special])
-									player.perform_move()
-									used = true
-									break
-						if not used: 
-							player.input_buffer.append_array(current_scpecial); player.perform_move()
+						fith_atk_option()
+					5:
+						sixth_atk_option()
+
 		1:
 			if not player.crouching : player.ai_press_input("jump")
 			
@@ -127,3 +119,26 @@ func move() :
 			Transitioned.emit(self, "camp")
 	
 	pass
+
+
+func first_atk_option():
+	player.ai_press_input("s_punch")
+	
+func second_atk_option():
+	player.ai_press_input("w_punch")
+	
+func third_atk_option():
+	player.ai_press_input("w_kick")
+	
+func fourth_atk_option():
+	player.ai_press_input("s_kick")
+	
+func fith_atk_option():
+	player.ai_press_input("crouch",70)
+
+func sixth_atk_option():
+	var specials = player.choose_random_special()
+	var special = specials.pick_random()
+	
+	player.input_buffer.append_array(player.moveset[special])
+	player.perform_move()

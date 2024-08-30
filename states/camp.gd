@@ -15,6 +15,8 @@ var current_direction : String = "none"
 @export var retreat_atk : String = "s_kick"
 
 var timer : float = 3.0
+@export var min_projectile_time : float = 0.4
+@export var max_projectile_time : float = 5.0
 
 var shoot_amount : int
 var shot_projectiles : int
@@ -63,10 +65,8 @@ func physics_update(delta : float):
 					player.input_buffer.push_back("move_right")
 
 					if retreating_projectile <= 3: #30percent
-						await get_tree().create_timer(move_timer/120.0).timeout
-						player.ai_press_input("crouch",40)
-						await get_tree().create_timer(0.017).timeout
-						player.ai_press_input(retreat_atk,2)
+						retreating_projectile()
+						
 					elif retreating_projectile <= 4:
 						var not_direction : String =""
 						if player.direction == "right": not_direction = "left"
@@ -88,11 +88,10 @@ func physics_update(delta : float):
 					player.input_buffer.push_back("move_left")
 					
 					if retreating_projectile <= 3:
-						await get_tree().create_timer(move_timer/120.0).timeout
-						player.ai_press_input("crouch",40)
-						await get_tree().create_timer(0.017).timeout
-						player.ai_press_input(retreat_atk,2)
+						retreating_projectile()
+						
 					elif retreating_projectile <= 4:
+						#does the special
 						var not_direction : String =""
 						if player.direction == "right": not_direction = "left"
 						else: not_direction = "right"
@@ -104,7 +103,7 @@ func physics_update(delta : float):
 	
 	if timer <= 0:
 		shoot_projectile()
-		timer = randf_range(0.4,5.0)
+		timer = randf_range(min_projectile_time, max_projectile_time)
 	
 	pass
 
@@ -119,3 +118,9 @@ func shoot_projectile():
 	
 	
 	pass
+
+func retreating_projectile():
+	await get_tree().create_timer(move_timer/120.0).timeout
+	player.ai_press_input("crouch",40)
+	await get_tree().create_timer(0.017).timeout
+	player.ai_press_input(retreat_atk,2)
