@@ -34,12 +34,15 @@ func physics_update(delta : float):
 	var joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 
 	if (not player.is_mapped_action_pressed("crouch") and 
-	not(joy_y ==  1 and abs(joy_x) < 0.4)) and GDSync.is_gdsync_owner(player) or (player.ai_player):
-		
-		if player.can_move:
-			transition_ground()
-			GDSync.call_func(transition_ground)
+	not(joy_y ==  1 and abs(joy_x) < 0.4)) and GDSync.is_gdsync_owner(player) :
+		if not player.ai_player:
+			if player.can_move:
+				transition_ground()
+				GDSync.call_func(transition_ground)
 	
+	#Transition specifically for cpus
+	elif player.ai_player and not player.is_input_pressed("crouch"):
+		transition_ground()
 	
 
 func exit():

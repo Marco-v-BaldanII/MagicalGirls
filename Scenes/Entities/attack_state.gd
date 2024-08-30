@@ -59,7 +59,8 @@ func perform_attack():
 			attack_input = "w_kick"
 		4:
 			attack_input = "crouch"
-	if attack_id == 4 :player.press_input(attack_input,100)
+	if attack_id == 4 :
+		pass
 	else: player.press_input(attack_input)
 	move_performed = true
 
