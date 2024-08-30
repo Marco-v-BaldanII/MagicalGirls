@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://online_menu.gd" id="1_dlesn"]
 [ext_resource type="Script" path="res://Scenes/Stages/center_pos.gd" id="2_7fe1t"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_cm7gu"]
-[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_g6si5"]
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Delete/Anastasia.tscn" id="3_g6si5"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="3_jnvgd"]
 [ext_resource type="Texture2D" uid="uid://dobkyxsqc46jr" path="res://Assets/Backgrounds/japan 3.png" id="5_4thlc"]
 [ext_resource type="Texture2D" uid="uid://d3tp1cunvr3ui" path="res://Assets/Backgrounds/japan 4.png" id="5_yux5p"]

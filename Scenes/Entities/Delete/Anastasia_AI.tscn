@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhmppv2p0lel1"]
 
-[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="1_rc73i"]
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Delete/Anastasia.tscn" id="1_rc73i"]
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="2_byv8e"]
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_u87n4"]
 [ext_resource type="Script" path="res://states/camp.gd" id="3_5afgx"]
+
 
 [node name="Anastasia" instance=ExtResource("1_rc73i")]
 script = ExtResource("2_byv8e")

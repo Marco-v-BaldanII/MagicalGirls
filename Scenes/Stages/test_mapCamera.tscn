@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_7axgn"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_37hnv"]
-[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="3_y2wxc"]
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Delete/Anastasia.tscn" id="3_y2wxc"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="4_1ty7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]

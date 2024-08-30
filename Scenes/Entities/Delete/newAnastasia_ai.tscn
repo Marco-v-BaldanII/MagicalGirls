@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6m7bg6tec20b"]
 
-[ext_resource type="PackedScene" uid="uid://c6oxefsfulot4" path="res://Scenes/Entities/Delete/newAnastasia.tscn" id="1_d8mit"]
+[ext_resource type="PackedScene" uid="uid://c6oxefsfulot4" path="res://Scenes/Entities/Anastasia.tscn" id="1_d8mit"]
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_8opys"]
 
 [node name="Anastasia ai" instance=ExtResource("1_d8mit")]

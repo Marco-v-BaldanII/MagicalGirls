@@ -1,6 +1,6 @@
-[gd_scene load_steps=88 format=3 uid="uid://bm75grpsstvdy"]
+[gd_scene load_steps=85 format=3 uid="uid://c6oxefsfulot4"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_fcfp7"]
+[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_0vdnb"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_grr1i"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_dfxhb"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_5k66o"]
@@ -9,9 +9,6 @@
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ubm5j"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_3hply"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_2s2cp"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_va8ie"]
-animation = &"2knife_attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -136,19 +133,6 @@ advance_mode = 2
 advance_mode = 2
 advance_condition = &"air_w_punch"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76fnt"]
-advance_mode = 2
-advance_condition = &"crouch"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d6iw6"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"crouching"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y58wf"]
-advance_mode = 2
-advance_condition = &"not_crouch"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4ea0"]
 advance_mode = 2
 advance_condition = &"crouch_w_punch"
@@ -181,17 +165,20 @@ advance_condition = &"crouch_s_kick"
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dpwar"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkskv"]
 advance_mode = 2
-advance_condition = &"2knife_attack"
+advance_condition = &"crouch"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yhvjk"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38utl"]
 switch_mode = 2
 advance_mode = 2
+advance_condition = &"crouching"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7s67u"]
+advance_mode = 2
+advance_condition = &"not_crouch"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_54ebg"]
-states/2knife_attack/node = SubResource("AnimationNodeAnimation_va8ie")
-states/2knife_attack/position = Vector2(104, 20)
 states/Start/position = Vector2(266, 11)
 states/air_s_kick/node = SubResource("AnimationNodeAnimation_tcpvf")
 states/air_s_kick/position = Vector2(24, 244)
@@ -214,7 +201,7 @@ states/crouch_w_punch/position = Vector2(751, -130)
 states/crouching/node = SubResource("AnimationNodeAnimation_h7ygo")
 states/crouching/position = Vector2(585, -60)
 states/idle_anim/node = SubResource("AnimationNodeAnimation_h2nsw")
-states/idle_anim/position = Vector2(266, 208)
+states/idle_anim/position = Vector2(271, 176)
 states/land/node = SubResource("AnimationNodeAnimation_xdnet")
 states/land/position = Vector2(266, 346)
 states/s_kick/node = SubResource("AnimationNodeAnimation_jrex2")
@@ -225,8 +212,8 @@ states/w_kick/node = SubResource("AnimationNodeAnimation_apyy6")
 states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
-transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_76fnt"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_d6iw6"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_y58wf"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_dpwar"), "2knife_attack", "idle_anim", SubResource("AnimationNodeStateMachineTransition_yhvjk")]
-graph_offset = Vector2(-125, -116)
+transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_fkskv"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_38utl"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_7s67u")]
+graph_offset = Vector2(-50, 13.7459)
 
 [sub_resource type="Animation" id="Animation_vp1kp"]
 resource_name = "2knife_attack"
@@ -1156,10 +1143,12 @@ height = 210.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
-[node name="Anastasia" type="CharacterBody2D"]
+[node name="Anastasia ai" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_fcfp7")
+script = ExtResource("1_0vdnb")
+fly = false
+character_name = "Anastasia"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1173,7 +1162,6 @@ frame = 7
 tree_root = SubResource("AnimationNodeStateMachine_54ebg")
 advance_expression_base_node = NodePath("")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/2knife_attack = false
 parameters/conditions/air_s_kick = false
 parameters/conditions/air_s_punch = false
 parameters/conditions/air_w_kick = false
@@ -1274,7 +1262,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head_hurt_box"]
-position = Vector2(-9, 13)
+position = Vector2(-8, 98)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)

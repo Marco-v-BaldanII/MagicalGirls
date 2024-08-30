@@ -1,14 +1,17 @@
-[gd_scene load_steps=85 format=3 uid="uid://c6oxefsfulot4"]
+[gd_scene load_steps=88 format=3 uid="uid://bm75grpsstvdy"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_h8pnn"]
-[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_nmkuv"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="3_8aeua"]
-[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ikyfs"]
-[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_fhfom"]
-[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_otxef"]
-[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ler2u"]
-[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_4qj6o"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_f0qeo"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_fcfp7"]
+[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_grr1i"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="3_dfxhb"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_5k66o"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_o26tm"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_tdwux"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ubm5j"]
+[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_3hply"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_2s2cp"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_va8ie"]
+animation = &"2knife_attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -133,6 +136,19 @@ advance_mode = 2
 advance_mode = 2
 advance_condition = &"air_w_punch"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76fnt"]
+advance_mode = 2
+advance_condition = &"crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d6iw6"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"crouching"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y58wf"]
+advance_mode = 2
+advance_condition = &"not_crouch"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4ea0"]
 advance_mode = 2
 advance_condition = &"crouch_w_punch"
@@ -165,20 +181,17 @@ advance_condition = &"crouch_s_kick"
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkskv"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dpwar"]
 advance_mode = 2
-advance_condition = &"crouch"
+advance_condition = &"2knife_attack"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38utl"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yhvjk"]
 switch_mode = 2
 advance_mode = 2
-advance_condition = &"crouching"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7s67u"]
-advance_mode = 2
-advance_condition = &"not_crouch"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_54ebg"]
+states/2knife_attack/node = SubResource("AnimationNodeAnimation_va8ie")
+states/2knife_attack/position = Vector2(104, 20)
 states/Start/position = Vector2(266, 11)
 states/air_s_kick/node = SubResource("AnimationNodeAnimation_tcpvf")
 states/air_s_kick/position = Vector2(24, 244)
@@ -201,7 +214,7 @@ states/crouch_w_punch/position = Vector2(751, -130)
 states/crouching/node = SubResource("AnimationNodeAnimation_h7ygo")
 states/crouching/position = Vector2(585, -60)
 states/idle_anim/node = SubResource("AnimationNodeAnimation_h2nsw")
-states/idle_anim/position = Vector2(271, 176)
+states/idle_anim/position = Vector2(266, 208)
 states/land/node = SubResource("AnimationNodeAnimation_xdnet")
 states/land/position = Vector2(266, 346)
 states/s_kick/node = SubResource("AnimationNodeAnimation_jrex2")
@@ -212,8 +225,8 @@ states/w_kick/node = SubResource("AnimationNodeAnimation_apyy6")
 states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
-transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_fkskv"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_38utl"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_7s67u")]
-graph_offset = Vector2(-50, 13.7459)
+transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_76fnt"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_d6iw6"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_y58wf"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_dpwar"), "2knife_attack", "idle_anim", SubResource("AnimationNodeStateMachineTransition_yhvjk")]
+graph_offset = Vector2(-125, -116)
 
 [sub_resource type="Animation" id="Animation_vp1kp"]
 resource_name = "2knife_attack"
@@ -1143,18 +1156,16 @@ height = 210.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
-[node name="Anastasia ai" type="CharacterBody2D"]
+[node name="Anastasia" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_h8pnn")
-fly = false
-character_name = "Anastasia"
+script = ExtResource("1_fcfp7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-3, 0)
 scale = Vector2(9, 9)
-texture = ExtResource("2_nmkuv")
+texture = ExtResource("2_grr1i")
 hframes = 8
 frame = 7
 
@@ -1162,6 +1173,7 @@ frame = 7
 tree_root = SubResource("AnimationNodeStateMachine_54ebg")
 advance_expression_base_node = NodePath("")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/2knife_attack = false
 parameters/conditions/air_s_kick = false
 parameters/conditions/air_s_punch = false
 parameters/conditions/air_w_kick = false
@@ -1219,20 +1231,20 @@ shape = SubResource("RectangleShape2D_4w7ad")
 debug_color = Color(0, 0.77905, 0.257128, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_8aeua")
+script = ExtResource("3_dfxhb")
 initial_state = NodePath("ground_move")
 
 [node name="knocked" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_ikyfs")
+script = ExtResource("4_5k66o")
 
 [node name="ground_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_fhfom")
+script = ExtResource("5_o26tm")
 
 [node name="air_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_otxef")
+script = ExtResource("6_tdwux")
 
 [node name="crouch" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_ler2u")
+script = ExtResource("7_ubm5j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1247,7 +1259,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_a7xf5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
-script = ExtResource("8_4qj6o")
+script = ExtResource("8_3hply")
 
 [node name="Body" type="Area2D" parent="."]
 
@@ -1262,13 +1274,13 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head_hurt_box"]
-position = Vector2(-8, 98)
+position = Vector2(-9, 13)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
 
 [node name="PositionSynchronizer" type="Node" parent="."]
-script = ExtResource("9_f0qeo")
+script = ExtResource("9_2s2cp")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "position"
