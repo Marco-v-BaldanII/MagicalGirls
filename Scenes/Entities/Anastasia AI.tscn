@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://ducrdvfxv8chh"]
+[gd_scene load_steps=90 format=3 uid="uid://d30wyg0b4bbu0"]
 
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_dw2ie"]
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="2_puiur"]

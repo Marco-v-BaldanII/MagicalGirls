@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0y3mc8kjb5r2"]
+[gd_scene load_steps=5 format=3 uid="uid://bhmppv2p0lel1"]
 
 [ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="1_rc73i"]
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="2_byv8e"]
