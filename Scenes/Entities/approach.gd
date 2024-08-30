@@ -18,7 +18,7 @@ func exit():
 
 	
 func physics_update(delta : float):
-	Transitioned.emit(self, "camp")
+
 	if player.crouching : return
 	player.animation_tree["parameters/conditions/crouch"] = false
 	player.animation_tree["parameters/conditions/not_crouch"] = true

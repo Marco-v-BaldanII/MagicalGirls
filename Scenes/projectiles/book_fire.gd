@@ -50,6 +50,7 @@ func destroy_projectile():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	await get_tree().create_timer(0.01667*5).timeout
-	moving = false
+	if body.is_in_group("floor"):
+		await get_tree().create_timer(0.01667*5).timeout
+		moving = false
 	pass # Replace with function body.

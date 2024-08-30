@@ -23,7 +23,7 @@ func enter():
 				e = e.get_parent()
 			player = e
 			
-	shoot_amount = randi_range(2,7)
+	shoot_amount = randi_range(4,9)
 	shot_projectiles = 0
 	
 	pass
@@ -40,10 +40,9 @@ func physics_update(delta : float):
 	move_timer -= delta
 	
 	if move_timer <= 0:
-		
+			var retreating_projectile : int = randi_range(1,10)
 			move_timer = randi_range(30,100)
 	
-		#if abs(player.oponent.global_position.x - player.global_position.x) < zone_distance:
 			if player.oponent.direction == "left":
 				
 				var id : int = randi_range(0,5)
@@ -51,17 +50,26 @@ func physics_update(delta : float):
 					move_timer *= 0.6 #approach for less time
 					player.ai_press_input("move_left",move_timer)
 					player.input_buffer.push_back("move_left")
+					
+					var approach_id : int = randi_range(0,2)
+					if approach_id == 0: Transitioned.emit(self,"approach")
+					
 				else:
 
 					player.ai_press_input("move_right",move_timer)
 					player.input_buffer.push_back("move_right")
-					#player.ai_press_input("crouch",20)
-					
-					await get_tree().create_timer(move_timer/120.0).timeout
-					player.ai_press_input("crouch",40)
-					await get_tree().create_timer(0.017).timeout
-					player.ai_press_input("s_kick",2)
-					
+
+					if retreating_projectile <= 3: #30percent
+						await get_tree().create_timer(move_timer/120.0).timeout
+						player.ai_press_input("crouch",40)
+						await get_tree().create_timer(0.017).timeout
+						player.ai_press_input("s_kick",2)
+					elif retreating_projectile <= 4:
+						var not_direction : String =""
+						if player.direction == "right": not_direction = "left"
+						else: not_direction = "right"
+						player.input_buffer.clear(); player.input_buffer.append_array(player.moveset["book_shield_" + not_direction])
+						player.perform_move()
 			else:
 				
 				var id : int = randi_range(0,5)
@@ -69,16 +77,24 @@ func physics_update(delta : float):
 					move_timer *= 0.6
 					player.ai_press_input("move_right",move_timer)
 					player.input_buffer.push_back("move_right")
+					
+					var approach_id : int = randi_range(0,2)
+					if approach_id == 0: Transitioned.emit(self,"approach")
 				else:
 					player.ai_press_input("move_left",move_timer)
 					player.input_buffer.push_back("move_left")
-					pass
-					#player.ai_press_input("crouch",20)
 					
-					await get_tree().create_timer(move_timer/120.0).timeout
-					player.ai_press_input("crouch",10)
-					await get_tree().create_timer(0.017).timeout
-					player.ai_press_input("s_kick",2)
+					if retreating_projectile <= 3:
+						await get_tree().create_timer(move_timer/120.0).timeout
+						player.ai_press_input("crouch",40)
+						await get_tree().create_timer(0.017).timeout
+						player.ai_press_input("s_kick",2)
+					elif retreating_projectile <= 4:
+						var not_direction : String =""
+						if player.direction == "right": not_direction = "left"
+						else: not_direction = "right"
+						player.input_buffer.clear(); player.input_buffer.append_array(player.moveset["book_shield_" + not_direction])
+						player.perform_move()
 
 			move_timer /= 60
 	timer -= delta

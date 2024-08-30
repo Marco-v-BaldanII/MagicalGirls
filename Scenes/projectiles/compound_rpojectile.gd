@@ -32,11 +32,12 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	
 	var i : int = 0
 	for projectile in projectiles:
-		if projectile.has_method("shoot"):
+		if is_instance_valid(projectile) and projectile.has_method("shoot"):
 			projectile.shoot(layer,mask,dir,player)
 			if delayed : 
 				await get_tree().create_timer(0.35).timeout
-				projectile.alive_time -= 0.35 * i
+				if is_instance_valid(projectile):
+					projectile.alive_time -= 0.35 * i
 				i += 1
 	
 

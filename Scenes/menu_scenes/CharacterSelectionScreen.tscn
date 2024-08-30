@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/controler_menu.gd" id="7_5016i"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="7_hiedg"]
-[ext_resource type="PackedScene" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
+[ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
 

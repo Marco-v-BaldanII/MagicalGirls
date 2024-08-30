@@ -593,7 +593,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("punch") or anim_name.contains("kick"):
 		can_move = true
 
-	if anim_name == "crouch" and GDSync.is_gdsync_owner(self):
+	if anim_name == "crouch" and GDSync.is_gdsync_owner(self) and not ai_player:
 		if  (not is_mapped_action_pressed("crouch") and 
 		not(joy_y >  0.4  and abs(joy_x) < 0.2)) and not animation_player.current_animation.contains("crouch") :
 			
@@ -603,6 +603,14 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 			
 			play_crouching()
 			GDSync.call_func(play_crouching)
+			
+	elif anim_name == "crouch" and ai_player:
+		
+		if not is_input_pressed("crouch"):
+			stand_up()
+		else:
+			play_crouching()
+		
 			#state_machine.on_child_transition(state_machine.current_state, "crouch")
 
 func play_crouching():

@@ -167,7 +167,7 @@ func _physics_process(delta: float) -> void:
 	
 	if not GDSync.is_gdsync_owner(self) or lag: return
 	
-	if is_on_floor() and charging_laser and not (is_mapped_action_pressed("move_right") or is_mapped_action_pressed("move_left")):
+	if is_on_floor() and charging_laser and not (is_mapped_action_pressed("move_right") or is_mapped_action_pressed("move_left")) and not (is_input_pressed("move_right") or is_input_pressed("move_left")):
 		if current_start_projectile != null and charging_laser:
 			current_start_projectile.charge(global_position)
 			pass
@@ -251,3 +251,38 @@ func ai_book_laser():
 			
 			shoot_laser()
 			
+
+
+func ai_on_hit():
+
+	
+	if hit_position == "body" and not blocked and not crouching :
+		var action_id : int = randi_range(0,2)
+		if action_id == 0:
+			ai_press_input("crouch",randi_range(70,200))
+		elif action_id == 1:
+			var atk_id = randi_range(0,4)
+				
+			match atk_id:
+					0:
+						ai_press_input("s_punch")
+					1:
+						ai_press_input("w_punch")
+					2:
+						ai_press_input("s_kick")
+					3: 
+						ai_press_input("w_kick")
+					4:
+						ai_press_input("crouch",30)
+		else:
+			
+			var current_state = $AI_StateMachine.current_state.name
+			
+			if current_state == "camp":
+				var approach_id = randi_range(0,1)
+				if approach_id == 0: $AI_StateMachine.on_child_transition($AI_StateMachine.current_state, "approach")
+				else:
+					ai_press_input("move_" + direction,30) #run away
+			else:
+				$AI_StateMachine.on_child_transition($AI_StateMachine.current_state, "camp")
+			pass

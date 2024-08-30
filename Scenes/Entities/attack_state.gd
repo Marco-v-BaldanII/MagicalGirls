@@ -88,7 +88,7 @@ func move() :
 		0:
 			if not player.crouching:  
 				player.ai_press_input("jump"); 
-				var atk_id = randi_range(0,3)
+				var atk_id = randi_range(0,4)
 				
 				match atk_id:
 					0:
@@ -99,9 +99,31 @@ func move() :
 						attack_input = "s_kick"
 					3: 
 						attack_input = "w_kick"
+					4:
+						# Choose a random special
+						var current_scpecial : Array[String]
+						var used : bool = false
+						player.input_buffer.clear()
 						
+						for special in player.moveset:
+							if player.moveset[special] is Array[String]  and player.direction != player.find_special_direction(special):
+								var use : int = randi_range(0,1)
+								current_scpecial = player.moveset[special]
+								if use == 0:
+									player.input_buffer.append_array(player.moveset[special])
+									player.perform_move()
+									used = true
+									break
+						if not used: 
+							player.input_buffer.append_array(current_scpecial); player.perform_move()
 		1:
 			if not player.crouching : player.ai_press_input("jump")
-			return
+			
+	
+	
+	if "move_" + player.direction == current_direction:
+		var camp_id = randi_range(0,1)
+		if camp_id == 0: 
+			Transitioned.emit(self, "camp")
 	
 	pass

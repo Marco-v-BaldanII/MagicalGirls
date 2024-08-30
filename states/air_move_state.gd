@@ -33,7 +33,7 @@ func physics_update(delta : float):
 		joy_y = Input.get_joy_axis(player.input_method, JOY_AXIS_LEFT_Y)
 	
 	if  player.can_move : 
-		if player.fly and not player.is_on_floor() and player.can_move and not player.lag:
+		if player.fly and not player.is_on_floor() and player.can_move and not player.lag and not player.ai_player:
 			
 			if player.is_mapped_action_pressed("move_right") or joy_x > 0.1 :
 				if player.velocity.x < 0:player.velocity.x *= -0.5
@@ -43,6 +43,16 @@ func physics_update(delta : float):
 				if player.velocity.x > 0:player.velocity.x *= -0.5
 				player.input_direction =  -1
 				
+			player.velocity.x += (player.FLY_SPEED * player.input_direction)/100
+			
+		elif player.fly and not player.is_on_floor() and player.can_move and not player.lag and  player.ai_player:
+			if player.is_input_pressed("move_right"):
+				if player.velocity.x < 0:player.velocity.x *= -0.5
+				player.input_direction = 1
+
+			elif player.is_input_pressed("move_left"):
+				if player.velocity.x > 0:player.velocity.x *= -0.5
+				player.input_direction =  -1
 
 			player.velocity.x += (player.FLY_SPEED * player.input_direction)/100
 
