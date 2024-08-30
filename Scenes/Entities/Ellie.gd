@@ -16,7 +16,6 @@ func hello():
 	pass
 
 func instanciate_projectile_online(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null):
-
 	var special_scene = load(path)
 	var instance = special_scene.instantiate()
 	if my_self == null :get_tree().root.add_child(instance)
@@ -35,7 +34,7 @@ func instanciate_projectile_online(path : String, p_name : String, position_offs
 func _input(event):
 
 	
-	if not can_move: return
+	if not can_move or ai_player: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
 		if input_method != 2:
@@ -176,18 +175,24 @@ func _physics_process(delta: float) -> void:
 		charging_laser = false
 	if is_on_floor() and not crouching:
 		
-		book_laser()
+		if not ai_player: book_laser()
+		else: ai_book_laser()
 		
 		
 	elif is_on_floor() and crouching:
 		
-		if is_mapped_action_pressed("s_kick") and current_start_projectile == null:
+		if not ai_player and is_mapped_action_pressed("s_kick") and current_start_projectile == null:
 			var fire_projectile = instanciate_fire()
 			GDSync.call_func(instanciate_fire)
 			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
 			add_lag(30)
 			pass
-	
+		
+		elif ai_player and is_input_pressed("s_kick"):
+			var fire_projectile = instanciate_fire()
+			GDSync.call_func(instanciate_fire)
+			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+			add_lag(30)
 	
 	#if not input_buffer.is_empty() and input_buffer.back().contains("s_punch"):
 		#instanciate_projectile("res://Scenes/projectiles/orbiting_book.tscn","", Vector2(200,0), self)
@@ -224,3 +229,25 @@ func shoot_laser():
 	current_start_projectile = null
 	charging_laser = false
 	add_lag(10)
+
+func ai_book_laser():
+		if is_input_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser:
+
+			var star = instanciate_star()
+			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
+			GDSync.call_func(instanciate_star)
+			charging_laser = false
+			started_charge = true	
+		
+		if not charging_laser and started_charge and not is_input_pressed("s_kick"):
+			
+			charging_laser = true
+			started_charge = false
+			
+		elif not charging_laser and not started_charge and is_input_pressed("s_kick"):
+			charging_laser = false; started_charge = true;
+
+		elif current_start_projectile and charging_laser  and is_input_pressed("s_kick"):
+			
+			shoot_laser()
+			

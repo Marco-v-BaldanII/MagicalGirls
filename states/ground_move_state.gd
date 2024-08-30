@@ -21,15 +21,29 @@ var crouching : bool = false
 func physics_update(delta : float):
 	if  player.lag: 
 		return
-	
-	if (player.is_input_pressed("move_right") and player.ai_player) or player.is_mapped_action_pressed("move_right") or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
-		player.input_direction = 1
+	if not player.ai_player:
+		#Not ai player
+		if  player.is_mapped_action_pressed("move_right") or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == 1:
+			player.input_direction = 1
 
-	elif (player.is_input_pressed("move_left") and player.ai_player) or player.is_mapped_action_pressed("move_left") or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1:
-		player.input_direction =  -1
+		elif  player.is_mapped_action_pressed("move_left") or Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X) == -1:
+			player.input_direction =  -1
+			
+		else:
+			player.input_direction -= 0.2
+			player.input_direction = clamp(player.input_direction, 0,1)
+			
 	else:
-		player.input_direction -= 0.2
-		player.input_direction = clamp(player.input_direction, 0,1)
+		#AI player
+		if (player.is_input_pressed("move_right") and player.ai_player) :
+			player.input_direction = 1
+		elif (player.is_input_pressed("move_left") and player.ai_player) :
+			player.input_direction = -1
+		
+		
+		else:
+			player.input_direction -= 0.2
+			player.input_direction = clamp(player.input_direction, 0,1)
 
 	if player.is_on_floor() and player.can_move: #Can move is turned on by the animation finished method
 		player.jump_lag -= delta

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dds7s6ldsbp6s"]
+
+[ext_resource type="Script" path="res://states/state_machine.gd" id="1_pusaa"]
+[ext_resource type="Script" path="res://Scenes/Entities/approach.gd" id="2_ojb3a"]
+[ext_resource type="Script" path="res://Scenes/Entities/attack_state.gd" id="3_jrets"]
+
+[node name="AI_StateMachine" type="Node" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_pusaa")
+initial_state = NodePath("approach")
+
+[node name="approach" type="Node2D" parent="."]
+script = ExtResource("2_ojb3a")
+
+[node name="attack" type="Node2D" parent="."]
+script = ExtResource("3_jrets")

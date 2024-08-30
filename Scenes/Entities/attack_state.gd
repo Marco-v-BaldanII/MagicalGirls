@@ -1,12 +1,16 @@
 extends State
+class_name AtkState
 
-var player : AI_Player
+var player : Player
 var attack_input : String
 var move_performed : bool = false
 
 var movement_range : int = 160
 var direction_chosen : bool = true
 var current_direction : String = "none"
+
+@export var atk_distance : int = 380
+
 
 func enter():
 	if not player:
@@ -43,7 +47,7 @@ func physics_update(delta : float):
 		pass
 		
 	if current_direction != "none" and not player.crouching:
-			player.press_input(current_direction,10)
+			player.ai_press_input(current_direction,randi_range(8,16))
 			
 
 func perform_attack():
@@ -61,11 +65,11 @@ func perform_attack():
 			attack_input = "crouch"
 	if attack_id == 4 :
 		pass
-	else: player.press_input(attack_input)
+	else: player.ai_press_input(attack_input)
 	move_performed = true
 
 func move() :
-	if abs(player.oponent.global_position.x - player.global_position.x) > player.attack_distance + movement_range+1:
+	if abs(player.oponent.global_position.x - player.global_position.x) > atk_distance + movement_range+1:
 		Transitioned.emit(self,"approach")
 	var move_id = randi_range(0,2)
 	direction_chosen = true
@@ -83,7 +87,7 @@ func move() :
 	match  jump_rand:
 		0:
 			if not player.crouching:  
-				player.press_input("jump"); 
+				player.ai_press_input("jump"); 
 				var atk_id = randi_range(0,3)
 				
 				match atk_id:
@@ -97,7 +101,7 @@ func move() :
 						attack_input = "w_kick"
 						
 		1:
-			if not player.crouching : player.press_input("jump")
+			if not player.crouching : player.ai_press_input("jump")
 			return
 	
 	pass

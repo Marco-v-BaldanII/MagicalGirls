@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ngjbdm0xxxg"]
+
+[ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie Quinn.tscn" id="1_2i38b"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_cwos8"]
+[ext_resource type="Script" path="res://Scenes/Entities/camp.gd" id="3_5nbar"]
+
+[node name="Ellie_AI" instance=ExtResource("1_2i38b")]
+ai_player = true
+
+[node name="AI_StateMachine" parent="." index="0" instance=ExtResource("2_cwos8")]
+
+[node name="camp2" type="Node2D" parent="AI_StateMachine" index="2"]
+script = ExtResource("3_5nbar")
+
+[editable path="AI_StateMachine"]

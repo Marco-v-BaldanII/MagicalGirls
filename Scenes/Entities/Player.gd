@@ -9,7 +9,7 @@ class_name Player
 
 var match_setting : Match
 
-var ai_player : bool = false
+@export var ai_player : bool = false
 
 #if an attack hits below this position it breacks guard
 const DOWN_HIT_POS_THRESHOLD : int = 860
@@ -253,6 +253,7 @@ var joy_x : float
 var joy_y : float
 
 func _input(event):
+	if ai_player: return #CPUS don't receive input
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
@@ -530,9 +531,14 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		GameManager.hit_stop_long()
 		state_machine.on_child_transition(state_machine.current_state, "knocked")
 	
+	
+	if ai_player: ai_on_hit()
+	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false
 	sprite_2d.modulate = Color.WHITE
+	
+	
 		
 func deactivate_collisions():
 	pass
@@ -604,7 +610,7 @@ func play_crouching():
 	animation_tree["parameters/conditions/crouching"] = true
 
 func stand_up():
-	animation_player.play("idle")
+	#animation_player.play("idle_anim")
 	animation_tree["parameters/conditions/crouch"] = false
 	animation_tree["parameters/conditions/not_crouch"] = true
 	await get_tree().create_timer(0.017 * 6).timeout
@@ -683,3 +689,34 @@ func shoot_projectile_wrap(projectile : Projectile):
 
 func shoot_projectile(projectile : Projectile):
 	projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+
+func ai_on_hit():
+
+	
+	if hit_position == "body" and not blocked and not crouching :
+		var action_id : int = randi_range(0,1)
+		if action_id == 0:
+			ai_press_input("crouch",randi_range(70,200))
+		else:
+			var atk_id = randi_range(0,4)
+				
+			match atk_id:
+					0:
+						ai_press_input("s_punch")
+					1:
+						ai_press_input("w_punch")
+					2:
+						ai_press_input("s_kick")
+					3: 
+						ai_press_input("w_kick")
+					4:
+						ai_press_input("crouch",30)
+			pass
+
+func ai_press_input(input : String, frames : float = 1):
+	
+	action_state[input] = true
+	input_buffer.push_back(input)
+	perform_move()
+	await get_tree().create_timer(0.01667 * frames).timeout
+	action_state[input] = false

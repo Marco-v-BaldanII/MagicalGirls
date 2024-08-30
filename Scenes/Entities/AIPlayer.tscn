@@ -1,12 +1,11 @@
-[gd_scene load_steps=90 format=3 uid="uid://dcnr1ch67xghk"]
+[gd_scene load_steps=89 format=3 uid="uid://dcnr1ch67xghk"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/ai_player.gd" id="1_c47be"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_ddbhl"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_nh138"]
 [ext_resource type="Script" path="res://Scenes/hit_box.gd" id="3_48lrs"]
-[ext_resource type="Script" path="res://Scenes/Entities/attack_state.gd" id="4_2j2uv"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="4_resk2"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="5_8h5cd"]
-[ext_resource type="Script" path="res://Scenes/Entities/approach.gd" id="5_rrj2i"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="6_jsikc"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="7_bwnl5"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="8_d5a5v"]
@@ -218,7 +217,7 @@ states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
 transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_76fnt"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_d6iw6"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_y58wf"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g")]
-graph_offset = Vector2(-268.169, -141.963)
+graph_offset = Vector2(-268.169, -4.65151)
 
 [sub_resource type="Animation" id="Animation_h1eyv"]
 length = 0.001
@@ -1113,15 +1112,7 @@ collision_layer = 0
 script = ExtResource("1_c47be")
 fly = false
 
-[node name="AI_StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_resk2")
-initial_state = NodePath("approach")
-
-[node name="approach" type="Node2D" parent="AI_StateMachine"]
-script = ExtResource("5_rrj2i")
-
-[node name="attack" type="Node2D" parent="AI_StateMachine"]
-script = ExtResource("4_2j2uv")
+[node name="AI_StateMachine" parent="." instance=ExtResource("2_ddbhl")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
