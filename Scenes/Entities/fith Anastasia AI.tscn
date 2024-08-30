@@ -1,14 +1,16 @@
-[gd_scene load_steps=84 format=3 uid="uid://cw2grg2ehu335"]
+[gd_scene load_steps=86 format=3 uid="uid://ckvjmwrx3iu1"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
-[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_gqrgg"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="3_lmxlw"]
-[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_r3xtr"]
-[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ivl1b"]
-[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_8hb6d"]
-[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ynsb0"]
-[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_4dgrw"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_11ku0"]
+[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_x78e0"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_oonnp"]
+[ext_resource type="Script" path="res://states/camp.gd" id="3_b31yj"]
+[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="4_3j46a"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="5_xx12x"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="6_ppki2"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="7_lnr5d"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="8_s2s2v"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="9_ljh2q"]
+[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="10_rgt4q"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="11_xyqp0"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -1161,17 +1163,22 @@ height = 210.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
-[node name="Ellie" type="CharacterBody2D"]
+[node name="anastasia ai" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_r7jln")
-character_name = "Ellie"
+script = ExtResource("1_x78e0")
+
+[node name="AI_StateMachine" parent="." instance=ExtResource("2_oonnp")]
+
+[node name="camp" type="Node2D" parent="AI_StateMachine"]
+script = ExtResource("3_b31yj")
+retreating_special = "triple_bombardment_"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-3, 0)
 scale = Vector2(9, 9)
-texture = ExtResource("2_gqrgg")
+texture = ExtResource("4_3j46a")
 hframes = 8
 frame = 7
 
@@ -1236,20 +1243,20 @@ shape = SubResource("RectangleShape2D_4w7ad")
 debug_color = Color(0, 0.77905, 0.257128, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_lmxlw")
+script = ExtResource("5_xx12x")
 initial_state = NodePath("ground_move")
 
 [node name="knocked" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_r3xtr")
+script = ExtResource("6_ppki2")
 
 [node name="ground_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_ivl1b")
+script = ExtResource("7_lnr5d")
 
 [node name="air_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_8hb6d")
+script = ExtResource("8_s2s2v")
 
 [node name="crouch" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_ynsb0")
+script = ExtResource("9_ljh2q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1264,7 +1271,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_a7xf5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
-script = ExtResource("8_4dgrw")
+script = ExtResource("10_rgt4q")
 
 [node name="Body" type="Area2D" parent="."]
 
@@ -1285,7 +1292,7 @@ shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
 
 [node name="PositionSynchronizer" type="Node" parent="."]
-script = ExtResource("9_11ku0")
+script = ExtResource("11_xyqp0")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "position"
@@ -1296,3 +1303,5 @@ interpolation_speed = 60.0
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
 [connection signal="area_entered" from="head_hurt_box" to="." method="_on_head_area_entered"]
+
+[editable path="AI_StateMachine"]

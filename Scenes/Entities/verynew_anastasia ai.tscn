@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxgnv70asqvaa"]
+
+[ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie Quinn.tscn" id="1_t3plx"]
+[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="2_dnn5h"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_sb37j"]
+[ext_resource type="Script" path="res://states/camp.gd" id="3_kvhbb"]
+
+[node name="anastasia ai" instance=ExtResource("1_t3plx")]
+script = ExtResource("2_dnn5h")
+recharge_frames = 40
+fire_rate_frames = 12
+max_shots = 15
+ai_player = true
+fly = false
+character_name = "Anastasia"
+
+[node name="AI_StateMachine" parent="." index="0" instance=ExtResource("2_sb37j")]
+
+[node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
+script = ExtResource("3_kvhbb")
+retreating_special = "power_shoot_"
+
+[editable path="AI_StateMachine"]

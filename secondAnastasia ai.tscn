@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://r5uehaftrtl7"]
+
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="1_63jwm"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_epch1"]
+
+[node name="Anastasia" instance=ExtResource("1_63jwm")]
+ai_player = true
+fly = false
+
+[node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_epch1")]

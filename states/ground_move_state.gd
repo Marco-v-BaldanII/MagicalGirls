@@ -49,6 +49,9 @@ func physics_update(delta : float):
 		player.jump_lag -= delta
 		player.moving_backwards = false
 		if(player.input_direction >= 0 and player.direction == "left") or (player.input_direction <= 0 and player.direction == "right"):
+			var f = player.input_direction * player.SPEED
+			var t = player.SPEED
+			var g = player.input_direction
 			player.velocity.x = player.input_direction * player.SPEED
 
 			
@@ -76,7 +79,7 @@ func physics_update(delta : float):
 		joy_y = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_Y)
 
 	#Transition to crouch
-	
+	var v = player.velocity
 	
 	if (player.can_move and player.is_mapped_action_pressed("crouch")) or ((joy_y ==  1 and abs(joy_x) < 0.4) and crouching == false and player.can_move) :
 			if not player.ai_player:

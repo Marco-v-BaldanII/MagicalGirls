@@ -1,14 +1,42 @@
-[gd_scene load_steps=84 format=3 uid="uid://cw2grg2ehu335"]
+[gd_scene load_steps=86 format=3 uid="uid://3arv4mdstia2"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
-[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_gqrgg"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="3_lmxlw"]
-[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_r3xtr"]
-[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ivl1b"]
-[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_8hb6d"]
-[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ynsb0"]
-[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_4dgrw"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_11ku0"]
+[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_4kuqw"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_swirm"]
+[ext_resource type="Script" path="res://states/camp.gd" id="3_qeivr"]
+[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="4_3h0dx"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="5_hek2n"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="6_736os"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="7_vtkfq"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="8_ymsfk"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="9_oipl8"]
+[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="10_6mgde"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="11_yf73p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b73rv"]
+size = Vector2(77, 23)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_76ytc"]
+radius = 4.64866e+06
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_52f0o"]
+radius = 39.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w7ad"]
+size = Vector2(149.5, 246.5)
+
+[sub_resource type="Theme" id="Theme_ykctd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7xf5"]
+bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5aki6"]
+bg_color = Color(0.643749, 0.61648, 5.77569e-07, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_evy26"]
+radius = 50.0
+height = 210.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -178,7 +206,7 @@ advance_condition = &"crouching"
 advance_mode = 2
 advance_condition = &"not_crouch"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_54ebg"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6bspg"]
 states/Start/position = Vector2(266, 11)
 states/air_s_kick/node = SubResource("AnimationNodeAnimation_tcpvf")
 states/air_s_kick/position = Vector2(24, 244)
@@ -1135,71 +1163,27 @@ _data = {
 "w_punch": SubResource("Animation_hgs7n")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b73rv"]
-size = Vector2(77, 23)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_76ytc"]
-radius = 4.64866e+06
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_52f0o"]
-radius = 39.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w7ad"]
-size = Vector2(149.5, 246.5)
-
-[sub_resource type="Theme" id="Theme_ykctd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7xf5"]
-bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5aki6"]
-bg_color = Color(0.643749, 0.61648, 5.77569e-07, 1)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_evy26"]
-radius = 50.0
-height = 210.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
-
-[node name="Ellie" type="CharacterBody2D"]
+[node name="anastasia ai" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_r7jln")
-character_name = "Ellie"
+script = ExtResource("1_4kuqw")
+ai_player = true
+fly = false
+character_name = "Anastasia"
+
+[node name="AI_StateMachine" parent="." instance=ExtResource("2_swirm")]
+
+[node name="camp" type="Node2D" parent="AI_StateMachine"]
+script = ExtResource("3_qeivr")
+retreating_special = "triple_bombardment_"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-3, 0)
 scale = Vector2(9, 9)
-texture = ExtResource("2_gqrgg")
+texture = ExtResource("4_3h0dx")
 hframes = 8
 frame = 7
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_54ebg")
-advance_expression_base_node = NodePath("")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/air_s_kick = false
-parameters/conditions/air_s_punch = false
-parameters/conditions/air_w_kick = false
-parameters/conditions/air_w_punch = false
-parameters/conditions/crouch = false
-parameters/conditions/crouch_s_kick = false
-parameters/conditions/crouch_s_punch = false
-parameters/conditions/crouch_w_kick = false
-parameters/conditions/crouch_w_punch = false
-parameters/conditions/crouching = false
-parameters/conditions/land = false
-parameters/conditions/not_crouch = false
-parameters/conditions/s_kick = false
-parameters/conditions/s_punch = false
-parameters/conditions/w_kick = false
-parameters/conditions/w_punch = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_max1l")
-}
 
 [node name="Feet" type="CollisionShape2D" parent="."]
 position = Vector2(19.5, 154.5)
@@ -1236,20 +1220,20 @@ shape = SubResource("RectangleShape2D_4w7ad")
 debug_color = Color(0, 0.77905, 0.257128, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_lmxlw")
+script = ExtResource("5_hek2n")
 initial_state = NodePath("ground_move")
 
 [node name="knocked" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_r3xtr")
+script = ExtResource("6_736os")
 
 [node name="ground_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_ivl1b")
+script = ExtResource("7_vtkfq")
 
 [node name="air_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_8hb6d")
+script = ExtResource("8_ymsfk")
 
 [node name="crouch" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_ynsb0")
+script = ExtResource("9_oipl8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1264,7 +1248,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_a7xf5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
-script = ExtResource("8_4dgrw")
+script = ExtResource("10_6mgde")
 
 [node name="Body" type="Area2D" parent="."]
 
@@ -1285,14 +1269,41 @@ shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
 
 [node name="PositionSynchronizer" type="Node" parent="."]
-script = ExtResource("9_11ku0")
+script = ExtResource("11_yf73p")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_6bspg")
+advance_expression_base_node = NodePath("")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/air_s_kick = false
+parameters/conditions/air_s_punch = false
+parameters/conditions/air_w_kick = false
+parameters/conditions/air_w_punch = false
+parameters/conditions/crouch = false
+parameters/conditions/crouch_s_kick = false
+parameters/conditions/crouch_s_punch = false
+parameters/conditions/crouch_w_kick = false
+parameters/conditions/crouch_w_punch = false
+parameters/conditions/crouching = false
+parameters/conditions/land = false
+parameters/conditions/not_crouch = false
+parameters/conditions/s_kick = false
+parameters/conditions/s_punch = false
+parameters/conditions/w_kick = false
+parameters/conditions/w_punch = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_max1l")
+}
+
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
 [connection signal="area_entered" from="head_hurt_box" to="." method="_on_head_area_entered"]
+
+[editable path="AI_StateMachine"]

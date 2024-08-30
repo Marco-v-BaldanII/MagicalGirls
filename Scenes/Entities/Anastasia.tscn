@@ -1,6 +1,6 @@
 [gd_scene load_steps=88 format=3 uid="uid://bm75grpsstvdy"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_lv1x0"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player.gd" id="1_fcfp7"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_grr1i"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_dfxhb"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_5k66o"]
@@ -1159,8 +1159,7 @@ height = 210.0
 [node name="Anastasia" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_lv1x0")
-character_name = "Anastasia"
+script = ExtResource("1_fcfp7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

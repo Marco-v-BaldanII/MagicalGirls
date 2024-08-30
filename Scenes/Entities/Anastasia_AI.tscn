@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0y3mc8kjb5r2"]
+
+[ext_resource type="PackedScene" uid="uid://bm75grpsstvdy" path="res://Scenes/Entities/Anastasia.tscn" id="1_rc73i"]
+[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="2_byv8e"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_u87n4"]
+[ext_resource type="Script" path="res://states/camp.gd" id="3_5afgx"]
+
+[node name="Anastasia" instance=ExtResource("1_rc73i")]
+script = ExtResource("2_byv8e")
+recharge_frames = 40
+fire_rate_frames = 12
+max_shots = 15
+ai_player = true
+fly = false
+character_name = "Anastasia"
+
+[node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_u87n4")]
+
+[node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
+script = ExtResource("3_5afgx")
+retreating_special = "triple_bombardment_"
+
+[editable path="AI_StateMachine"]

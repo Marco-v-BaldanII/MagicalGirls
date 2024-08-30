@@ -105,8 +105,8 @@ func gun_fire():
 	
 func perform_move():
 	if not can_move and not lag: return
-	
-	velocity.x = 0
+	#
+	#velocity.x = 0
 	
 	for specials in moveset:
 			if  moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size()  and  has_subarray(moveset[specials], input_buffer):

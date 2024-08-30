@@ -19,10 +19,11 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 		print("the hp was" + str(hp) + "but now is" + str(value))
 		if GDSync.is_gdsync_owner(self): GDSync.call_func(change_hp,[value])
 		hp = clamp(value,0,100)
-		hp_bar.value = hp
-		while hp_bar.value != hp:
-			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
-			await get_tree().create_timer(0.1667).timeout
+		if hp_bar: 
+			hp_bar.value = hp
+			while hp_bar.value != hp:
+				hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
+				await get_tree().create_timer(0.1667).timeout
 			
 
 func change_hp(value : int):

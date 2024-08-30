@@ -1,14 +1,19 @@
-[gd_scene load_steps=84 format=3 uid="uid://cw2grg2ehu335"]
+[gd_scene load_steps=90 format=3 uid="uid://ducrdvfxv8chh"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
-[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_gqrgg"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="3_lmxlw"]
-[ext_resource type="Script" path="res://states/knocked_state.gd" id="4_r3xtr"]
-[ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ivl1b"]
-[ext_resource type="Script" path="res://states/air_move_state.gd" id="6_8hb6d"]
-[ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ynsb0"]
-[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_4dgrw"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_11ku0"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_dw2ie"]
+[ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="2_puiur"]
+[ext_resource type="Script" path="res://states/camp.gd" id="3_30wjw"]
+[ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="4_w1tbb"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="5_fmlp2"]
+[ext_resource type="Script" path="res://states/knocked_state.gd" id="6_2egvl"]
+[ext_resource type="Script" path="res://states/ground_move_state.gd" id="7_qmayu"]
+[ext_resource type="Script" path="res://states/air_move_state.gd" id="8_hwe5c"]
+[ext_resource type="Script" path="res://states/crouch_state.gd" id="9_vummm"]
+[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="10_cnngo"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="11_0ipgv"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_va8ie"]
+animation = &"2knife_attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -165,20 +170,30 @@ advance_condition = &"crouch_s_kick"
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkskv"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dpwar"]
+advance_mode = 2
+advance_condition = &"2knife_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yhvjk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jtgf0"]
 advance_mode = 2
 advance_condition = &"crouch"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38utl"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ianvg"]
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"crouching"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7s67u"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uvmn7"]
 advance_mode = 2
 advance_condition = &"not_crouch"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_54ebg"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lh15g"]
+states/2knife_attack/node = SubResource("AnimationNodeAnimation_va8ie")
+states/2knife_attack/position = Vector2(104, 20)
 states/Start/position = Vector2(266, 11)
 states/air_s_kick/node = SubResource("AnimationNodeAnimation_tcpvf")
 states/air_s_kick/position = Vector2(24, 244)
@@ -201,7 +216,7 @@ states/crouch_w_punch/position = Vector2(751, -130)
 states/crouching/node = SubResource("AnimationNodeAnimation_h7ygo")
 states/crouching/position = Vector2(585, -60)
 states/idle_anim/node = SubResource("AnimationNodeAnimation_h2nsw")
-states/idle_anim/position = Vector2(271, 176)
+states/idle_anim/position = Vector2(243, 205)
 states/land/node = SubResource("AnimationNodeAnimation_xdnet")
 states/land/position = Vector2(266, 346)
 states/s_kick/node = SubResource("AnimationNodeAnimation_jrex2")
@@ -212,8 +227,37 @@ states/w_kick/node = SubResource("AnimationNodeAnimation_apyy6")
 states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
-transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_fkskv"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_38utl"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_7s67u")]
-graph_offset = Vector2(-50, 13.7459)
+transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "idle_anim", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_dpwar"), "2knife_attack", "idle_anim", SubResource("AnimationNodeStateMachineTransition_yhvjk"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_jtgf0"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_ianvg"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmn7")]
+graph_offset = Vector2(-35, -62)
+
+[sub_resource type="Animation" id="Animation_vp1kp"]
+resource_name = "2knife_attack"
+length = 0.150002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 5), Vector2(287, -103)]
+}
 
 [sub_resource type="Animation" id="Animation_h1eyv"]
 length = 0.001
@@ -313,18 +357,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("head_hurt_box/CollisionShape2D:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-8, 98)]
 }
 
 [sub_resource type="Animation" id="Animation_ld7p7"]
@@ -869,18 +901,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("head_hurt_box/CollisionShape2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-8, 98)]
-}
 
 [sub_resource type="Animation" id="Animation_ia5yg"]
 resource_name = "idle_anim"
@@ -907,30 +927,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(9, 9)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-3, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_hxat6"]
@@ -1116,6 +1112,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_max1l"]
 _data = {
+"2knife_attack": SubResource("Animation_vp1kp"),
 "RESET": SubResource("Animation_h1eyv"),
 "air_s_kick": SubResource("Animation_ld7p7"),
 "air_s_punch": SubResource("Animation_5v44t"),
@@ -1161,24 +1158,19 @@ height = 210.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7dml"]
 
-[node name="Ellie" type="CharacterBody2D"]
+[node name="Anastasia AI" type="CharacterBody2D"]
 position = Vector2(303, 871)
 collision_layer = 0
-script = ExtResource("1_r7jln")
-character_name = "Ellie"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(-3, 0)
-scale = Vector2(9, 9)
-texture = ExtResource("2_gqrgg")
-hframes = 8
-frame = 7
+script = ExtResource("2_puiur")
+ai_player = true
+fly = false
+character_name = "Anastasia"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_54ebg")
+tree_root = SubResource("AnimationNodeStateMachine_lh15g")
 advance_expression_base_node = NodePath("")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/2knife_attack = false
 parameters/conditions/air_s_kick = false
 parameters/conditions/air_s_punch = false
 parameters/conditions/air_w_kick = false
@@ -1200,6 +1192,20 @@ parameters/conditions/w_punch = false
 libraries = {
 "": SubResource("AnimationLibrary_max1l")
 }
+
+[node name="AI_StateMachine" parent="." instance=ExtResource("2_dw2ie")]
+
+[node name="camp" type="Node2D" parent="AI_StateMachine"]
+script = ExtResource("3_30wjw")
+retreating_special = "triple_bombardment_"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-3, 0)
+scale = Vector2(9, 9)
+texture = ExtResource("4_w1tbb")
+hframes = 8
+frame = 7
 
 [node name="Feet" type="CollisionShape2D" parent="."]
 position = Vector2(19.5, 154.5)
@@ -1236,20 +1242,20 @@ shape = SubResource("RectangleShape2D_4w7ad")
 debug_color = Color(0, 0.77905, 0.257128, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_lmxlw")
+script = ExtResource("5_fmlp2")
 initial_state = NodePath("ground_move")
 
 [node name="knocked" type="Node2D" parent="StateMachine"]
-script = ExtResource("4_r3xtr")
+script = ExtResource("6_2egvl")
 
 [node name="ground_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_ivl1b")
+script = ExtResource("7_qmayu")
 
 [node name="air_move" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_8hb6d")
+script = ExtResource("8_hwe5c")
 
 [node name="crouch" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_ynsb0")
+script = ExtResource("9_vummm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1264,7 +1270,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_a7xf5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
-script = ExtResource("8_4dgrw")
+script = ExtResource("10_cnngo")
 
 [node name="Body" type="Area2D" parent="."]
 
@@ -1285,14 +1291,15 @@ shape = SubResource("CircleShape2D_v7dml")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
 
 [node name="PositionSynchronizer" type="Node" parent="."]
-script = ExtResource("9_11ku0")
+script = ExtResource("11_0ipgv")
 refresh_rate = 60
 node_path = NodePath("..")
 property_name = "position"
 interpolated = true
 interpolation_speed = 60.0
 
-[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
 [connection signal="area_entered" from="head_hurt_box" to="." method="_on_head_area_entered"]
+
+[editable path="AI_StateMachine"]

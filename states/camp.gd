@@ -10,6 +10,9 @@ var direction_chosen : bool = true
 var current_direction : String = "none"
 
 @export var zone_distance : int = 900
+@export var retreating_special : String = "book_shield_"
+@export var shoot_input : String = "s_kick"
+@export var retreat_atk : String = "s_kick"
 
 var timer : float = 3.0
 
@@ -63,12 +66,12 @@ func physics_update(delta : float):
 						await get_tree().create_timer(move_timer/120.0).timeout
 						player.ai_press_input("crouch",40)
 						await get_tree().create_timer(0.017).timeout
-						player.ai_press_input("s_kick",2)
+						player.ai_press_input(retreat_atk,2)
 					elif retreating_projectile <= 4:
 						var not_direction : String =""
 						if player.direction == "right": not_direction = "left"
 						else: not_direction = "right"
-						player.input_buffer.clear(); player.input_buffer.append_array(player.moveset["book_shield_" + not_direction])
+						player.input_buffer.clear(); player.input_buffer.append_array(player.moveset[retreating_special + not_direction])
 						player.perform_move()
 			else:
 				
@@ -88,12 +91,12 @@ func physics_update(delta : float):
 						await get_tree().create_timer(move_timer/120.0).timeout
 						player.ai_press_input("crouch",40)
 						await get_tree().create_timer(0.017).timeout
-						player.ai_press_input("s_kick",2)
+						player.ai_press_input(retreat_atk,2)
 					elif retreating_projectile <= 4:
 						var not_direction : String =""
 						if player.direction == "right": not_direction = "left"
 						else: not_direction = "right"
-						player.input_buffer.clear(); player.input_buffer.append_array(player.moveset["book_shield_" + not_direction])
+						player.input_buffer.clear(); player.input_buffer.append_array(player.moveset[retreating_special + not_direction])
 						player.perform_move()
 
 			move_timer /= 60
@@ -107,7 +110,7 @@ func physics_update(delta : float):
 
 func shoot_projectile():
 	
-	player.ai_press_input("s_kick",1)
+	player.ai_press_input(shoot_input,1)
 	shot_projectiles += 1
 	
 	if shot_projectiles >= shoot_amount:

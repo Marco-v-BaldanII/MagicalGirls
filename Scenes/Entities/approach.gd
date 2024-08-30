@@ -26,10 +26,10 @@ func physics_update(delta : float):
 	
 	if abs(player.oponent.global_position.x - player.global_position.x) > atk_distance:
 		if player.oponent.direction == "left":
-			player.ai_press_input("move_left",2)
+			player.ai_press_input("move_left",20)
 			player.input_buffer.push_back("move_left")
 		else:
-			player.ai_press_input("move_right",2)
+			player.ai_press_input("move_right",20)
 			player.input_buffer.push_back("move_right")
 	else:
 		Transitioned.emit(self, "attack")

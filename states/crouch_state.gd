@@ -49,6 +49,7 @@ func exit():
 	player.crouching = false
 	player.animation_tree["parameters/conditions/crouch"] = false
 	player.animation_tree["parameters/conditions/not_crouch"] = true
+	
 	#player.animation_player.play("idle_anim")
 	
 
