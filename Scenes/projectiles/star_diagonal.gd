@@ -9,7 +9,7 @@ var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	dmg = 2
+
 	GDSync.expose_node(self)
 	set_physics_process(false)
 	hide()
@@ -54,3 +54,8 @@ func destroy_projectile():
 	await  get_tree().create_timer(0.017).timeout
 	queue_free()
 	
+func _on_area_2d_area_entered(area: Area2D) -> void:
+
+	
+	if area.is_in_group("projectile"):
+		collide_with_projectile(area)

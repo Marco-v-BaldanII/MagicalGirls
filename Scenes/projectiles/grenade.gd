@@ -101,13 +101,15 @@ func _physics_process(delta: float) -> void:
 	if speedY > 0:speedY += 20
 	
 	if alive_time < 0:
+		explode()
+
+func explode():
 		animation_tree["parameters/conditions/explode"] = true
 		GDSync.call_func(change_animation,["explode"])
 		GDSync.call_func(assign_phys_layer,[3,4])
 		GDSync.call_func(assign_phys_layer,[2,5])
 		assign_phys_layer(2,5)
 		assign_phys_layer(3,4)
-
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
@@ -118,12 +120,17 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 var can_bounce : bool = false
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if can_bounce:
-		speed *= -0.6
-		og_speedX *= -0.6
+	if area.is_in_group("projectile"):
+		explode()
+	else:
+		if can_bounce:
+			speed *= -0.6
+			og_speedX *= -0.6
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	
+	
 	speedY = og_speedY*1.5/num_bounce
 	speed = og_speedX*1.5/num_bounce
 	speedY = clamp(speedY, -1000,-200)

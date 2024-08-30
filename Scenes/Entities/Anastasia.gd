@@ -223,3 +223,36 @@ func _physics_process(delta: float) -> void:
 				
 			current_start_projectile = null
 			
+
+func ai_on_hit():
+
+	
+	if hit_position == "body" and not blocked and not crouching :
+		var action_id : int = randi_range(0,1)
+		if action_id == 0:
+			ai_press_input("crouch",randi_range(70,200))
+		elif action_id == 1:
+			var atk_id = randi_range(0,4)
+				
+			match atk_id:
+					0:
+						ai_press_input("s_punch")
+					1:
+						ai_press_input("w_punch")
+					2:
+						ai_press_input("s_kick")
+					3: 
+						ai_press_input("w_kick")
+					4:
+						ai_press_input("crouch",30)
+
+			
+			var current_state = $AI_StateMachine.current_state.name
+			
+			if current_state == "camp":
+
+				$AI_StateMachine.on_child_transition($AI_StateMachine.current_state, "approach")
+				
+			else:
+				$AI_StateMachine.on_child_transition($AI_StateMachine.current_state, "camp")
+			pass

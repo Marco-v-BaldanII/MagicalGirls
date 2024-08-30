@@ -106,3 +106,12 @@ func deativate():
 
 	is_visible = false
 	_ready()
+
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	
+	if area.is_in_group("projectile"):
+		deativate()
+	else:
+		pass

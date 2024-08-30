@@ -83,7 +83,7 @@ states/explode/node = SubResource("AnimationNodeAnimation_hb6b8")
 states/explode/position = Vector2(444, 90)
 transitions = ["Start", "explode", SubResource("AnimationNodeStateMachineTransition_k2284")]
 
-[node name="Grenade" type="Sprite2D"]
+[node name="Grenade" type="Sprite2D" groups=["projectile"]]
 position = Vector2(113, 57)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_wf1yj")

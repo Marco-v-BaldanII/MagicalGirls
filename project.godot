@@ -67,6 +67,7 @@ weak_=""
 super_weak=""
 strong=""
 floor=""
+projectile=""
 
 [input]
 

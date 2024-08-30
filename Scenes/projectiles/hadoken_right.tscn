@@ -15,7 +15,7 @@ texture = ExtResource("1_bfalx")
 script = ExtResource("2_jyryr")
 speed = 500
 
-[node name="Area2D" type="Area2D" parent="." groups=["special"]]
+[node name="Area2D" type="Area2D" parent="." groups=["projectile", "special"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_bgkeb")

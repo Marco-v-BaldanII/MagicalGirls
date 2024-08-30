@@ -17,7 +17,7 @@ script = ExtResource("2_excbd")
 alive_time = 4.0
 speed = 550
 
-[node name="Area2D" type="Area2D" parent="." groups=["super_weak"]]
+[node name="Area2D" type="Area2D" parent="." groups=["projectile", "super_weak"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_isww1")

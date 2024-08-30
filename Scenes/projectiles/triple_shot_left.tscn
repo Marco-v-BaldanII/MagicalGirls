@@ -11,13 +11,16 @@ script = ExtResource("1_htwqo")
 position = Vector2(114, -151.6)
 lag_frames = 0
 speedY = 300
+dmg = 6.0
 
 [node name="Hadoken" parent="." instance=ExtResource("2_kv8c6")]
 position = Vector2(113, -151.6)
 lag_frames = 0
 speed = 600
+dmg = 6.0
 
 [node name="Star2" parent="." instance=ExtResource("1_3ylvx")]
 position = Vector2(114, -151.6)
 lag_frames = 0
 speedY = -300
+dmg = 6.0

@@ -22,6 +22,8 @@ func _physics_process(delta: float) -> void:
 func assign_phys_layer(layer : int, mask : int):
 	if not area_2d: area_2d = $Area2D
 	area_2d.set_collision_layer_value(layer,true)
+	if layer == 2: area_2d.set_collision_mask_value(3,true)
+	else: area_2d.set_collision_mask_value(2,true)
 	area_2d.set_collision_mask_value(mask,true)
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
@@ -50,7 +52,15 @@ func destroy_projectile():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	
 	if body.is_in_group("floor"):
 		await get_tree().create_timer(0.01667*5).timeout
 		moving = false
 	pass # Replace with function body.
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("projectile"):
+		collide_with_projectile(area)
+	else:
+		pass # Replace with function body.

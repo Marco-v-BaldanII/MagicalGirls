@@ -182,8 +182,8 @@ func _process(delta):
 		scale.x *= -1
 		direction = "left"
 		
-	if not crouching and animation_tree["parameters/conditions/not_crouch"] == false:
-		animation_tree["parameters/conditions/not_crouch"] = true
+	#if not crouching and animation_tree["parameters/conditions/not_crouch"] == false:
+		#animation_tree["parameters/conditions/not_crouch"] = true
 	if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
 		can_move = true
 

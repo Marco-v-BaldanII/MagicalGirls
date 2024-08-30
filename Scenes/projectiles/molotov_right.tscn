@@ -19,7 +19,7 @@ speed = 600
 speedY = -600
 dmg = 4.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["projectile"]]
 collision_layer = 0
 script = ExtResource("3_tmpp7")
 

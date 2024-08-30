@@ -14,7 +14,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_ye62c")
 script = ExtResource("2_p3c85")
 
-[node name="Area2D" type="Area2D" parent="." groups=["weak"]]
+[node name="Area2D" type="Area2D" parent="." groups=["projectile", "weak"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_gbwfr")
@@ -30,3 +30,5 @@ node_path = NodePath("..")
 property_name = "position"
 interpolated = false
 interpolation_speed = 1.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

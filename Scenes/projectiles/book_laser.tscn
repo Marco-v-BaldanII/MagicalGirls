@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 167.966
 
-[node name="Laser" type="Sprite2D"]
+[node name="Laser" type="Sprite2D" groups=["projectile"]]
 position = Vector2(113, 57)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_v1v4p")
@@ -46,3 +46,5 @@ node_path = NodePath("..")
 property_name = "dmg"
 interpolated = false
 interpolation_speed = 1.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
