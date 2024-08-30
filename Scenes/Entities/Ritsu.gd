@@ -79,7 +79,7 @@ func perform_move():
 
 					return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("w_punch"):
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_punch"):
 		
 		velocity.x = 0
 		
@@ -111,7 +111,7 @@ func perform_move():
 			
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
-	elif input_buffer.back().contains("w_punch") and current_start_projectile == null and  is_on_floor():
+	elif input_buffer.back().contains("s_punch") and current_start_projectile == null and  is_on_floor():
 
 		var star = instanciate_star()
 		GDSync.set_gdsync_owner(star,GDSync.get_client_id())
@@ -119,7 +119,7 @@ func perform_move():
 
 		
 	#diagonal non chargeable projectile on  air
-	elif not is_on_floor() and input_buffer.back().contains("w_punch") and not current_start_projectile:
+	elif not is_on_floor() and input_buffer.back().contains("s_punch") and not current_start_projectile:
 		
 		instanciate_diagonal_star()
 		GDSync.call_func(instanciate_diagonal_star)
@@ -158,7 +158,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
 	if is_on_floor():
-		if current_start_projectile != null and is_mapped_action_pressed("w_punch"):
+		if current_start_projectile != null and (is_mapped_action_pressed("s_punch") or is_input_pressed("s_punch")):
 			current_start_projectile.charge(global_position)
 			pass
 		elif current_start_projectile != null:

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dau41kote41f8"]
+
+[ext_resource type="PackedScene" uid="uid://ct7hitycb8c46" path="res://Scenes/Entities/Ritsu.tscn" id="1_yytyl"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_h8wp8"]
+[ext_resource type="Script" path="res://states/camp.gd" id="3_aj3o8"]
+
+[node name="Ritsu" instance=ExtResource("1_yytyl")]
+ai_player = true
+
+[node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_h8wp8")]
+
+[node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
+script = ExtResource("3_aj3o8")
+retreating_special = "fire_shot"
+shoot_input = "s_punch"
+retreat_atk = "s_punch"
+
+[editable path="AI_StateMachine"]

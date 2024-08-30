@@ -13,6 +13,7 @@ position = Vector2(113, 57)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_0yqcg")
 script = ExtResource("2_jbq4n")
+alive_time = 3.0
 speed = 900
 speedY = 3
 dmg = 5.0
