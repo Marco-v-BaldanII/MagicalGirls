@@ -165,11 +165,10 @@ scale = Vector2(0.6, 0.461)
 texture = ExtResource("6_ghpru")
 
 [node name="AnastasiaBG" type="ParallaxBackground" parent="Background"]
-visible = false
 
 [node name="snow" type="CPUParticles2D" parent="Background/AnastasiaBG"]
 position = Vector2(954, -110)
-amount = 120
+amount = 1000
 lifetime = 5.0
 texture = ExtResource("8_t155g")
 emission_shape = 3
@@ -311,7 +310,7 @@ scale = Vector2(1.04, 1.2)
 motion_scale = Vector2(0.105, 0.105)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/EllieBG/Ground2"]
-z_index = -6
+z_index = -5
 position = Vector2(937, 531)
 scale = Vector2(0.57, 0.461)
 texture = ExtResource("18_w0wlv")
@@ -341,12 +340,13 @@ offset_bottom = 1304.17
 rotation = -0.071896
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/EllieBG/Ground4"]
-z_index = -6
+z_index = -4
 position = Vector2(937, 531)
 scale = Vector2(0.57, 0.461)
 texture = ExtResource("20_84fyp")
 
 [node name="LarissaBG" type="ParallaxBackground" parent="Background"]
+visible = false
 
 [node name="Background" type="ParallaxLayer" parent="Background/LarissaBG"]
 position = Vector2(294, 159.48)

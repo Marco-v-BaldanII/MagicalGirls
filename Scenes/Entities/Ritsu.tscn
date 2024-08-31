@@ -1,7 +1,8 @@
-[gd_scene load_steps=67 format=3 uid="uid://ct7hitycb8c46"]
+[gd_scene load_steps=68 format=3 uid="uid://ct7hitycb8c46"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_hxmnc"]
+[ext_resource type="Texture2D" uid="uid://diruwspuw5k77" path="res://Assets/characters/Ritsu/Animations/ritsuPunch.png" id="2_kcdun"]
 [ext_resource type="PackedScene" uid="uid://mt26wg4plg0p" path="res://Scenes/Animations/RitsuAnimations.tscn" id="3_5br1e"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ujalq"]
@@ -246,6 +247,13 @@ height = 210.0
 position = Vector2(303, 871)
 collision_layer = 0
 script = ExtResource("1_h8qxx")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(56, -15)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_kcdun")
+hframes = 12
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
