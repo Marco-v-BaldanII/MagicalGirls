@@ -153,8 +153,8 @@ func _ready():
 	set_hitboxes(player_id)
 
 
-	var animation = $AnimationPlayer.get_animation("idle_anim")
-	animation.loop_mode = Animation.LOOP_PINGPONG
+	#var animation = $AnimationPlayer.get_animation("idle_anim")
+	#animation.loop_mode = Animation.LOOP_PINGPONG
 	
 	#Assign to each character their moveset
 	moveset = MovesetManager.movesets[character_name].duplicate()
@@ -184,22 +184,24 @@ func _process(delta):
 		
 	#if not crouching and animation_tree["parameters/conditions/not_crouch"] == false:
 		#animation_tree["parameters/conditions/not_crouch"] = true
-	if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
-		can_move = true
+	#if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
+		#can_move = true
 
 func _physics_process(delta):
 	#Safety conditions to prevent can't move softlock
-	if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move and animation_player.current_animation == "idle_anim":
-				can_move = true
-				crouching = false
-				
-	if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
-		can_move = true
+	#if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move and animation_player.current_animation == "idle_anim":
+				#can_move = true
+				#crouching = false
+				#
+	#if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
+		#can_move = true
 	
 	var s = animation_player.current_animation
-	
+	move_and_slide()
 	#if not crouching and animation_tree["parameters/conditions/not_crouch"] == true and (animation_player.current_animation == "crouching" or animation_player.current_animation == ""):
 		#animation_player.play("idle_anim")
+	
+	if not oponent: return
 	
 	var distance_to_cam : int = abs(global_position.x - match_setting.camera.center_pos)
 	var distance_to_rival : int = abs(global_position.x - oponent.global_position.x)
@@ -218,7 +220,7 @@ func _physics_process(delta):
 			match_setting.camera.velocity.x = velocity.x*0.6
 
 
-	move_and_slide()
+	
 
 func is_joy_button_just_pressed(action_name : String) -> bool:
 	if input_method != INPUT_METHOD.KEYBOARD:

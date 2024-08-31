@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dcnr1ch67xghk" path="res://Scenes/Entities/AIPlayer.tscn" id="4_m6wa3"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="5_0w2pn"]
 
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rhgy"]
 size = Vector2(1936, 135)
 
