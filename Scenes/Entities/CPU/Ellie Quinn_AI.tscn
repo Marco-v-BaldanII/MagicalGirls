@@ -12,4 +12,7 @@ ai_player = true
 [node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
 script = ExtResource("3_5nbar")
 
+[node name="Sprite2D" parent="." index="1"]
+frame = 6
+
 [editable path="AI_StateMachine"]
