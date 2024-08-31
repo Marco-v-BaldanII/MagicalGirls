@@ -1,6 +1,7 @@
-[gd_scene load_steps=84 format=3 uid="uid://ct7hitycb8c46"]
+[gd_scene load_steps=98 format=3 uid="uid://ct7hitycb8c46"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
+[ext_resource type="Texture2D" uid="uid://b6k374aaw3ydf" path="res://Assets/characters/Ritsu/Animations/ritsuIddlea.png" id="2_7a0mk"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_hxmnc"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ujalq"]
@@ -9,6 +10,103 @@
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_t58ng"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_wgxbo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bth1o"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(0, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icohq"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(333, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amxw3"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(666, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4li4a"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(999, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yurre"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(1332, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lspyv"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(1665, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gawt2"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(1998, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnokp"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(2331, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c48ny"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(2664, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esvw6"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(2997, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3o6b"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(3330, 0, 333, 345)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1446t"]
+atlas = ExtResource("2_7a0mk")
+region = Rect2(3663, 0, 333, 345)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_snlrt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bth1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icohq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amxw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4li4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yurre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lspyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gawt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnokp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c48ny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esvw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3o6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1446t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -41,7 +139,7 @@ animation = &"crouch_w_punch"
 animation = &"crouching"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2nsw"]
-animation = &"idle_anim"
+animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdnet"]
 animation = &"land"
@@ -213,7 +311,7 @@ states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(411, 148)
 transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_76fnt"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_d6iw6"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_y58wf"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g")]
-graph_offset = Vector2(-20, -186)
+graph_offset = Vector2(-101, 118)
 
 [sub_resource type="Animation" id="Animation_h1eyv"]
 length = 0.001
@@ -313,6 +411,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AnimatedSprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AnimatedSprite2D:animation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
 }
 
 [sub_resource type="Animation" id="Animation_ld7p7"]
@@ -860,6 +982,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_ia5yg"]
 resource_name = "idle_anim"
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -883,6 +1006,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0833335, 0.166667, 0.25, 0.333334, 0.416667, 0.500001, 0.583334, 0.666668, 0.750001, 0.833335, 0.916668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_hxat6"]
@@ -1028,6 +1175,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_hgs7n"]
 resource_name = "w_punch"
 length = 0.233337
+step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1114,8 +1262,16 @@ height = 210.0
 
 [node name="Ritsu" type="CharacterBody2D"]
 position = Vector2(303, 871)
+scale = Vector2(1.25, 1.25)
 collision_layer = 0
 script = ExtResource("1_h8qxx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+position = Vector2(20, 4.00001)
+scale = Vector2(1.03228, 1.03116)
+sprite_frames = SubResource("SpriteFrames_snlrt")
+animation = &"idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1123,7 +1279,6 @@ position = Vector2(-3, 0)
 scale = Vector2(9, 9)
 texture = ExtResource("2_hxmnc")
 hframes = 8
-frame = 7
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_54ebg")
