@@ -383,3 +383,5 @@ interpolation_speed = 60.0
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
 [connection signal="area_entered" from="head_hurt_box" to="." method="_on_head_area_entered"]
+
+[editable path="AnimationPlayer"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://io2t2ltetkpm"]
+[gd_scene load_steps=88 format=3 uid="uid://csnjwv6sxapx"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/larissa.gd" id="1_ohpxn"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_0yl7x"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuxw6kv17566f"]
+
+[ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie Quinn.tscn" id="1_3gvd0"]
+[ext_resource type="Script" path="res://Scenes/Entities/larissa.gd" id="1_i8trq"]
+[ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="10_oqbgm"]
+
+[node name="Larissa_AI" instance=ExtResource("1_3gvd0")]
+script = ExtResource("1_i8trq")
+ai_player = true
+fly = false
+character_name = "Larissa"
+
+[node name="AI_StateMachine" parent="." index="0" instance=ExtResource("10_oqbgm")]
+
+[editable path="AI_StateMachine"]
