@@ -41,6 +41,7 @@ offset_bottom = 2002.0
 texture = SubResource("Texture2D_r8uyx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 offset_left = 602.0
 offset_top = 106.0
 offset_right = 1304.0
@@ -79,12 +80,23 @@ vbox = NodePath("../../VBoxContainer")
 [node name="ControlerMenu1" parent="CanvasLayer/LobbySelection/P1_control_selection" index="0"]
 script = ExtResource("3_hbw2o")
 
+[node name="password_edit" type="TextEdit" parent="CanvasLayer/LobbySelection"]
+offset_left = -1405.0
+offset_top = -700.0
+offset_right = -1019.0
+offset_bottom = -652.0
+theme_override_font_sizes/font_size = 25
+placeholder_text = "              Type Password"
+
 [node name="cursor" type="Sprite2D" parent="CanvasLayer"]
 visible = false
 position = Vector2(165, 299)
 texture = ExtResource("4_v2qc8")
 
 [node name="LobbyCreator" type="Node2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(34, -488)
+scale = Vector2(1.88, 1.88)
 script = ExtResource("4_3ldkt")
 
 [node name="LobbyName" type="TextEdit" parent="CanvasLayer/LobbyCreator"]
@@ -144,6 +156,7 @@ text = "waiting for oponent..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="." method="_on_go_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/my_lobby" method="_on_go_back_pressed"]

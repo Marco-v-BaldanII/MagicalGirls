@@ -21,5 +21,10 @@ func receive_lobbies(lobbies : Array):
 		var option = LOBBY_OPTION.instantiate()
 		add_child(option)
 		option.label.text = lobby["Name"]
+		option.password_edit = $"../../password_edit"    
 		get_parent().options.push_back(option)
+		
+		if lobby["Tags"]["public"] == true:
+			option.show_lock()
+		
 	pass

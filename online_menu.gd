@@ -117,6 +117,7 @@ func _on_join_button_button_down():
 		#GDSync.join_lobby("Lobby Name", "Password123")
 		#v_box_container.hide()
 		$CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
+		v_box_container.hide()
 		lobby_selection.show()
 		#node_instantiator.instantiate_node()
 
@@ -157,3 +158,14 @@ func to_title_screen():
 	SceneWrapper.change_scene(load("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))
 	
 	
+
+func _process(delta: float) -> void:
+	if Input.is_joy_button_pressed(0,Controls.ui["go_back"][0]) or Input.is_physical_key_pressed(Controls.ui["go_back"][1]):
+		_on_go_back_pressed()
+
+func _on_go_back_pressed() -> void:
+	if v_box_container.visible:
+		GDSync.stop_multiplayer()
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+	
+	pass # Replace with function body.

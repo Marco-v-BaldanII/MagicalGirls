@@ -124,6 +124,9 @@ func _process(delta: float) -> void:
 						print("cehck box pressed")
 			
 			if is_joy_button_just_pressed("go_back"):
+				while  Input.is_joy_button_pressed(0,Controls.ui["go_back"][0]) or  Input.is_physical_key_pressed(Controls.ui["go_back"][1]):
+					await get_tree().create_timer(0.017).timeout
+				#wait for the  input to not be pressed
 				_on_go_back_pressed()
 
 

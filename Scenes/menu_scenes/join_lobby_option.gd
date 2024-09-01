@@ -34,3 +34,6 @@ func receive_lobbies(lobbies : Array):
 	
 	GDSync.join_lobby(label.text, password)
 	pass
+
+func show_lock(show : bool):
+	if show : $lock.show()
