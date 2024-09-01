@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scenes/menu_scenes/input_viewer.gd" id="1_uo8v2"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_vqsjr"]
 
-
 [sub_resource type="Texture2D" id="Texture2D_y0sje"]
 resource_local_to_scene = false
 resource_name = ""

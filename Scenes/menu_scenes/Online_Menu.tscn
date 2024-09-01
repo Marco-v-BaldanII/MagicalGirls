@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=4 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
+[ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="2_561r3"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_menu.gd" id="3_hbw2o"]
 
 [node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
@@ -8,7 +10,6 @@ script = ExtResource("1_wibys")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-visible = false
 offset_left = 602.0
 offset_top = 106.0
 offset_right = 1304.0
@@ -34,6 +35,17 @@ scale = Vector2(2.52, 2.52)
 theme_override_font_sizes/font_size = 18
 text = "Online"
 
+[node name="ControlSelection" parent="CanvasLayer" instance=ExtResource("2_561r3")]
+position = Vector2(2165, 993)
+
+[node name="P1_control_selection" parent="CanvasLayer/ControlSelection" index="1"]
+_is_active = true
+
+[node name="ControlerMenu1" parent="CanvasLayer/ControlSelection/P1_control_selection" index="0"]
+script = ExtResource("3_hbw2o")
+
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
+
+[editable path="CanvasLayer/ControlSelection"]

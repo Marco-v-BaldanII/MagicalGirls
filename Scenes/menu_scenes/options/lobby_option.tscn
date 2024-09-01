@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://k1lv633wv3h4"]
+
+[ext_resource type="Script" path="res://Scenes/menu_scenes/join_lobby_option.gd" id="1_jbhlh"]
+
+[node name="ColorRect" type="ColorRect"]
+custom_minimum_size = Vector2(500, 80)
+script = ExtResource("1_jbhlh")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Super Lobby"
+horizontal_alignment = 1
