@@ -30,6 +30,11 @@ func _on_button_button_down() -> void:
 		GameManager.is_host = true
 		GameManager.joined_lobby.emit()
 	
+	
+		$"../my_lobby".show()
+		$"../my_lobby".label.text = lobby_name.text
+		hide()
+	
 	pass # Replace with function body.
 
 
@@ -71,6 +76,7 @@ func _ready():
 	
 
 func _process(delta: float) -> void:
+	if not visible: return
 	
 	timer -= delta
 	
@@ -116,7 +122,9 @@ func _process(delta: float) -> void:
 					if  current_option is CheckButton:
 						current_option.button_pressed = !current_option.button_pressed
 						print("cehck box pressed")
-
+			
+			if is_joy_button_just_pressed("go_back"):
+				_on_go_back_pressed()
 
 
 
@@ -156,7 +164,7 @@ var action_state : Dictionary = {
 	"move_down" : false,
 	"move_up" : false,
 	"accept" : false,
-	"s_punch" : false,
+	"go_back" : false,
 	"w_kick" : false,
 	"s_kick" : false
 }
@@ -169,3 +177,11 @@ func is_joy_button_just_pressed(action_name : String) -> bool:
 		if not Input.is_joy_button_pressed(0, Controls.ui[action_name][0]) and not Input.is_physical_key_pressed(Controls.ui[action_name][1]):
 			action_state[action_name] = false
 		return false
+
+
+func _on_go_back_pressed() -> void:
+	if visible:
+		$"../VBoxContainer".show()
+		hide()
+	
+	pass # Replace with function body.

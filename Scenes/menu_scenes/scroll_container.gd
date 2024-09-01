@@ -133,7 +133,10 @@ func _input(event):
 						
 					else:
 						current_option.execute_option()
-			
+		if is_joy_button_just_pressed("go_back"):
+				
+			_on_go_back_pressed()
+				
 
 
 
@@ -231,3 +234,13 @@ func change_in_controllers():
 			2: 
 				if player_id == 0: input_method = 0;
 				elif player_id == 1: input_method = 1
+
+@export var lobby_selection: Node2D 
+@export var vbox : VBoxContainer
+
+func _on_go_back_pressed() -> void:
+	if lobby_selection.visible:
+		lobby_selection.hide()
+		vbox.show()
+		pass
+	pass # Replace with function body.

@@ -15,6 +15,8 @@ var online : bool:
 func _ready():
 	online = false
 	GDSync.expose_node(self)
+	
+	_on_online_button_button_down()
 
 	#
 	#$PropertySynchronizer.node_path = p1
@@ -81,19 +83,22 @@ func lobby_join_failed(lobby_name : String, error : int):
 
 func _on_host_button_button_down():
 	if online:
-		GDSync.create_lobby(
-		"Lobby Name",
-		"Password123",
-		true,
-		10,
-		{
-			"Map" : "Desert",
-			"Game Mode" : "Free For All"
-		}
-		)
-		#GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
-		GameManager.is_host = true
-		GameManager.joined_lobby.emit()
+		#GDSync.create_lobby(
+		#"Lobby Name",
+		#"Password123",
+		#true,
+		#10,
+		#{
+			#"Map" : "Desert",
+			#"Game Mode" : "Free For All"
+		#}
+		#)
+		##GDSync.set_gdsync_owner(player_1, GDSync.get_client_id())
+		#GameManager.is_host = true
+		#GameManager.joined_lobby.emit()
+		
+		$CanvasLayer/LobbyCreator.show()
+		
 		#i could loop through all it's children and set gdsync owner
 	v_box_container.hide()
 
@@ -102,7 +107,8 @@ func _on_join_button_button_down():
 	if online:
 		#GDSync.join_lobby("Lobby Name", "Password123")
 		#v_box_container.hide()
-		$CanvasLayer/ControlSelection/P1_control_selection/ControlerMenu1._ready()
+		$CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
+		$CanvasLayer/LobbySelection.show()
 		#node_instantiator.instantiate_node()
 
 
