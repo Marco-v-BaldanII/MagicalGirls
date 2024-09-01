@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=15 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
+[ext_resource type="Texture2D" uid="uid://df8g0yxsec1nb" path="res://Assets/UI/ritsu portrait(2).png" id="3_q1jj1"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
+[ext_resource type="Texture2D" uid="uid://dabpluqqm3tfa" path="res://Assets/UI/anastasia portrait(1).png" id="4_e7lsl"]
+[ext_resource type="Texture2D" uid="uid://oi674s6pvdsw" path="res://Assets/UI/ellie portrait(3).png" id="5_dti1v"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/controler_menu.gd" id="7_5016i"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="7_hiedg"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="8_l0m68"]
@@ -96,19 +99,19 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-texture = ExtResource("1_jt3s1")
+texture = ExtResource("3_q1jj1")
 
 [node name="Anastasia" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-texture = ExtResource("1_jt3s1")
+texture = ExtResource("4_e7lsl")
 
 [node name="Ellie Quinn" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-texture = ExtResource("1_jt3s1")
+texture = ExtResource("5_dti1v")
 
 [node name="Larissa" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
