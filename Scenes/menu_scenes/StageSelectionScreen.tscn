@@ -1,0 +1,368 @@
+[gd_scene load_steps=41 format=3 uid="uid://dq5o8hv6iaamp"]
+
+[ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_yfclx"]
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="3_j4dlq"]
+[ext_resource type="Texture2D" uid="uid://cxhlqthcys3vv" path="res://Assets/UI/japan bg full.png" id="4_osqnq"]
+[ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="4_y4x15"]
+[ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="5_2ms6r"]
+[ext_resource type="Texture2D" uid="uid://dwlcjkslketbu" path="res://Assets/UI/rusia bg full.png" id="5_kcjj4"]
+[ext_resource type="Texture2D" uid="uid://10laaqokt11i" path="res://Assets/UI/library bg full.png" id="6_hdlsg"]
+[ext_resource type="PackedScene" uid="uid://dhe6lj8x5nk7d" path="res://Scenes/menu_scenes/Online_Menu.tscn" id="6_qjhoq"]
+[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="7_cbwjp"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="8_gspx1"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="8_kpqop"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/controler_menu.gd" id="9_ikbv2"]
+[ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="10_te4s5"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_qt76p"]
+[ext_resource type="Texture2D" uid="uid://8krekpnwof5j" path="res://Assets/UI/standard button.png" id="15_bob0a"]
+[ext_resource type="Texture2D" uid="uid://d00ch4i8luj4l" path="res://Assets/UI/bgbgbg.PNG" id="16_ypmaj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h1rq7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pnub7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4n5tm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gdg6g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_31ahe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgr38"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7yo65"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m03gv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0v5fw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2god1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s4aaq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cccyb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0ggu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5n7wk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ltsd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hga3k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5glbe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bf5j6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6vdk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ia667"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fp6tq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gdn37"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0kj5n"]
+
+[sub_resource type="Texture2D" id="Texture2D_dtlya"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("11_qt76p")
+path = "settings"
+show_mode = 0
+force_type = 0
+
+[node name="CharacterSelectionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_yfclx")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1575.0
+offset_top = 383.333
+offset_right = -1063.0
+offset_bottom = 895.333
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_j4dlq")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1066.67
+offset_top = 383.333
+offset_right = 1578.67
+offset_bottom = 895.333
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_j4dlq")
+
+[node name="Position" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1583.33
+offset_top = -883.333
+offset_right = -1543.33
+offset_bottom = -843.333
+
+[node name="PositionDown" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1583.33
+offset_top = 563.333
+offset_right = -1543.33
+offset_bottom = 603.333
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -772.0
+offset_top = -514.0
+offset_right = 772.0
+offset_bottom = 514.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RitsuBG" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("4_osqnq")
+
+[node name="AnastasiaBG" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("5_kcjj4")
+
+[node name="Ellie QuinnBG" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("6_hdlsg")
+
+[node name="LarissaBG" type="TextureRect" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("3_j4dlq")
+
+[node name="SelectCharacter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y4x15")
+
+[node name="MenuSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2ms6r")
+volume_db = -11.243
+
+[node name="StartButton" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 0
+offset_left = 198.333
+offset_top = 620.0
+offset_right = 698.333
+offset_bottom = 918.0
+theme_override_fonts/font = ExtResource("8_kpqop")
+theme_override_font_sizes/font_size = 200
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h1rq7")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pnub7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4n5tm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_gdg6g")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_31ahe")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mgr38")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7yo65")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m03gv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0v5fw")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_2god1")
+theme_override_styles/normal = SubResource("StyleBoxTexture_s4aaq")
+text = "Start"
+icon = SubResource("ViewportTexture_cccyb")
+
+[node name="StartButton2" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 0
+offset_left = -615.0
+offset_top = 620.0
+offset_right = -115.0
+offset_bottom = 910.0
+theme_override_fonts/font = ExtResource("8_kpqop")
+theme_override_font_sizes/font_size = 200
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s0ggu")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5n7wk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2ltsd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_hga3k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5glbe")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_bf5j6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p6vdk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ia667")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fp6tq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gdn37")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0kj5n")
+text = "Random"
+
+[node name="OnlineMenu" parent="." instance=ExtResource("6_qjhoq")]
+position = Vector2(0, -230)
+
+[node name="ControlSelection" type="Node2D" parent="."]
+visible = false
+
+[node name="cursor" type="Sprite2D" parent="ControlSelection"]
+position = Vector2(-926.667, -522.667)
+texture = ExtResource("7_cbwjp")
+
+[node name="P1_control_selection" type="ScrollContainer" parent="ControlSelection"]
+offset_left = -1502.0
+offset_top = -579.0
+offset_right = -845.0
+offset_bottom = 6.99994
+script = ExtResource("8_gspx1")
+cursor_offset = 16
+_is_active = false
+num_of_options_fit = 5
+scroll_offset = 120
+
+[node name="ControlerMenu1" type="GridContainer" parent="ControlSelection/P1_control_selection"]
+custom_minimum_size = Vector2(500, 1000)
+layout_mode = 2
+theme_override_constants/v_separation = 20
+script = ExtResource("9_ikbv2")
+
+[node name="Controler_Option" parent="ControlSelection/P1_control_selection/ControlerMenu1" instance=ExtResource("10_te4s5")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ControlSelection"]
+offset_left = -1547.0
+offset_top = -863.0
+offset_right = -848.0
+offset_bottom = -706.0
+theme_override_font_sizes/font_size = 60
+text = "Change Control Scheme"
+
+[node name="start_icon" type="TextureRect" parent="ControlSelection"]
+offset_left = -815.0
+offset_top = -865.0
+offset_right = -658.0
+offset_bottom = -708.0
+texture = SubResource("Texture2D_dtlya")
+
+[node name="tag_panel" type="Panel" parent="ControlSelection"]
+offset_left = -1500.0
+offset_top = -690.0
+offset_right = -870.0
+offset_bottom = -598.0
+
+[node name="tag_label" type="Label" parent="ControlSelection/tag_panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_right = 615.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 60
+text = "Player 1"
+
+[node name="ControlSelection2" type="Node2D" parent="."]
+visible = false
+position = Vector2(2230, 0)
+
+[node name="cursor" type="Sprite2D" parent="ControlSelection2"]
+position = Vector2(-926.667, -522.667)
+texture = ExtResource("7_cbwjp")
+
+[node name="P2_control_selection" type="ScrollContainer" parent="ControlSelection2"]
+offset_left = -1502.0
+offset_top = -579.0
+offset_right = -845.0
+offset_bottom = 6.99994
+script = ExtResource("8_gspx1")
+cursor_offset = 16
+player_id = 1
+_is_active = false
+num_of_options_fit = 5
+scroll_offset = 120
+
+[node name="ControlerMenu1" type="GridContainer" parent="ControlSelection2/P2_control_selection"]
+custom_minimum_size = Vector2(500, 1000)
+layout_mode = 2
+theme_override_constants/v_separation = 20
+script = ExtResource("9_ikbv2")
+
+[node name="Controler_Option" parent="ControlSelection2/P2_control_selection/ControlerMenu1" instance=ExtResource("10_te4s5")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ControlSelection2"]
+offset_left = -1547.0
+offset_top = -863.0
+offset_right = -848.0
+offset_bottom = -706.0
+theme_override_font_sizes/font_size = 60
+text = "Change Control Scheme"
+
+[node name="start_icon" type="TextureRect" parent="ControlSelection2"]
+offset_left = -815.0
+offset_top = -865.0
+offset_right = -658.0
+offset_bottom = -708.0
+texture = SubResource("Texture2D_dtlya")
+
+[node name="tag_panel" type="Panel" parent="ControlSelection2"]
+offset_left = -1500.0
+offset_top = -690.0
+offset_right = -870.0
+offset_bottom = -598.0
+
+[node name="tag_label" type="Label" parent="ControlSelection2/tag_panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_right = 615.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 60
+text = "Player 2
+"
+
+[node name="StandardButton" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(416.667, 760)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_bob0a")
+
+[node name="StandardButton2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-410, 760)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_bob0a")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+z_index = -10
+layout_mode = 1
+offset_left = -2068.33
+offset_top = -1348.33
+offset_right = -1921.33
+offset_bottom = -1246.33
+scale = Vector2(27.0711, 23.9825)
+texture = ExtResource("16_ypmaj")
+
+[connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="StartButton2" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="ControlSelection/Button" to="ControlSelection/P1_control_selection" method="_on_button_button_down"]
+[connection signal="button_down" from="ControlSelection2/Button" to="ControlSelection2/P2_control_selection" method="_on_button_button_down"]
