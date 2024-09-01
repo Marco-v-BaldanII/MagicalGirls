@@ -1,4 +1,6 @@
 extends Option
+class_name ControlerOption
+
 @onready var label: Label = $Label
 
 

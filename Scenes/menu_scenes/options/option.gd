@@ -1,5 +1,5 @@
 extends Control
 class_name Option
 
-func execite_option() -> bool:
+func execute_option() -> bool:
 	return true

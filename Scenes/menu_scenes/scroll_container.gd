@@ -23,6 +23,7 @@ var num_scrolled_down : int = 0
 
 var marker_down : int = 0
 
+@export var controller_menu : bool = true
 
 enum axis{
 	X,
@@ -115,19 +116,23 @@ func _input(event):
 				_change_cursor_pos()
 				
 			if is_joy_button_just_pressed("accept") and current_option != null:
-				
-				var control_resource : ControlSource = load("res://ControlSchemes/"+current_option.label.text+".tres")
-				if player_id == 0:
-					Controls.p1 = control_resource.controls.duplicate()
-					Controls.mapping[0] = Controls.p1
-				else:
-					Controls.p2 = control_resource.controls.duplicate()
-					Controls.mapping[1] = Controls.p2
-				
-				#current_option.execute_option()
-				option_selected.emit()
-				$"../tag_panel/tag_label".text = current_option.label.text
-				deactivate()
+					if current_option is ControlerOption:
+						
+						var control_resource : ControlSource = load("res://ControlSchemes/"+current_option.label.text+".tres")
+						if player_id == 0:
+							Controls.p1 = control_resource.controls.duplicate()
+							Controls.mapping[0] = Controls.p1
+						else:
+							Controls.p2 = control_resource.controls.duplicate()
+							Controls.mapping[1] = Controls.p2
+						
+						#current_option.execute_option()
+						option_selected.emit()
+						$"../tag_panel/tag_label".text = current_option.label.text
+						deactivate()
+						
+					else:
+						current_option.execute_option()
 			
 
 

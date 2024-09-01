@@ -4,7 +4,7 @@ class_name OnlineMenu
 @onready var canvas_layer = $CanvasLayer
 @onready var v_box_container: VBoxContainer = $CanvasLayer/VBoxContainer
 
-const CHARACTER_SELECTION_SCREEN = preload("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn")
+@onready var CHARACTER_SELECTION_SCREEN = preload("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn")
 
 var online : bool:
 	set(value):
