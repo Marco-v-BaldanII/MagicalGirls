@@ -110,7 +110,7 @@ func _on_join_button_button_down():
 	if online:
 		#GDSync.join_lobby("Lobby Name", "Password123")
 		#v_box_container.hide()
-		p1_lobby_selection._ready()
+		$CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
 		lobby_selection.show()
 		#node_instantiator.instantiate_node()
 
