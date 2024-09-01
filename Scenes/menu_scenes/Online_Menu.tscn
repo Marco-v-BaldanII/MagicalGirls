@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=7 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="2_561r3"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_menu.gd" id="3_hbw2o"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_creator.gd" id="4_3ldkt"]
+[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="4_v2qc8"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/input_field_option.gd" id="5_jqadj"]
 
 [node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
@@ -44,8 +47,51 @@ _is_active = true
 [node name="ControlerMenu1" parent="CanvasLayer/ControlSelection/P1_control_selection" index="0"]
 script = ExtResource("3_hbw2o")
 
+[node name="cursor" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(165, 299)
+texture = ExtResource("4_v2qc8")
+
+[node name="LobbyCreator" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("4_3ldkt")
+
+[node name="LobbyName" type="TextEdit" parent="CanvasLayer/LobbyCreator"]
+offset_left = 75.0
+offset_top = 422.0
+offset_right = 679.0
+offset_bottom = 478.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "                     Type Lobby name"
+script = ExtResource("5_jqadj")
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/LobbyCreator"]
+offset_left = 690.0
+offset_top = 406.0
+offset_right = 795.0
+offset_bottom = 445.0
+scale = Vector2(2.12, 2.12)
+text = "Private"
+
+[node name="Button" type="Button" parent="CanvasLayer/LobbyCreator"]
+offset_left = 75.0
+offset_top = 519.0
+offset_right = 457.0
+offset_bottom = 577.0
+theme_override_font_sizes/font_size = 28
+text = "Create Lobby"
+
+[node name="LobbyPassword" type="TextEdit" parent="CanvasLayer/LobbyCreator"]
+offset_left = 483.0
+offset_top = 519.0
+offset_right = 908.0
+offset_bottom = 579.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "              Type password"
+script = ExtResource("5_jqadj")
+
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/LobbyCreator/Button" to="CanvasLayer/LobbyCreator" method="_on_button_button_down"]
 
 [editable path="CanvasLayer/ControlSelection"]

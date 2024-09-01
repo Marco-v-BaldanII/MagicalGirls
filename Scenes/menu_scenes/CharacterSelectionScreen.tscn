@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=13 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
-[ext_resource type="PackedScene" uid="uid://dhe6lj8x5nk7d" path="res://Scenes/menu_scenes/Online_Menu.tscn" id="2_sth4x"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_xooqk"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
@@ -147,9 +146,6 @@ offset_right = 255.0
 offset_bottom = 815.0
 theme_override_font_sizes/font_size = 120
 text = "Start"
-
-[node name="OnlineMenu" parent="." instance=ExtResource("2_sth4x")]
-position = Vector2(0, -230)
 
 [node name="start_icon" type="TextureRect" parent="."]
 layout_mode = 0

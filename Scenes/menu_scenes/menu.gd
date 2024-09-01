@@ -67,10 +67,14 @@ func _process(delta: float) -> void:
 				_change_cursor_pos()
 			
 			if (Input.is_joy_button_pressed(0, Controls.ui["accept"][0]) or Input.is_physical_key_pressed(Controls.ui["accept"][1])) and current_option != null:
-				#if current_option is Option:
+				if current_option is Option:
 					var  done : bool = current_option.execute_option()
 					if done:
 						deactivate()
+				elif current_option is Button:
+					#Programatically press button
+					current_option.pressed.emit()
+					current_option.button_down.emit()
 
 
 func _change_cursor_pos():

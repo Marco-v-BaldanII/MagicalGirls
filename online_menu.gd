@@ -139,6 +139,6 @@ func _on_online_button_button_down() -> void:
 
 func to_title_screen():
 	
-	SceneWrapper.change_scene(CHARACTER_SELECTION_SCREEN)
+	SceneWrapper.change_scene(load("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))
 	
 	
