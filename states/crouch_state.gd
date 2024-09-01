@@ -49,13 +49,12 @@ func exit():
 	player.crouching = false
 	player.animation_tree["parameters/conditions/crouch"] = false
 	player.animation_tree["parameters/conditions/not_crouch"] = true
-	
-	#player.animation_player.play("idle_anim")
+	player.animation_tree.set("parameters/playback/current", "idle_anim")
 	
 
 func transition_ground():
-	player.animation_tree["parameters/conditions/crouch"] = false
-	player.animation_tree["parameters/conditions/not_crouch"] = true
+	#player.animation_tree["parameters/conditions/crouch"] = false
+	#player.animation_tree["parameters/conditions/not_crouch"] = true
 	Transitioned.emit(self, "ground_move")
 
 	await  get_tree().create_timer(0.16*6).timeout

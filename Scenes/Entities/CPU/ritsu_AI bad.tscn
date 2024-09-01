@@ -7,10 +7,6 @@
 [node name="Ritsu" instance=ExtResource("1_yytyl")]
 ai_player = true
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-animation = &"default"
-frame = 1
-
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_h8wp8")]
 
 [node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
