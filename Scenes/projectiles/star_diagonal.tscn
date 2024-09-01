@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 167.966
 
-[node name="Star" type="Sprite2D"]
+[node name="Star2" type="Sprite2D"]
 position = Vector2(113, 57)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_ye62c")

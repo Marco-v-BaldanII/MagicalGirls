@@ -40,7 +40,13 @@ func connection_failed(error : int):
 
 func lobby_created(lobby_name : String):
 	print("Succesfully created lobby "+lobby_name)
-	GDSync.join_lobby(lobby_name, "Password123")
+	var password : String = "Password123"
+	
+	if $CanvasLayer/LobbyCreator/CheckButton.button_pressed: #If the lobby is marked as private
+		#Get the written password
+		password = $CanvasLayer/LobbyCreator/LobbyPassword.text
+		
+	GDSync.join_lobby(lobby_name, password)
 #	Now you can join the lobby!
 
 func lobby_creation_failed(lobby_name : String, error : int):
