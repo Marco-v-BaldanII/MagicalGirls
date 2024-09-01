@@ -4,6 +4,8 @@ class_name OnlineMenu
 @onready var canvas_layer = $CanvasLayer
 @onready var v_box_container: VBoxContainer = $CanvasLayer/VBoxContainer
 
+const CHARACTER_SELECTION_SCREEN = preload("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn")
+
 var online : bool:
 	set(value):
 		GameManager.online = value
@@ -12,7 +14,7 @@ var online : bool:
 
 func _ready():
 	online = false
-	
+	GDSync.expose_node(self)
 
 	#
 	#$PropertySynchronizer.node_path = p1
@@ -98,8 +100,9 @@ func _on_host_button_button_down():
 
 func _on_join_button_button_down():
 	if online:
-		GDSync.join_lobby("Lobby Name", "Password123")
-		v_box_container.hide()
+		#GDSync.join_lobby("Lobby Name", "Password123")
+		#v_box_container.hide()
+		$CanvasLayer/ControlSelection/P1_control_selection/ControlerMenu1._ready()
 		#node_instantiator.instantiate_node()
 
 
@@ -108,6 +111,8 @@ func client_joined(client_id : int):
 		#GDSync.set_gdsync_owner(player_2, client_id)
 		GameManager.joined_lobby.emit()
 		GameManager.online_setup.emit()
+		to_title_screen()
+		GDSync.call_func(to_title_screen)
 
 func _on_online_button_button_down() -> void:
 	if not online:
@@ -131,3 +136,9 @@ func _on_online_button_button_down() -> void:
 		
 	
 	pass # Replace with function body.
+
+func to_title_screen():
+	
+	SceneWrapper.change_scene(CHARACTER_SELECTION_SCREEN)
+	
+	

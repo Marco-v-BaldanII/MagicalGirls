@@ -2,6 +2,7 @@ extends Node
 
 func _ready() -> void:
 	GDSync.expose_node(self)
+	joined_lobby.connect(online_selection)
 
 signal joined_lobby
 signal online_setup
@@ -36,7 +37,8 @@ var default_camera_pos : Vector2 = Vector2(0,0)
 var character_selection_mode : int = 0
 #0 = LOCAL_2P , 1 = ONLINE_2P , 2 = CPU
 
-	
+func online_selection():
+	character_selection_mode = 1
 
 func add_player(player : Player):
 	players.push_back(player)

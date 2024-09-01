@@ -152,6 +152,7 @@ text = "Start"
 position = Vector2(0, -230)
 
 [node name="start_icon" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -815.0
 offset_top = -865.0
 offset_right = -658.0

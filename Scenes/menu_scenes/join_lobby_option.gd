@@ -1,12 +1,11 @@
 extends Option
 class_name JoinLobbyOption
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var label: Label = $Label
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func execite_option() -> bool:
+	
+	GDSync.join_lobby(label.text, "Password123")
+	
+	return true
