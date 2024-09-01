@@ -79,6 +79,9 @@ func lobby_join_failed(lobby_name : String, error : int):
 		ENUMS.LOBBY_JOIN_ERROR.DUPLICATE_USERNAME:
 			push_error("The lobby "+lobby_name+" already contains your username.")
 	  
+@onready var lobby_selection: Node2D = $CanvasLayer/LobbySelection
+@onready var lobby_creator: LobbyCreator = $CanvasLayer/LobbyCreator
+@onready var p1_lobby_selection: ScrollMenu = $CanvasLayer/LobbySelection/P1_control_selection
 
 
 func _on_host_button_button_down():
@@ -97,7 +100,7 @@ func _on_host_button_button_down():
 		#GameManager.is_host = true
 		#GameManager.joined_lobby.emit()
 		
-		$CanvasLayer/LobbyCreator.show()
+		lobby_creator.show()
 		
 		#i could loop through all it's children and set gdsync owner
 	v_box_container.hide()
@@ -107,8 +110,8 @@ func _on_join_button_button_down():
 	if online:
 		#GDSync.join_lobby("Lobby Name", "Password123")
 		#v_box_container.hide()
-		$CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
-		$CanvasLayer/LobbySelection.show()
+		p1_lobby_selection._ready()
+		lobby_selection.show()
 		#node_instantiator.instantiate_node()
 
 
