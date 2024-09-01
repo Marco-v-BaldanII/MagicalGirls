@@ -2,22 +2,35 @@ extends Option
 class_name JoinLobbyOption
 
 @onready var label: Label = $Label
+
+var password_edit : TextEdit
+
 var _lobbies : Array
 
 func execute_option() -> bool:
 	GDSync.lobbies_received.connect(receive_lobbies)
 	GDSync.get_public_lobbies()
 	
-	for lobby in _lobbies:
-		
-		if lobby.tags["public"] == true:
-			return true
-		else:
-			return false
-	
-	GDSync.join_lobby(label.text, "Password123")
+
 	
 	return true
 
 func receive_lobbies(lobbies : Array):
 	_lobbies = lobbies
+	
+	var password : String = "Password123"
+	
+	for lobby in _lobbies:
+		if lobby["Name"] == label.text:
+		
+			if lobby["Tags"]["public"] == true:
+				pass
+			else:
+				#the lobby is private and you need to input a password
+				password = password_edit.text
+			break
+				
+
+	
+	GDSync.join_lobby(label.text, password)
+	pass

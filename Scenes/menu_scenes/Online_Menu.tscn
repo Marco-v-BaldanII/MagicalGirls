@@ -41,6 +41,7 @@ offset_bottom = 2002.0
 texture = SubResource("Texture2D_r8uyx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 offset_left = 602.0
 offset_top = 106.0
 offset_right = 1304.0
@@ -78,6 +79,14 @@ vbox = NodePath("../../VBoxContainer")
 
 [node name="ControlerMenu1" parent="CanvasLayer/LobbySelection/P1_control_selection" index="0"]
 script = ExtResource("3_hbw2o")
+
+[node name="password_edit" type="TextEdit" parent="CanvasLayer/LobbySelection"]
+offset_left = -1442.0
+offset_top = -673.0
+offset_right = -992.0
+offset_bottom = -623.0
+theme_override_font_sizes/font_size = 24
+placeholder_text = "                     Type Password"
 
 [node name="cursor" type="Sprite2D" parent="CanvasLayer"]
 visible = false
