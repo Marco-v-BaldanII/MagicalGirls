@@ -1,7 +1,7 @@
 [gd_scene load_steps=77 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_dooe2"]
-[ext_resource type="Texture2D" uid="uid://bhbq37orpa8yh" path="res://Assets/characters/Ritsu/Animations/spritesheet(5).png" id="2_wektk"]
+[ext_resource type="Texture2D" uid="uid://clemg5xdxu4kp" path="res://Assets/characters/Ritsu/Animations/RitsuSpriteSheet.png" id="2_p5h2w"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_mlnsc"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_6g380"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_p8wm6"]
@@ -500,10 +500,10 @@ script = ExtResource("1_dooe2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.35, 1.35)
-texture = ExtResource("2_wektk")
+texture = ExtResource("2_p5h2w")
 hframes = 12
-vframes = 5
-frame = 43
+vframes = 9
+frame = 68
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
