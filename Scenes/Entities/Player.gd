@@ -9,6 +9,8 @@ class_name Player
 
 var match_setting : Match
 
+var is_initialized : bool = false
+
 @export var ai_player : bool = false
 
 #if an attack hits below this position it breacks guard
@@ -56,7 +58,9 @@ var moveset : Dictionary
 var input_buffer : Array[String]
 var input_made : bool = false
 @export var oponent : Player
-@export var direction : String = "left"
+@export var direction : String:
+	set(value):
+		direction = value
 var input_direction : float = 0
 
 const BUFFER_FRAMES = 16
@@ -142,9 +146,13 @@ var last_used_move : String
 
 var colliders : Array[CollisionShape2D]
 
+@onready var weak_attack: CollisionShape2D = $hit_boxes/weak_box/weak_attack
+@onready var strong_attack: CollisionShape2D = $hit_boxes/strong_box/strong_attack
 
 
 func _ready():
+	weak_attack.disabled = true; strong_attack.disabled = true
+	direction = "left"
 	await fully_instanciated
 	can_move = true
 	if GameManager.is_host and player_num == 1:
@@ -163,13 +171,21 @@ func _ready():
 	#Assign to each character their moveset
 	moveset = MovesetManager.movesets[character_name].duplicate()
 	
-	if  oponent and oponent.global_position.x < global_position.x:
-		scale.x *= -1
-		direction = "right"
+	#if  oponent and oponent.global_position.x < global_position.x:
+		#scale.x *= -1
+		#direction = "right"
+	#else: direction = "left"
 	
 	GDSync.expose_node(self)
 	GDSync.expose_func(online_instantiate)
 
+func calculate_direction():
+	if direction == "left" and oponent and oponent.global_position.x < global_position.x:
+		scale.x *= -1
+		direction = "right"
+	elif direction == "right" and oponent and oponent.global_position.x > global_position.x:
+		scale.x *= -1
+		direction = "left"
 
 func _process(delta):
 	if input_made:
@@ -192,6 +208,8 @@ func _process(delta):
 		#can_move = true
 
 func _physics_process(delta):
+	if not is_initialized: return
+	
 	#Safety conditions to prevent can't move softlock
 	#if is_on_floor() and animation_tree["parameters/conditions/crouch"] == false and not can_move and animation_player.current_animation == "idle_anim":
 				#can_move = true
@@ -200,7 +218,7 @@ func _physics_process(delta):
 	#if not can_move and not crouching and is_on_floor() and not lag and animation_player.current_animation == "idle_anim":
 		#can_move = true
 	
-	var s = animation_player.current_animation
+
 	move_and_slide()
 	#if not crouching and animation_tree["parameters/conditions/not_crouch"] == true and (animation_player.current_animation == "crouching" or animation_player.current_animation == ""):
 		#animation_player.play("idle_anim")
@@ -729,7 +747,7 @@ func ai_on_hit():
 			pass
 
 func ai_press_input(input : String, frames : float = 1):
-	
+	if input.contains("kick") or input.contains("punch"): last_used_move = input
 	action_state[input] = true
 	input_buffer.push_back(input)
 	perform_move()

@@ -118,7 +118,6 @@ z_index = 2
 [node name="Background" type="Node" parent="."]
 
 [node name="RitsuBG" type="ParallaxBackground" parent="Background"]
-visible = false
 
 [node name="Background" type="ParallaxLayer" parent="Background/RitsuBG"]
 position = Vector2(22, -45.52)
@@ -165,6 +164,7 @@ scale = Vector2(0.6, 0.461)
 texture = ExtResource("6_ghpru")
 
 [node name="AnastasiaBG" type="ParallaxBackground" parent="Background"]
+visible = false
 
 [node name="snow" type="CPUParticles2D" parent="Background/AnastasiaBG"]
 position = Vector2(954, -110)

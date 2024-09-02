@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://c58a1qhbv0y64"
+path="res://.godot/imported/Anastasia.dialogue-1a7c5933014c6fd0f856f9ddd2a142cd.tres"
+
+[deps]
+
+source_file="res://Dialogues/Anastasia.dialogue"
+dest_files=["res://.godot/imported/Anastasia.dialogue-1a7c5933014c6fd0f856f9ddd2a142cd.tres"]
+
+[params]
+
+defaults=true

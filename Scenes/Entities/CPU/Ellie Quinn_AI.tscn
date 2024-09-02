@@ -6,13 +6,11 @@
 
 [node name="Ellie_AI" instance=ExtResource("1_2i38b")]
 ai_player = true
+character_name = "Ellie Quinn"
 
 [node name="AI_StateMachine" parent="." index="0" instance=ExtResource("2_cwos8")]
 
 [node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
 script = ExtResource("3_5nbar")
-
-[node name="Sprite2D" parent="." index="1"]
-frame = 6
 
 [editable path="AI_StateMachine"]

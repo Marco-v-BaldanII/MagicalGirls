@@ -1537,6 +1537,7 @@ collision_layer = 0
 script = ExtResource("1_i8trq")
 ai_player = true
 fly = false
+character_name = "Larissa"
 
 [node name="AI_StateMachine" parent="." instance=ExtResource("10_oqbgm")]
 

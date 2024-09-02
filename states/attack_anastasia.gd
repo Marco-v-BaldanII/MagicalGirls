@@ -24,5 +24,7 @@ func sixth_atk_option():
 	var specials = player.choose_random_special()
 	var special = specials.pick_random()
 	
+	if special == null: return
+	
 	player.input_buffer.append_array(player.moveset[special])
 	player.perform_move()

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ArcadeRun" load_steps=2 format=3 uid="uid://b2153gu56srwu"]
+
+[ext_resource type="Script" path="res://Resources+/ArcadeRun.gd" id="1_p0u5r"]
+
+[resource]
+script = ExtResource("1_p0u5r")
+oponents = Array[String](["Anastasia", "Ritsu", "Ellie"])

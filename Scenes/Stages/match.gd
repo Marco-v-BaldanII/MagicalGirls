@@ -5,14 +5,15 @@ var p1 : Player
 var p2 : Player 
 
 @onready var camera: CharacterBody2D = $Camera
-
+const BALLOON = preload("res://Dialogues/balloon.tscn")
+var baloon = null
 
 func _ready():
 	
 	p1 = GameManager.p1.instantiate()
 	p2  = GameManager.p2.instantiate()
 	
-	add_child(p1); add_child(p2);
+
 	p1.global_position = $spawn_p1.global_position
 	p2.global_position = $spawn_p2.global_position
 	
@@ -28,9 +29,32 @@ func _ready():
 		GDSync.set_gdsync_owner(p1, GDSync.get_client_id())
 	else:
 		GDSync.set_gdsync_owner(p2, GDSync.get_client_id())
+		
 	p1.match_setting = self; p2.match_setting = self;
-	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
+	add_child(p1); add_child(p2);
+	p1.can_move = false; p2.can_move = false;
+	#p2.set_physics_process(false); p1.set_physics_process(false)
 	
+	if FileAccess.file_exists(("res://Dialogues/" + p1.character_name +".dialogue")):
+		baloon = BALLOON.instantiate()
+		await get_tree().create_timer(0.4).timeout
+		
+		var dialogue_resource : DialogueResource = load("res://Dialogues/" + p1.character_name +".dialogue")
+		var title : String = p2.character_name
+		add_child(baloon)
+		if title == "Ellie Quinn": 
+			title = "EllieQuinn"
+
+		baloon.start(dialogue_resource, title)
+
+		
+	while is_instance_valid(baloon):
+		await get_tree().create_timer(0.017).timeout
+	
+	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
+	p1.can_move = true; p2.can_move = true;
+	p2.is_initialized = true; p1.is_initialized = true
+	#p2.calculate_direction(); p1.calculate_direction()
 	
 	var connected_controllers = Input.get_connected_joypads()
 	var num_connected = connected_controllers.size()
