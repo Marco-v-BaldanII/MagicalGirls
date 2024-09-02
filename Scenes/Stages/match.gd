@@ -47,6 +47,8 @@ func _ready():
 	
 	#These are basically so that online nodes dont get confused when spawning 2 simoultaneous instance of the same projectile
 	GameManager.p1_spawns = $player1_spawns; GameManager.p2_spawns = $player2_spawns2
+	p1.player_died.connect(GameManager.match_results); p2.player_died.connect(GameManager.match_results)
+	
 	GameManager.initialized_players.emit(p1 ,p2)
 	
 	Controls.changed_controllers.connect(remap_controllers)

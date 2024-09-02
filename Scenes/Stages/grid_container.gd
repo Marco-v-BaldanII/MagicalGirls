@@ -26,6 +26,7 @@ enum match_mode {
 	LOCAL_2P,
 	ONLINE_2P,
 	CPU,
+	ARCADE
 	
 }
 
@@ -89,7 +90,7 @@ func _process(delta: float) -> void:
 		if not GameManager.online or GameManager.is_host:
 			input_movement(0)
 			
-	if(choose_cooldown2 >= .3) and not p2_control_selection._is_active:
+	if(choose_cooldown2 >= .3) and not p2_control_selection._is_active and mode != match_mode.ARCADE:
 		#Player 2
 		if not GameManager.online and mode == match_mode.LOCAL_2P:
 			input_movement(1)
@@ -99,6 +100,7 @@ func _process(delta: float) -> void:
 		elif selected_fighter != "" and mode == match_mode.CPU:
 			input_movement(0, true)
 
+var back : bool = false
 
 func input_movement(character_id : int, second_onlineP : bool = false):
 	if ((character_id == 0 and selected_fighter == "") or (character_id == 0 and selected_fighter2 == "" and second_onlineP)) or (character_id == 1 and selected_fighter2 == ""):
@@ -122,18 +124,28 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			$MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
-	else:
-		if is_joy_button_just_pressed("go_back", input_methods[character_id]):
-			$MenuSelect.play()
-			if mode == match_mode.CPU:
-				if selected_fighter2 != "": selected_fighter2 = ""
-				else: selected_fighter = ""
-			else:
+
+	if (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
+			print("GOOOOOOOOOO BAAAAAAAAAAACKKK")
+			if not back:
+				back = true
 				
-				if character_id == 0 and not second_onlineP:
-					selected_fighter = ""
+				while (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
+					await get_tree().create_timer(0.017).timeout
+				
+				_on_go_back_button_down()
+				
+				$MenuSelect.play()
+				if mode == match_mode.CPU:
+					if selected_fighter2 != "": selected_fighter2 = ""
+					else: selected_fighter = ""
 				else:
-					selected_fighter2 = ""
+					
+					if character_id == 0 and not second_onlineP:
+						selected_fighter = ""
+					else:
+						selected_fighter2 = ""
+				back = false
 
 func move_selection(offset: int, player : int = 0, second_onlineP : bool = false):
 	
@@ -212,16 +224,30 @@ func _select_fighter(player : int = 0, second_onlineP : bool = false):
 
 
 func _on_start_button_button_down() -> void:
-	if selected_fighter != "" and selected_fighter2 != "":
+	if mode != match_mode.ARCADE and selected_fighter != "" and selected_fighter2 != "":
 		
 		start_match()
 		GDSync.call_func(start_match)
+		
+	elif mode == match_mode.ARCADE and selected_fighter != "":
+		if FileAccess.file_exists("res://ArcadeRuns/" + selected_fighter + ".tres"):
+			
+			var arcade_route : ArcadeRun = load("res://ArcadeRuns/" + selected_fighter + ".tres")
+			GameManager.arcade_route = arcade_route
+			
+			selected_fighter2 = arcade_route.oponents[0] #first oponent
+			start_match()
 
 func start_match():
-	if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter2+".tscn"):
+	var p2_path : String = "res://Scenes/Entities/"
+	if mode == match_mode.CPU or mode == match_mode.ARCADE: 
+		p2_path = "res://Scenes/Entities/CPU/"
+		selected_fighter2 += "_AI" #append suffix
+	
+	if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists(p2_path + selected_fighter2+".tscn"):
 			
 			GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
-			GameManager.p2 = load("res://Scenes/Entities/"+selected_fighter2+".tscn")
+			GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
 			
 			SceneWrapper.change_scene(current_map)
 
@@ -285,3 +311,13 @@ func remap_controllers():
 			input_methods[0] = 0; input_methods[1] = 2; #Player1 uses controller and p2 uses keyboard
 		2: 
 			input_methods[0] = 0; input_methods[1] = 1; #Player1 uses controller and p2 uses controller
+
+
+func _on_go_back_button_down() -> void:
+	if mode == match_mode.ONLINE_2P: return
+	
+	elif mode == match_mode.LOCAL_2P and selected_fighter == "" and selected_fighter2 == "":
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+		
+	elif mode == match_mode.ARCADE or mode == match_mode.CPU and selected_fighter == "":
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))

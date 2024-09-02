@@ -79,9 +79,10 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 func destroy_wraped():
 	#my_player.oponent.add_lag(4)
 
-	if my_player: 
+	if is_instance_valid(my_player): 
 		my_player.oponent.weak_knock = true
 		my_player.dead_bullets += 1
+	else: queue_free()
 	await  get_tree().create_timer(0.017).timeout
 	deativate()
 

@@ -14,6 +14,8 @@ var match_setting : Match
 #if an attack hits below this position it breacks guard
 const DOWN_HIT_POS_THRESHOLD : int = 860
 
+signal player_died(player_id : int)
+
 @export var hp : int = 100:
 	set(value ):
 		print("the hp was" + str(hp) + "but now is" + str(value))
@@ -24,7 +26,9 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 			while hp_bar.value != hp:
 				hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
 				await get_tree().create_timer(0.1667).timeout
-			
+		
+		if hp == 0:
+			player_died.emit(oponent.player_num)
 
 func change_hp(value : int):
 	hp = clamp(value,0,100)

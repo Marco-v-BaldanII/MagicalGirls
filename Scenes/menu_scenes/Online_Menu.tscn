@@ -1,44 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=9 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
+[ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="2_1hqwr"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="2_561r3"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_menu.gd" id="3_hbw2o"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_creator.gd" id="4_3ldkt"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="4_v2qc8"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/input_field_option.gd" id="5_jqadj"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/my_lobby.gd" id="7_8vq33"]
-[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="7_pci7d"]
-
-[sub_resource type="Texture2D" id="Texture2D_r8uyx"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("7_pci7d")
-path = "s_kick"
-show_mode = 0
-force_type = 0
 
 [node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="goBack" type="Node2D" parent="CanvasLayer"]
-position = Vector2(-363, -953)
-
-[node name="go_back" type="Button" parent="CanvasLayer/goBack"]
-offset_left = 394.0
-offset_top = 1897.0
-offset_right = 709.0
-offset_bottom = 2001.0
-theme_override_font_sizes/font_size = 60
-text = "go back"
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/goBack"]
-offset_left = 724.0
-offset_top = 1898.0
-offset_right = 828.0
-offset_bottom = 2002.0
-texture = SubResource("Texture2D_r8uyx")
+[node name="goBack" parent="CanvasLayer" instance=ExtResource("2_1hqwr")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 visible = false
@@ -156,10 +132,6 @@ text = "waiting for oponent..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="." method="_on_go_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/my_lobby" method="_on_go_back_pressed"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]

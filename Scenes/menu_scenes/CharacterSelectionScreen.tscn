@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=17 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
+[ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_bafco"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
 [ext_resource type="Texture2D" uid="uid://df8g0yxsec1nb" path="res://Assets/UI/ritsu portrait(2).png" id="3_q1jj1"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
+[ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
 
 [sub_resource type="Texture2D" id="Texture2D_dtlya"]
 resource_local_to_scene = false
@@ -35,6 +37,7 @@ scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_iyl6b")
+current_map = ExtResource("2_bafco")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -238,7 +241,12 @@ theme_override_font_sizes/font_size = 60
 text = "Player 2
 "
 
+[node name="goBack" parent="." instance=ExtResource("15_x5w14")]
+position = Vector2(-1948.33, -1135)
+
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_down" from="ControlSelection2/Button" to="ControlSelection2/P2_control_selection" method="_on_button_button_down"]
+[connection signal="button_down" from="goBack/go_back" to="." method="_on_go_back_button_down"]
 
 [editable path="ControlSelection"]
+[editable path="goBack"]

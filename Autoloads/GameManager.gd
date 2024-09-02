@@ -37,6 +37,8 @@ var default_camera_pos : Vector2 = Vector2(0,0)
 var character_selection_mode : int = 0
 #0 = LOCAL_2P , 1 = ONLINE_2P , 2 = CPU
 
+var arcade_route : ArcadeRun = null
+
 func online_selection():
 	character_selection_mode = 1
 
@@ -75,3 +77,30 @@ func shaking_cam():
 	cam_offset = Vector2(randf_range(-1,1) * shake_amount, randf_range(-1,1)*shake_amount)
 	camera.position += cam_offset
 	print(camera.position)
+
+var set_points : Array[int] = [0,0]
+
+
+func match_results(winner_id : int):
+	winner_id -= 1
+	players.clear()
+	set_points[winner_id] += 1
+	
+	if set_points[0] >= 2:
+		if character_selection_mode == 0 or character_selection_mode == 2: #Local and cpu
+			back_to_character_selection()
+		elif character_selection_mode ==  1: #online
+			back_to_character_selection(); GDSync.call_func(back_to_character_selection)
+		
+		pass
+	elif set_points[1] >= 2:
+		if character_selection_mode == 0 or character_selection_mode == 2:
+			back_to_character_selection()
+		elif character_selection_mode ==  1:
+			back_to_character_selection(); GDSync.call_func(back_to_character_selection)
+	else:
+		SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
+
+func back_to_character_selection():
+
+	SceneWrapper.change_scene(load( "res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))

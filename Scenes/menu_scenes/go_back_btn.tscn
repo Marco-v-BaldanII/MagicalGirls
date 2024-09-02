@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn8baxe5jwlvy"]
+
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="1_mphbw"]
+
+[sub_resource type="Texture2D" id="Texture2D_r8uyx"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_mphbw")
+path = "s_kick"
+show_mode = 0
+force_type = 0
+
+[node name="goBack" type="Node2D"]
+position = Vector2(-363, -953)
+
+[node name="go_back" type="Button" parent="."]
+offset_left = 394.0
+offset_top = 1897.0
+offset_right = 709.0
+offset_bottom = 2001.0
+theme_override_font_sizes/font_size = 60
+text = "go back"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 724.0
+offset_top = 1898.0
+offset_right = 828.0
+offset_bottom = 2002.0
+texture = SubResource("Texture2D_r8uyx")
+metadata/_edit_use_anchors_ = true

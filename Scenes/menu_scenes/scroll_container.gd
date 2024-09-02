@@ -243,7 +243,7 @@ func change_in_controllers():
 @export var vbox : VBoxContainer
 
 func _on_go_back_pressed() -> void:
-	if lobby_selection.visible:
+	if lobby_selection and lobby_selection.visible:
 		lobby_selection.hide()
 		vbox.show()
 		pass

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://2ri16duvgw33"]
+[gd_scene load_steps=9 format=3 uid="uid://2ri16duvgw33"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="2_t6vsj"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/cpu_match_option.gd" id="3_45vy0"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/options/arcade_option.gd" id="3_rfhmp"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/local_match_option.gd" id="3_yq44x"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/online_option.gd" id="5_u1bm1"]
 
@@ -30,6 +31,7 @@ theme_override_constants/v_separation = 24
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = SubResource("GradientTexture1D_kmppu")
+script = ExtResource("3_rfhmp")
 
 [node name="Label" type="Label" parent="GridContainer/TextureRect"]
 layout_mode = 0
