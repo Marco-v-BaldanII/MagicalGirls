@@ -1,0 +1,413 @@
+[gd_scene load_steps=22 format=3 uid="uid://c7tuf5obwfday"]
+
+[ext_resource type="Script" path="res://Scenes/menu_scenes/titleScript.gd" id="1_1mawk"]
+[ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="2_60l2l"]
+[ext_resource type="AudioStream" uid="uid://ctd0tfuhqp6ho" path="res://Assets/SFX/UI/title audio.mp3" id="5_emoy5"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="5_ktq7h"]
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="9_xqaml"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="10_xplnr"]
+[ext_resource type="Texture2D" uid="uid://m5cvofrcf6w1" path="res://Assets/UI/Menus/title(1).png" id="12_8vs0t"]
+[ext_resource type="Texture2D" uid="uid://bvw4onoh3yjgb" path="res://Assets/UI/settings button.png" id="14_74w27"]
+[ext_resource type="Texture2D" uid="uid://iwrjbwx2868k" path="res://Assets/UI/off button.png" id="15_ep6y6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcixg"]
+shader = ExtResource("9_xqaml")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b61lm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_8vs0t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_oxx5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/AnimatedSprite2D/cursor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0vjwg"]
+resource_name = "rotate"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/AnimatedSprite2D/cursor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.19804, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 1.0472, 1.5708, 2.0944, 2.61799, 2.96706, 3.49066, 4.01426, 4.53786, 5.06145, 5.58505, 6.10865, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsr4q"]
+_data = {
+"RESET": SubResource("Animation_oxx5k"),
+"rotate": SubResource("Animation_0vjwg")
+}
+
+[sub_resource type="Animation" id="Animation_0ud1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-549, 424)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.119177]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cursor2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(339.447, -10.8887)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cursor:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(221.329, 82.2279)]
+}
+
+[sub_resource type="Animation" id="Animation_fi5sp"]
+resource_name = "breathh"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.76667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-549, 424), Vector2(1343, 424), Vector2(1000, 424)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.933333, 1.2, 1.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.119177, 0.0, 0.0, 6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.7, 2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(2, 2), Vector2(1.5, 1.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cursor2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.13333, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(171.333, 61.3333), Vector2(227.305, 74.7304), Vector2(339.447, -10.8887), Vector2(529.564, -138.667), Vector2(1635.15, 1336)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cursor:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.766667, 1, 1.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(221.329, 82.2279), Vector2(433.051, -240), Vector2(2406.36, 1800)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bejxq"]
+_data = {
+"RESET": SubResource("Animation_0ud1g"),
+"breathh": SubResource("Animation_fi5sp")
+}
+
+[sub_resource type="Animation" id="Animation_se0ej"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g3qqn"]
+resource_name = "breath"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ll75r"]
+_data = {
+"RESET": SubResource("Animation_se0ej"),
+"breath": SubResource("Animation_g3qqn")
+}
+
+[sub_resource type="Curve" id="Curve_lnq7c"]
+_data = [Vector2(0, 0.946281), 0.0, 0.0, 0, 0, Vector2(1, 0.742149), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Title" type="Node2D"]
+script = ExtResource("1_1mawk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -186.0
+offset_top = -73.0
+offset_right = -146.0
+offset_bottom = -33.0
+scale = Vector2(55.9259, 30.9745)
+color = Color(1, 0.458824, 0.627451, 1)
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_gcixg")
+offset_left = -73.0
+offset_top = -50.0
+offset_right = 1847.0
+offset_bottom = 1030.0
+scale = Vector2(1.08867, 1.09458)
+texture = ExtResource("10_xplnr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureRect"]
+z_index = 2
+position = Vector2(-549, 424)
+rotation = -0.119177
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_b61lm")
+
+[node name="cursor" type="Sprite2D" parent="TextureRect/AnimatedSprite2D"]
+z_index = 1
+z_as_relative = false
+position = Vector2(221.329, 82.2279)
+scale = Vector2(0.666667, 0.666667)
+texture = ExtResource("2_60l2l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect/AnimatedSprite2D/cursor"]
+root_node = NodePath("../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_vsr4q")
+}
+autoplay = "rotate"
+
+[node name="cursor2" type="Sprite2D" parent="TextureRect/AnimatedSprite2D"]
+z_index = 1
+z_as_relative = false
+position = Vector2(339.447, -10.8887)
+rotation = 1.7458
+scale = Vector2(0.666667, 0.666667)
+texture = ExtResource("2_60l2l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect/AnimatedSprite2D/cursor2"]
+root_node = NodePath("../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_vsr4q")
+}
+autoplay = "rotate"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect/AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_bejxq")
+}
+autoplay = "breathh"
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1938.0
+offset_bottom = 1073.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.52549, 0.858824, 1, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_emoy5")
+autoplay = true
+
+[node name="SettingsButton" type="Sprite2D" parent="."]
+position = Vector2(211, 1008)
+scale = Vector2(0.724169, 0.724169)
+texture = ExtResource("14_74w27")
+
+[node name="OffButton" type="Sprite2D" parent="."]
+position = Vector2(79, 1012)
+scale = Vector2(0.724, 0.724)
+texture = ExtResource("15_ep6y6")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 432.0
+offset_top = 813.0
+offset_right = 1475.0
+offset_bottom = 958.0
+pivot_offset = Vector2(521.5, 72.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.419608, 0.858824, 1, 1)
+theme_override_colors/font_outline_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_constants/outline_size = 100
+theme_override_fonts/font = ExtResource("5_ktq7h")
+theme_override_font_sizes/font_size = 100
+text = "Press any button to start the game"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+"": SubResource("AnimationLibrary_ll75r")
+}
+autoplay = "breath"
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(253, 1045)
+rotation = -1.13147
+scale = Vector2(1.5, 1.5)
+emitting = false
+amount = 30
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.2
+lifetime_randomness = 0.25
+local_coords = true
+texture = ExtResource("2_60l2l")
+direction = Vector2(1, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+angular_velocity_min = 280.0
+angular_velocity_max = 280.0
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+scale_amount_min = 0.1
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_lnq7c")
+color = Color(0.52549, 0.858824, 1, 1)
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="."]
+position = Vector2(1674, 1044)
+rotation = -1.13147
+scale = Vector2(1.5, 1.5)
+emitting = false
+amount = 30
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.2
+lifetime_randomness = 0.25
+local_coords = true
+texture = ExtResource("2_60l2l")
+direction = Vector2(1, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+angular_velocity_min = 280.0
+angular_velocity_max = 280.0
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+scale_amount_min = 0.1
+scale_amount_max = 0.6
+scale_amount_curve = SubResource("Curve_lnq7c")
+color = Color(0.52549, 0.858824, 1, 1)
