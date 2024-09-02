@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://y386gryjkvww"]
+
+[ext_resource type="Texture2D" uid="uid://d3tp1cunvr3ui" path="res://Assets/Backgrounds/japan 4.png" id="1_18y1p"]
+[ext_resource type="Texture2D" uid="uid://dobkyxsqc46jr" path="res://Assets/Backgrounds/japan 3.png" id="2_1ngv0"]
+[ext_resource type="Texture2D" uid="uid://vnd5bdtkaq6h" path="res://Assets/Backgrounds/japan 2.png" id="3_o6ac4"]
+[ext_resource type="Texture2D" uid="uid://dq0hyrwlyuo7i" path="res://Assets/Backgrounds/japan 1.png" id="4_3jy5l"]
+
+[node name="RitsuBG" type="ParallaxBackground"]
+
+[node name="Background" type="ParallaxLayer" parent="."]
+position = Vector2(22, -45.52)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("1_18y1p")
+
+[node name="City" type="ParallaxLayer" parent="."]
+position = Vector2(22, -45.52)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="City"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("2_1ngv0")
+
+[node name="Foliage" type="ParallaxLayer" parent="."]
+position = Vector2(22, -43)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foliage"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("3_o6ac4")
+
+[node name="Ground" type="ParallaxLayer" parent="."]
+position = Vector2(33, -46)
+scale = Vector2(1.04, 1.2)
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+z_index = -10
+position = Vector2(937, 531)
+scale = Vector2(0.6, 0.461)
+texture = ExtResource("4_3jy5l")

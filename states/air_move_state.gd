@@ -59,6 +59,10 @@ func physics_update(delta : float):
 		
 		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0 and not player.lag:
 			player.jump_lag = 100
+			player.animation_tree["parameters/conditions/jump"] = true
+			
+			
+			
 			if not player.fly:
 				player.velocity.y = player.JUMP_VELOCITY
 			else:
@@ -73,6 +77,7 @@ func physics_update(delta : float):
 		#LAND	
 		elif player.is_on_floor() and not player.grounded:
 			player.animation_tree["parameters/conditions/land"] = true
+			player.animation_tree["parameters/conditions/jump"] = false
 			player.grounded = true
 			player.jump_lag = 0.01666 * player.JUMP_LAG_FPS
 			await get_tree().create_timer(0.017 * 6).timeout

@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_jly1f")
-oponents = Array[String](["Anastasia", "Ellie", "Ritsu"])
+oponents = Array[String](["Anastasia", "Ellie Quinn", "Ritsu"])

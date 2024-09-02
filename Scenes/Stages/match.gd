@@ -7,6 +7,7 @@ var p2 : Player
 @onready var camera: CharacterBody2D = $Camera
 const BALLOON = preload("res://Dialogues/balloon.tscn")
 var baloon = null
+@onready var background: Node = $Background
 
 func _ready():
 	
@@ -32,24 +33,34 @@ func _ready():
 		
 	p1.match_setting = self; p2.match_setting = self;
 	add_child(p1); add_child(p2);
-	p1.can_move = false; p2.can_move = false;
-	#p2.set_physics_process(false); p1.set_physics_process(false)
-	
-	if FileAccess.file_exists(("res://Dialogues/" + p1.character_name +".dialogue")):
-		baloon = BALLOON.instantiate()
-		await get_tree().create_timer(0.4).timeout
-		
-		var dialogue_resource : DialogueResource = load("res://Dialogues/" + p1.character_name +".dialogue")
-		var title : String = p2.character_name
-		add_child(baloon)
-		if title == "Ellie Quinn": 
-			title = "EllieQuinn"
 
-		baloon.start(dialogue_resource, title)
 
+	if GameManager.character_selection_mode == 3 : #show dialogues in arcade mode
 		
-	while is_instance_valid(baloon):
-		await get_tree().create_timer(0.017).timeout
+			#pick the cpu map
+		var parallax : PackedScene = load("res://Scenes/Stages/parallax/" + p2.character_name + ".tscn")
+		if parallax != null:
+			var p = parallax.instantiate()
+			background.add_child(p)
+			
+		
+		if FileAccess.file_exists(("res://Dialogues/" + p1.character_name +".dialogue")) and GameManager.total_set_matches() == 0:
+			baloon = BALLOON.instantiate()
+			
+		
+			await get_tree().create_timer(0.4).timeout
+			
+			var dialogue_resource : DialogueResource = load("res://Dialogues/" + p1.character_name +".dialogue")
+			var title : String = p2.character_name
+			add_child(baloon)
+			if title == "Ellie Quinn": 
+				title = "EllieQuinn"
+
+			baloon.start(dialogue_resource, title)
+
+			
+		while is_instance_valid(baloon):
+			await get_tree().create_timer(0.017).timeout
 	
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 	p1.can_move = true; p2.can_move = true;
@@ -76,6 +87,8 @@ func _ready():
 	GameManager.initialized_players.emit(p1 ,p2)
 	
 	Controls.changed_controllers.connect(remap_controllers)
+	
+	#p2.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

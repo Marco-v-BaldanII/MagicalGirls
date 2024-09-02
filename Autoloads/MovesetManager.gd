@@ -83,5 +83,5 @@ var movesets : Dictionary = {
 	"Ritsu" : Ritsu,
 	"Larissa" : Larissa,
 	"Anastasia" : Anastasia,
-	"Ellie" : Ellie
+	"Ellie Quinn" : Ellie
 }

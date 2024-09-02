@@ -13,9 +13,10 @@ func enter():
 				e = e.get_parent()
 			player = e
 	else:
+		pass
 		#player.animation_tree["parameters/conditions/not_crouch"] = true
 		#player.animation_tree["parameters/conditions/crouch"] = false
-		player.animation_player.play("idle_anim")
+
 
 var crouching : bool = false
 
@@ -31,8 +32,15 @@ func physics_update(delta : float):
 			player.input_direction =  -1
 			
 		else:
+
+			if player.animation_tree["parameters/conditions/idle_anim"] == false:
+				player.animation_tree["parameters/conditions/idle_anim"] = true
+				player.animation_tree["parameters/conditions/move_forward"] = false
+				player.animation_tree["parameters/conditions/move_backward"] = false
+				
 			player.input_direction -= 0.2
 			player.input_direction = clamp(player.input_direction, 0,1)
+			#play idle
 			
 	else:
 		#AI player
@@ -49,17 +57,24 @@ func physics_update(delta : float):
 	if player.is_on_floor() and player.can_move: #Can move is turned on by the animation finished method
 		player.jump_lag -= delta
 		player.moving_backwards = false
-		if(player.input_direction >= 0 and player.direction == "left") or (player.input_direction <= 0 and player.direction == "right"):
+		if(player.input_direction > 0 and player.direction == "left") or (player.input_direction < 0 and player.direction == "right"):
 			var f = player.input_direction * player.SPEED
 			var t = player.SPEED
 			var g = player.input_direction
 			player.velocity.x = player.input_direction * player.SPEED
-
+			if player.animation_tree["parameters/conditions/move_forward"] == false: 
+				player.animation_tree["parameters/conditions/move_backward"] = false
+				player.animation_tree["parameters/conditions/move_forward"] = true
+				player.animation_tree["parameters/conditions/idle_anim"] = false
+			#player.animation_tree["parameters/conditions/ilde_anim"] = false
 			
 		else:
 			#move slower in your back direction
 			player.velocity.x = player.input_direction * (player.SPEED*0.55)
-
+			if player.input_direction != 0 and  player.animation_tree["parameters/conditions/move_backward"] == false: 
+				player.animation_tree["parameters/conditions/move_backward"] = true
+				player.animation_tree["parameters/conditions/move_forward"] = false
+				player.animation_tree["parameters/conditions/idle_anim"] = false
 			player.moving_backwards = true
 			
 	elif player.is_on_floor():
