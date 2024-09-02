@@ -1,10 +1,9 @@
 extends Control
-class_name CharacterSelect
 
 @export var selected_index : int = 0
 @export var selected_index2 : int = 0
 
-@export var grid_width : int = 3 
+@export var grid_width : int = 2 
 @onready var grid_container : GridContainer = $GridContainer
 @onready var banner_texture_rect : TextureRect = $TextureRect
 
