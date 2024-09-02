@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bb6lwnt74f5sm"
+path="res://.godot/imported/Ritsu.dialogue-3e8c644a97f77756f8d0dcb58cdfd0ea.tres"
+
+[deps]
+
+source_file="res://Ritsu.dialogue"
+dest_files=["res://.godot/imported/Ritsu.dialogue-3e8c644a97f77756f8d0dcb58cdfd0ea.tres"]
+
+[params]
+
+defaults=true
