@@ -1,36 +1,139 @@
-[gd_scene load_steps=9 format=3 uid="uid://2ri16duvgw33"]
+[gd_scene load_steps=24 format=3 uid="uid://2ri16duvgw33"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
-[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="2_t6vsj"]
+[ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="2_rqkyj"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/cpu_match_option.gd" id="3_45vy0"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/arcade_option.gd" id="3_rfhmp"]
+[ext_resource type="Texture2D" uid="uid://cxgjxqjq6dp6o" path="res://Assets/UI/Menus/standardbutton1-ezgif.com-crop.png" id="3_utj3r"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/local_match_option.gd" id="3_yq44x"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/online_option.gd" id="5_u1bm1"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="5_uuvb4"]
+[ext_resource type="Texture2D" uid="uid://cm15pc5gm537w" path="res://Assets/UI/Menus/Girls.png" id="7_a4cbo"]
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="7_xvlvo"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="8_fnxuv"]
+[ext_resource type="Texture2D" uid="uid://m5cvofrcf6w1" path="res://Assets/UI/Menus/title(1).png" id="10_yjb53"]
+[ext_resource type="AudioStream" uid="uid://cyb1vo6bs31ih" path="res://Assets/UI/ritsu song.mp3" id="13_0dqwb"]
+[ext_resource type="Texture2D" uid="uid://bvw4onoh3yjgb" path="res://Assets/UI/settings button.png" id="14_s5nr1"]
+[ext_resource type="Texture2D" uid="uid://iwrjbwx2868k" path="res://Assets/UI/off button.png" id="15_y08sq"]
 
-[sub_resource type="Gradient" id="Gradient_qwghj"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="Animation" id="Animation_0vjwg"]
+resource_name = "rotate"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cursor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.19804, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 1.0472, 1.5708, 2.0944, 2.61799, 2.96706, 3.49066, 4.01426, 4.53786, 5.06145, 5.58505, 6.10865, 6.28319]
+}
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_kmppu"]
-gradient = SubResource("Gradient_qwghj")
+[sub_resource type="Animation" id="Animation_oxx5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cursor:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsr4q"]
+_data = {
+"RESET": SubResource("Animation_oxx5k"),
+"rotate": SubResource("Animation_0vjwg")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcixg"]
+shader = ExtResource("7_xvlvo")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b61lm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_yjb53")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ivsdf"]
+resource_name = "breath"
+length = 2.66667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.33333, 2.66667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.902936, 0.902936), Vector2(0.95, 0.95), Vector2(0.902936, 0.902936)]
+}
+
+[sub_resource type="Animation" id="Animation_emepo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.902936, 0.902936)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ia266"]
+_data = {
+"RESET": SubResource("Animation_emepo"),
+"breath": SubResource("Animation_ivsdf")
+}
 
 [node name="menu" type="Node2D"]
 script = ExtResource("1_klk57")
 
 [node name="cursor" type="Sprite2D" parent="."]
-position = Vector2(165, 299)
-texture = ExtResource("2_t6vsj")
+z_index = 5
+position = Vector2(224.5, 471)
+texture = ExtResource("2_rqkyj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="cursor"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_vsr4q")
+}
+autoplay = "rotate"
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 256.0
-offset_top = 256.0
-offset_right = 906.0
-offset_bottom = 976.0
+offset_left = 303.5
+offset_top = 422.0
+offset_right = 953.5
+offset_bottom = 1418.0
+scale = Vector2(0.75, 0.8)
+size_flags_horizontal = 4
 theme_override_constants/v_separation = 24
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
-texture = SubResource("GradientTexture1D_kmppu")
+texture = ExtResource("3_utj3r")
 script = ExtResource("3_rfhmp")
 
 [node name="Label" type="Label" parent="GridContainer/TextureRect"]
@@ -38,8 +141,9 @@ layout_mode = 0
 offset_top = -7.0
 offset_right = 650.0
 offset_bottom = 117.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("5_uuvb4")
+theme_override_font_sizes/font_size = 120
 text = "Arcade"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -47,16 +151,18 @@ vertical_alignment = 1
 [node name="TextureRect2" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
-texture = SubResource("GradientTexture1D_kmppu")
+texture = ExtResource("3_utj3r")
 script = ExtResource("3_45vy0")
 
 [node name="Label" type="Label" parent="GridContainer/TextureRect2"]
 layout_mode = 0
+offset_left = 22.5
 offset_top = -7.0
-offset_right = 650.0
-offset_bottom = 117.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+offset_right = 672.5
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("5_uuvb4")
+theme_override_font_sizes/font_size = 120
 text = "CPU match"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -64,16 +170,18 @@ vertical_alignment = 1
 [node name="TextureRect3" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
-texture = SubResource("GradientTexture1D_kmppu")
+texture = ExtResource("3_utj3r")
 script = ExtResource("3_yq44x")
 
 [node name="Label" type="Label" parent="GridContainer/TextureRect3"]
 layout_mode = 0
-offset_top = -7.0
-offset_right = 650.0
-offset_bottom = 117.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+offset_left = 23.75
+offset_top = -5.25005
+offset_right = 673.75
+offset_bottom = 154.75
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("5_uuvb4")
+theme_override_font_sizes/font_size = 110
 text = "Local match"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -81,7 +189,7 @@ vertical_alignment = 1
 [node name="TextureRect4" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
-texture = SubResource("GradientTexture1D_kmppu")
+texture = ExtResource("3_utj3r")
 script = ExtResource("5_u1bm1")
 
 [node name="Label" type="Label" parent="GridContainer/TextureRect4"]
@@ -89,8 +197,9 @@ layout_mode = 0
 offset_top = -7.0
 offset_right = 650.0
 offset_bottom = 117.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("5_uuvb4")
+theme_override_font_sizes/font_size = 120
 text = "Online"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -98,16 +207,74 @@ vertical_alignment = 1
 [node name="TextureRect5" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
-texture = SubResource("GradientTexture1D_kmppu")
+texture = ExtResource("3_utj3r")
 
 [node name="Label" type="Label" parent="GridContainer/TextureRect5"]
 layout_mode = 0
-offset_top = -7.0
-offset_right = 650.0
-offset_bottom = 117.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+offset_left = 20.0
+offset_top = 1.99994
+offset_right = 670.0
+offset_bottom = 147.0
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("5_uuvb4")
+theme_override_font_sizes/font_size = 100
 text = "Training Mode
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -186.0
+offset_top = -73.0
+offset_right = -146.0
+offset_bottom = -33.0
+scale = Vector2(55.9259, 30.9745)
+color = Color(1, 0.458824, 0.627451, 1)
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_gcixg")
+offset_left = -73.0
+offset_top = -50.0
+offset_right = 1847.0
+offset_bottom = 1030.0
+scale = Vector2(1.08867, 1.09458)
+texture = ExtResource("8_fnxuv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 958.0
+offset_top = -15.0
+offset_right = 1973.0
+offset_bottom = 1065.0
+grow_horizontal = 2
+scale = Vector2(0.950808, 1.03081)
+texture = ExtResource("7_a4cbo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(451, 225)
+scale = Vector2(0.902936, 0.902936)
+sprite_frames = SubResource("SpriteFrames_b61lm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ia266")
+}
+autoplay = "breath"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_0dqwb")
+autoplay = true
+
+[node name="SettingsButton" type="Sprite2D" parent="."]
+position = Vector2(211, 1008)
+scale = Vector2(0.724169, 0.724169)
+texture = ExtResource("14_s5nr1")
+
+[node name="OffButton" type="Sprite2D" parent="."]
+position = Vector2(79, 1012)
+scale = Vector2(0.724, 0.724)
+texture = ExtResource("15_y08sq")

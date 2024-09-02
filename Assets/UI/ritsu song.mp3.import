@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyb1vo6bs31ih"
+path="res://.godot/imported/ritsu song.mp3-f7a6f06920898e429c4fb2b465ffe6e6.mp3str"
+
+[deps]
+
+source_file="res://Assets/UI/ritsu song.mp3"
+dest_files=["res://.godot/imported/ritsu song.mp3-f7a6f06920898e429c4fb2b465ffe6e6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
