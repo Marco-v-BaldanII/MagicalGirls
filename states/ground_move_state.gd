@@ -13,7 +13,10 @@ func enter():
 				e = e.get_parent()
 			player = e
 	else:
-		pass
+		player.animation_tree["parameters/conditions/idle_anim"] = true
+		player.animation_tree.set("parameters/playback/current", "idle_anim")
+		return
+
 
 
 var crouching : bool = false
@@ -32,6 +35,7 @@ func physics_update(delta : float):
 		else:
 
 			if player.animation_tree["parameters/conditions/idle_anim"] == false:
+				player.animation_tree["parameters/conditions/land"] = false
 				player.animation_tree["parameters/conditions/idle_anim"] = true
 				player.animation_tree["parameters/conditions/move_forward"] = false
 				player.animation_tree["parameters/conditions/move_backward"] = false
@@ -42,15 +46,20 @@ func physics_update(delta : float):
 			
 	else:
 		#AI player
-		if (player.is_input_pressed("move_right") and player.ai_player) :
+		if (player.input_buffer.size() > 0 and player.input_buffer.back() == "move_right" and player.ai_player) :
 			player.input_direction = 1
-		elif (player.is_input_pressed("move_left") and player.ai_player) :
+		elif (player.input_buffer.size() > 0 and player.input_buffer.back() == "move_left" and player.ai_player) :
 			player.input_direction = -1
 		
 		
 		else:
 			player.input_direction -= 0.2
 			player.input_direction = clamp(player.input_direction, 0,1)
+			if player.animation_tree["parameters/conditions/idle_anim"] == false:
+				player.animation_tree["parameters/conditions/land"] = false
+				player.animation_tree["parameters/conditions/idle_anim"] = true
+				player.animation_tree["parameters/conditions/move_forward"] = false
+				player.animation_tree["parameters/conditions/move_backward"] = false
 
 	if player.is_on_floor() and player.can_move: #Can move is turned on by the animation finished method
 		player.jump_lag -= delta
@@ -106,6 +115,9 @@ func physics_update(delta : float):
 	if (player.ai_player and player.can_move and player.is_input_pressed("crouch")):
 		Transitioned.emit(self, "crouch")	
 
+
+func update(delta : float):
+	pass
 
 
 func transition_to_crouch():

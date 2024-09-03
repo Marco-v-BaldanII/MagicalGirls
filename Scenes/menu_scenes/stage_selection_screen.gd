@@ -40,7 +40,7 @@ var real_target_position: Vector2
 var target_position: Vector2  
 
 var selected_fighter : String = ""
-var selected_fighter2 : String = ""
+
 
 var character_banners = {
 	"TextureRect1": preload("res://Assets/PlaceHolders/bomb.png"),
@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 var back : bool = false
 
 func input_movement(character_id : int, second_onlineP : bool = false):
-	if ((character_id == 0 and selected_fighter == "") or (character_id == 0 and selected_fighter2 == "" and second_onlineP)) or (character_id == 1 and selected_fighter2 == ""):
+
 		if is_joy_button_just_pressed("move_up", input_methods[character_id]) or( Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
 			$SelectCharacter.play()
 			move_selection(-grid_width,character_id, second_onlineP) 
@@ -124,27 +124,21 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			_select_fighter(character_id, second_onlineP)
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 
-	if (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
-			print("GOOOOOOOOOO BAAAAAAAAAAACKKK")
-			if not back:
-				back = true
-				
-				while (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
-					await get_tree().create_timer(0.017).timeout
-				
-				_on_go_back_button_down()
-				
-				$MenuSelect.play()
-				if mode == match_mode.CPU:
-					if selected_fighter2 != "": selected_fighter2 = ""
-					else: selected_fighter = ""
-				else:
+		if (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
+				print("GOOOOOOOOOO BAAAAAAAAAAACKKK")
+				if not back:
+					back = true
 					
-					if character_id == 0 and not second_onlineP:
+					while (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
+						await get_tree().create_timer(0.017).timeout
+					
+					_on_go_back_button_down()
+					
+					$MenuSelect.play()
+					if selected_fighter != "":
 						selected_fighter = ""
-					else:
-						selected_fighter2 = ""
-				back = false
+
+					back = false
 
 func move_selection(offset: int, player : int = 0, second_onlineP : bool = false):
 	
@@ -198,7 +192,7 @@ func _update_selection(player : int = 0, second_onlineP : bool = false):
 	
 	var children = grid_container.get_children()
 	for i in range(children.size()):
-		if children[i] != children[selected_index] and children[i] != children[selected_index2]:
+		if children[i] != children[selected_index] :
 		
 			children[i].modulate = Color(1, 1, 1, 0.5) 
 	if children.size() > 0 and actual_player_index < children.size():
@@ -217,39 +211,31 @@ func _select_fighter(player : int = 0, second_onlineP : bool = false):
 		if player == 0 and not second_onlineP:
 			selected_fighter = children[selected_index].name
 			print("Selected fighter: ", selected_fighter)
-		else:
-			selected_fighter2 = children[selected_index2].name
-			print("Selected fighter: ", selected_fighter2)
+
 
 
 func _on_start_button_button_down() -> void:
-	if mode != match_mode.ARCADE and selected_fighter != "" and selected_fighter2 != "":
+	if mode != match_mode.ARCADE and selected_fighter != "":
 		
 		start_match()
 		GDSync.call_func(start_match)
 		
-	elif mode == match_mode.ARCADE and selected_fighter != "":
-		if FileAccess.file_exists("res://ArcadeRuns/" + selected_fighter + ".tres"):
-			
-			var arcade_route : ArcadeRun = load("res://ArcadeRuns/" + selected_fighter + ".tres")
-			GameManager.arcade_route = arcade_route
-			
-			selected_fighter2 = arcade_route.oponents[0] #first oponent
-			start_match()
+	#elif mode == match_mode.ARCADE and selected_fighter != "":
+		#if FileAccess.file_exists("res://ArcadeRuns/" + selected_fighter + ".tres"):
+			#
+			#var arcade_route : ArcadeRun = load("res://ArcadeRuns/" + selected_fighter + ".tres")
+			#GameManager.arcade_route = arcade_route
+			#
+			#selected_fighter2 = arcade_route.oponents[0] #first oponent
+			#start_match()
 
 func start_match():
-	var p2_path : String = "res://Scenes/Entities/"
-	if mode == match_mode.CPU or mode == match_mode.ARCADE: 
-		p2_path = "res://Scenes/Entities/CPU/"
-		selected_fighter2 += "_AI" #append suffix
 	
-	if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists(p2_path + selected_fighter2+".tscn"):
-			
-			GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
-			GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
-			
-			SceneWrapper.change_scene(current_map)
-
+	if FileAccess.file_exists("res://Scenes/Stages/parallax/" + selected_fighter +".tscn"):
+		
+		GameManager.back_ground = load("res://Scenes/Stages/parallax/" + selected_fighter +".tscn")
+		SceneWrapper.change_scene(current_map)
+		
 
 
 var action_state : Dictionary = {
@@ -315,8 +301,30 @@ func remap_controllers():
 func _on_go_back_button_down() -> void:
 	if mode == match_mode.ONLINE_2P: return
 	
-	elif mode == match_mode.LOCAL_2P and selected_fighter == "" and selected_fighter2 == "":
-		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+
+	if  selected_fighter == "":
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))
+
+
+func _on_button_button_down() -> void:
+	if mode != match_mode.ARCADE and selected_fighter != "":
 		
-	elif mode == match_mode.ARCADE or mode == match_mode.CPU and selected_fighter == "":
-		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+		start_match()
+		GDSync.call_func(start_match)
+		
+	pass # Replace with function body.
+
+
+func _on_random_button_button_down() -> void:
+	
+	var stages : Array = grid_container.get_children()
+	
+	selected_fighter = stages.pick_random().name
+	_on_button_button_down()
+	
+	pass # Replace with function body.
+
+
+func _on_real_random_button_button_down() -> void:
+	_on_random_button_button_down()
+	pass # Replace with function body.
