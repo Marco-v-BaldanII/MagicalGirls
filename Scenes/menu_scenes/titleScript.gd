@@ -11,6 +11,8 @@ var flash_duration : float = 0.5
 var flash_intensity : float = 1.0 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 	color_rect.color.a = 0
 	pass # Replace with function body.
 
