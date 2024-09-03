@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oi674s6pvdsw"
-path="res://.godot/imported/ellie portrait(3).png-ddc0157ae71f0df993280e809fc54745.ctex"
+uid="uid://df8g0yxsec1nb"
+path="res://.godot/imported/Ritsu.png-76f3931598f642cd9b1b900fde43c249.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/ellie portrait(3).png"
-dest_files=["res://.godot/imported/ellie portrait(3).png-ddc0157ae71f0df993280e809fc54745.ctex"]
+source_file="res://Assets/portraits/Ritsu.png"
+dest_files=["res://.godot/imported/Ritsu.png-76f3931598f642cd9b1b900fde43c249.ctex"]
 
 [params]
 

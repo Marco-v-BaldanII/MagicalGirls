@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b02x15g8k4i5m"
-path="res://.godot/imported/anastasia portrait.png-a64d32235db5a6a316dcda1130562aed.ctex"
+uid="uid://oi674s6pvdsw"
+path="res://.godot/imported/Ellie Quinn.png-ab47874eb9efae6459623d40e956f0db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/anastasia portrait.png"
-dest_files=["res://.godot/imported/anastasia portrait.png-a64d32235db5a6a316dcda1130562aed.ctex"]
+source_file="res://Assets/portraits/Ellie Quinn.png"
+dest_files=["res://.godot/imported/Ellie Quinn.png-ab47874eb9efae6459623d40e956f0db.ctex"]
 
 [params]
 

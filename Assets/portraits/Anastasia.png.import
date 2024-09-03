@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df8g0yxsec1nb"
-path="res://.godot/imported/ritsu portrait(2).png-87f26f47e1ac1b6014ee572e8fc7b979.ctex"
+uid="uid://b02x15g8k4i5m"
+path="res://.godot/imported/Anastasia.png-049acd291ea121a35629d8b18810de08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/ritsu portrait(2).png"
-dest_files=["res://.godot/imported/ritsu portrait(2).png-87f26f47e1ac1b6014ee572e8fc7b979.ctex"]
+source_file="res://Assets/portraits/Anastasia.png"
+dest_files=["res://.godot/imported/Anastasia.png-049acd291ea121a35629d8b18810de08.ctex"]
 
 [params]
 

@@ -151,7 +151,7 @@ var colliders : Array[CollisionShape2D]
 
 
 func _ready():
-	weak_attack.disabled = true; strong_attack.disabled = true
+	#weak_attack.disabled = true; strong_attack.disabled = true
 	direction = "left"
 	await fully_instanciated
 	can_move = true

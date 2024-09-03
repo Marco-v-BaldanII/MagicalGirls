@@ -53,7 +53,7 @@ var dialogue_line: DialogueLine:
 		character_label.text = tr(dialogue_line.character, "dialogue")
 		
 		if dialogue_line != null:
-			var portrait_path : String = "res://Assets/characters/%s.png" % dialogue_line.character
+			var portrait_path : String = "res://Assets/portraits/%s.png" % dialogue_line.character
 			
 			if FileAccess.file_exists(portrait_path):
 				portrait.texture = load(portrait_path)
@@ -142,11 +142,12 @@ func _on_mutated(_mutation: Dictionary) -> void:
 	)
 
 
-func _on_balloon_gui_input(event: InputEvent) -> void:
+func advance_dialogue() -> void:
 	# See if we need to skip typing of the dialogue
 	if dialogue_label.is_typing:
-		var mouse_was_clicked: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
-		var skip_button_was_pressed: bool = event.is_action_pressed(skip_action)
+		var mouse_was_clicked: bool = true
+		#var skip_button_was_pressed: bool = event.is_action_pressed(skip_action)
+		var skip_button_was_pressed = false
 		if mouse_was_clicked or skip_button_was_pressed:
 			get_viewport().set_input_as_handled()
 			dialogue_label.skip_typing()
@@ -158,11 +159,32 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 	# When there are no response options the balloon itself is the clickable thing
 	get_viewport().set_input_as_handled()
 
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		next(dialogue_line.next_id)
-	elif event.is_action_pressed(next_action) and get_viewport().gui_get_focus_owner() == balloon:
-		next(dialogue_line.next_id)
 
+	next(dialogue_line.next_id)
+	#elif event.is_action_pressed(next_action) and get_viewport().gui_get_focus_owner() == balloon:
+		#next(dialogue_line.next_id)
+
+var action_state : Dictionary = {
+	"accept" : false,
+	"go_back" : false,
+
+}
+func is_joy_button_just_pressed(action_name : String) -> bool:
+
+		if action_state[action_name] == false and (Input.is_joy_button_pressed( 0, Controls.ui[action_name][0]) or Input.is_physical_key_pressed(Controls.ui[action_name][1])) :
+			action_state[action_name] = true
+			return true
+		if not Input.is_joy_button_pressed(0, Controls.ui[action_name][0]) and not Input.is_physical_key_pressed(Controls.ui[action_name][1]):
+			action_state[action_name] = false
+		return false
+
+
+
+func _input(event: InputEvent) -> void:
+	
+	if is_joy_button_just_pressed("accept"):
+		advance_dialogue()
+	
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)

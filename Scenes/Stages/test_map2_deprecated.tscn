@@ -60,10 +60,10 @@ position = Vector2(999, -36)
 shape = SubResource("RectangleShape2D_cj0l7")
 
 [node name="spawn_p1" type="Node2D" parent="."]
-position = Vector2(200, 794)
+position = Vector2(350, 794)
 
 [node name="spawn_p2" type="Node2D" parent="."]
-position = Vector2(1718, 794)
+position = Vector2(1568, 794)
 
 [node name="player1_spawns" type="Node2D" parent="."]
 z_index = 2

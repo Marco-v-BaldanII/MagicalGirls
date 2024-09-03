@@ -14,8 +14,6 @@ func enter():
 			player = e
 	else:
 		pass
-		#player.animation_tree["parameters/conditions/not_crouch"] = true
-		#player.animation_tree["parameters/conditions/crouch"] = false
 
 
 var crouching : bool = false
@@ -58,9 +56,7 @@ func physics_update(delta : float):
 		player.jump_lag -= delta
 		player.moving_backwards = false
 		if(player.input_direction > 0 and player.direction == "left") or (player.input_direction < 0 and player.direction == "right"):
-			var f = player.input_direction * player.SPEED
-			var t = player.SPEED
-			var g = player.input_direction
+			
 			player.velocity.x = player.input_direction * player.SPEED
 			if player.animation_tree["parameters/conditions/move_forward"] == false: 
 				player.animation_tree["parameters/conditions/move_backward"] = false

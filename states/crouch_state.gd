@@ -14,13 +14,14 @@ func enter():
 
 	player.velocity.x = 0
 	player.animation_tree["parameters/conditions/crouch"] = true
+
 	player.animation_tree["parameters/conditions/not_crouch"] = false
+	player.animation_tree.set("parameters/playback/current", "crouching")
 	player.crouching = true
 	
 	await  get_tree().create_timer(0.1).timeout
 	
-	
-	player.animation_tree["parameters/conditions/crouch"] = true
+
 
 
 func physics_update(delta : float):
