@@ -12,6 +12,8 @@ var is_host : bool = false
 @onready var p2 : PackedScene = preload("res://Scenes/Entities/CPU/Ritsu_AI.tscn")
 @onready var p1 : PackedScene = preload("res://Scenes/Entities/Ritsu.tscn")
 
+var back_ground : PackedScene
+
 var p1_spawns : Node2D
 var p2_spawns : Node2D
 

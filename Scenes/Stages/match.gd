@@ -33,17 +33,17 @@ func _ready():
 		
 	p1.match_setting = self; p2.match_setting = self;
 	add_child(p1); add_child(p2);
-
+	
+	var parallax : PackedScene
 
 	if GameManager.character_selection_mode == 3 : #show dialogues in arcade mode
 		
 			#pick the cpu map
-		var parallax : PackedScene = load("res://Scenes/Stages/parallax/" + p2.character_name + ".tscn")
+		parallax  = load("res://Scenes/Stages/parallax/" + p2.character_name + ".tscn")
 		if parallax != null:
 			var p = parallax.instantiate()
 			background.add_child(p)
 			
-		
 		if FileAccess.file_exists(("res://Dialogues/" + p1.character_name +".dialogue")) and GameManager.total_set_matches() == 0:
 			baloon = BALLOON.instantiate()
 			
@@ -57,11 +57,15 @@ func _ready():
 				title = "EllieQuinn"
 
 			baloon.start(dialogue_resource, title)
-
+	
 			
 		while is_instance_valid(baloon):
 			await get_tree().create_timer(0.017).timeout
-	
+	else:
+		parallax  = GameManager.back_ground
+		if parallax != null:
+			var p = parallax.instantiate()
+			background.add_child(p)
 	
 	$AnimationPlayer.play("start")
 	await get_tree().create_timer(0.01667*84).timeout

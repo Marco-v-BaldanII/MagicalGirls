@@ -1,6 +1,7 @@
 [gd_scene load_steps=44 format=3 uid="uid://dq5o8hv6iaamp"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/stage_selection_screen.gd" id="1_brvgn"]
+[ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_pbnj6"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="3_j4dlq"]
 [ext_resource type="Texture2D" uid="uid://c4jq4bqccmeg3" path="res://japan unlocked(1).png" id="3_uwywb"]
 [ext_resource type="Texture2D" uid="uid://dm677krwbjirh" path="res://rusia unlocked(1).png" id="4_5xfea"]
@@ -8,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="5_2ms6r"]
 [ext_resource type="Texture2D" uid="uid://bin6oa5t3ueth" path="res://library unlocked(1).png" id="5_y6mv2"]
 [ext_resource type="Texture2D" uid="uid://jy82ruls5ghl" path="res://brazil unlocked(1).png" id="6_njr0w"]
-[ext_resource type="PackedScene" uid="uid://dhe6lj8x5nk7d" path="res://Scenes/menu_scenes/Online_Menu.tscn" id="6_qjhoq"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="7_cbwjp"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="8_gspx1"]
 [ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="8_kpqop"]
@@ -89,6 +89,7 @@ scale = Vector2(0.6, 0.6)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_brvgn")
+current_map = ExtResource("2_pbnj6")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -150,25 +151,25 @@ size_flags_vertical = 4
 columns = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="RitsuBG" type="TextureRect" parent="GridContainer"]
+[node name="Ritsu" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("3_uwywb")
 
-[node name="AnastasiaBG" type="TextureRect" parent="GridContainer"]
+[node name="Anastasia" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("4_5xfea")
 
-[node name="Ellie QuinnBG" type="TextureRect" parent="GridContainer"]
+[node name="Ellie Quinn" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("5_y6mv2")
 
-[node name="LarissaBG" type="TextureRect" parent="GridContainer"]
+[node name="Larissa" type="TextureRect" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -225,9 +226,6 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_fp6tq")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gdn37")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0kj5n")
 text = "Random"
-
-[node name="OnlineMenu" parent="." instance=ExtResource("6_qjhoq")]
-position = Vector2(0, -230)
 
 [node name="ControlSelection" type="Node2D" parent="."]
 visible = false

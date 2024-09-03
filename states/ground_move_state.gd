@@ -13,6 +13,8 @@ func enter():
 				e = e.get_parent()
 			player = e
 	else:
+		player.animation_tree["parameters/conditions/idle_anim"] = true
+		player.animation_tree.set("parameters/playback/current", "idle_anim")
 		return
 
 
