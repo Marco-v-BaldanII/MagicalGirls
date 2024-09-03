@@ -77,7 +77,7 @@ func physics_update(delta : float):
 				player.velocity.x = -KNOCK_FORCE
 		speedY -= gravity
 	
-	if  (player.launch_knock and player.is_on_floor() and speedY < 0):
+	if  (player.launch_knock and (player.is_on_floor() or player.is_on_wall()) and speedY < 0):
 		
 		if player.launch_knock and not lauched_to_ground:
 			speedY = launch_forceY

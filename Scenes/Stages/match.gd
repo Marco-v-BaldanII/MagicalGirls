@@ -62,6 +62,10 @@ func _ready():
 		while is_instance_valid(baloon):
 			await get_tree().create_timer(0.017).timeout
 	
+	
+	$AnimationPlayer.play("start")
+	await get_tree().create_timer(0.01667*84).timeout
+	
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 	p1.can_move = true; p2.can_move = true;
 	p2.is_initialized = true; p1.is_initialized = true

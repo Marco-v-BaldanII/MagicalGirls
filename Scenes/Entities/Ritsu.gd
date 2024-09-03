@@ -175,3 +175,7 @@ func _physics_process(delta: float) -> void:
 		
 			current_start_projectile = null
 			
+
+
+func _on_body_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
