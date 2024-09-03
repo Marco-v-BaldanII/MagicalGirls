@@ -71,7 +71,7 @@ func physics_update(delta : float):
 				player.animation_tree["parameters/conditions/move_backward"] = true
 				player.animation_tree["parameters/conditions/move_forward"] = false
 				player.animation_tree["parameters/conditions/idle_anim"] = false
-			player.moving_backwards = true
+			if player.input_direction != 0 :player.moving_backwards = true
 			
 	elif player.is_on_floor():
 		player.jump_lag -= delta

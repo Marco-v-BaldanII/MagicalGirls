@@ -424,6 +424,8 @@ var blocked : bool = false
 var hit_position : String 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
+	print("hit on " + str(area.global_position.y))
+	
 
 	GDSync.call_func(online_receive_dmg,[area])
 	hit_position = "none"

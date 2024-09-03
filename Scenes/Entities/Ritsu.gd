@@ -58,6 +58,10 @@ func instanciate_diagonal_star():
 func perform_move():
 	if not can_move and not lag: return
 	
+	#$AnimationTree["parameters/conditions/idle_anim"] = true
+	#animation_tree.set("parameters/playback/current", "idle_anim")
+	#await get_tree().create_timer(0.01667).timeout
+	
 	for specials in moveset:
 		if  moveset[specials] is Array[String] and moveset[specials].size() <= input_buffer.size()  and  has_subarray(moveset[specials], input_buffer):
 			var dir = find_special_direction(specials)
