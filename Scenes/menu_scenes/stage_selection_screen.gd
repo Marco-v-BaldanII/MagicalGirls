@@ -304,3 +304,27 @@ func _on_go_back_button_down() -> void:
 
 	if  selected_fighter == "":
 		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))
+
+
+func _on_button_button_down() -> void:
+	if mode != match_mode.ARCADE and selected_fighter != "":
+		
+		start_match()
+		GDSync.call_func(start_match)
+		
+	pass # Replace with function body.
+
+
+func _on_random_button_button_down() -> void:
+	
+	var stages : Array = grid_container.get_children()
+	
+	selected_fighter = stages.pick_random().name
+	_on_button_button_down()
+	
+	pass # Replace with function body.
+
+
+func _on_real_random_button_button_down() -> void:
+	_on_random_button_button_down()
+	pass # Replace with function body.

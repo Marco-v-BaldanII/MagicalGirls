@@ -248,8 +248,10 @@ func start_match():
 			
 			GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
 			GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
-			
-			SceneWrapper.change_scene(current_map)
+			if mode == match_mode.ARCADE:
+				SceneWrapper.change_scene(current_map)
+			else:
+				SceneWrapper.change_scene(load("res://Scenes/menu_scenes/StageSelectionScreen.tscn"))
 
 
 

@@ -205,7 +205,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_s4aaq")
 text = "Start"
 icon = SubResource("ViewportTexture_cccyb")
 
-[node name="StartButton2" type="Button" parent="."]
+[node name="randomButton" type="Button" parent="."]
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 0
 offset_left = -615.0
@@ -376,7 +376,25 @@ offset_bottom = -1005.0
 scale = Vector2(92.7015, 51.3426)
 color = Color(1, 0.458824, 0.627451, 1)
 
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 107.0
+offset_top = 667.0
+offset_right = 717.0
+offset_bottom = 853.0
+
+[node name="realRandomButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -713.0
+offset_top = 670.0
+offset_right = -105.0
+offset_bottom = 850.0
+
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
-[connection signal="button_down" from="StartButton2" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="randomButton" to="." method="_on_random_button_button_down"]
 [connection signal="button_down" from="ControlSelection/Button" to="ControlSelection/P1_control_selection" method="_on_button_button_down"]
 [connection signal="button_down" from="ControlSelection2/Button" to="ControlSelection2/P2_control_selection" method="_on_button_button_down"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="realRandomButton" to="." method="_on_real_random_button_button_down"]
