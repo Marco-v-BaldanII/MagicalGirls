@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_hxmnc"]
-[ext_resource type="Texture2D" uid="uid://djkhbp65uy288" path="res://Assets/characters/Ritsu/Animations/ritsuIddle(1).png" id="3_jg0sp"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ujalq"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ohqq7"]
@@ -216,48 +215,51 @@ states/w_punch/position = Vector2(411, 148)
 transitions = ["Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "land", SubResource("AnimationNodeStateMachineTransition_g1n7t"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_vs2yb"), "idle_anim", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_ixyer"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_lognw"), "idle_anim", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_scsg8"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_d0fgt"), "idle_anim", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_w6ggf"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_s33j6"), "idle_anim", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_m3lec"), "idle_anim", "crouch", SubResource("AnimationNodeStateMachineTransition_76fnt"), "crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_d6iw6"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_y58wf"), "crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g")]
 graph_offset = Vector2(7, 104)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_58xte"]
+load_path = "res://.godot/imported/ritsuIddle(1).png-6dc58d1070452f82a77bf02269047749.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_msn78"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(0, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6lwc"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(333, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdbpg"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(666, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atloi"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(999, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nslhs"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(1332, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3i5p"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(1665, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c1bku"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(1998, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b02bl"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(2331, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul0r3"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(2664, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qerex"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(2997, 0, 333, 347)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u00xv"]
-atlas = ExtResource("3_jg0sp")
+atlas = SubResource("CompressedTexture2D_58xte")
 region = Rect2(3330, 0, 333, 347)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lji15"]
