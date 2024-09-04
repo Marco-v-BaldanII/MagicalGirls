@@ -7,6 +7,8 @@ const BOOK_FIRE = preload("res://Scenes/projectiles/book_fire.tscn")
 
 const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
 
+var fire_cost = 150
+
 func _ready() -> void:
 	super()
 	GDSync.expose_node(self)
@@ -106,13 +108,15 @@ func perform_move():
 				print(specials + dir)
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
-					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
-
-					#GDSync.call_func(instanciate_projectile_online,["res://Scenes/projectiles/"+specials+".tscn"])
-					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn", specials)
 					
-					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
-					#Here will call the animation in the animation tree , which will have it's hitstun
+					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
+						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+
+						#GDSync.call_func(instanciate_projectile_online,["res://Scenes/projectiles/"+specials+".tscn"])
+						instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn", specials)
+						
+						add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
+						#Here will call the animation in the animation tree , which will have it's hitstun
 				
 			clear_buffer()
 
@@ -170,9 +174,11 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and charging_laser and not (is_mapped_action_pressed("move_right") or is_mapped_action_pressed("move_left")) and not (is_input_pressed("move_right") or is_input_pressed("move_left")):
 		if current_start_projectile != null and charging_laser:
 			current_start_projectile.charge(global_position)
+			charging_mp = false
 			pass
 	elif charging_laser:
 		charging_laser = false
+		charging_mp = true
 	if is_on_floor() and not crouching:
 		
 		if not ai_player: book_laser()
@@ -180,19 +186,19 @@ func _physics_process(delta: float) -> void:
 		
 		
 	elif is_on_floor() and crouching:
-		
-		if not ai_player and is_mapped_action_pressed("s_kick") and current_start_projectile == null:
-			var fire_projectile = instanciate_fire()
-			GDSync.call_func(instanciate_fire)
-			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
-			add_lag(30)
-			pass
-		
-		elif ai_player and is_input_pressed("s_kick"):
-			var fire_projectile = instanciate_fire()
-			GDSync.call_func(instanciate_fire)
-			fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
-			add_lag(30)
+		if enough_mp(fire_cost):
+			if not ai_player and is_mapped_action_pressed("s_kick") and current_start_projectile == null:
+				var fire_projectile = instanciate_fire()
+				GDSync.call_func(instanciate_fire)
+				fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+				add_lag(30)
+				pass
+			
+			elif ai_player and is_input_pressed("s_kick"):
+				var fire_projectile = instanciate_fire()
+				GDSync.call_func(instanciate_fire)
+				fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+				add_lag(30)
 	
 	#if not input_buffer.is_empty() and input_buffer.back().contains("s_punch"):
 		#instanciate_projectile("res://Scenes/projectiles/orbiting_book.tscn","", Vector2(200,0), self)

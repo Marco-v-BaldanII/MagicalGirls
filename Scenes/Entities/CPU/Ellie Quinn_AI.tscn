@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://1ngjbdm0xxxg"]
+[gd_scene load_steps=8 format=3 uid="uid://1ngjbdm0xxxg"]
 
 [ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie Quinn.tscn" id="1_2i38b"]
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_cwos8"]
 [ext_resource type="Script" path="res://states/camp.gd" id="3_5nbar"]
+[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="4_bgjxe"]
+
+[sub_resource type="Theme" id="Theme_fa6qx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3q1tp"]
+bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1ix1"]
+bg_color = Color(0.13863, 0.40582, 0.708132, 1)
 
 [node name="Ellie_AI" instance=ExtResource("1_2i38b")]
 ai_player = true
@@ -12,5 +21,20 @@ character_name = "Ellie Quinn"
 
 [node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
 script = ExtResource("3_5nbar")
+
+[node name="mpBar2" type="ProgressBar" parent="CanvasLayer" index="1"]
+offset_left = 1034.0
+offset_top = 94.0
+offset_right = 1881.0
+offset_bottom = 143.0
+size_flags_horizontal = 0
+theme = SubResource("Theme_fa6qx")
+theme_override_styles/background = SubResource("StyleBoxFlat_3q1tp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s1ix1")
+max_value = 600.0
+value = 20.0
+show_percentage = false
+script = ExtResource("4_bgjxe")
+regenerate = true
 
 [editable path="AI_StateMachine"]

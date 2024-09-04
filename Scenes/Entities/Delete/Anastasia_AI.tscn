@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_u87n4"]
 [ext_resource type="Script" path="res://states/camp.gd" id="3_5afgx"]
 
-
 [node name="Anastasia" instance=ExtResource("1_rc73i")]
 script = ExtResource("2_byv8e")
 recharge_frames = 40
 fire_rate_frames = 12
+grenade_cost = 40
 max_shots = 15
 ai_player = true
 fly = false
