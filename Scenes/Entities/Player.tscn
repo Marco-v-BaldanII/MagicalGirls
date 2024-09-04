@@ -1272,7 +1272,6 @@ interpolated = true
 interpolation_speed = 60.0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
-[connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
 [connection signal="area_exited" from="Body" to="." method="_on_body_area_exited"]
 [connection signal="area_entered" from="head_hurt_box" to="." method="_on_head_area_entered"]

@@ -16,6 +16,8 @@ func enter():
 		player.animation_tree["parameters/conditions/idle_anim"] = true
 		player.animation_tree["parameters/conditions/move_forward"] = false
 		player.animation_tree["parameters/conditions/move_backward"] = false
+		player.animation_tree["parameters/conditions/jump"] = false
+		player.animation_tree["parameters/conditions/land"] = true
 		player.animation_tree.set("parameters/playback/current", "idle_anim")
 		return
 
@@ -70,6 +72,7 @@ func physics_update(delta : float):
 			
 			player.velocity.x = player.input_direction * player.SPEED
 			if player.animation_tree["parameters/conditions/move_forward"] == false: 
+
 				player.animation_tree["parameters/conditions/move_backward"] = false
 				player.animation_tree["parameters/conditions/move_forward"] = true
 				player.animation_tree["parameters/conditions/idle_anim"] = false
@@ -79,6 +82,7 @@ func physics_update(delta : float):
 			#move slower in your back direction
 			player.velocity.x = player.input_direction * (player.SPEED*0.55)
 			if player.input_direction != 0 and  player.animation_tree["parameters/conditions/move_backward"] == false: 
+
 				player.animation_tree["parameters/conditions/move_backward"] = true
 				player.animation_tree["parameters/conditions/move_forward"] = false
 				player.animation_tree["parameters/conditions/idle_anim"] = false
@@ -90,6 +94,7 @@ func physics_update(delta : float):
 	
 	else:
 		player.grounded = false
+		player.animation_tree["parameters/conditions/land"] = false
 		Transitioned.emit(self, "air_move")
 
 	#Transition to jump

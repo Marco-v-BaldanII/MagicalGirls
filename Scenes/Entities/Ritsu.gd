@@ -9,7 +9,7 @@ const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
 
 
 func _input(event):
-	if not can_move: return
+	if not can_move or ai_player: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
 		if input_method != 3: #not using keyboard
@@ -187,4 +187,14 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_head_hurt_box_area_entered(area: Area2D) -> void:
+
+	head = true
+	_on_hurt_box_area_entered(area)
+	_on_hurt_box_area_entered(area)
+	head = false
+
 	pass # Replace with function body.

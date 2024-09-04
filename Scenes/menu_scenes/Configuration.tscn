@@ -196,5 +196,5 @@ script = ExtResource("10_6vea0")
 bus_name = "Sfx"
 
 [connection signal="toggled" from="TextureButton" to="." method="_on_texture_button_toggled"]
-[connection signal="toggled" from="TextureButton2" to="." method="_on_texture_button_2_toggled"]
 [connection signal="toggled" from="TextureButton2" to="." method="_on_texture_button_toggled"]
+[connection signal="toggled" from="TextureButton2" to="." method="_on_texture_button_2_toggled"]

@@ -15,6 +15,7 @@ func enter():
 	else:
 		player.animation_tree["parameters/conditions/not_crouch"] = true
 		player.animation_tree["parameters/conditions/crouch"] = false
+		player.animation_tree["parameters/conditions/land"] = false
 	player.grounded = false
 	player.velocity.x = 0
 	

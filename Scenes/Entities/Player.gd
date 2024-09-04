@@ -685,12 +685,6 @@ func stand_up():
 	await get_tree().create_timer(0.017 * 6).timeout
 	animation_tree["parameters/conditions/not_crouch"] = false
 
-func _on_head_area_entered(area: Area2D) -> void:
-	head = true
-	_on_hurt_box_area_entered(area)
-	_on_hurt_box_area_entered(area)
-	head = false
-	pass # Replace with function body.
 
 func online_instantiate(special_scene : PackedScene):
 
