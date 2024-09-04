@@ -100,11 +100,12 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + move] = false
+			animation_player.play(move)
 			clear_buffer()
 			GDSync.call_func(_sync_move,[move])
 		elif crouching:
 			last_used_move = "crouch_" + move
-
+			animation_player.play(last_used_move)
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
@@ -113,6 +114,7 @@ func perform_move():
 			GDSync.call_func(_sync_move,["crouch_" + move])
 		else:
 			last_used_move = "air_" + move
+			animation_player.play(last_used_move)
 			$AnimationTree["parameters/conditions/" + "air_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "air_" + move] = false

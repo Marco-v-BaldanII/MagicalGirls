@@ -126,7 +126,7 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 
 	if (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
-			print("GOOOOOOOOOO BAAAAAAAAAAACKKK")
+
 			if not back:
 				back = true
 				

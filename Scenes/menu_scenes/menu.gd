@@ -103,3 +103,44 @@ func deactivate():
 	print("Deactivate")
 	_is_active = false
 	hide()
+
+
+func _on_settings_button_button_down() -> void:
+	
+	SceneWrapper.change_scene(load("res://Scenes/menu_scenes/Configuration.tscn"))
+	pass # Replace with function body.
+
+func _input(event: InputEvent) -> void:
+	
+	if Controls.is_ui_action_pressed("select"):
+		_on_settings_button_button_down()
+	
+
+
+func _on_off_button_button_down() -> void:
+	pass # Replace with function body.
+
+
+func _on_arcade_button_button_down() -> void:
+	$GridContainer/Arcade.execute_option()
+	pass # Replace with function body.
+	
+
+
+func _on_cpu_button_button_down() -> void:
+	$GridContainer/CpuMatch.execute_option()
+	pass # Replace with function body.
+
+
+func _on_local_button_button_down() -> void:
+	$GridContainer/localMatch.execute_option()
+	pass # Replace with function body.
+
+
+func _on_online_button_button_down() -> void:
+	$GridContainer/Online.execute_option()
+	pass # Replace with function body.
+
+
+func _on_button_button_down() -> void:
+	pass # Replace with function body.

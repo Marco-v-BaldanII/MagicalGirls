@@ -18,11 +18,11 @@ func _on_value_changed(value: float) -> void:
 
 func execute_option():
 	selected = true
-	
+	modulate = Color.DARK_ORANGE
 	
 func deselect():
 	selected = false
-	
+	modulate = Color.WHITE
 	
 func _process(delta: float) -> void:
 	if selected:

@@ -50,3 +50,11 @@ func _process(delta: float) -> void:
 			current_slider = options[index % options.size()]
 			current_slider.execute_option()
 			pass
+	if Controls.is_joy_button_just_pressed("go_back"):
+		
+		_on_go_back_button_down()
+
+
+func _on_go_back_button_down() -> void:
+	SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+	pass # Replace with function body.

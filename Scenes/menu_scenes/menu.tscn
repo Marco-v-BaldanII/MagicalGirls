@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://2ri16duvgw33"]
+[gd_scene load_steps=23 format=3 uid="uid://2ri16duvgw33"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
 [ext_resource type="PackedScene" uid="uid://dyjnspgu8xbph" path="res://Scenes/menu_scenes/cursor.tscn" id="2_6m5h7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://m5cvofrcf6w1" path="res://Assets/UI/Menus/title(1).png" id="10_yjb53"]
 [ext_resource type="AudioStream" uid="uid://bjirl7m4mync" path="res://Assets/SFX/UI/menu audio.mp3" id="13_gw8y1"]
 [ext_resource type="Texture2D" uid="uid://bvw4onoh3yjgb" path="res://Assets/UI/settings button.png" id="14_s5nr1"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="15_w6deo"]
 [ext_resource type="Texture2D" uid="uid://iwrjbwx2868k" path="res://Assets/UI/off button.png" id="15_y08sq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gcixg"]
@@ -68,11 +69,20 @@ _data = {
 "breath": SubResource("Animation_ivsdf")
 }
 
+[sub_resource type="Texture2D" id="Texture2D_lxmb7"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("15_w6deo")
+path = "select"
+show_mode = 0
+force_type = 0
+
 [node name="menu" type="Node2D"]
 script = ExtResource("1_klk57")
 cursor_offset = 54
 
 [node name="cursor" parent="." instance=ExtResource("2_6m5h7")]
+position = Vector2(257, 471)
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 303.5
@@ -83,13 +93,13 @@ scale = Vector2(0.75, 0.8)
 size_flags_horizontal = 4
 theme_override_constants/v_separation = 24
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer"]
+[node name="Arcade" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = ExtResource("3_utj3r")
 script = ExtResource("3_rfhmp")
 
-[node name="Label" type="Label" parent="GridContainer/TextureRect"]
+[node name="Label" type="Label" parent="GridContainer/Arcade"]
 layout_mode = 0
 offset_top = -7.0
 offset_right = 650.0
@@ -101,13 +111,13 @@ text = "Arcade"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="GridContainer"]
+[node name="CpuMatch" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = ExtResource("3_utj3r")
 script = ExtResource("3_45vy0")
 
-[node name="Label" type="Label" parent="GridContainer/TextureRect2"]
+[node name="Label" type="Label" parent="GridContainer/CpuMatch"]
 layout_mode = 0
 offset_left = 22.5
 offset_top = -7.0
@@ -120,13 +130,13 @@ text = "CPU match"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect3" type="TextureRect" parent="GridContainer"]
+[node name="localMatch" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = ExtResource("3_utj3r")
 script = ExtResource("3_yq44x")
 
-[node name="Label" type="Label" parent="GridContainer/TextureRect3"]
+[node name="Label" type="Label" parent="GridContainer/localMatch"]
 layout_mode = 0
 offset_left = 23.75
 offset_top = -5.25005
@@ -139,13 +149,13 @@ text = "Local match"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect4" type="TextureRect" parent="GridContainer"]
+[node name="Online" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = ExtResource("3_utj3r")
 script = ExtResource("5_u1bm1")
 
-[node name="Label" type="Label" parent="GridContainer/TextureRect4"]
+[node name="Label" type="Label" parent="GridContainer/Online"]
 layout_mode = 0
 offset_top = -7.0
 offset_right = 650.0
@@ -157,12 +167,12 @@ text = "Online"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect5" type="TextureRect" parent="GridContainer"]
+[node name="TrainingMode" type="TextureRect" parent="GridContainer"]
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = ExtResource("3_utj3r")
 
-[node name="Label" type="Label" parent="GridContainer/TextureRect5"]
+[node name="Label" type="Label" parent="GridContainer/TrainingMode"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 1.99994
@@ -222,12 +232,68 @@ autoplay = "breath"
 stream = ExtResource("13_gw8y1")
 autoplay = true
 
-[node name="SettingsButton" type="Sprite2D" parent="."]
-position = Vector2(211, 1008)
+[node name="SettingsButton_" type="Sprite2D" parent="."]
+position = Vector2(79, 877)
 scale = Vector2(0.724169, 0.724169)
 texture = ExtResource("14_s5nr1")
+
+[node name="TextureRect" type="TextureRect" parent="SettingsButton_"]
+offset_left = 69.0446
+offset_top = -63.5211
+offset_right = 199.045
+offset_bottom = 66.4789
+texture = SubResource("Texture2D_lxmb7")
+
+[node name="SettingsButton" type="Button" parent="SettingsButton_"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -69.0
+offset_top = -68.0
+offset_right = 66.0
+offset_bottom = 65.0
 
 [node name="OffButton" type="Sprite2D" parent="."]
 position = Vector2(79, 1012)
 scale = Vector2(0.724, 0.724)
 texture = ExtResource("15_y08sq")
+
+[node name="offButton" type="Button" parent="OffButton"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -69.0161
+offset_top = -254.48
+offset_right = 65.9839
+offset_bottom = -121.48
+
+[node name="arcade_button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 317.0
+offset_top = 431.0
+offset_right = 776.0
+offset_bottom = 530.0
+
+[node name="cpu_button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 315.0
+offset_top = 563.0
+offset_right = 778.0
+offset_bottom = 659.0
+
+[node name="online_button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 316.0
+offset_top = 833.0
+offset_right = 779.0
+offset_bottom = 930.0
+
+[node name="local_button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 314.0
+offset_top = 696.0
+offset_right = 779.0
+offset_bottom = 796.0
+
+[connection signal="button_down" from="SettingsButton_/SettingsButton" to="." method="_on_settings_button_button_down"]
+[connection signal="button_down" from="OffButton/offButton" to="." method="_on_off_button_button_down"]
+[connection signal="button_down" from="arcade_button" to="." method="_on_arcade_button_button_down"]
+[connection signal="button_down" from="cpu_button" to="." method="_on_cpu_button_button_down"]
+[connection signal="button_down" from="online_button" to="." method="_on_online_button_button_down"]
+[connection signal="button_down" from="local_button" to="." method="_on_local_button_button_down"]

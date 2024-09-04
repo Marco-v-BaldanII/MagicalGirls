@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://ddb321fqevct6" path="res://Assets/Backgrounds/brasileña 1.png" id="6_2se8l"]
 
 [node name="LarissaBG" type="ParallaxBackground"]
-visible = false
 
 [node name="Background" type="ParallaxLayer" parent="."]
 position = Vector2(294, 159.48)

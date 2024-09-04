@@ -127,7 +127,7 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 
 		if (input_methods[character_id] != 2 and Input.is_joy_button_pressed(input_methods[character_id], Controls.ui["go_back"][0])) or (input_methods[character_id] == 2 and Input.is_physical_key_pressed(Controls.ui["go_back"][1])):
-				print("GOOOOOOOOOO BAAAAAAAAAAACKKK")
+
 				if not back:
 					back = true
 					
@@ -186,10 +186,9 @@ func move_selection(offset: int, player : int = 0, second_onlineP : bool = false
 func _update_selection(player : int = 0, second_onlineP : bool = false):
 	var actual_player_index : int
 	
-	if player == 0 and not second_onlineP:
-		actual_player_index = selected_index
-	else:
-		actual_player_index = selected_index2
+
+	actual_player_index = selected_index
+
 	
 	
 	var children = grid_container.get_children()

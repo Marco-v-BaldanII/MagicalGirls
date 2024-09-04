@@ -92,7 +92,7 @@ force_type = 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ktbue"]
 shader = ExtResource("17_yk83m")
 
-[node name="CharacterSelectionScreen" type="Control"]
+[node name="CharacterSelectionScreen2" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

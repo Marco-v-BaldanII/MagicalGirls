@@ -1,14 +1,32 @@
-[gd_scene load_steps=108 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=112 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://dixaj5d6gkk4n" path="res://Assets/characters/Ritsu/RitsuSpriteSheet(2).png" id="2_0s4wq"]
+[ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_3uh4q"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
+[ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_gkyms"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ujalq"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ohqq7"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_ib67o"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_t58ng"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_wgxbo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_taivp"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 9
+particles_anim_loop = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56ibl"]
+shader = ExtResource("3_3uh4q")
+shader_parameter/fadeCont = true
+shader_parameter/fadeStep = 2.0
+shader_parameter/scale = 1.0
+shader_parameter/red = 0.2
+shader_parameter/green = 0.075
+shader_parameter/blue = 0.075
+shader_parameter/tex_anim_offset = 0.0648148
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -837,7 +855,7 @@ states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(478, 115)
 transitions = ["crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "jump", "in_air", SubResource("AnimationNodeStateMachineTransition_wh10h"), "in_air", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_v6023"), "in_air", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_kvsvy"), "in_air", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_duujg"), "in_air", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_ipw6q"), "air_s_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_m3xc6"), "air_s_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_spjx6"), "air_w_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_syu4n"), "air_w_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_btxuy"), "move_backward", "jump", SubResource("AnimationNodeStateMachineTransition_j0pg8"), "move_forward", "jump", SubResource("AnimationNodeStateMachineTransition_xa7ef"), "move_forward", "s_kick", SubResource("AnimationNodeStateMachineTransition_6geba"), "move_forward", "s_punch", SubResource("AnimationNodeStateMachineTransition_1px32"), "move_forward", "w_kick", SubResource("AnimationNodeStateMachineTransition_wpgqb"), "move_forward", "w_punch", SubResource("AnimationNodeStateMachineTransition_de3vn"), "move_backward", "w_kick", SubResource("AnimationNodeStateMachineTransition_57ejk"), "move_backward", "w_punch", SubResource("AnimationNodeStateMachineTransition_xhoh1"), "move_backward", "s_punch", SubResource("AnimationNodeStateMachineTransition_uw4bi"), "move_backward", "s_kick", SubResource("AnimationNodeStateMachineTransition_o1085"), "Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "jump", SubResource("AnimationNodeStateMachineTransition_jbma8"), "in_air", "idle_anim", SubResource("AnimationNodeStateMachineTransition_kdq1c"), "idle_anim", "move_forward", SubResource("AnimationNodeStateMachineTransition_ofcr2"), "move_forward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_wa1kf"), "move_backward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_6a8ks"), "idle_anim", "move_backward", SubResource("AnimationNodeStateMachineTransition_cmgjt"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_13hnv"), "idle_anim", "crouching", SubResource("AnimationNodeStateMachineTransition_jn5ud"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_v0lk2"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_t32fp"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_n114p"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_4pkss"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav")]
-graph_offset = Vector2(17.067, 194)
+graph_offset = Vector2(-58.933, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12cjw"]
 size = Vector2(77, 23)
@@ -877,10 +895,20 @@ height = 376.0
 script = ExtResource("1_h8qxx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, -12)
 scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_0s4wq")
 hframes = 12
 vframes = 9
+frame = 8
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+z_index = -1
+material = SubResource("CanvasItemMaterial_taivp")
+position = Vector2(-0.740739, 0)
+process_material = SubResource("ShaderMaterial_56ibl")
+texture = ExtResource("2_0s4wq")
+script = ExtResource("4_gkyms")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
