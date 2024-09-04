@@ -69,9 +69,9 @@ func physics_update(delta : float):
 				player.velocity.y = player.JUMP_VELOCITY*0.47
 
 			if player.is_mapped_action_pressed("move_left") or  j_x < -0.1 or player.is_input_pressed("move_left") :
-					player.velocity.x = -player.air_speed
+					player.velocity.x += -player.air_speed
 			elif player.is_mapped_action_pressed("move_right") or j_x > 0.1 or player.is_input_pressed("move_right") :
-					player.velocity.x = player.air_speed
+					player.velocity.x += player.air_speed
 
 		
 		#LAND	
