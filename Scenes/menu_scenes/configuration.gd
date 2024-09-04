@@ -5,3 +5,8 @@ func _on_texture_button_toggled(toggled_on):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+func _on_texture_button_2_toggled(toggled_on):
+	
+	pass 
