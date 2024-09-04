@@ -55,19 +55,6 @@ grow_vertical = 2
 scale = Vector2(0.376963, 0.376963)
 texture = ExtResource("3_hp4ll")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1066.67
-offset_top = 383.333
-offset_right = 1578.67
-offset_bottom = 895.333
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_jt3s1")
-
 [node name="Position" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -1583.33

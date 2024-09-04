@@ -135,7 +135,7 @@ func perform_move():
 							#this means that the special is a melee attack
 							last_used_move =  specials
 							can_move = false #Can't move while ground attacks
-							$AnimationTree["parameters/conditions/" + specials] = true
+							$AnimationTree["paramjeters/conditions/" + specials] = true
 							await get_tree().create_timer(0.017 * 6).timeout
 							$AnimationTree["parameters/conditions/" + specials] = false
 							clear_buffer()
