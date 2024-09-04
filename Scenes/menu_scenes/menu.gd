@@ -53,20 +53,20 @@ func _process(delta: float) -> void:
 	
 	if options.size() > 0 and timer <= 0:
 
-			if Input.is_joy_button_pressed(0, Controls.ui["move_down"][0]) or Input.is_physical_key_pressed(Controls.ui["move_down"][1]):
+			if Controls.is_ui_action_pressed("move_down"):
 				_index += 1
 				while options[_index % options.size()].is_visible_in_tree() == false:
 					_index += 1
 				_change_cursor_pos()
 				
 					
-			if Input.is_joy_button_pressed(0, Controls.ui["move_up"][0]) or Input.is_physical_key_pressed(Controls.ui["move_up"][1]):
+			if Controls.is_ui_action_pressed("move_up"):
 				_index -= 1
 				while options[_index % options.size()].is_visible_in_tree() == false:
 					_index -= 1
 				_change_cursor_pos()
 			
-			if (Input.is_joy_button_pressed(0, Controls.ui["accept"][0]) or Input.is_physical_key_pressed(Controls.ui["accept"][1])) and current_option != null:
+			if Controls.is_ui_action_pressed("accept") and current_option != null:
 				if current_option is Option:
 					var  done : bool = current_option.execute_option()
 					if done:

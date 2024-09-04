@@ -51,6 +51,8 @@ var character_banners = {
 	"TextureRect6": preload("res://Assets/PlaceHolders/bomb.png"),
 }
 
+
+
 func _ready():
 	GDSync.expose_node(self)
 	_update_selection(0)
@@ -314,17 +316,16 @@ func _on_button_button_down() -> void:
 		
 	pass # Replace with function body.
 
-
-func _on_random_button_button_down() -> void:
-	
+func _on_real_random_button_button_down() -> void:
 	var stages : Array = grid_container.get_children()
 	
 	selected_fighter = stages.pick_random().name
 	_on_button_button_down()
-	
 	pass # Replace with function body.
 
-
-func _on_real_random_button_button_down() -> void:
-	_on_random_button_button_down()
-	pass # Replace with function body.
+func _input(event: InputEvent) -> void:
+	if Controls.is_ui_action_pressed("start"):
+		_on_button_button_down()
+		
+	elif Controls.is_joy_button_just_pressed("s_punch"):
+		_on_real_random_button_button_down()

@@ -28,17 +28,25 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+		timer -= delta
+	
+		if timer <= 0:
+			if Controls.is_ui_action_pressed("move_up"):
+				index -= 1
+				timer = 0.15
+				text_edit.modulate = Color.WHITE
+				cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y +  40
+			elif Controls.is_ui_action_pressed("move_down"):
+				index += 1
+				timer = 0.15
+				cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y +  40
+				text_edit.modulate = Color.WHITE
+
+	
+var timer := 0.15
 
 func _input(event: InputEvent) -> void:
 	if not listening_input:
-		if Controls.is_joy_button_just_pressed("move_up"):
-			index -= 1
-			
-		elif Controls.is_joy_button_just_pressed("move_down"):
-			index += 1
-		
-		cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y +  40
 		
 		
 		if Controls.is_ui_action_pressed("go_back") and not text_edit.has_focus():
@@ -52,6 +60,7 @@ func _input(event: InputEvent) -> void:
 				_on_button_button_down()
 			elif input_boxes[index % input_boxes.size()] is TextEdit:
 				input_boxes[index % input_boxes.size()].grab_focus()
+				text_edit.modulate = Color.AQUA
 	else:
 		
 		if Controls.is_joy_button_just_pressed("s_punch"):

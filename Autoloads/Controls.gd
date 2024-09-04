@@ -67,7 +67,8 @@ var action_state : Dictionary = {
 	"w_kick" : false,
 	"s_kick" : false,
 	"accept" : false,
-	"go_back" : false
+	"go_back" : false,
+	"start" : false
 }
 
 func is_ui_action_pressed(action : String)-> bool:

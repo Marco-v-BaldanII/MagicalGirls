@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c45w8tjq6yk2k"]
+[gd_scene load_steps=14 format=3 uid="uid://c45w8tjq6yk2k"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/configuration.gd" id="1_ujifl"]
 [ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="2_dgmwx"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="2_u3fpt"]
+[ext_resource type="PackedScene" uid="uid://dyjnspgu8xbph" path="res://Scenes/menu_scenes/cursor.tscn" id="2_uw1hv"]
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="3_gt1cy"]
 [ext_resource type="Texture2D" uid="uid://cmdcqnhnrg701" path="res://Assets/UI/Menus/active_round.png" id="5_6r270"]
 [ext_resource type="Texture2D" uid="uid://c1xosg6um4l7k" path="res://Assets/UI/Menus/inactive_round.png" id="6_6e1jm"]
@@ -22,7 +23,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0.419608, 0.858824, 1, 1)
 
-[node name="Substitles_Toggle_Button" type="Control"]
+[node name="Substitles_Toggle_Button" type="Control" node_paths=PackedStringArray("options")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +31,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ujifl")
+options = [NodePath("TextureButton"), NodePath("VBoxContainer/VolumeSlider"), NodePath("VBoxContainer/VolumeSlider2"), NodePath("VBoxContainer2/VolumeSlider4"), NodePath("TextureButton2")]
+
+[node name="cursor" parent="." instance=ExtResource("2_uw1hv")]
+position = Vector2(348, 459)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 2
