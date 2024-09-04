@@ -44,9 +44,9 @@ var selected_fighter : String = ""
 var selected_fighter2 : String = ""
 
 var character_banners = {
-	"TextureRect1": preload("res://Assets/PlaceHolders/bomb.png"),
-	"TextureRect2": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
-	"TextureRect3": preload("res://Assets/PlaceHolders/bomb.png"),
+	"Ritsu": preload("res://Assets/characters/concepts/RitsuConcept.png"),
+	"Anastasia": preload("res://Assets/characters/concepts/Magical_Girl_Game_Jam_Anastasia_concept-ezgif.com-crop.png"),
+	"Ellie Quinn": preload("res://Assets/characters/concepts/EllieQuinnConcept.png"),
 	"TextureRect4": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
 	"TextureRect5": preload("res://Assets/PlaceHolders/bomb.png"),
 	"TextureRect6": preload("res://Assets/PlaceHolders/bomb.png"),

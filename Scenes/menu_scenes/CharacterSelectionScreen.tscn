@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=18 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
+[ext_resource type="Texture2D" uid="uid://d2ry206yui2an" path="res://Assets/characters/concepts/RitsuConcept.png" id="3_hp4ll"]
 [ext_resource type="Texture2D" uid="uid://df8g0yxsec1nb" path="res://Assets/portraits/Ritsu.png" id="3_q1jj1"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 [ext_resource type="Texture2D" uid="uid://dabpluqqm3tfa" path="res://Assets/UI/anastasia portrait(1).png" id="4_e7lsl"]
@@ -45,13 +46,14 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1575.0
-offset_top = 383.333
-offset_right = -1063.0
-offset_bottom = 895.333
+offset_left = -1980.0
+offset_top = 81.6666
+offset_right = 1520.0
+offset_bottom = 5081.67
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jt3s1")
+scale = Vector2(0.376963, 0.376963)
+texture = ExtResource("3_hp4ll")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 1
