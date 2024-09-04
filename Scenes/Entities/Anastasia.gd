@@ -8,6 +8,8 @@ const GUN_FIRE = preload("res://Scenes/projectiles/gun_fire.tscn")
 @export var recharge_frames : int = 40
 @export var fire_rate_frames : int = 12
 
+@export var grenade_cost = 40
+
 signal recharge_AK
 
 var dead_bullets :
@@ -113,32 +115,34 @@ func perform_move():
 				var dir = find_special_direction(specials)
 				if dir != direction:
 					print(specials + dir)
-					
-					if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
-						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
+						if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
+							
+							
+								var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
-						#GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-						instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
-						
-						clear_buffer()
-						
-						await lag_finished
-						
-						add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
-						return
-						#Here will call the animation in the animation tree , which will have it's hitstun
-					else:
-						#this means that the special is a melee attack
-						last_used_move =  specials
-						can_move = false #Can't move while ground attacks
-						$AnimationTree["parameters/conditions/" + specials] = true
-						await get_tree().create_timer(0.017 * 6).timeout
-						$AnimationTree["parameters/conditions/" + specials] = false
-						clear_buffer()
-						GDSync.call_func(_sync_move,[specials])
-						
-						
-						return
+								#GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+								instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+								
+								clear_buffer()
+								
+								await lag_finished
+								
+								add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
+								return
+							#Here will call the animation in the animation tree , which will have it's hitstun
+						else:
+							#this means that the special is a melee attack
+							last_used_move =  specials
+							can_move = false #Can't move while ground attacks
+							$AnimationTree["parameters/conditions/" + specials] = true
+							await get_tree().create_timer(0.017 * 6).timeout
+							$AnimationTree["parameters/conditions/" + specials] = false
+							clear_buffer()
+							GDSync.call_func(_sync_move,[specials])
+							
+							
+							return
 			
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") and not input_buffer.back().contains("s_punch"):
 		var move : String = input_buffer.back()
@@ -170,12 +174,12 @@ func perform_move():
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
 	elif input_buffer.back().contains("s_kick") and current_start_projectile == null :
-
-		var grenade = instanciate_projectile("res://Scenes/projectiles/grenade.tscn","",Vector2.ZERO ,null , false, player_num)
-		current_start_projectile = grenade
-		#var grenade = instanciate_grenade()
-		GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
-		#GDSync.call_func(instanciate_grenade)
+		if  enough_mp(grenade_cost) : #if you have enough mp
+			var grenade = instanciate_projectile("res://Scenes/projectiles/grenade.tscn","",Vector2.ZERO ,null , false, player_num)
+			current_start_projectile = grenade
+			#var grenade = instanciate_grenade()
+			GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
+			#GDSync.call_func(instanciate_grenade)
 
 
 		

@@ -6,6 +6,9 @@ class_name Player
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
+@onready var mp_bar: ProgressBar = $CanvasLayer/mpBar
+
+var charging_mp : bool = true
 
 var match_setting : Match
 
@@ -20,6 +23,11 @@ signal player_died(player_id : int)
 
 @export var hp : int = 100:
 	set(value ):
+		
+		var difference = hp - value
+		mp += difference * 5
+		
+
 		print("the hp was" + str(hp) + "but now is" + str(value))
 		if GDSync.is_gdsync_owner(self): GDSync.call_func(change_hp,[value])
 		hp = clamp(value,0,100)
@@ -31,6 +39,13 @@ signal player_died(player_id : int)
 		
 		if hp == 0:
 			player_died.emit(oponent.player_num)
+			
+@export var mp : int = 200:
+	set(value):
+		mp = clamp(value,0,600)
+		if mp_bar:
+			mp_bar.value = mp
+			
 
 func change_hp(value : int):
 	hp = clamp(value,0,100)
@@ -187,7 +202,15 @@ func calculate_direction():
 		scale.x *= -1
 		direction = "left"
 
+var mp_timer : float = 0.75
+
 func _process(delta):
+	
+	mp_timer -= delta
+	if mp_timer <= 0.0 and charging_mp:
+		mp += 10
+		mp_timer = 0.75
+	
 	if input_made:
 		buffer_time -= delta
 	
@@ -769,3 +792,22 @@ func choose_random_special() -> Array[String]:
 								possible_specials.push_back(special)
 								
 						return possible_specials
+
+func enough_mp(atk_mp : int)-> bool:
+	if atk_mp <= mp:
+		mp -= atk_mp
+		return true
+	else:
+		
+		flash_mp_bar()
+		return false
+		
+		
+func flash_mp_bar():
+	var i = 3
+	while i > 0:
+		mp_bar.modulate = Color.RED
+		await get_tree().create_timer(0.017 * 6).timeout
+		mp_bar.modulate = Color.WHITE
+		await get_tree().create_timer(0.017 * 6).timeout
+		i -= 1

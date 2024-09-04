@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://c6oxefsfulot4"]
+[gd_scene load_steps=91 format=3 uid="uid://c6oxefsfulot4"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_0vdnb"]
 [ext_resource type="Texture2D" uid="uid://bxrk23tdfyt41" path="res://Assets/PlaceHolders/goku_spsheet.png" id="2_grr1i"]
@@ -1150,6 +1150,14 @@ bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5aki6"]
 bg_color = Color(0.643749, 0.61648, 5.77569e-07, 1)
 
+[sub_resource type="Theme" id="Theme_qergp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbqe6"]
+bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fq4r"]
+bg_color = Color(0.13863, 0.40582, 0.708132, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_evy26"]
 radius = 50.0
 height = 210.0
@@ -1262,6 +1270,21 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5aki6")
 value = 100.0
 show_percentage = false
 script = ExtResource("8_3hply")
+
+[node name="mpBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 1034.0
+offset_top = 94.0
+offset_right = 1881.0
+offset_bottom = 143.0
+size_flags_horizontal = 0
+theme = SubResource("Theme_qergp")
+theme_override_styles/background = SubResource("StyleBoxFlat_kbqe6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0fq4r")
+max_value = 600.0
+value = 20.0
+show_percentage = false
+script = ExtResource("8_3hply")
+regenerate = true
 
 [node name="Body" type="Area2D" parent="."]
 

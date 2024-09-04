@@ -5,6 +5,9 @@ var current_start_projectile : Projectile
 const STAR_RIGHT = preload("res://Scenes/projectiles/star_right.tscn")
 const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
 
+@export var star_cost : int = 10
+
+
 func _input(event):
 	if not can_move: return
 	
@@ -69,19 +72,22 @@ func perform_move():
 				print(specials + dir)
 				
 				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
-					var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+					
+					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
+						
+						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
-					GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-					instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
-					
-					clear_buffer()
-					
-					await lag_finished
-					
-					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
-					#Here will call the animation in the animation tree , which will have it's hitstun
+						GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+						instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+						
+						clear_buffer()
+						
+						await lag_finished
+						
+						add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
+						#Here will call the animation in the animation tree , which will have it's hitstun
 
-					return
+						return
 			
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_punch"):
 		
@@ -116,34 +122,35 @@ func perform_move():
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
 	elif input_buffer.back().contains("s_punch") and current_start_projectile == null and  is_on_floor():
-
-		var star = instanciate_star()
-		GDSync.set_gdsync_owner(star,GDSync.get_client_id())
-		GDSync.call_func(instanciate_star)
+		
+		if enough_mp(50):
+			var star = instanciate_star()
+			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
+			GDSync.call_func(instanciate_star)
 
 		
 	#diagonal non chargeable projectile on  air
 	elif not is_on_floor() and input_buffer.back().contains("s_punch") and not current_start_projectile:
-		
-		instanciate_diagonal_star()
-		GDSync.call_func(instanciate_diagonal_star)
-		
-		var i = 0
-		can_move = false
-		if direction == "left":
-			while i < 8:
-				#velocity.x = FLY_SPEED * -0.4
-				i += 1
-				can_move = false
-				await get_tree().create_timer(0.01667).timeout
-		else:
-			while i < 8:
-				#velocity.x = FLY_SPEED * 0.4
-				i += 1
-				can_move = false
-				await get_tree().create_timer(0.01667).timeout
-		can_move = true
-		#input_direction = 0
+		if  enough_mp(star_cost):
+			instanciate_diagonal_star()
+			GDSync.call_func(instanciate_diagonal_star)
+			
+			var i = 0
+			can_move = false
+			if direction == "left":
+				while i < 8:
+					#velocity.x = FLY_SPEED * -0.4
+					i += 1
+					can_move = false
+					await get_tree().create_timer(0.01667).timeout
+			else:
+				while i < 8:
+					#velocity.x = FLY_SPEED * 0.4
+					i += 1
+					can_move = false
+					await get_tree().create_timer(0.01667).timeout
+			can_move = true
+			#input_direction = 0
 		
 	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
 		#Force the player to throw the projectile when jumping
@@ -162,10 +169,12 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
 	if is_on_floor():
-		if current_start_projectile != null and (is_mapped_action_pressed("s_punch") or is_input_pressed("s_punch")):
+		if current_start_projectile != null and (is_mapped_action_pressed("s_punch") or is_input_pressed("s_punch")) and enough_mp(1):
 			current_start_projectile.charge(global_position)
+			charging_mp = false
 			pass
 		elif current_start_projectile != null:
+			charging_mp = true
 			if oponent : current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 			else : current_start_projectile.shoot((player_num-1) + 2, 0 ,direction, self)
 			velocity.x = 0

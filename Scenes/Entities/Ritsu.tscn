@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=106 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://bwe01h110gk4s" path="res://Assets/characters/Ritsu/Animations/RitsuSpriteSheet(1).png" id="2_oii31"]
@@ -859,6 +859,9 @@ bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvalm"]
 bg_color = Color(0.643749, 0.61648, 5.77569e-07, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muiop"]
+bg_color = Color(0.13863, 0.40582, 0.708132, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e0v4l"]
 radius = 43.0
 height = 376.0
@@ -873,7 +876,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_oii31")
 hframes = 12
 vframes = 9
-frame = 5
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -973,6 +976,21 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_vvalm")
 value = 100.0
 show_percentage = false
 script = ExtResource("8_t58ng")
+
+[node name="mpBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 1034.0
+offset_top = 94.0
+offset_right = 1881.0
+offset_bottom = 143.0
+size_flags_horizontal = 0
+theme = SubResource("Theme_67jtk")
+theme_override_styles/background = SubResource("StyleBoxFlat_m1fgn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_muiop")
+max_value = 600.0
+value = 20.0
+show_percentage = false
+script = ExtResource("8_t58ng")
+regenerate = true
 
 [node name="Body" type="Area2D" parent="." groups=["player"]]
 position = Vector2(-28, 67)
