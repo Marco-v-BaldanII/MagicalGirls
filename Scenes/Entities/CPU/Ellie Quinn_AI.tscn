@@ -22,7 +22,7 @@ character_name = "Ellie Quinn"
 [node name="camp" type="Node2D" parent="AI_StateMachine" index="2"]
 script = ExtResource("3_5nbar")
 
-[node name="mpBar" type="ProgressBar" parent="CanvasLayer" index="1"]
+[node name="mpBar2" type="ProgressBar" parent="CanvasLayer" index="1"]
 offset_left = 1034.0
 offset_top = 94.0
 offset_right = 1881.0
