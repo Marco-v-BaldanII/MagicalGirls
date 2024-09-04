@@ -1,0 +1,161 @@
+[gd_scene load_steps=13 format=3 uid="uid://c45w8tjq6yk2k"]
+
+[ext_resource type="Script" path="res://Scenes/menu_scenes/configuration.gd" id="1_ujifl"]
+[ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="2_dgmwx"]
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="2_u3fpt"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="3_gt1cy"]
+[ext_resource type="Texture2D" uid="uid://donkna5dsbbl0" path="res://Assets/UI/active round.png" id="5_7aylf"]
+[ext_resource type="Texture2D" uid="uid://e1qxxc2rhjde" path="res://Assets/UI/inactive round.png" id="6_6ncod"]
+[ext_resource type="Texture2D" uid="uid://bddxien0dmkk0" path="res://Assets/UI/dialogue.png" id="7_f7wl0"]
+[ext_resource type="Texture2D" uid="uid://dap2m7sq022tj" path="res://Assets/UI/life bar contour(1).png" id="8_4gib1"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="9_icwjw"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/volume_slider.gd" id="10_6vea0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfooj"]
+shader = ExtResource("2_u3fpt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv223"]
+bg_color = Color(0.466667, 0, 0.309804, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.419608, 0.858824, 1, 1)
+
+[node name="Substitles_Toggle_Button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ujifl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 279.0
+offset_top = 169.0
+offset_right = 319.0
+offset_bottom = 209.0
+scale = Vector2(2.94251, 1.65444)
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_cfooj")
+layout_mode = 0
+offset_left = -73.0
+offset_top = -50.0
+offset_right = 1847.0
+offset_bottom = 1030.0
+scale = Vector2(1.08867, 1.09458)
+texture = ExtResource("3_gt1cy")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 403.0
+offset_top = 125.0
+offset_right = 1272.0
+offset_bottom = 299.0
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("9_icwjw")
+theme_override_font_sizes/font_size = 120
+text = "CHANGE WINDOW MODE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 1496.0
+offset_top = 124.0
+offset_right = 1559.0
+offset_bottom = 176.0
+scale = Vector2(3.6107, 3.6107)
+toggle_mode = true
+texture_normal = ExtResource("5_7aylf")
+texture_pressed = ExtResource("6_6ncod")
+
+[node name="Dialogue" type="Sprite2D" parent="."]
+position = Vector2(984, 498)
+scale = Vector2(1.69848, 2.71459)
+texture = ExtResource("7_f7wl0")
+
+[node name="LifeBarContour(1)" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(679, 179)
+scale = Vector2(1.68, 1.24)
+texture = ExtResource("8_4gib1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 322.0
+offset_right = 668.0
+offset_bottom = 651.0
+scale = Vector2(1.39147, 1.39147)
+
+[node name="MasterVolume" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("2_dgmwx")
+theme_override_font_sizes/font_size = 60
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_kv223")
+max_value = 1.0
+step = 0.001
+script = ExtResource("10_6vea0")
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("2_dgmwx")
+theme_override_font_sizes/font_size = 60
+text = "Music
+"
+
+[node name="VolumeSlider2" type="HSlider" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_kv223")
+max_value = 1.0
+step = 0.001
+script = ExtResource("10_6vea0")
+bus_name = "Music"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1043.0
+offset_top = 322.0
+offset_right = 1301.0
+offset_bottom = 651.0
+scale = Vector2(1.39147, 1.39147)
+
+[node name="Sfx" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_fonts/font = ExtResource("2_dgmwx")
+theme_override_font_sizes/font_size = 60
+text = "Sfx
+"
+
+[node name="VolumeSlider4" type="HSlider" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_kv223")
+max_value = 1.0
+step = 0.001
+script = ExtResource("10_6vea0")
+bus_name = "Sfx"
+
+[connection signal="toggled" from="TextureButton" to="." method="_on_texture_button_toggled"]
