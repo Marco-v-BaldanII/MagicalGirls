@@ -204,8 +204,26 @@ func calculate_direction():
 
 var mp_timer : float = 0.75
 
+func air_bump():
+		if not is_on_floor():
+			if direction == "left":
+				velocity.x -= 100
+				velocity.x = clamp(velocity.x,-300,0)
+				move_and_slide()
+				print("velocity invert")
+
+			else:
+				velocity.x += 100
+				velocity.x = clamp(velocity.x,0,300)
+				move_and_slide()
+				print("velocity invert")
+			print(velocity.x)
+
+
 func _process(delta):
-	
+	if on_body:
+		air_bump()
+		
 	mp_timer -= delta
 	if mp_timer <= 0.0 and charging_mp:
 		mp += 10
@@ -603,16 +621,9 @@ func online_receive_dmg(area : Area2D):
 			parent.destroy_projectile()
 	
 	GameManager.camera_shake()
+var on_body : bool = false
 
-func _on_body_area_entered(area: Area2D) -> void:
-	
-	#Don't apply knock back if im not moving
-	if input_direction != 0:
-		oponent.strong_knock = true
-		oponent.state_machine.on_child_transition(oponent.state_machine.current_state, "knocked")
-		oponent.jump_lag = 0
-		jump_lag = 0
-	pass # Replace with function body.
+
 
 var hurt_box_layer : int = 0
 
@@ -811,3 +822,21 @@ func flash_mp_bar():
 		mp_bar.modulate = Color.WHITE
 		await get_tree().create_timer(0.017 * 6).timeout
 		i -= 1
+
+
+func _on_body_area_exited(area: Area2D) -> void:
+	
+	on_body = false
+	pass # Replace with function body.
+
+func _on_body_area_entered(area: Area2D) -> void:
+	on_body = true
+	print("body cooooooooooooooooooolllllllllllllllliiiiiiiiiissssssiiiiiiiiiiooooooonnnnnnnnn")
+	if input_direction != 0 and is_on_floor():
+		oponent.strong_knock = true
+		oponent.state_machine.on_child_transition(oponent.state_machine.current_state, "knocked")
+		oponent.jump_lag = 0
+		jump_lag = 0
+	#Don't apply knock back if im not moving
+	
+	pass # Replace with function body.

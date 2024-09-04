@@ -14,6 +14,8 @@ func enter():
 			player = e
 	else:
 		player.animation_tree["parameters/conditions/idle_anim"] = true
+		player.animation_tree["parameters/conditions/move_forward"] = false
+		player.animation_tree["parameters/conditions/move_backward"] = false
 		player.animation_tree.set("parameters/playback/current", "idle_anim")
 		return
 
