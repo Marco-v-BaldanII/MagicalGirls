@@ -8,5 +8,5 @@ func _on_texture_button_toggled(toggled_on):
 
 
 func _on_texture_button_2_toggled(toggled_on):
-	
+	SceneWrapper.change_scene(load("res://Scenes/menu_scenes/ReMapControls.tscn"))
 	pass 

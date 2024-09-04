@@ -881,7 +881,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_0s4wq")
 hframes = 12
 vframes = 9
-frame = 4
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

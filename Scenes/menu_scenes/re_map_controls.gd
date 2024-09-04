@@ -10,28 +10,8 @@ var index : int = 0
 
 var listening_input : bool = false
 
-var action_state : Dictionary = {
-	"move_left" : false,
-	"move_right" : false,
-	"move_down" : false,
-	"move_up" : false,
-	"w_punch" : false,
-	"s_punch" : false,
-	"w_kick" : false,
-	"s_kick" : false,
-	"accept" : false,
-	"go_back" : false
-}
-
 @onready var current_controls : ControlSource = ControlSource.new()
 
-func is_joy_button_just_pressed(action_name : String):
-	if action_state[action_name] == false and Input.is_joy_button_pressed(0, Controls.ui[action_name][0]) or Input.is_physical_key_pressed(Controls.ui[action_name][1]):
-		action_state[action_name] = true
-		return true
-	if not Input.is_joy_button_pressed(0, Controls.ui[action_name][0]) and not Input.is_physical_key_pressed(Controls.ui[action_name][1]) :
-		action_state[action_name] = false
-	return false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +22,7 @@ func _ready() -> void:
 			input_boxes.push_back(child)
 			
 	input_boxes.push_back(button)
+	input_boxes.push_back(text_edit)
 	pass # Replace with function body.
 
 
@@ -51,29 +32,35 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if not listening_input:
-		if is_joy_button_just_pressed("move_up"):
+		if Controls.is_joy_button_just_pressed("move_up"):
 			index -= 1
 			
-		elif is_joy_button_just_pressed("move_down"):
+		elif Controls.is_joy_button_just_pressed("move_down"):
 			index += 1
 		
 		cursor.global_position.y = input_boxes[index % input_boxes.size()].global_position.y +  40
 		
-		if is_joy_button_just_pressed("accept"):
-			if input_boxes[index % input_boxes.size()] is not Button:
+		
+		if Controls.is_ui_action_pressed("go_back") and not text_edit.has_focus():
+			_on_go_back_button_down()
+		
+		if Controls.is_joy_button_just_pressed("accept"):
+			if input_boxes[index % input_boxes.size()] is not Button and input_boxes[index % input_boxes.size()] is not TextEdit:
 				listening_input = true
 				input_boxes[index % input_boxes.size()].modulate = Color.YELLOW
-			else:
+			elif input_boxes[index % input_boxes.size()] is  Button:
 				_on_button_button_down()
+			elif input_boxes[index % input_boxes.size()] is TextEdit:
+				input_boxes[index % input_boxes.size()].grab_focus()
 	else:
 		
-		if is_joy_button_just_pressed("s_punch"):
+		if Controls.is_joy_button_just_pressed("s_punch"):
 			reMap("s_punch")
-		elif is_joy_button_just_pressed("w_punch"):
+		elif Controls.is_joy_button_just_pressed("w_punch"):
 			reMap("w_punch")
-		elif is_joy_button_just_pressed("s_kick"):
+		elif Controls.is_joy_button_just_pressed("s_kick"):
 			reMap("s_kick")
-		elif is_joy_button_just_pressed("w_kick"):
+		elif Controls.is_joy_button_just_pressed("w_kick"):
 			reMap("w_kick")
 			pass
 
@@ -120,4 +107,9 @@ func _on_button_button_down() -> void:
 	else:
 		print("Failed to save resource with error code: ", error)
 	
+	pass # Replace with function body.
+
+
+func _on_go_back_button_down() -> void:
+	SceneWrapper.change_scene(load("res://Scenes/menu_scenes/Configuration.tscn"))
 	pass # Replace with function body.

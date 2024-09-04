@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2p0yqjtabr84"]
+[gd_scene load_steps=8 format=3 uid="uid://b2p0yqjtabr84"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/re_map_controls.gd" id="1_02rww"]
 [ext_resource type="PackedScene" uid="uid://bpv7if73lqpnv" path="res://Scenes/input_map_field.tscn" id="1_5t4au"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="2_14xmh"]
+[ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="4_8bfuw"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/go_back_btn.gd" id="5_tkyrv"]
 
 [sub_resource type="Gradient" id="Gradient_hknml"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -130,4 +132,10 @@ custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 texture = SubResource("GradientTexture1D_aub08")
 
+[node name="goBack" parent="." instance=ExtResource("4_8bfuw")]
+script = ExtResource("5_tkyrv")
+
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="goBack/go_back" to="." method="_on_go_back_button_down"]
+
+[editable path="goBack"]
