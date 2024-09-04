@@ -1,0 +1,141 @@
+[gd_scene load_steps=10 format=3 uid="uid://cdamr53sejuvy"]
+
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="1_j4bay"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="2_wg43g"]
+[ext_resource type="Texture2D" uid="uid://b8lv0qe1acvwl" path="res://Assets/UI/Menus/dialogue.png" id="3_ctxgf"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="4_qdvql"]
+[ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="5_t3cci"]
+[ext_resource type="Texture2D" uid="uid://ctqmccgdo24u8" path="res://Assets/UI/Menus/Flag_of_Russia.svg.png" id="6_r6dtj"]
+[ext_resource type="Texture2D" uid="uid://c4jq4bqccmeg3" path="res://japan unlocked(1).png" id="7_6x0mb"]
+[ext_resource type="Texture2D" uid="uid://na7w3sj1xwhy" path="res://Assets/characters/concepts/Magical_Girl_Game_Jam_Anastasia_concept.png" id="8_lqvhn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfooj"]
+shader = ExtResource("1_j4bay")
+
+[node name="AnastasiaMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_cfooj")
+layout_mode = 0
+offset_left = -73.0
+offset_top = -50.0
+offset_right = 1847.0
+offset_bottom = 1030.0
+scale = Vector2(1.08867, 1.09458)
+texture = ExtResource("2_wg43g")
+
+[node name="Dialogue" type="Sprite2D" parent="."]
+position = Vector2(960, 565)
+scale = Vector2(1.69848, 2.71459)
+texture = ExtResource("3_ctxgf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 964.0
+offset_top = 78.0
+offset_right = 1543.0
+offset_bottom = 368.0
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_colors/font_shadow_color = Color(0.466667, 0, 0.309804, 0.407843)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("4_qdvql")
+theme_override_font_sizes/font_size = 200
+text = "Anastasia"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 969.0
+offset_top = 326.0
+offset_right = 30115.0
+offset_bottom = 1300.0
+scale = Vector2(0.696023, 0.696023)
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 0.666667)
+theme_override_constants/line_spacing = -50
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("5_t3cci")
+theme_override_font_sizes/font_size = 75
+text = "Anastasia  is  an  elite  Russian  agent  known 
+for  her  eccentric  personality  and  her  crazy
+mannerisms.  Being  a  KGB  agent  who cares
+more  about   the   brand  of   vodka  than  her 
+missions, Anastasia enjoys the chaos of a good
+fight, so she’s determined  to  put  her  skills  to 
+the test in the tournament, and, why not, claim
+the glory of a well-deserved victory paid in vodka."
+
+[node name="Normal attacks" type="Label" parent="."]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 179.0
+offset_right = 29345.0
+offset_bottom = 1483.0
+scale = Vector2(0.696023, 0.696023)
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_constants/line_spacing = -50
+theme_override_fonts/font = ExtResource("5_t3cci")
+theme_override_font_sizes/font_size = 70
+text = "Normal Attacks:
+w punch - Punch with knife
+w kick - Kick
+s punch - AK shoot
+s kick - Grenade
+
+Crouched Attacks:
+w punch - Knife stab
+w kick - Knife sweep
+s punch - AK shoot
+s kick - Grenade
+
+Aerial Attacks:
+w punch - Sweep knife
+w kick - Diagonal down kick
+s punch - AK shoot
+s kick - Grenade
+"
+
+[node name="Special attacks + combos" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 199.0
+offset_top = 179.0
+offset_right = 29345.0
+offset_bottom = 1483.0
+scale = Vector2(0.696023, 0.696023)
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_constants/line_spacing = -50
+theme_override_fonts/font = ExtResource("5_t3cci")
+theme_override_font_sizes/font_size = 70
+text = "Special Attacks:
+-facing, facing, -facing, facing, B - Three grenades
+down, facing, Y - Powered shoot
+down, -facing, Y - Molotov
+facing, facing, X - Two knife attack"
+
+[node name="FlagOfJapan_svg" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(1690.2, 203.961)
+scale = Vector2(0.0763846, 0.0736746)
+texture = ExtResource("6_r6dtj")
+
+[node name="JapanUnlocked(1)" type="Sprite2D" parent="."]
+position = Vector2(1694.2, 201.961)
+scale = Vector2(0.256731, 0.25162)
+texture = ExtResource("7_6x0mb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 305.0
+offset_top = 29.0
+offset_right = 5305.0
+offset_bottom = 5029.0
+scale = Vector2(0.186683, 0.186683)
+texture = ExtResource("8_lqvhn")

@@ -1,0 +1,196 @@
+[gd_scene load_steps=13 format=3 uid="uid://ch2ran87rv8my"]
+
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="2_6ibm7"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="3_4jwbk"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="4_qeu4q"]
+[ext_resource type="Texture2D" uid="uid://cejggquq2osia" path="res://Assets/UI/Menus/Flag_of_Japan.svg.png" id="7_dkj87"]
+[ext_resource type="Texture2D" uid="uid://b8lv0qe1acvwl" path="res://Assets/UI/Menus/dialogue.png" id="7_vdw78"]
+[ext_resource type="Texture2D" uid="uid://c4jq4bqccmeg3" path="res://japan unlocked(1).png" id="8_3bq35"]
+[ext_resource type="Texture2D" uid="uid://d2ry206yui2an" path="res://Assets/characters/concepts/RitsuConcept.png" id="8_pjeo7"]
+[ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="9_aceli"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfooj"]
+shader = ExtResource("2_6ibm7")
+
+[sub_resource type="Animation" id="Animation_r1vhk"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(482, 25), Vector2(482, -20), Vector2(482, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_gdacu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(482, 25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bpane"]
+_data = {
+"RESET": SubResource("Animation_gdacu"),
+"new_animation": SubResource("Animation_r1vhk")
+}
+
+[node name="RitsuMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_cfooj")
+layout_mode = 0
+offset_left = -73.0
+offset_top = -50.0
+offset_right = 1847.0
+offset_bottom = 1030.0
+scale = Vector2(1.08867, 1.09458)
+texture = ExtResource("3_4jwbk")
+
+[node name="Dialogue" type="Sprite2D" parent="."]
+position = Vector2(960, 565)
+scale = Vector2(1.69848, 2.71459)
+texture = ExtResource("7_vdw78")
+
+[node name="Label" type="Label" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = 1083.0
+offset_top = 77.0
+offset_right = 1374.0
+offset_bottom = 367.0
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_colors/font_shadow_color = Color(0.466667, 0, 0.309804, 0.407843)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("4_qeu4q")
+theme_override_font_sizes/font_size = 200
+text = "Ritsu"
+
+[node name="Label2" type="Label" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 274.0
+offset_right = 30234.0
+offset_bottom = 1248.0
+scale = Vector2(0.696023, 0.696023)
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 0.666667)
+theme_override_constants/line_spacing = -50
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("9_aceli")
+theme_override_font_sizes/font_size = 75
+text = "Since she was little, Ritsu has always 
+dreamed of becoming a magical girl. 
+In  her  case,  being  the  kind  of fan
+who  has  a  room  full of figures and 
+practically  wallpapered  with photos 
+of her idols actually paid off, as Ritsu 
+trained tirelessly until she mastered 
+her   magical  abilities.  Despite  the 
+mockery  and   disbelief   of   others,
+she  never   lost  sight  of   her  goal, 
+and now she’s found the opportunity 
+of a lifetime. She’s ready to give it her 
+all to prove she’s got what it takes to 
+be a real magical girl.
+"
+
+[node name="Normal attacks" type="Label" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = 200.0
+offset_top = 138.0
+offset_right = 29346.0
+offset_bottom = 1442.0
+scale = Vector2(0.696023, 0.696023)
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_constants/line_spacing = -50
+theme_override_fonts/font = ExtResource("9_aceli")
+theme_override_font_sizes/font_size = 70
+text = "Normal Attacks:
+w punch - Punch
+w kick - Kick
+s punch - Star shoot 
+(hold to charge the star)
+s kick - 
+
+Crouched Attacks:
+w punch - Punch
+w kick - Slide kick
+s punch - Star shoot
+ (hold to charge the star)
+s kick - Down wand stab
+
+Aerial Attacks:
+w punch - Diagonal down punch
+w kick - Kick down
+s punch - Star shoot diagonally down
+s kick - 180 degree sweep
+"
+
+[node name="Special attacks + combos" type="Label" parent="."]
+visible = false
+z_index = 5
+layout_mode = 0
+offset_left = 199.0
+offset_top = 179.0
+offset_right = 29345.0
+offset_bottom = 1483.0
+scale = Vector2(0.696023, 0.696023)
+theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
+theme_override_constants/line_spacing = -50
+theme_override_fonts/font = ExtResource("9_aceli")
+theme_override_font_sizes/font_size = 70
+text = "Special Attacks:
+down, facing - Triple shoot
+down, -facing, Y - Fire shoot"
+
+[node name="FlagOfJapan_svg" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(1619.39, 202.961)
+scale = Vector2(0.163286, 0.157493)
+texture = ExtResource("7_dkj87")
+
+[node name="JapanUnlocked(1)" type="Sprite2D" parent="."]
+position = Vector2(1623.39, 200.961)
+scale = Vector2(0.256731, 0.25162)
+texture = ExtResource("8_3bq35")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 482.0
+offset_top = 25.0
+offset_right = 3982.0
+offset_bottom = 5025.0
+scale = Vector2(0.203894, 0.203894)
+texture = ExtResource("8_pjeo7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_bpane")
+}
+autoplay = "new_animation"
