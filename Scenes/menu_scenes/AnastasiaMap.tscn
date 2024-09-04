@@ -133,6 +133,7 @@ scale = Vector2(0.256731, 0.25162)
 texture = ExtResource("7_6x0mb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 305.0
 offset_top = 29.0
 offset_right = 5305.0
