@@ -53,7 +53,7 @@ var lauched_to_ground : bool = false
 func physics_update(delta : float):
 	
 	knocked_time -= delta
-	player.lag = true
+	player.can_move = false
 	
 	if not player.launch_knock:
 		if player.direction == "right":
@@ -89,17 +89,18 @@ func physics_update(delta : float):
 			player.sprite_2d.rotation = 0
 			lauched_to_ground = false
 		
-		player.weak_knock = false; player.lag= false;
+		player.weak_knock = false; 
 		Transitioned.emit(self, "ground_move")
 		
 	if knocked_time < 0 and not player.launch_knock:
-		player.weak_knock = false; player.lag= false;
+		player.weak_knock = false;
 		Transitioned.emit(self, "ground_move")
 	
 	pass
 
 func exit():
 	player.can_move = true
-	player.lag = false
+	player.velocity.x = 0
+	#player.lag = false
 	pass
 	

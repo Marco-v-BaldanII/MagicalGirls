@@ -93,7 +93,9 @@ var weak_knock : bool = false
 var moving_backwards : bool = false
 var launch_knock : bool = false
 
-var lag : bool = false
+var lag : bool = false:
+	set(value):
+		lag = value
 
 var action_state : Dictionary = {
 	"move_left" : false,
@@ -135,18 +137,18 @@ var authority : bool
 }
 
 @export var move_vulnerable_on_shield : Dictionary = {
-	"w_punch" : 8,
-	"s_punch" : 15,
-	"crouch_w_punch" : 8,
-	"crouch_s_punch" : 15,
-	"air_w_punch" : 8,
-	"air_s_punch" : 15,
-	"w_kick" : 8,
-	"s_kick" : 15,
-	"crouch_w_kick" : 8,
-	"crouch_s_kick" : 15,
-	"air_w_kick" : 8,
-	"air_s_kick" : 15
+	"w_punch" : 15,
+	"s_punch" : 30,
+	"crouch_w_punch" : 15,
+	"crouch_s_punch" : 30,
+	"air_w_punch" : 15,
+	"air_s_punch" : 30,
+	"w_kick" : 15,
+	"s_kick" : 30,
+	"crouch_w_kick" : 15,
+	"crouch_s_kick" : 30,
+	"air_w_kick" : 15,
+	"air_s_kick" : 30
 }
 
 var last_used_move : String
@@ -599,6 +601,9 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		GameManager.hit_stop_long()
 		state_machine.on_child_transition(state_machine.current_state, "knocked")
 	
+	if not blocked and oponent.last_used_move != "":
+		#add hitstun after getting hit
+		add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move] * 2)
 	
 	if ai_player: ai_on_hit()
 	
@@ -825,7 +830,7 @@ func _on_body_area_exited(area: Area2D) -> void:
 
 func _on_body_area_entered(area: Area2D) -> void:
 	on_body = true
-	print("body cooooooooooooooooooolllllllllllllllliiiiiiiiiissssssiiiiiiiiiiooooooonnnnnnnnn")
+
 	if input_direction != 0 and is_on_floor():
 		oponent.strong_knock = true
 		oponent.state_machine.on_child_transition(oponent.state_machine.current_state, "knocked")
