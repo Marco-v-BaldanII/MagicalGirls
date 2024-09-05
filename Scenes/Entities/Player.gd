@@ -171,6 +171,12 @@ var colliders : Array[CollisionShape2D]
 
 func _ready():
 	#weak_attack.disabled = true; strong_attack.disabled = true
+	
+	if player_num == 1:
+		$PositionSynchronizer.broadcast = 0
+	else: $PositionSynchronizer.broadcast = 1
+		
+	
 	direction = "left"
 	await fully_instanciated
 	can_move = true

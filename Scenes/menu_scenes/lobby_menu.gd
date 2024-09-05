@@ -25,6 +25,7 @@ func receive_lobbies(lobbies : Array):
 		get_parent().options.push_back(option)
 		
 		if lobby["Tags"]["public"] == true:
+			return
 			option.show_lock()
 		
 	pass
