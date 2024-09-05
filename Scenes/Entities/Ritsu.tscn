@@ -1,8 +1,8 @@
-[gd_scene load_steps=113 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=116 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://dixaj5d6gkk4n" path="res://Assets/characters/Ritsu/RitsuSpriteSheet(2).png" id="2_0s4wq"]
-[ext_resource type="Texture2D" uid="uid://cyh1okj8f1uuw" path="res://Assets/characters/Ritsu/spritesheet(3).png" id="2_atdbw"]
+[ext_resource type="Texture2D" uid="uid://dh7ru42ot2ok0" path="res://Assets/characters/Ritsu/spriteshee(4).png" id="2_4gj7c"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_3uh4q"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_gkyms"]
@@ -27,7 +27,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.2
 shader_parameter/green = 0.075
 shader_parameter/blue = 0.06
-shader_parameter/tex_anim_offset = 0.0833333
+shader_parameter/tex_anim_offset = 1.05556
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -177,71 +177,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [39, 96]
-}
-
-[sub_resource type="Animation" id="Animation_os8hj"]
-resource_name = "crouch_w_punch"
-length = 0.283336
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.0400001, 0.0600001, 0.0800002, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.133334, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(190, 30), Vector2(223, 24)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("hurt_box/CollisionShape2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(21, -11)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Body/BodyCollisionShape2D:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(30, 31)]
 }
 
 [sub_resource type="Animation" id="Animation_oy3v6"]
@@ -543,13 +478,131 @@ tracks/0/keys = {
 "values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
 }
 
+[sub_resource type="Animation" id="Animation_ul345"]
+resource_name = "air_w_kick"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333334, 0.0666668, 0.1, 0.133334, 0.166667, 0.2, 0.233334, 0.266667, 0.300001, 0.333334, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [144, 145, 146, 147, 148, 149, 150, 150, 150, 150, 150, 150]
+}
+
+[sub_resource type="Animation" id="Animation_os8hj"]
+resource_name = "crouch_s_kick"
+length = 0.400002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.032, 0.0640002, 0.0960002, 0.128, 0.16, 0.192, 0.224, 0.256, 0.288, 0.32, 0.352, 0.384),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.133334, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(190, 30), Vector2(223, 24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hurt_box/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(21, -11)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/BodyCollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 31)]
+}
+
+[sub_resource type="Animation" id="Animation_c2qpf"]
+resource_name = "crouch_w_punch"
+length = 0.200002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.0333334, 0.0500001, 0.0666667, 0.1, 0.116667, 0.133334, 0.15, 0.166667, 0.183334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [132, 133, 134, 135, 136, 137, 138, 138, 138, 138, 138]
+}
+
+[sub_resource type="Animation" id="Animation_def3p"]
+resource_name = "crouch_w_kick"
+length = 0.233335
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0283334, 0.0566668, 0.0850002, 0.113334, 0.141667, 0.17, 0.198334, 0.226667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [108, 109, 110, 111, 112, 113, 114, 114, 114]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj6tu"]
 _data = {
 "RESET": SubResource("Animation_s4nyy"),
 "air_s_punch": SubResource("Animation_vc7wq"),
+"air_w_kick": SubResource("Animation_ul345"),
 "air_w_punch": SubResource("Animation_no61m"),
 "crouch": SubResource("Animation_etjdn"),
-"crouch_w_punch": SubResource("Animation_os8hj"),
+"crouch_s_kick": SubResource("Animation_os8hj"),
+"crouch_w_kick": SubResource("Animation_def3p"),
+"crouch_w_punch": SubResource("Animation_c2qpf"),
 "crouching": SubResource("Animation_oy3v6"),
 "idle_anim": SubResource("Animation_ebury"),
 "in_air": SubResource("Animation_240tv"),
@@ -898,12 +951,13 @@ script = ExtResource("1_h8qxx")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, -12)
 scale = Vector2(1.35, 1.35)
-texture = ExtResource("2_atdbw")
+texture = ExtResource("2_4gj7c")
 hframes = 12
 vframes = 13
-frame = 9
+frame = 114
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+visible = false
 z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
