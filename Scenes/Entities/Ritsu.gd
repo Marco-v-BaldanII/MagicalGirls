@@ -9,7 +9,7 @@ const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
 
 
 func _input(event):
-	if not can_move or ai_player: return
+	if  ai_player: return
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
 		if input_method != 3: #not using keyboard
@@ -33,6 +33,7 @@ func _input(event):
 			add_input_to_buffer("s_punch")
 			perform_move()
 		if is_joy_button_just_pressed("w_punch"):
+			print("uiokytpnry,tpo,nr")
 			add_input_to_buffer("w_punch")
 			perform_move()
 		if is_joy_button_just_pressed("s_kick"):

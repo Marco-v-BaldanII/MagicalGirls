@@ -78,7 +78,7 @@ var input_made : bool = false
 		direction = value
 var input_direction : float = 0
 
-const BUFFER_FRAMES = 16
+const BUFFER_FRAMES = 6
 
 var grounded : bool = false
 var crouching : bool = false
@@ -235,6 +235,7 @@ func _process(delta):
 		buffer_time -= delta
 	
 		if buffer_time <= 0:
+			if input_buffer.size() > 0: perform_move()
 			clear_buffer()
 		
 	#Auto turn around logic
@@ -291,6 +292,7 @@ func is_joy_button_just_pressed(action_name : String) -> bool:
 	if input_method != INPUT_METHOD.KEYBOARD:
 		if action_state[action_name] == false and Input.is_joy_button_pressed( input_method, Controls.mapping[player_id][action_name][0]) :
 			action_state[action_name] = true
+			listen_for_not_input(action_name)
 			return true
 		if not Input.is_joy_button_pressed(input_method, Controls.mapping[input_method][action_name][0]):
 			action_state[action_name] = false
@@ -298,11 +300,22 @@ func is_joy_button_just_pressed(action_name : String) -> bool:
 	else:
 		if action_state[action_name] == false and Input.is_physical_key_pressed(Controls.mapping[player_id][action_name][1]) :
 			action_state[action_name] = true
+			listen_for_not_input(action_name)
 			return true
 		if not Input.is_physical_key_pressed(Controls.mapping[player_id][action_name][1]):
 			action_state[action_name] = false
 		return false
 
+func listen_for_not_input(action_name : String):
+	if input_method != INPUT_METHOD.KEYBOARD:
+		while Input.is_joy_button_pressed( input_method, Controls.mapping[player_id][action_name][0]) :
+			await get_tree().create_timer(0.0167).timeout
+		action_state[action_name] = false
+	
+	else:
+		while  Input.is_physical_key_pressed(Controls.mapping[player_id][action_name][1]):
+			await get_tree().create_timer(0.0167).timeout
+		action_state[action_name] = false
 
 func is_mapped_action_pressed(action_name : String) -> bool:
 	if input_method != INPUT_METHOD.KEYBOARD:

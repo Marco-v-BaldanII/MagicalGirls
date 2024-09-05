@@ -26,7 +26,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.2
 shader_parameter/green = 0.075
 shader_parameter/blue = 0.06
-shader_parameter/tex_anim_offset = 0.0
+shader_parameter/tex_anim_offset = 0.211538
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -494,7 +494,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_a1feo"]
 resource_name = "w_kick"
-length = 0.583336
+length = 0.300002
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -953,6 +953,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_obeqb")
 hframes = 12
 vframes = 13
+frame = 33
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
