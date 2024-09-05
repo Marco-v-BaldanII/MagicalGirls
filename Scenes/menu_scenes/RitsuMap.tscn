@@ -184,9 +184,9 @@ texture = ExtResource("8_3bq35")
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 482.0
-offset_top = 7.27426
+offset_top = 25.0
 offset_right = 3982.0
-offset_bottom = 5007.27
+offset_bottom = 5025.0
 scale = Vector2(0.203894, 0.203894)
 texture = ExtResource("8_pjeo7")
 

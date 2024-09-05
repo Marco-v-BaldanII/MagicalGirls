@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=125 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://ditutvvfdtptp" path="res://Assets/characters/Ritsu/spritesheet.png" id="2_obeqb"]
@@ -11,6 +11,16 @@
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_t58ng"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_wgxbo"]
+[ext_resource type="Texture2D" uid="uid://dap2m7sq022tj" path="res://Assets/UI/life bar contour(1).png" id="11_5sq4o"]
+[ext_resource type="Texture2D" uid="uid://c1jp774qfvlql" path="res://Assets/UI/life bar(1).png" id="12_5yg5x"]
+[ext_resource type="Texture2D" uid="uid://buagwkdk6erec" path="res://Assets/UI/under life bar(1).png" id="13_n4r16"]
+[ext_resource type="Script" path="res://Scenes/Entities/faifnaitsatfredis.gd" id="14_xngo3"]
+[ext_resource type="Texture2D" uid="uid://b28dthsn4tn68" path="res://Assets/UI/stamina_bar_line.png" id="15_32jdj"]
+[ext_resource type="Texture2D" uid="uid://bj4qnxpq1namf" path="res://Assets/UI/ritsu portrait.png" id="15_a8p1g"]
+[ext_resource type="Texture2D" uid="uid://cr52rj3wjkwf2" path="res://Assets/UI/char portrait.png" id="15_xf4wv"]
+[ext_resource type="Texture2D" uid="uid://dugc7vyvyvtg2" path="res://Assets/UI/stamina_bar_full.png" id="16_qscq6"]
+[ext_resource type="Texture2D" uid="uid://cvjkg5125jgev" path="res://Assets/UI/stamina_bar_not_full.png" id="17_4dfj5"]
+[ext_resource type="Texture2D" uid="uid://cmdcqnhnrg701" path="res://Assets/UI/Menus/active_round.png" id="17_j1ae2"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_taivp"]
 particles_animation = true
@@ -26,7 +36,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.2
 shader_parameter/green = 0.075
 shader_parameter/blue = 0.06
-shader_parameter/tex_anim_offset = 0.211538
+shader_parameter/tex_anim_offset = 0.128205
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -105,6 +115,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_vc7wq"]
 resource_name = "air_s_punch"
+length = 0.366669
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -113,14 +124,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0166667, 0.0500001, 0.0833335, 0.116667, 0.15, 0.183334, 0.216667, 0.250001, 0.283334, 0.316667, 0.350001, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.0166667, 0.0500001, 0.0833335, 0.116667, 0.15, 0.183334, 0.216667, 0.250001, 0.283334, 0.316667, 0.350001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 73]
+"values": [73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
 }
 
 [sub_resource type="Animation" id="Animation_ul345"]
 resource_name = "air_w_kick"
+length = 0.450003
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -133,6 +145,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [144, 145, 146, 147, 148, 149, 150, 150, 150, 150, 150, 150]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(27, -105), Vector2(218, 109)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.450001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_no61m"]
@@ -217,7 +253,7 @@ tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.25),
+"times": PackedFloat32Array(0, 0.133333, 0.316667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -261,7 +297,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_def3p"]
 resource_name = "crouch_w_kick"
-length = 0.233335
+length = 0.333336
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -275,10 +311,34 @@ tracks/0/keys = {
 "update": 1,
 "values": [108, 109, 110, 111, 112, 113, 114, 114, 114]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666668, 0.183334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(30, -119), Vector2(148, 92), Vector2(242, 90)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.183334, 0.300001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_c2qpf"]
 resource_name = "crouch_w_punch"
-length = 0.200002
+length = 0.283336
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -291,6 +351,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [132, 133, 134, 135, 136, 137, 138, 138, 138, 138, 138]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.116667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(30, -119), Vector2(149, -32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.283334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_oy3v6"]
@@ -494,7 +578,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_a1feo"]
 resource_name = "w_kick"
-length = 0.300002
+length = 0.383336
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -535,7 +619,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_nwele"]
 resource_name = "w_punch"
-length = 0.200002
+length = 0.283336
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -953,7 +1037,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_obeqb")
 hframes = 12
 vframes = 13
-frame = 33
+frame = 20
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
@@ -1052,10 +1136,10 @@ script = ExtResource("7_qmnh1")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="hpBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 1034.0
-offset_top = 38.0
-offset_right = 1881.0
-offset_bottom = 87.0
+offset_left = 701.0
+offset_top = 52.0
+offset_right = 1548.0
+offset_bottom = 101.0
 size_flags_horizontal = 0
 theme = SubResource("Theme_67jtk")
 theme_override_styles/background = SubResource("StyleBoxFlat_m1fgn")
@@ -1065,10 +1149,10 @@ show_percentage = false
 script = ExtResource("8_t58ng")
 
 [node name="mpBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 1034.0
-offset_top = 94.0
-offset_right = 1881.0
-offset_bottom = 143.0
+offset_left = 1024.0
+offset_top = 985.0
+offset_right = 1871.0
+offset_bottom = 1034.0
 size_flags_horizontal = 0
 theme = SubResource("Theme_4jybw")
 theme_override_styles/background = SubResource("StyleBoxFlat_o8xjl")
@@ -1078,6 +1162,58 @@ value = 20.0
 show_percentage = false
 script = ExtResource("8_t58ng")
 regenerate = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 568.0
+offset_top = -137.0
+offset_right = 1518.0
+offset_bottom = 214.0
+texture_under = ExtResource("11_5sq4o")
+texture_over = ExtResource("12_5yg5x")
+texture_progress = ExtResource("13_n4r16")
+script = ExtResource("14_xngo3")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 334.0
+offset_top = 480.0
+offset_right = 1285.0
+offset_bottom = 832.0
+scale = Vector2(1.66825, 1.66825)
+texture_under = ExtResource("15_32jdj")
+texture_over = ExtResource("16_qscq6")
+texture_progress = ExtResource("17_4dfj5")
+script = ExtResource("14_xngo3")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1567.0
+offset_top = 3.0
+offset_right = 1912.0
+offset_bottom = 357.0
+texture = ExtResource("15_xf4wv")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+z_index = 1
+offset_left = 1612.0
+offset_top = -10.0
+offset_right = 1862.0
+offset_bottom = 298.0
+texture = ExtResource("15_a8p1g")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
+offset_left = 666.0
+offset_top = 155.0
+offset_right = 762.0
+offset_bottom = 240.0
+scale = Vector2(1.30662, 1.30662)
+texture = ExtResource("17_j1ae2")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer"]
+offset_left = 747.0
+offset_top = 155.0
+offset_right = 843.0
+offset_bottom = 240.0
+scale = Vector2(1.30662, 1.30662)
+texture = ExtResource("17_j1ae2")
 
 [node name="Body" type="Area2D" parent="." groups=["player"]]
 position = Vector2(-28, 67)
