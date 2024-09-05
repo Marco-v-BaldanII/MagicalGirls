@@ -1,16 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2p0yqjtabr84"]
+[gd_scene load_steps=12 format=3 uid="uid://b2p0yqjtabr84"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/re_map_controls.gd" id="1_02rww"]
 [ext_resource type="PackedScene" uid="uid://bpv7if73lqpnv" path="res://Scenes/input_map_field.tscn" id="1_5t4au"]
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="2_14xmh"]
+[ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="2_js3yl"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="4_8bfuw"]
+[ext_resource type="PackedScene" uid="uid://ci1182rw4g6ub" path="res://Scenes/menu_scenes/cursor.tscn" id="4_b0lms"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/go_back_btn.gd" id="5_tkyrv"]
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="7_ny6m3"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="8_kv7rk"]
 
-[sub_resource type="Gradient" id="Gradient_hknml"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_c6b6s"]
+colors = PackedColorArray(1, 0.458824, 0.627451, 1, 1, 0.588235, 0.701961, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_aub08"]
-gradient = SubResource("Gradient_hknml")
+gradient = SubResource("Gradient_c6b6s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7rbs"]
+shader = ExtResource("7_ny6m3")
 
 [node name="ReMapControls" type="CanvasLayer"]
 script = ExtResource("1_02rww")
@@ -20,7 +26,8 @@ offset_left = 666.0
 offset_top = 728.0
 offset_right = 1270.0
 offset_bottom = 784.0
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("2_js3yl")
+theme_override_font_sizes/font_size = 40
 placeholder_text = "                      Insert Control Tag"
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -38,81 +45,104 @@ columns = 2
 [node name="ColorRect" type="ColorRect" parent="GridContainer"]
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 
 [node name="Label" type="Label" parent="GridContainer/ColorRect"]
 layout_mode = 0
-offset_right = 599.0
-offset_bottom = 101.0
+offset_left = -2.0
+offset_top = -0.199997
+offset_right = 597.0
+offset_bottom = 115.8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "weak punch
+theme_override_fonts/font = ExtResource("2_js3yl")
+theme_override_font_sizes/font_size = 80
+text = "Weak Punch
 "
 horizontal_alignment = 1
 
 [node name="input_map_field" parent="GridContainer" instance=ExtResource("1_5t4au")]
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 mapped_action = "w_punch"
 
 [node name="ColorRect3" type="ColorRect" parent="GridContainer"]
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 
 [node name="Label" type="Label" parent="GridContainer/ColorRect3"]
 layout_mode = 0
-offset_right = 599.0
-offset_bottom = 101.0
+offset_left = -2.0
+offset_top = -0.199997
+offset_right = 597.0
+offset_bottom = 115.8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "strong punch
+theme_override_fonts/font = ExtResource("2_js3yl")
+theme_override_font_sizes/font_size = 80
+text = "Strong Punch
 "
 horizontal_alignment = 1
 
 [node name="input_map_field2" parent="GridContainer" instance=ExtResource("1_5t4au")]
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 my_action = "s_punch"
 mapped_action = "s_punch"
 
 [node name="ColorRect5" type="ColorRect" parent="GridContainer"]
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 
 [node name="Label" type="Label" parent="GridContainer/ColorRect5"]
 layout_mode = 0
-offset_right = 599.0
-offset_bottom = 101.0
+offset_left = -2.0
+offset_top = -0.199997
+offset_right = 597.0
+offset_bottom = 115.8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "weak kick"
+theme_override_fonts/font = ExtResource("2_js3yl")
+theme_override_font_sizes/font_size = 80
+text = "Weak Kick"
 horizontal_alignment = 1
 
 [node name="input_map_field3" parent="GridContainer" instance=ExtResource("1_5t4au")]
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 my_action = "w_kick"
 mapped_action = "w_kick"
 
 [node name="ColorRect7" type="ColorRect" parent="GridContainer"]
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 
 [node name="Label" type="Label" parent="GridContainer/ColorRect7"]
 layout_mode = 0
-offset_right = 599.0
-offset_bottom = 101.0
+offset_left = -2.0
+offset_top = -0.199997
+offset_right = 597.0
+offset_bottom = 115.8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "strong kick
+theme_override_fonts/font = ExtResource("2_js3yl")
+theme_override_font_sizes/font_size = 80
+text = "Strong Kick
 "
 horizontal_alignment = 1
 
 [node name="input_map_field4" parent="GridContainer" instance=ExtResource("1_5t4au")]
 layout_mode = 2
+color = Color(1, 0.588235, 0.701961, 1)
 my_action = "s_kick"
 mapped_action = "s_kick"
 
 [node name="cursor" type="Sprite2D" parent="."]
 position = Vector2(306, 211.2)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_14xmh")
+
+[node name="cursor" parent="cursor" instance=ExtResource("4_b0lms")]
+position = Vector2(-14.9999, -16)
+scale = Vector2(5.22348, 5.22348)
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(400, 90)
@@ -134,6 +164,17 @@ texture = SubResource("GradientTexture1D_aub08")
 
 [node name="goBack" parent="." instance=ExtResource("4_8bfuw")]
 script = ExtResource("5_tkyrv")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_b7rbs")
+offset_left = -33.0
+offset_top = -23.0
+offset_right = 1887.0
+offset_bottom = 1057.0
+scale = Vector2(1.03954, 1.04518)
+texture = ExtResource("8_kv7rk")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="goBack/go_back" to="." method="_on_go_back_button_down"]

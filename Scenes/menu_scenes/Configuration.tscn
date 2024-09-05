@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/menu_scenes/configuration.gd" id="1_ujifl"]
 [ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="2_dgmwx"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="2_u3fpt"]
-[ext_resource type="PackedScene" uid="uid://dyjnspgu8xbph" path="res://Scenes/menu_scenes/cursor.tscn" id="2_uw1hv"]
+[ext_resource type="PackedScene" uid="uid://ci1182rw4g6ub" path="res://Scenes/menu_scenes/cursor.tscn" id="2_uw1hv"]
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="3_gt1cy"]
 [ext_resource type="Texture2D" uid="uid://cmdcqnhnrg701" path="res://Assets/UI/Menus/active_round.png" id="5_6r270"]
 [ext_resource type="Texture2D" uid="uid://c1xosg6um4l7k" path="res://Assets/UI/Menus/inactive_round.png" id="6_6e1jm"]
