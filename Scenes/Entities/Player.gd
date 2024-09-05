@@ -171,6 +171,12 @@ var colliders : Array[CollisionShape2D]
 
 func _ready():
 	#weak_attack.disabled = true; strong_attack.disabled = true
+	
+	if player_num == 1:
+		$PositionSynchronizer.broadcast = 0
+	else: $PositionSynchronizer.broadcast = 1
+		
+	
 	direction = "left"
 	await fully_instanciated
 	can_move = true
@@ -728,6 +734,9 @@ func instanciate_projectile(path : String, p_name : String, position_offset : Ve
 func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1, start_pos : bool = true):
 	var special_scene = load(path)
 	var instance = special_scene.instantiate()
+	
+	instance.online_synch(player_id)
+	
 	if my_self == null :
 		if spawn == 1:
 			GameManager.p1_spawns.add_child(instance)

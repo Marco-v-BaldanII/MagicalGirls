@@ -5,11 +5,11 @@
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/attack_ritsu.gd" id="3_u2m73"]
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/camp_ritsu.gd" id="4_cboxs"]
 
-[node name="NewRitsu" instance=ExtResource("1_kmcq4")]
+[node name="NewRitsu2" instance=ExtResource("1_kmcq4")]
 ai_player = true
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 6
+frame = 9
 
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_rvqmf")]
 

@@ -15,6 +15,10 @@ func _ready() -> void:
 	power_multiply = dmg/(frame_charge_time/4) #max charge is 3 times stronger
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)
+	
+	
+	
+	
 	pass # Replace with function body.
 
 

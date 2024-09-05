@@ -39,6 +39,7 @@ func physics_update(delta : float):
 		if not player.ai_player:
 			if player.can_move:
 				transition_ground()
+				GDSync.expose_func(transition_ground)
 				GDSync.call_func(transition_ground)
 	
 	#Transition specifically for cpus
