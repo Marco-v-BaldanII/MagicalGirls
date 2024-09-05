@@ -18,6 +18,6 @@ func _process(delta):
 	var current_frame = $"..".frame
 	var total_frames = hframes * vframes
 	var frame_index = current_frame % total_frames
-
+	#print("irhrtihj")
 	# Pass the frame index directly to the shader
-	process_material.set_shader_parameter("tex_anim_offset", float(frame_index)/108.0)
+	process_material.set_shader_parameter("tex_anim_offset", float(frame_index)/156)
