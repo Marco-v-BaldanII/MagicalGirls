@@ -35,6 +35,8 @@ var Ritsu : Dictionary = {
 }
 var Larissa : Dictionary = {}
 
+var anastasia_ulti : Array[String] = ["l_trigger", "r_trigger"]
+
 var triple_bombardment_right : Array[String] = ["move_left", "move_right", "move_left", "move_right" , "s_kick"]
 var triple_bombardment_left : Array[String] =  ["move_right", "move_left", "move_right" , "move_left", "s_kick"]
 var power_shoot_left : Array[String] = ["crouch" , "move_left", "s_punch"]
@@ -80,6 +82,16 @@ var Anastasia : Dictionary = {
 	"2knife_attack_lag" : 10,
 	"2knife_attack_startup" : 5,
 	"2knife_attack_cost" : 200,
+	
+	#"ritsu_ulti" : ritsu_ulti,
+	#"ritsu_ulti_lag" : 0,
+	#"ritsu_ulti_cost" : 0,
+	#"ritsu_ulti_startup" : 18,
+	
+	"anastasia_ulti" : ritsu_ulti,
+	"anastasia_ulti_lag" : 15,
+	"anastasia_ulti_startup" : 0,
+	"anastasia_ulti_cost" : 0
 }
 
 var shield : Array[String] = ["crouch","move_left" ,"s_kick"]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw1ccp44bmhp6"]
+
+[ext_resource type="Script" path="res://Scenes/projectiles/compound_rpojectile.gd" id="1_pyrry"]
+[ext_resource type="PackedScene" uid="uid://ddqug5kbme134" path="res://Scenes/projectiles/missile.tscn" id="2_wtve4"]
+
+[node name="AnastasiaUlti" type="Node2D"]
+position = Vector2(0, 145)
+script = ExtResource("1_pyrry")
+delayed = true
+at_global = true
+
+[node name="missile" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(113, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile10" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(1543, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile3" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(432, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile4" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(594, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile2" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(279, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile8" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(1174, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile6" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(886, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile7" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(1030, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile5" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(747, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile11" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(1759, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile13" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(699, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile9" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(1345, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile14" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(367, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900
+
+[node name="missile12" parent="." instance=ExtResource("2_wtve4")]
+position = Vector2(1256, -114)
+alive_time = 8.0
+speed = 0
+speedY = 900

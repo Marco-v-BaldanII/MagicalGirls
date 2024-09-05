@@ -14,7 +14,6 @@ points = [NodePath("Node2D"), NodePath("Node2D4"), NodePath("Node2D2"), NodePath
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0, -1097.6)
-scale = Vector2(1, 1)
 
 [node name="Area2D" type="Area2D" parent="." groups=["projectile", "special"]]
 position = Vector2(-101.92, 19.6)
@@ -36,15 +35,12 @@ interpolation_speed = 1.0
 
 [node name="Node2D4" type="Node2D" parent="."]
 position = Vector2(999.6, -360.64)
-scale = Vector2(1, 1)
 
 [node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(-717.36, 983.92)
-scale = Vector2(1, 1)
 
 [node name="Node2D5" type="Node2D" parent="."]
 position = Vector2(-1030.96, -360.64)
-scale = Vector2(1, 1)
 
 [node name="Node2D3" type="Node2D" parent="."]
 position = Vector2(748.72, 983.92)

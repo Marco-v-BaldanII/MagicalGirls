@@ -718,14 +718,14 @@ func online_instantiate(special_scene : PackedScene):
 	instance.global_position = global_position
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
-func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1):
-
-	var instance = projectile_instanciation(path, p_name, position_offset, my_self , shoot,spawn)
-	GDSync.call_func(projectile_instanciation,[path, p_name, position_offset, my_self, shoot,spawn])
+func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1, start_pos : bool = false):
+	if p_name == "anastasia_ulti": my_self = null
+	var instance = projectile_instanciation(path, p_name, position_offset, my_self , shoot,spawn, start_pos)
+	GDSync.call_func(projectile_instanciation,[path, p_name, position_offset, my_self, shoot,spawn, start_pos])
 	
 	return instance
 	
-func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1):
+func projectile_instanciation(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1, start_pos : bool = true):
 	var special_scene = load(path)
 	var instance = special_scene.instantiate()
 	if my_self == null :
@@ -733,11 +733,16 @@ func projectile_instanciation(path : String, p_name : String, position_offset : 
 			GameManager.p1_spawns.add_child(instance)
 		else:
 			GameManager.p2_spawns.add_child(instance)
-	else: my_self.add_child(instance)
-	instance.global_position = global_position
+	else: 
+		my_self.add_child(instance)
 	
-	instance.global_position += position_offset
-	
+	if start_pos:
+		instance.global_position = global_position
+		
+		instance.global_position += position_offset
+	else:
+		instance.global_position = GameManager.camera.get_parent().global_position
+		
 	var startup : int = 0
 	if p_name != "": startup = MovesetManager.movesets[character_name][p_name + "_startup"]
 	

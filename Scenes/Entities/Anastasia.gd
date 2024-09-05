@@ -56,39 +56,7 @@ func sync_AK():
 			GDSync.set_gdsync_owner(A,GDSync.get_client_id())
 			A.sync_broadcast(GDSync.get_client_id())
 
-func _input(event):
-	if not can_move: return
-	
-	if not GameManager.online or GDSync.is_gdsync_owner(self):
-		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-		joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
-		
-		if is_joy_button_just_pressed("move_left") or (joy_x == -1 and abs(joy_y) < 0.4):
-			add_input_to_buffer("move_left")
-			perform_move()
-		if is_joy_button_just_pressed("move_right") or (joy_x == 1 and abs(joy_y) <0.4):
-			add_input_to_buffer("move_right")
-			perform_move()
-		if is_joy_button_just_pressed("crouch") or (joy_y ==  1 and abs(joy_x) < 0.4):
-			add_input_to_buffer("crouch")
-			perform_move()
-		if is_joy_button_just_pressed("jump") or (joy_y < -0.2 and abs(joy_x) < 0.4 ):
-			#print("jump with a y of " + str(joy_y) +"and a x of " + str(joy_x))
-			add_input_to_buffer("jump")
-			perform_move()
-		if is_joy_button_just_pressed("s_punch"):
-			add_input_to_buffer("s_punch")
-			perform_move()
-		if is_joy_button_just_pressed("w_punch"):
-			add_input_to_buffer("w_punch")
-			perform_move()
-		if is_joy_button_just_pressed("s_kick"):
-			add_input_to_buffer("s_kick")
-			perform_move()
-		if is_joy_button_just_pressed("w_kick"):
-			add_input_to_buffer("w_kick")
-			perform_move()
-		
+
 func instanciate_grenade():
 	current_start_projectile = GRENADE.instantiate()
 	get_tree().root.add_child(current_start_projectile)
@@ -122,8 +90,12 @@ func perform_move():
 								var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 								#GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-								instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
 								
+									
+								instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+								#else:
+									#instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials, Vector2.ZERO,null,true,1,false)
+								#
 								clear_buffer()
 								
 								await lag_finished
