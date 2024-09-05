@@ -1,7 +1,8 @@
-[gd_scene load_steps=112 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=113 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://dixaj5d6gkk4n" path="res://Assets/characters/Ritsu/RitsuSpriteSheet(2).png" id="2_0s4wq"]
+[ext_resource type="Texture2D" uid="uid://cyh1okj8f1uuw" path="res://Assets/characters/Ritsu/spritesheet(3).png" id="2_atdbw"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_3uh4q"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_gkyms"]
@@ -26,7 +27,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.2
 shader_parameter/green = 0.075
 shader_parameter/blue = 0.06
-shader_parameter/tex_anim_offset = 0.037037
+shader_parameter/tex_anim_offset = 0.0833333
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -897,10 +898,10 @@ script = ExtResource("1_h8qxx")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, -12)
 scale = Vector2(1.35, 1.35)
-texture = ExtResource("2_0s4wq")
+texture = ExtResource("2_atdbw")
 hframes = 12
-vframes = 9
-frame = 5
+vframes = 13
+frame = 9
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
