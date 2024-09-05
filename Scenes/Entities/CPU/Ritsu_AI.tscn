@@ -9,7 +9,7 @@
 ai_player = true
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 6
+frame = 8
 
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_rvqmf")]
 

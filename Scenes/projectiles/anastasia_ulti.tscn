@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bw1ccp44bmhp6"]
 
 [ext_resource type="Script" path="res://Scenes/projectiles/compound_rpojectile.gd" id="1_pyrry"]
-[ext_resource type="PackedScene" uid="uid://ddqug5kbme134" path="res://Scenes/projectiles/missile.tscn" id="2_wtve4"]
+[ext_resource type="PackedScene" uid="uid://bf235quwldrpk" path="res://Scenes/projectiles/missile.tscn" id="2_wtve4"]
 
 [node name="AnastasiaUlti" type="Node2D"]
 position = Vector2(0, 145)

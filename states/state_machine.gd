@@ -36,8 +36,8 @@ func _physics_process(delta):
 		current_state.physics_update(delta)
 
 func on_child_transition(state : State, new_state_name : String):
-	if state != current_state:
-		return
+	#if state != current_state:
+		#return
 	#Returns the corresponding value for the given key in the dictionary. If the key does not exist, returns default, or null if the parameter is omitted.
 	var new_state : State = states.get(new_state_name.to_lower())
 	name_current_state = new_state_name.to_lower()
