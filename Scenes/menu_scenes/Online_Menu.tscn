@@ -132,9 +132,13 @@ text = "waiting for oponent..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/my_lobby" method="_on_go_back_pressed"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/LobbyCreator/Button" to="CanvasLayer/LobbyCreator" method="_on_button_button_down"]
 
+[editable path="CanvasLayer/goBack"]
 [editable path="CanvasLayer/LobbySelection"]

@@ -56,6 +56,6 @@ func destroy_projectile():
 
 	for projectile in projectiles:
 		projectile.destroy_projectile()
-
+	queue_free()
 	
 	
