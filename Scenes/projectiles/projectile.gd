@@ -12,6 +12,14 @@ class_name Projectile
 var my_player : Player
 var active : bool = false
 
+var _visible : bool = false:
+	set(value):
+		_visible = value
+		if value:
+			show()
+		else:
+			hide()
+
 func _ready() -> void:
 
 	GDSync.expose_node(self)
@@ -86,5 +94,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func online_synch(player_num : int):
 	if player_num == 1:
 		$PositionSynchronizer.broadcast = 0
-	else: $PositionSynchronizer.broadcast = 1
+		$PropertySynchronizer2.broadcast = 0
+		$PropertySynchronizer3.broadcast = 0
+		
+		
+	else: 
+		$PositionSynchronizer.broadcast = 1
+		$PropertySynchronizer2.broadcast = 1
+		$PropertySynchronizer3.broadcast = 1
 		
