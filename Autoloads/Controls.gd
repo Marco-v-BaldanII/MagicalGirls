@@ -9,7 +9,9 @@ var p1 : Dictionary = {
 	"w_punch" : [2, KEY_J],
 	"s_punch" : [3, KEY_U],
 	"w_kick" : [0, KEY_K],
-	"s_kick" : [1, KEY_I]
+	"s_kick" : [1, KEY_I],
+	"l_trigger" : [9,KEY_SPACE],
+	"r_trigger" : [10,KEY_SPACE],
 }
 var p2 : Dictionary = {
 	"move_left" : [13, KEY_A],
@@ -19,7 +21,9 @@ var p2 : Dictionary = {
 	"w_punch" : [2, KEY_J],
 	"s_punch" : [3, KEY_U],
 	"w_kick" : [0, KEY_K],
-	"s_kick" : [1, KEY_I]
+	"s_kick" : [1, KEY_I],
+	"l_trigger" : [9,KEY_SPACE],
+	"r_trigger" : [10,KEY_SPACE],
 }
 
 var default : Dictionary = {
@@ -30,7 +34,9 @@ var default : Dictionary = {
 	"w_punch" : [2, KEY_J],
 	"s_punch" : [3, KEY_U],
 	"w_kick" : [0, KEY_K],
-	"s_kick" : [1, KEY_I]
+	"s_kick" : [1, KEY_I],
+	"l_trigger" : [9,KEY_SPACE],
+	"r_trigger" : [10,KEY_SPACE],
 }
 
 var mapping : Dictionary = {

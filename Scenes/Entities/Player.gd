@@ -105,7 +105,9 @@ var action_state : Dictionary = {
 	"w_punch" : false,
 	"s_punch" : false,
 	"w_kick" : false,
-	"s_kick" : false
+	"s_kick" : false,
+	"l_trigger" : false,
+	"r_trigger" : false
 }
 
 enum INPUT_METHOD{
@@ -365,7 +367,12 @@ func _input(event):
 		if is_joy_button_just_pressed("w_kick"):
 			add_input_to_buffer("w_kick")
 			perform_move()
-		
+		if is_joy_button_just_pressed("l_trigger"):
+			add_input_to_buffer("l_trigger")
+			perform_move()
+		if is_joy_button_just_pressed("r_trigger"):
+			add_input_to_buffer("r_trigger")
+			perform_move()
 	
 func add_input_to_buffer(input : String):
 	if input_buffer.size() == 0 or input_buffer.back() != input:
@@ -752,7 +759,7 @@ func add_lag(frames : int):
 	
 	while lag:
 		await get_tree().create_timer(0.01667).timeout
-		lag = false
+	lag = false
 	print(str(frames) + "lag")
 	lag = true
 	set_process_input(false)

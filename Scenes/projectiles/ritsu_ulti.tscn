@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh6gh7w3jmhdn"]
+
+[ext_resource type="Texture2D" uid="uid://dumwi1fvk4s57" path="res://star.webp" id="1_6mqy7"]
+[ext_resource type="Script" path="res://Scenes/projectiles/ritsu_ulti.gd" id="2_b0vdv"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_ckwlw"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_4hbxf"]
+
+[node name="RitsuUlti" type="Sprite2D" node_paths=PackedStringArray("points")]
+position = Vector2(133, 124)
+scale = Vector2(0.255102, 0.255102)
+texture = ExtResource("1_6mqy7")
+script = ExtResource("2_b0vdv")
+points = [NodePath("Node2D"), NodePath("Node2D4"), NodePath("Node2D2"), NodePath("Node2D5"), NodePath("Node2D3")]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, -1097.6)
+scale = Vector2(1, 1)
+
+[node name="Area2D" type="Area2D" parent="." groups=["projectile", "special"]]
+position = Vector2(-101.92, 19.6)
+scale = Vector2(2.48611, 2.48611)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_ckwlw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(37.8422, -203.402, 105.643, -93.0288, 239.668, -59.9169, 154.522, 44.1493, 167.137, 179.751, 42.5725, 127.718, -83.5683, 181.327, -69.3774, 44.1493, -162.406, -56.7634, -33.112, -83.5683)
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("4_4hbxf")
+refresh_rate = 120
+node_path = NodePath("..")
+property_name = "position"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="Node2D4" type="Node2D" parent="."]
+position = Vector2(999.6, -360.64)
+scale = Vector2(1, 1)
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(-717.36, 983.92)
+scale = Vector2(1, 1)
+
+[node name="Node2D5" type="Node2D" parent="."]
+position = Vector2(-1030.96, -360.64)
+scale = Vector2(1, 1)
+
+[node name="Node2D3" type="Node2D" parent="."]
+position = Vector2(748.72, 983.92)

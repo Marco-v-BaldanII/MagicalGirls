@@ -5,6 +5,8 @@ var hadoken_input_l : Array[String] = ["crouch", "move_left", "s_punch"]
 var fire_shot_r : Array[String] = ["crouch","move_left","s_punch"]
 var fire_shot_l : Array[String] = ["crouch","move_right","s_punch"]
 
+var ritsu_ulti : Array[String] = ["l_trigger", "r_trigger"]
+
 var Ritsu : Dictionary = {
 	
 	"triple_shot_right" : hadoken_input_r,
@@ -24,6 +26,11 @@ var Ritsu : Dictionary = {
 	"fire_shot_left_startup" : 18,
 	"fire_shot_right_startup" : 18,
 	"fire_shot_right_cost" : 200,
+	
+	"ritsu_ulti" : ritsu_ulti,
+	"ritsu_ulti_lag" : 48,
+	"ritsu_ulti_cost" : 0,
+	"ritsu_ulti_startup" : 18,
 	
 }
 var Larissa : Dictionary = {}

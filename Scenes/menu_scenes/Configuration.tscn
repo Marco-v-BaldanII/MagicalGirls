@@ -199,8 +199,8 @@ bus_name = "Sfx"
 [node name="goBack" parent="." instance=ExtResource("12_fwu1u")]
 
 [connection signal="toggled" from="TextureButton" to="." method="_on_texture_button_toggled"]
-[connection signal="toggled" from="TextureButton2" to="." method="_on_texture_button_toggled"]
 [connection signal="toggled" from="TextureButton2" to="." method="_on_texture_button_2_toggled"]
+[connection signal="toggled" from="TextureButton2" to="." method="_on_texture_button_toggled"]
 [connection signal="button_down" from="goBack/go_back" to="." method="_on_go_back_button_down"]
 
 [editable path="goBack"]

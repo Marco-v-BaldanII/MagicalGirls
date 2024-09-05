@@ -25,6 +25,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		
 	position.x += speed * delta
+	position.y += speedY * delta
 
 func assign_phys_layer(layer : int, mask : int):
 	if not area_2d: area_2d = $Area2D
@@ -45,7 +46,7 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	if startup != 0:
 		player.add_lag(startup)
 		await get_tree().create_timer(0.01667 * startup).timeout
-	else:
+	elif player:
 		player.lag_finished.emit() #No startup lag, so start end_lag
 
 	_layer = layer; _mask = mask
@@ -55,11 +56,12 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	active = true
 	assign_phys_layer(layer, mask)
 	my_player = player
-	global_position = my_player.position
-	if dir == "right":
-		speed *= -1
 	if player:
-		player.add_lag(lag_frames)
+		global_position = my_player.position
+		if dir == "right":
+			speed *= -1
+		if player:
+			player.add_lag(lag_frames)
 
 func destroy_projectile():
 	await  get_tree().create_timer(0.017).timeout
