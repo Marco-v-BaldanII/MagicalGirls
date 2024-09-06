@@ -110,12 +110,12 @@ func online_synch(player_num : int):
 	
 	if player_num == 1:
 		property_synchronizer.broadcast = 0
-		property_synchronizer2.broadcast = 0
-		property_synchronizer3.broadcast = 0
+		if property_synchronizer2 :property_synchronizer2.broadcast = 0
+		if property_synchronizer3 :property_synchronizer3.broadcast = 0
 		
 		
 	else: 
 		property_synchronizer.broadcast = 1
-		property_synchronizer2.broadcast = 1
-		property_synchronizer3.broadcast = 1
+		if property_synchronizer2 :property_synchronizer2.broadcast = 1
+		if property_synchronizer3 :property_synchronizer3.broadcast = 1
 		
