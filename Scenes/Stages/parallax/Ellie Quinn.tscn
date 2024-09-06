@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpmopv12racrh"]
+[gd_scene load_steps=13 format=3 uid="uid://bpmopv12racrh"]
 
 [ext_resource type="Texture2D" uid="uid://cgnlqtksv6spe" path="res://Assets/Backgrounds/dotdos.png" id="1_58ik4"]
 [ext_resource type="Texture2D" uid="uid://b5j8857lpnm6n" path="res://Assets/Backgrounds/library 5.png" id="2_jdv7h"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bedpqi4q0v3ts" path="res://Assets/Backgrounds/library 1.5.png" id="7_ol0jm"]
 [ext_resource type="Shader" path="res://Scenes/Stages/godray.gdshader" id="8_ndxce"]
 [ext_resource type="Texture2D" uid="uid://bun0oonbx8g38" path="res://Assets/Backgrounds/library 0.png" id="9_esnaq"]
+[ext_resource type="AudioStream" uid="uid://coqjx5lalkwmt" path="res://Scenes/Stages/parallax/musica biblio.mp3" id="10_4xawr"]
 
 [sub_resource type="Gradient" id="Gradient_2m5qm"]
 offsets = PackedFloat32Array(0, 0.369565, 1)
@@ -135,3 +136,9 @@ z_index = -4
 position = Vector2(937, 531)
 scale = Vector2(0.57, 0.461)
 texture = ExtResource("9_esnaq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_4xawr")
+volume_db = -6.0
+autoplay = true
+bus = &"Music"

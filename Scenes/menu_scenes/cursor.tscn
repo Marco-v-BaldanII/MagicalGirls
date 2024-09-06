@@ -1,8 +1,53 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci1182rw4g6ub"]
+[gd_scene load_steps=5 format=3 uid="uid://ci1182rw4g6ub"]
 
 [ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="1_2mxww"]
+
+[sub_resource type="Animation" id="Animation_pxjxg"]
+resource_name = "new_animation"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 1.0472, 1.5708, 2.0944, 2.61799, 3.14159, 3.66519, 4.18879, 4.71239, 5.23599, 5.75959, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_c2j6n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.523599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhl8r"]
+_data = {
+"RESET": SubResource("Animation_c2j6n"),
+"new_animation": SubResource("Animation_pxjxg")
+}
 
 [node name="cursor" type="Sprite2D"]
 z_index = 5
 position = Vector2(224.5, 471)
+rotation = 0.523599
 texture = ExtResource("1_2mxww")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yhl8r")
+}
+autoplay = "new_animation"
