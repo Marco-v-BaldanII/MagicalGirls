@@ -43,6 +43,7 @@ signal player_died(player_id : int)
 @export var mp : int = 200:
 	set(value):
 		mp = clamp(value,0,600)
+		if GDSync.is_gdsync_owner(self) : GDSync.call_func(change_mp,[value])
 		if mp_bar:
 			mp_bar.value = mp
 			
@@ -53,6 +54,10 @@ func change_hp(value : int):
 	while hp_bar.value != hp:
 			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
 			await get_tree().create_timer(0.1667).timeout
+			
+func change_mp(value : int):
+	mp = clamp(value,0,600)
+	mp_bar.value = mp
 
 var player_num : int = 0 #player_num is 1 or 2 and is independent of online or offline unlike player_id 
 @export var player_id : int = 0
@@ -504,11 +509,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	print("hit on " + str(area.global_position.y))
 	
-
-	GDSync.call_func(online_receive_dmg,[area])
+	show_tint()
+	if GameManager.online:
+		GDSync.call_func(show_tint)
+		GDSync.call_func(online_receive_dmg,[area])
 	hit_position = "none"
 	hit = true
-	sprite_2d.modulate = Color.RED
 	
 	var parent = area.get_parent()
 	if parent.has_method("destroy_projectile"):
@@ -645,9 +651,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false
-	sprite_2d.modulate = Color.WHITE
+
 	
-	
+func show_tint():
+		sprite_2d.modulate = Color.RED
+		await  get_tree().create_timer(0.017 * 20).timeout
+		sprite_2d.modulate = Color.WHITE
 		
 func deactivate_collisions():
 	pass

@@ -66,6 +66,7 @@ func _ready():
 		if parallax != null:
 			var p = parallax.instantiate()
 			background.add_child(p)
+			await get_tree().create_timer(0.01667*20).timeout
 	
 	$AnimationPlayer.play("start")
 	await get_tree().create_timer(0.01667*84).timeout
