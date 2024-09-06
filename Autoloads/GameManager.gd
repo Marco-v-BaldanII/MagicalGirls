@@ -70,6 +70,7 @@ func camera_shake():
 			frames -= 1
 			shaking_cam()
 			await get_tree().create_timer(0.01667).timeout
+		if not is_instance_valid(camera): return
 		while camera.position != default_camera_pos:
 			
 			camera.position = camera.position.move_toward(default_camera_pos, 2)

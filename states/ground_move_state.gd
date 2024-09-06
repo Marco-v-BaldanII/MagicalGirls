@@ -26,7 +26,7 @@ func enter():
 var crouching : bool = false
 
 func physics_update(delta : float):
-	if  player.lag: 
+	if  player.lag or (GameManager.online and not GDSync.is_gdsync_owner(player) ): 
 		return
 	if not player.ai_player:
 		#Not ai player

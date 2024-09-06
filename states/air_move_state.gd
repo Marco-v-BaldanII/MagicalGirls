@@ -39,7 +39,7 @@ func physics_update(delta : float):
 			if player.is_mapped_action_pressed("move_right") or joy_x > 0.1 :
 				if player.velocity.x < 0:player.velocity.x *= -0.5
 				player.input_direction = 1
-
+				
 			elif player.is_mapped_action_pressed("move_left") or joy_x < -0.1 :
 				if player.velocity.x > 0:player.velocity.x *= -0.5
 				player.input_direction =  -1
@@ -80,6 +80,7 @@ func physics_update(delta : float):
 		elif player.is_on_floor() and not player.grounded:
 			land_anim()
 			GDSync.call_func(land_anim)
+			
 			player.grounded = true
 			player.jump_lag = 0.01666 * player.JUMP_LAG_FPS
 			print("rest_jump_lag")
