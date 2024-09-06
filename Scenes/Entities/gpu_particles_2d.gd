@@ -7,6 +7,8 @@ func _ready():
 	if !viewportTexture:
 		texture = get_parent().texture
 
+	process_material = process_material.duplicate()
+
 func _process(delta):
 
 	#original
