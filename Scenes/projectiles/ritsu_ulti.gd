@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 		tween.tween_property(self,"scale",scale+Vector2(0.16,0.16),(1.0/60.0) * (frame_charge_time*0.6))
 		tween.set_ease(Tween.EASE_IN_OUT)
 		var tween2 : Tween = create_tween()
-		tween2.tween_property(self,"rotation",rotation + randf_range(1.3,1.8),(1.0/60.0) * (frame_charge_time*0.6))
+		tween2.tween_property(self,"rotation",rotation + 1.5 ,(1.0/60.0) * (frame_charge_time*0.6))
 		tween2.set_ease(Tween.EASE_IN_OUT)
 
 		current_growth_segment += 1
@@ -65,16 +65,5 @@ func _process(delta: float) -> void:
 
 func online_synch(player_num : int):
 	
-	await  instanciated
-	
-	if player_num == 1:
-		property_synchronizer.broadcast = 0
-		property_synchronizer2.broadcast = 0
-		property_synchronizer3.broadcast = 0
-		
-		
-	else: 
-		property_synchronizer.broadcast = 1
-		property_synchronizer2.broadcast = 1
-		property_synchronizer3.broadcast = 1
+	pass
 		
