@@ -7,7 +7,10 @@ var j_x : float
 var j_y : float
 
 func enter():
+	GDSync.expose_node(self)
+	
 	if not player:
+		
 			var e = get_parent()
 			while (e == null or not ( e is  Player)):
 				e = e.get_parent()

@@ -62,7 +62,10 @@ var ui: Dictionary = {
 }
 signal changed_controllers
 
-var connected_controllers : int = 0
+var connected_controllers : int = 0:
+	get():
+		connected_controllers = Input.get_connected_joypads().size()
+		return connected_controllers
 
 var action_state : Dictionary = {
 	"move_left" : false,

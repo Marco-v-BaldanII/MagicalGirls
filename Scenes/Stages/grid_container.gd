@@ -250,10 +250,32 @@ func start_match():
 			GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
 			if mode == match_mode.ARCADE:
 				SceneWrapper.change_scene(current_map)
-			else:
+			elif mode != match_mode.ONLINE_2P:
 				SceneWrapper.change_scene(load("res://Scenes/menu_scenes/StageSelectionScreen.tscn"))
+			else:
+				
+
+					var id : int = randi_range(1,4)
+					var stage : String
+					match id:
+							1: stage = "Ritsu"
+							2: stage = "Anastasia"
+							3: stage = "Ellie"
+							4: stage = "Larissa"
+						
+					online_random_map(stage)
+					GDSync.call_func(online_random_map,[stage])
+						
+					start_online_match()
+					GDSync.call_func(start_online_match)
 
 
+func online_random_map(stage : String):
+
+	GameManager.back_ground = load("res://Scenes/Stages/parallax/" + stage + ".tscn")
+
+func start_online_match():
+	SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
 
 var action_state : Dictionary = {
 	"move_left" : false,
