@@ -131,7 +131,7 @@ func perform_move():
 			can_move = true
 			#input_direction = 0
 		
-	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
+	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching and jump_lag < 0:
 		#Force the player to throw the projectile when jumping
 		if current_start_projectile != null:
 			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)

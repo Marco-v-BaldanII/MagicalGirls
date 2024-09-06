@@ -24,3 +24,5 @@ position = Vector2(114, -151.6)
 lag_frames = 0
 speedY = -300
 dmg = 6.0
+
+[editable path="Star3"]

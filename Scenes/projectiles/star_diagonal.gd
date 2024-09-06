@@ -15,25 +15,6 @@ func _ready() -> void:
 	hide()
 
 
-
-func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
-	if startup != 0:
-		player.add_lag(startup)
-		await get_tree().create_timer(0.01667 * startup).timeout
-	else:
-		player.lag_finished.emit() #No startup lag, so start end_lag
-	
-	set_physics_process(true)
-	show()
-	assign_phys_layer(layer, mask)
-	if dir == "right":
-		speed *= -1
-	if player:
-		my_player = player
-		player.add_lag(current_frame*0.7)
-	GDSync.call_func(shoot, [layer,mask,dir,player])
-
-
 func _process(delta: float) -> void:
 	pass
 

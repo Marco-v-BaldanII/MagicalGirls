@@ -73,7 +73,7 @@ func physics_update(delta : float):
 					player.velocity.x += -player.air_speed
 			elif player.is_mapped_action_pressed("move_right") or j_x > 0.1 or player.is_input_pressed("move_right") :
 					player.velocity.x += player.air_speed
-
+			player.clear_buffer()
 		
 		#LAND	
 		elif player.is_on_floor() and not player.grounded:
@@ -81,9 +81,7 @@ func physics_update(delta : float):
 			player.animation_tree["parameters/conditions/jump"] = false
 			player.grounded = true
 			player.jump_lag = 0.01666 * player.JUMP_LAG_FPS
-			await get_tree().create_timer(0.017 * 6).timeout
-			player.animation_tree["parameters/conditions/land"] = false
-			
+			print("rest_jump_lag")
 			Transitioned.emit(self, "ground_move")
 
 	# Add the gravity.
