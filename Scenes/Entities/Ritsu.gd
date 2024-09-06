@@ -13,10 +13,10 @@ func _ready() -> void:
 	super()
 	await fully_instanciated
 	
-	#if player_num == 1:
-		#$PositionSynchronizer.broadcast = 0
-	#else: $PositionSynchronizer.broadcast = 1
-		#
+	if player_num == 1:
+		$PositionSynchronizer.broadcast = 0
+	else: $PositionSynchronizer.broadcast = 1
+		
 
 func instanciate_star():
 	current_start_projectile = STAR_RIGHT.instantiate()

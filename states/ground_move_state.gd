@@ -70,9 +70,7 @@ func physics_update(delta : float):
 		player.moving_backwards = false
 		if(player.input_direction > 0 and player.direction == "left") or (player.input_direction < 0 and player.direction == "right"):
 			
-			move_player(player.input_direction, player.SPEED)
-			GDSync.call_func(move_player, [player.input_direction, player.SPEED])
-			
+			player.velocity.x = player.input_direction * player.SPEED
 			if player.animation_tree["parameters/conditions/move_forward"] == false: 
 
 				player.animation_tree["parameters/conditions/move_backward"] = false
@@ -82,9 +80,7 @@ func physics_update(delta : float):
 			
 		else:
 			#move slower in your back direction
-			move_player(player.input_direction, player.SPEED * 0.55)
-			GDSync.call_func(move_player, [player.input_direction, player.SPEED * 0.55])
-			
+			player.velocity.x = player.input_direction * (player.SPEED*0.55)
 			if player.input_direction != 0 and  player.animation_tree["parameters/conditions/move_backward"] == false: 
 
 				player.animation_tree["parameters/conditions/move_backward"] = true
@@ -134,7 +130,3 @@ func update(delta : float):
 func transition_to_crouch():
 	Transitioned.emit(self, "crouch")
 	crouching = true
-
-
-func move_player(dir : float, speed : int):
-	player.velocity.x = player.dir * player.speed #line that makes you move
