@@ -171,10 +171,11 @@ func _on_body_body_entered(body: Node2D) -> void:
 
 
 func _on_head_hurt_box_area_entered(area: Area2D) -> void:
+	
+	if crouching:
+		head = true
+		_on_hurt_box_area_entered(area)
 
-	head = true
-	_on_hurt_box_area_entered(area)
-	_on_hurt_box_area_entered(area)
-	head = false
+		head = false
 
 	pass # Replace with function body.

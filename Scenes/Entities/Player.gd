@@ -78,7 +78,7 @@ var input_made : bool = false
 		direction = value
 var input_direction : float = 0
 
-const BUFFER_FRAMES = 6
+const BUFFER_FRAMES = 10
 
 var grounded : bool = false
 var crouching : bool = false
@@ -493,6 +493,8 @@ var blocked : bool = false
 
 var hit_position : String 
 
+var body : bool = false
+
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	if GameManager.online and not GDSync.is_gdsync_owner(self) and area.get_parent() is Projectile:
@@ -511,6 +513,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		parent.destroy_projectile()
 
 	if not head:
+		
 		var hit_pos : int = area.get_child(0).global_position.y
 		
 		if not crouching:
@@ -777,9 +780,11 @@ func add_lag(frames : int):
 	
 	if is_on_floor():
 		velocity.x = 0
+		input_direction = 0
+		input_buffer.clear()
 	
-	while lag:
-		await get_tree().create_timer(0.01667).timeout
+	#while lag:
+		#await get_tree().create_timer(0.01667).timeout
 	lag = false
 	print(str(frames) + "lag")
 	lag = true

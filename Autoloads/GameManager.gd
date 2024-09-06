@@ -78,6 +78,7 @@ func camera_shake():
 var cam_offset = 0
 
 func shaking_cam():
+	if not is_instance_valid(camera): return
 	cam_offset = Vector2(randf_range(-1,1) * shake_amount, randf_range(-1,1)*shake_amount)
 	camera.position += cam_offset
 	print(camera.position)
