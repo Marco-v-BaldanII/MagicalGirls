@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh58ivkbsm6kl"]
+[gd_scene load_steps=9 format=3 uid="uid://bh58ivkbsm6kl"]
 
 [ext_resource type="Texture2D" uid="uid://cgnlqtksv6spe" path="res://Assets/Backgrounds/dotdos.png" id="1_441hu"]
 [ext_resource type="Texture2D" uid="uid://cgdlqd1pu3qni" path="res://Assets/Backgrounds/rusia 5.png" id="2_m1n5l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ycw6c503gggs" path="res://Assets/Backgrounds/rusia 3.png" id="4_lan3d"]
 [ext_resource type="Texture2D" uid="uid://crpk8uxvaur8q" path="res://Assets/Backgrounds/rusia 2.png" id="5_peppg"]
 [ext_resource type="Texture2D" uid="uid://d3sqtq6485t4l" path="res://Assets/Backgrounds/rusia 1.png" id="6_y0rnf"]
+[ext_resource type="AudioStream" uid="uid://bud01tjr4kkbc" path="res://Scenes/Stages/parallax/soviet(1).mp3" id="7_k7jb6"]
 
 [sub_resource type="Gradient" id="Gradient_2m5qm"]
 offsets = PackedFloat32Array(0, 0.369565, 1)
@@ -84,3 +85,9 @@ z_index = -6
 position = Vector2(937, 531)
 scale = Vector2(0.6, 0.461)
 texture = ExtResource("6_y0rnf")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_k7jb6")
+volume_db = -5.0
+autoplay = true
+bus = &"Music"

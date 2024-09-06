@@ -4,6 +4,7 @@ class_name Ritsu
 var current_start_projectile : Projectile
 const STAR_RIGHT = preload("res://Scenes/projectiles/star_right.tscn")
 const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
+@onready var placeholder = $placeholder
 
 @export var star_cost : int = 10
 
