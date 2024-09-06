@@ -68,6 +68,9 @@ func _ready():
 			background.add_child(p)
 	
 	$AnimationPlayer.play("start")
+	
+	remap_controllers()
+	
 	await get_tree().create_timer(0.01667*84).timeout
 	
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
