@@ -494,6 +494,10 @@ var blocked : bool = false
 var hit_position : String 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
+	
+	if GameManager.online and not GDSync.is_gdsync_owner(self):
+		return
+	
 	print("hit on " + str(area.global_position.y))
 	
 

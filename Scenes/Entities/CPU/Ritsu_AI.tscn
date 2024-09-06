@@ -32,6 +32,10 @@ texture_under = null
 texture_over = null
 texture_progress = null
 
+[node name="PositionSynchronizer" parent="." index="10"]
+refresh_rate = 120
+interpolated = false
+
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_rvqmf")]
 
 [node name="attack" parent="AI_StateMachine" index="1"]

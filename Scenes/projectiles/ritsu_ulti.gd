@@ -10,11 +10,13 @@ const HADOKEN_RIGHT = preload("res://Scenes/projectiles/hadoken_right.tscn")
 @export var points : Array[Node2D]
 
 func _ready() -> void:
-		super()
+	GDSync.expose_node(self)
+	set_physics_process(false)
+	hide()
+	instanciated.emit()
 
 func _physics_process(delta: float) -> void:
 	pass
-
 func _process(delta: float) -> void:
 	alive_time -= delta
 	current_frame += 1
@@ -60,3 +62,19 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer((1.0/60.0) * (frame_charge_time*0.6)).timeout
 		queue_free()
 		pass
+
+func online_synch(player_num : int):
+	
+	await  instanciated
+	
+	if player_num == 1:
+		property_synchronizer.broadcast = 0
+		property_synchronizer2.broadcast = 0
+		property_synchronizer3.broadcast = 0
+		
+		
+	else: 
+		property_synchronizer.broadcast = 1
+		property_synchronizer2.broadcast = 1
+		property_synchronizer3.broadcast = 1
+		

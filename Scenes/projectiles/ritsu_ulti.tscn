@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh6gh7w3jmhdn"]
+[gd_scene load_steps=4 format=3 uid="uid://bck7361v7f4c2"]
 
 [ext_resource type="Texture2D" uid="uid://dumwi1fvk4s57" path="res://star.webp" id="1_6mqy7"]
 [ext_resource type="Script" path="res://Scenes/projectiles/ritsu_ulti.gd" id="2_b0vdv"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_ckwlw"]
-[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_4hbxf"]
 
 [node name="RitsuUlti" type="Sprite2D" node_paths=PackedStringArray("points")]
 position = Vector2(133, 124)
@@ -24,14 +23,6 @@ script = ExtResource("3_ckwlw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(37.8422, -203.402, 105.643, -93.0288, 239.668, -59.9169, 154.522, 44.1493, 167.137, 179.751, 42.5725, 127.718, -83.5683, 181.327, -69.3774, 44.1493, -162.406, -56.7634, -33.112, -83.5683)
-
-[node name="PropertySynchronizer" type="Node" parent="."]
-script = ExtResource("4_4hbxf")
-refresh_rate = 120
-node_path = NodePath("..")
-property_name = "position"
-interpolated = false
-interpolation_speed = 1.0
 
 [node name="Node2D4" type="Node2D" parent="."]
 position = Vector2(999.6, -360.64)
