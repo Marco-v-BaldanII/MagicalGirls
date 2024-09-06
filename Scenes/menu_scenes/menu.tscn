@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://2ri16duvgw33"]
+[gd_scene load_steps=24 format=3 uid="uid://2ri16duvgw33"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
 [ext_resource type="PackedScene" uid="uid://ci1182rw4g6ub" path="res://Scenes/menu_scenes/cursor.tscn" id="2_6m5h7"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cm15pc5gm537w" path="res://Assets/UI/Menus/Girls.png" id="7_a4cbo"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="7_xvlvo"]
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="8_fnxuv"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/training_mode_option.gd" id="9_p4ytc"]
 [ext_resource type="Texture2D" uid="uid://m5cvofrcf6w1" path="res://Assets/UI/Menus/title(1).png" id="10_yjb53"]
 [ext_resource type="AudioStream" uid="uid://bjirl7m4mync" path="res://Assets/SFX/UI/menu audio.mp3" id="13_gw8y1"]
 [ext_resource type="Texture2D" uid="uid://bvw4onoh3yjgb" path="res://Assets/UI/settings button.png" id="14_s5nr1"]
@@ -171,6 +172,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 texture = ExtResource("3_utj3r")
+script = ExtResource("9_p4ytc")
 
 [node name="Label" type="Label" parent="GridContainer/TrainingMode"]
 layout_mode = 0
@@ -245,13 +247,6 @@ offset_right = 199.045
 offset_bottom = 66.4789
 texture = SubResource("Texture2D_lxmb7")
 
-[node name="SettingsButton" type="Button" parent="SettingsButton_"]
-modulate = Color(1, 1, 1, 0)
-offset_left = -69.0
-offset_top = -68.0
-offset_right = 66.0
-offset_bottom = 65.0
-
 [node name="OffButton" type="Sprite2D" parent="."]
 position = Vector2(79, 1012)
 scale = Vector2(0.724, 0.724)
@@ -292,9 +287,16 @@ offset_top = 696.0
 offset_right = 779.0
 offset_bottom = 796.0
 
-[connection signal="button_down" from="SettingsButton_/SettingsButton" to="." method="_on_settings_button_button_down"]
+[node name="settings_button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 26.0
+offset_top = 829.0
+offset_right = 128.0
+offset_bottom = 929.0
+
 [connection signal="button_down" from="OffButton/offButton" to="." method="_on_off_button_button_down"]
 [connection signal="button_down" from="arcade_button" to="." method="_on_arcade_button_button_down"]
 [connection signal="button_down" from="cpu_button" to="." method="_on_cpu_button_button_down"]
 [connection signal="button_down" from="online_button" to="." method="_on_online_button_button_down"]
 [connection signal="button_down" from="local_button" to="." method="_on_local_button_button_down"]
+[connection signal="button_down" from="settings_button" to="." method="_on_settings_button_button_down"]

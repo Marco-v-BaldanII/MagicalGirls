@@ -45,20 +45,23 @@ func _process(delta: float) -> void:
 		##texture_rect.texture = res
 	pass
 
-func add_input(input : String):
+func add_input(input : String, input_method : int):
+	var index = 0
+	if input_method == 2: 
+		index = 1 #keyboard
 	
 	#traducirlo
-	var id = id_to_button(Controls.p1[input])
-	
+	var id = id_to_button(Controls.p1[input][index])
+	#
 	for i in buttons.size():
 		if buttons[i].texture == null:
 			var res : ControllerIconTexture = ControllerIconTexture.new()
 			
 			#This is the translation bc the pluggin actually doesnt work super well
-			if id == "s_kick":input = "s_punch"
-			elif id == "s_punch":input = "w_punch"
-			elif id == "w_punch" : input = "w_kick"
-			elif id == "w_kick" : input = "s_kick"
+			#if input == "s_kick":input = "s_punch"
+			#elif input == "s_punch":input = "w_punch"
+			#elif input == "w_punch" : input = "w_kick"
+			#elif input == "w_kick" : input = "s_kick"
 			res.path = input
 			buttons[i].texture = res
 			
@@ -81,11 +84,12 @@ func add_input(input : String):
 	curret_order += 1
 	
 	var res : ControllerIconTexture = ControllerIconTexture.new()
-	if id == "s_kick":input = "s_punch"
-	elif id == "s_punch":input = "w_punch"
-	elif id == "w_punch" : input = "w_kick"
-	elif id == "w_kick" : input = "s_kick"
+	#if input == "s_kick":input = "s_punch"
+	#elif input == "s_punch":input = "w_punch"
+	#elif input == "w_punch" : input = "w_kick"
+	#elif input == "w_kick" : input = "s_kick"
 	res.path = input
+
 	button_new.texture = res
 	
 	pass

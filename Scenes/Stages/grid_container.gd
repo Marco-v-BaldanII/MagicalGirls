@@ -26,7 +26,8 @@ enum match_mode {
 	LOCAL_2P,
 	ONLINE_2P,
 	CPU,
-	ARCADE
+	ARCADE,
+	TRAINING
 	
 }
 
@@ -97,7 +98,7 @@ func _process(delta: float) -> void:
 		elif  not GameManager.is_host and mode == match_mode.ONLINE_2P:
 			input_movement(0, true)
 			
-		elif selected_fighter != "" and mode == match_mode.CPU:
+		elif selected_fighter != "" and (mode == match_mode.CPU or mode == match_mode.TRAINING):
 			input_movement(0, true)
 
 var back : bool = false
@@ -343,5 +344,5 @@ func _on_go_back_button_down() -> void:
 	elif mode == match_mode.LOCAL_2P and selected_fighter == "" and selected_fighter2 == "":
 		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
 		
-	elif mode == match_mode.ARCADE or mode == match_mode.CPU and selected_fighter == "":
+	elif mode == match_mode.ARCADE or mode == match_mode.CPU or mode == match_mode.TRAINING and selected_fighter == "":
 		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))

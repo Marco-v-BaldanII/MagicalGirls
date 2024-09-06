@@ -240,11 +240,11 @@ func change_in_controllers():
 				elif player_id == 1: input_method = 1
 
 @export var lobby_selection: Node2D 
-@export var vbox : VBoxContainer
+@export var connect : Node2D
 
 func _on_go_back_pressed() -> void:
 	if lobby_selection and lobby_selection.visible:
 		lobby_selection.hide()
-		vbox.show()
+		connect.show()
 		pass
 	pass # Replace with function body.

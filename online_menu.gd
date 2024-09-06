@@ -2,7 +2,7 @@ extends Node2D
 class_name OnlineMenu
 
 @onready var canvas_layer = $CanvasLayer
-@onready var v_box_container: VBoxContainer = $CanvasLayer/VBoxContainer
+@onready var connect_menu : Node2D = $CanvasLayer/connect_menu
 
 @onready var CHARACTER_SELECTION_SCREEN = preload("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn")
 
@@ -27,7 +27,7 @@ func _ready():
 func connected():
 	print("You are now connected!")
 	online = true
-	v_box_container.show()
+	connect_menu.show()
 
 
 func connection_failed(error : int):
@@ -69,7 +69,7 @@ func lobby_creation_failed(lobby_name : String, error : int):
 
 func lobby_joined(lobby_name : String):
 	print("Succesfully joined lobby "+lobby_name)
-	v_box_container.hide()
+	connect_menu.hide()
 	
 
 func lobby_join_failed(lobby_name : String, error : int):
@@ -109,7 +109,7 @@ func _on_host_button_button_down():
 		lobby_creator.show()
 		
 		#i could loop through all it's children and set gdsync owner
-	v_box_container.hide()
+	connect_menu.hide()
 
 
 func _on_join_button_button_down():
@@ -117,7 +117,7 @@ func _on_join_button_button_down():
 		#GDSync.join_lobby("Lobby Name", "Password123")
 		#v_box_container.hide()
 		$CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
-		v_box_container.hide()
+		connect_menu.hide()
 		lobby_selection.show()
 		#node_instantiator.instantiate_node()
 
@@ -164,7 +164,7 @@ func _process(delta: float) -> void:
 		_on_go_back_pressed()
 
 func _on_go_back_pressed() -> void:
-	if v_box_container.visible:
+	if connect_menu.visible:
 		GDSync.stop_multiplayer()
 		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
 	

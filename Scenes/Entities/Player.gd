@@ -23,6 +23,8 @@ signal player_died(player_id : int)
 
 @export var hp : int = 100:
 	set(value ):
+		if GameManager.character_selection_mode == 4:
+			return #no damagein training mode
 		
 		var difference = hp - value
 		mp += difference * 5
@@ -42,6 +44,8 @@ signal player_died(player_id : int)
 			
 @export var mp : int = 200:
 	set(value):
+		if GameManager.character_selection_mode == 4:
+			return #no damagein training mode
 		mp = clamp(value,0,600)
 		if GDSync.is_gdsync_owner(self) : GDSync.call_func(change_mp,[value])
 		if mp_bar:
@@ -393,8 +397,8 @@ func add_input_to_buffer(input : String):
 		buffer_time =  0.01666 * BUFFER_FRAMES
 		input_buffer.push_back(input)
 		input_made = true
-		
-		#InputViewer.add_input(input)
+		if GameManager.character_selection_mode == 4: #TrainingMode
+			InputViewer.add_input(input, input_method)
 
 var can_move :bool:
 	set(value):
@@ -509,10 +513,6 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	print("hit on " + str(area.global_position.y))
 	
-	show_tint()
-	if GameManager.online:
-		GDSync.call_func(show_tint)
-		GDSync.call_func(online_receive_dmg,[area])
 	hit_position = "none"
 	hit = true
 	
@@ -646,17 +646,21 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not blocked and oponent.last_used_move != "":
 		#add hitstun after getting hit
 		add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move] * 2)
-	
+	show_tint(blocked)
+	if GameManager.online:
+		GDSync.call_func(show_tint, [blocked])
+		GDSync.call_func(online_receive_dmg,[area])
 	if ai_player: ai_on_hit()
 	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false
 
 	
-func show_tint():
-		sprite_2d.modulate = Color.RED
-		await  get_tree().create_timer(0.017 * 20).timeout
-		sprite_2d.modulate = Color.WHITE
+func show_tint(block : bool):
+	if block: sprite_2d.modulate = Color.AQUA
+	else :sprite_2d.modulate = Color.RED
+	await  get_tree().create_timer(0.017 * 20).timeout
+	sprite_2d.modulate = Color.WHITE
 		
 func deactivate_collisions():
 	pass

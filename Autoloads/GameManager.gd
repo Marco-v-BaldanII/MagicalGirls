@@ -37,7 +37,7 @@ var shake_amount : float = 8
 var default_camera_pos : Vector2 = Vector2(0,0)
 
 var character_selection_mode : int = 0
-#0 = LOCAL_2P , 1 = ONLINE_2P , 2 = CPU, 3 = ARCADE
+#0 = LOCAL_2P , 1 = ONLINE_2P , 2 = CPU, 3 = ARCADE, 4 = TRAINING
 
 var arcade_route : ArcadeRun = null
 var arcade_index : int = 0

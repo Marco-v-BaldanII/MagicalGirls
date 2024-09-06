@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=10 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="2_1hqwr"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="2_561r3"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_menu.gd" id="3_hbw2o"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_creator.gd" id="4_3ldkt"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/v_box_menu.gd" id="4_6a1dq"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="4_v2qc8"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/input_field_option.gd" id="5_jqadj"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/my_lobby.gd" id="7_8vq33"]
@@ -15,24 +16,6 @@ script = ExtResource("1_wibys")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="goBack" parent="CanvasLayer" instance=ExtResource("2_1hqwr")]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-visible = false
-offset_left = 602.0
-offset_top = 106.0
-offset_right = 1304.0
-offset_bottom = 311.0
-theme_override_constants/separation = 50
-
-[node name="host_button" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Host"
-
-[node name="join_button" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Join"
 
 [node name="OnlineButton" type="CheckButton" parent="CanvasLayer"]
 visible = false
@@ -48,10 +31,10 @@ text = "Online"
 visible = false
 position = Vector2(2165, 993)
 
-[node name="P1_control_selection" parent="CanvasLayer/LobbySelection" index="1" node_paths=PackedStringArray("lobby_selection", "vbox")]
+[node name="P1_control_selection" parent="CanvasLayer/LobbySelection" index="1" node_paths=PackedStringArray("lobby_selection", "connect")]
 _is_active = true
 lobby_selection = NodePath("..")
-vbox = NodePath("../../VBoxContainer")
+connect = NodePath("../../connect_menu")
 
 [node name="ControlerMenu1" parent="CanvasLayer/LobbySelection/P1_control_selection" index="0"]
 script = ExtResource("3_hbw2o")
@@ -132,13 +115,39 @@ text = "waiting for oponent..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="connect_menu" type="Node2D" parent="CanvasLayer"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/connect_menu"]
+position = Vector2(117, 317)
+texture = ExtResource("4_v2qc8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/connect_menu"]
+offset_left = 199.0
+offset_top = 267.0
+offset_right = 901.0
+offset_bottom = 472.0
+scale = Vector2(2.2, 2.2)
+theme_override_constants/separation = 50
+script = ExtResource("4_6a1dq")
+
+[node name="host_button" type="Button" parent="CanvasLayer/connect_menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Host"
+
+[node name="join_button" type="Button" parent="CanvasLayer/connect_menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Join"
+
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/my_lobby" method="_on_go_back_pressed"]
-[connection signal="button_down" from="CanvasLayer/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/LobbyCreator/Button" to="CanvasLayer/LobbyCreator" method="_on_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/connect_menu/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/connect_menu/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
 
 [editable path="CanvasLayer/goBack"]
 [editable path="CanvasLayer/LobbySelection"]

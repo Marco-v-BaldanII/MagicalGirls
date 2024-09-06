@@ -184,7 +184,7 @@ func is_joy_button_just_pressed(action_name : String) -> bool:
 
 func _on_go_back_pressed() -> void:
 	if visible:
-		$"../VBoxContainer".show()
+		$"../connect_menu".show()
 		hide()
 	
 	pass # Replace with function body.

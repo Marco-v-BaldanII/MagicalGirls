@@ -66,3 +66,20 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	
 	if area.is_in_group("projectile"):
 		collide_with_projectile(area)
+
+func online_synch(player_num : int):
+	
+	await  instanciated
+	
+	if player_num == 1:
+		property_synchronizer.broadcast = 0
+		property_synchronizer2.broadcast = 0
+		property_synchronizer3.broadcast = 0
+		$PropertySynchronizer4.broadcast = 0
+		
+	else: 
+		property_synchronizer.broadcast = 1
+		property_synchronizer2.broadcast = 1
+		property_synchronizer3.broadcast = 1
+		$PropertySynchronizer4.broadcast = 1
+		
