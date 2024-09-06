@@ -329,11 +329,13 @@ stream = ExtResource("5_emoy5")
 autoplay = true
 
 [node name="SettingsButton" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(211, 1008)
 scale = Vector2(0.724169, 0.724169)
 texture = ExtResource("14_74w27")
 
 [node name="OffButton" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(79, 1012)
 scale = Vector2(0.724, 0.724)
 texture = ExtResource("15_ep6y6")
