@@ -60,7 +60,8 @@ func physics_update(delta : float):
 		
 		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0 and not player.lag:
 			player.jump_lag = 100
-			player.animation_tree["parameters/conditions/jump"] = true
+			jump_anim()
+			GDSync.call_func(jump_anim)
 			
 			
 			
@@ -77,8 +78,8 @@ func physics_update(delta : float):
 		
 		#LAND	
 		elif player.is_on_floor() and not player.grounded:
-			player.animation_tree["parameters/conditions/land"] = true
-			player.animation_tree["parameters/conditions/jump"] = false
+			land_anim()
+			GDSync.call_func(land_anim)
 			player.grounded = true
 			player.jump_lag = 0.01666 * player.JUMP_LAG_FPS
 			print("rest_jump_lag")
@@ -95,3 +96,11 @@ func physics_update(delta : float):
 		
 		else:
 			player.velocity.y += (player.gravity) * delta
+
+
+func jump_anim():
+	player.animation_tree["parameters/conditions/jump"] = true
+	
+func land_anim():
+	player.animation_tree["parameters/conditions/land"] = true
+	player.animation_tree["parameters/conditions/jump"] = false
