@@ -116,7 +116,9 @@ enum INPUT_METHOD{
 	KEYBOARD
 }
 
-var input_method : INPUT_METHOD = INPUT_METHOD.KEYBOARD
+var input_method : INPUT_METHOD = INPUT_METHOD.KEYBOARD:
+	set(value):
+		input_method = value
 
 func is_input_pressed(input : String) -> bool:
 	return action_state[input]

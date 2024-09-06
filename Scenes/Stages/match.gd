@@ -75,18 +75,19 @@ func _ready():
 	p1.fully_instanciated.emit(); p2.fully_instanciated.emit()
 	p1.can_move = true; p2.can_move = true;
 	p2.is_initialized = true; p1.is_initialized = true
-	#p2.calculate_direction(); p1.calculate_direction()
-	
-	var connected_controllers = Input.get_connected_joypads()
-	var num_connected = connected_controllers.size()
-	
-	match num_connected:
-		0: 
-			p1.input_method = 2 #Player1 uses keyboard
-		1: 
-			p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
-		2: 
-			p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
+
+	if not GameManager.online:
+		
+		var connected_controllers = Input.get_connected_joypads()
+		var num_connected = connected_controllers.size()
+		
+		match num_connected:
+			0: 
+				p1.input_method = 2 #Player1 uses keyboard
+			1: 
+				p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
+			2: 
+				p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
 
 
 	
@@ -106,6 +107,7 @@ func _process(delta: float) -> void:
 	pass
 
 func remap_controllers():
+	print("called remap controlers")
 	if not GameManager.online:
 		
 		match Controls.connected_controllers:
@@ -128,8 +130,10 @@ func remap_controllers():
 		match Controls.connected_controllers:
 			0: 
 				my_player.input_method = 2 #Player1 uses keyboard
+				print("connected to keyboard")
 			1: 
 				my_player.input_method = 0; 
+				print("connected to gamepad")
 			_: 
 				p1.input_method = 0; 
 		

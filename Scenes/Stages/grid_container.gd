@@ -252,7 +252,7 @@ func start_match():
 				SceneWrapper.change_scene(current_map)
 			elif mode != match_mode.ONLINE_2P:
 				SceneWrapper.change_scene(load("res://Scenes/menu_scenes/StageSelectionScreen.tscn"))
-			else:
+			elif GameManager.is_host:
 				
 
 					var id : int = randi_range(1,4)
