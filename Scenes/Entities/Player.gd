@@ -5,8 +5,8 @@ class_name Player
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: StateMachine = $StateMachine
-@onready var hp_bar: ProgressBar = $CanvasLayer/hpBar
-@onready var mp_bar: ProgressBar = $CanvasLayer/mpBar
+@onready var hp_bar: TextureProgressBar =  $CanvasLayer/UI/hpBar_
+@onready var mp_bar: TextureProgressBar = $CanvasLayer/UI/mpBar_
 
 var charging_mp : bool = true
 

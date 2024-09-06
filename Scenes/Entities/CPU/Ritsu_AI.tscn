@@ -8,9 +8,6 @@
 [node name="NewRitsu2" instance=ExtResource("1_kmcq4")]
 ai_player = true
 
-[node name="Sprite2D" parent="." index="0"]
-frame = 9
-
 [node name="hpBar" parent="CanvasLayer" index="0"]
 offset_left = 1034.0
 offset_top = 38.0

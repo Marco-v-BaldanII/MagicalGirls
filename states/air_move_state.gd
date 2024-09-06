@@ -115,6 +115,7 @@ func physics_update(delta : float):
 
 func jump_anim():
 	player.animation_tree["parameters/conditions/jump"] = true
+	player.animation_tree["parameters/conditions/land"] = false
 	
 func land_anim():
 	player.animation_tree["parameters/conditions/land"] = true

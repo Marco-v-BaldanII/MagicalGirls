@@ -1,19 +1,17 @@
 extends TextureProgressBar
-@onready var player: Player = $"../.."
+@export var player: Player
 
 @export var regenerate : bool = false
 var second_timer = 0.8
 @export var incerement_value = 1
 
+@onready var portrait: TextureRect = $portrait
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	fill_mode = FILL_RIGHT_TO_LEFT
+	pass
 
-	await get_tree().create_timer(0.01).timeout
-	if player.direction == "left":
-		position = Vector2(42,position.y)
-	else:
-		position = Vector2(1038,position.y)
+		
 		
 	# Set the broadcaster to be the computer of the player that actually controls the player
 	#if GDSync.is_gdsync_owner(player):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=121 format=3 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="Texture2D" uid="uid://ditutvvfdtptp" path="res://Assets/characters/Ritsu/spritesheet.png" id="2_obeqb"]
@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ohqq7"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_ib67o"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
-[ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="8_t58ng"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_wgxbo"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/player_ui.gd" id="10_nuwfx"]
 [ext_resource type="Texture2D" uid="uid://dap2m7sq022tj" path="res://Assets/UI/life bar contour(1).png" id="11_5sq4o"]
 [ext_resource type="Texture2D" uid="uid://c1jp774qfvlql" path="res://Assets/UI/life bar(1).png" id="12_5yg5x"]
 [ext_resource type="Texture2D" uid="uid://buagwkdk6erec" path="res://Assets/UI/under life bar(1).png" id="13_n4r16"]
@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://b28dthsn4tn68" path="res://Assets/UI/stamina_bar_line.png" id="15_32jdj"]
 [ext_resource type="Texture2D" uid="uid://bj4qnxpq1namf" path="res://Assets/UI/ritsu portrait.png" id="15_a8p1g"]
 [ext_resource type="Texture2D" uid="uid://cr52rj3wjkwf2" path="res://Assets/UI/char portrait.png" id="15_xf4wv"]
-[ext_resource type="Texture2D" uid="uid://dugc7vyvyvtg2" path="res://Assets/UI/stamina_bar_full.png" id="16_qscq6"]
 [ext_resource type="Texture2D" uid="uid://cvjkg5125jgev" path="res://Assets/UI/stamina_bar_not_full.png" id="17_4dfj5"]
 [ext_resource type="Texture2D" uid="uid://cmdcqnhnrg701" path="res://Assets/UI/Menus/active_round.png" id="17_j1ae2"]
 [ext_resource type="AudioStream" uid="uid://cadi7wx13ei3l" path="res://Assets/SFX/placeholder.wav" id="22_n70dd"]
@@ -39,7 +38,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.2
 shader_parameter/green = 0.075
 shader_parameter/blue = 0.06
-shader_parameter/tex_anim_offset = 0.0320513
+shader_parameter/tex_anim_offset = 0.0128205
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1023,7 +1022,7 @@ states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(478, 115)
 transitions = ["crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "jump", "in_air", SubResource("AnimationNodeStateMachineTransition_wh10h"), "in_air", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_v6023"), "in_air", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_kvsvy"), "in_air", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_duujg"), "in_air", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_ipw6q"), "air_s_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_m3xc6"), "air_s_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_spjx6"), "air_w_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_syu4n"), "air_w_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_btxuy"), "move_backward", "jump", SubResource("AnimationNodeStateMachineTransition_j0pg8"), "move_forward", "jump", SubResource("AnimationNodeStateMachineTransition_xa7ef"), "move_forward", "s_kick", SubResource("AnimationNodeStateMachineTransition_6geba"), "move_forward", "s_punch", SubResource("AnimationNodeStateMachineTransition_1px32"), "move_forward", "w_kick", SubResource("AnimationNodeStateMachineTransition_wpgqb"), "move_forward", "w_punch", SubResource("AnimationNodeStateMachineTransition_de3vn"), "move_backward", "w_kick", SubResource("AnimationNodeStateMachineTransition_57ejk"), "move_backward", "w_punch", SubResource("AnimationNodeStateMachineTransition_xhoh1"), "move_backward", "s_punch", SubResource("AnimationNodeStateMachineTransition_uw4bi"), "move_backward", "s_kick", SubResource("AnimationNodeStateMachineTransition_o1085"), "Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "jump", SubResource("AnimationNodeStateMachineTransition_jbma8"), "in_air", "idle_anim", SubResource("AnimationNodeStateMachineTransition_kdq1c"), "idle_anim", "move_forward", SubResource("AnimationNodeStateMachineTransition_ofcr2"), "move_forward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_wa1kf"), "move_backward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_6a8ks"), "idle_anim", "move_backward", SubResource("AnimationNodeStateMachineTransition_cmgjt"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_13hnv"), "idle_anim", "crouching", SubResource("AnimationNodeStateMachineTransition_jn5ud"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_v0lk2"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_t32fp"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_n114p"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_4pkss"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav")]
-graph_offset = Vector2(-58.933, 56)
+graph_offset = Vector2(17.067, 135)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12cjw"]
 size = Vector2(77, 23)
@@ -1036,22 +1035,6 @@ radius = 39.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xix7"]
 size = Vector2(129.5, 414)
-
-[sub_resource type="Theme" id="Theme_67jtk"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m1fgn"]
-bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvalm"]
-bg_color = Color(0.643749, 0.61648, 5.77569e-07, 1)
-
-[sub_resource type="Theme" id="Theme_4jybw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8xjl"]
-bg_color = Color(0.363454, 0.113738, 0.0818088, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07xdu"]
-bg_color = Color(0.13863, 0.40582, 0.708132, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e0v4l"]
 radius = 43.0
@@ -1068,7 +1051,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_obeqb")
 hframes = 12
 vframes = 13
-frame = 3
+frame = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
@@ -1166,83 +1149,63 @@ script = ExtResource("7_qmnh1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="hpBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 701.0
-offset_top = 52.0
-offset_right = 1548.0
-offset_bottom = 101.0
-size_flags_horizontal = 0
-theme = SubResource("Theme_67jtk")
-theme_override_styles/background = SubResource("StyleBoxFlat_m1fgn")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vvalm")
-value = 100.0
-show_percentage = false
-script = ExtResource("8_t58ng")
+[node name="UI" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("10_nuwfx")
 
-[node name="mpBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 1024.0
-offset_top = 985.0
-offset_right = 1871.0
-offset_bottom = 1034.0
-size_flags_horizontal = 0
-theme = SubResource("Theme_4jybw")
-theme_override_styles/background = SubResource("StyleBoxFlat_o8xjl")
-theme_override_styles/fill = SubResource("StyleBoxFlat_07xdu")
+[node name="mpBar_" type="TextureProgressBar" parent="CanvasLayer/UI" node_paths=PackedStringArray("player")]
+offset_left = -91.0
+offset_top = -102.0
+offset_right = 860.0
+offset_bottom = 250.0
 max_value = 600.0
-value = 20.0
-show_percentage = false
-script = ExtResource("8_t58ng")
-regenerate = true
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 568.0
-offset_top = -137.0
-offset_right = 1518.0
-offset_bottom = 214.0
-texture_under = ExtResource("11_5sq4o")
-texture_over = ExtResource("12_5yg5x")
-texture_progress = ExtResource("13_n4r16")
-script = ExtResource("14_xngo3")
-
-[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 334.0
-offset_top = 480.0
-offset_right = 1285.0
-offset_bottom = 832.0
-scale = Vector2(1.66825, 1.66825)
+value = 300.0
 texture_under = ExtResource("15_32jdj")
-texture_over = ExtResource("16_qscq6")
 texture_progress = ExtResource("17_4dfj5")
 script = ExtResource("14_xngo3")
+player = NodePath("../../..")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-offset_left = 1567.0
-offset_top = 3.0
-offset_right = 1912.0
-offset_bottom = 357.0
+[node name="hpBar_" type="TextureProgressBar" parent="CanvasLayer/UI" node_paths=PackedStringArray("player")]
+offset_left = 25.0
+offset_top = -137.0
+offset_right = 975.0
+offset_bottom = 214.0
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(210, 180)
+value = 100.0
+texture_under = ExtResource("13_n4r16")
+texture_over = ExtResource("11_5sq4o")
+texture_progress = ExtResource("12_5yg5x")
+script = ExtResource("14_xngo3")
+player = NodePath("../../..")
+
+[node name="portrait" type="TextureRect" parent="CanvasLayer/UI/hpBar_"]
+offset_left = -53.0
+offset_top = 140.0
+offset_right = 292.0
+offset_bottom = 494.0
 texture = ExtResource("15_xf4wv")
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/UI/hpBar_/portrait"]
 z_index = 1
-offset_left = 1612.0
-offset_top = -10.0
-offset_right = 1862.0
-offset_bottom = 298.0
+offset_left = 45.0
+offset_top = -13.0
+offset_right = 295.0
+offset_bottom = 295.0
 texture = ExtResource("15_a8p1g")
 
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
-offset_left = 666.0
-offset_top = 155.0
-offset_right = 762.0
-offset_bottom = 240.0
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/UI/hpBar_/portrait"]
+offset_left = 212.0
+offset_top = 152.0
+offset_right = 308.0
+offset_bottom = 237.0
 scale = Vector2(1.30662, 1.30662)
 texture = ExtResource("17_j1ae2")
 
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer"]
-offset_left = 747.0
-offset_top = 155.0
-offset_right = 843.0
-offset_bottom = 240.0
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/UI/hpBar_/portrait"]
+offset_left = 293.0
+offset_top = 152.0
+offset_right = 389.0
+offset_bottom = 237.0
 scale = Vector2(1.30662, 1.30662)
 texture = ExtResource("17_j1ae2")
 
