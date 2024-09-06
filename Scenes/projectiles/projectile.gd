@@ -26,11 +26,18 @@ var _visible : bool = false:
 		else:
 			hide()
 
-func _ready() -> void:
+signal instanciated
 
+func _ready() -> void:
+	
+	property_synchronizer = $PropertySynchronizer
+	property_synchronizer2 = $PropertySynchronizer2
+	property_synchronizer3 = $PropertySynchronizer3
+	
 	GDSync.expose_node(self)
 	set_physics_process(false)
 	hide()
+	instanciated.emit()
 
 func _physics_process(delta: float) -> void:
 	alive_time -= delta
@@ -98,7 +105,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func online_synch(player_num : int):
-
+	
+	await  instanciated
+	
 	if player_num == 1:
 		property_synchronizer.broadcast = 0
 		property_synchronizer2.broadcast = 0

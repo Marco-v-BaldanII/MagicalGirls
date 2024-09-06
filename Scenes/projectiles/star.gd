@@ -16,7 +16,7 @@ func _ready() -> void:
 	scale = Vector2(0.2,0.2)
 	set_physics_process(false)
 	
-	
+	instanciated.emit()
 	
 	
 	pass # Replace with function body.

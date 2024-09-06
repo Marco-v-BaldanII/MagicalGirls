@@ -9,7 +9,19 @@
 ai_player = true
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 0
+frame = 7
+
+[node name="hpBar" parent="CanvasLayer" index="0"]
+offset_left = 1034.0
+offset_top = 38.0
+offset_right = 1881.0
+offset_bottom = 87.0
+
+[node name="mpBar" parent="CanvasLayer" index="1"]
+offset_left = 1034.0
+offset_top = 94.0
+offset_right = 1881.0
+offset_bottom = 143.0
 
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_rvqmf")]
 
