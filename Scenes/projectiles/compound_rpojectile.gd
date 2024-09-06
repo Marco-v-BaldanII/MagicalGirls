@@ -59,3 +59,7 @@ func destroy_projectile():
 	queue_free()
 	
 	
+func online_synch(player_num : int):
+	for projectile in projectiles:
+		
+		projectile.online_synch(player_num)

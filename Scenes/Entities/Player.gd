@@ -494,6 +494,10 @@ var blocked : bool = false
 var hit_position : String 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
+	
+	if GameManager.online and not GDSync.is_gdsync_owner(self):
+		return
+	
 	print("hit on " + str(area.global_position.y))
 	
 
@@ -726,6 +730,8 @@ func online_instantiate(special_scene : PackedScene):
 	if oponent : instance.assign_phys_layer((player_num-1) + 2, oponent.hurt_box_layer)
 	
 func instanciate_projectile(path : String, p_name : String, position_offset : Vector2 = Vector2.ZERO, my_self : Player = null, shoot : bool = true, spawn : int = 1, start_pos : bool = false):
+	if GDSync.is_gdsync_owner(self):
+		await get_tree().create_timer(0.0167*5).timeout
 	if p_name == "anastasia_ulti": my_self = null
 	var instance = projectile_instanciation(path, p_name, position_offset, my_self , shoot,spawn, start_pos)
 	GDSync.call_func(projectile_instanciation,[path, p_name, position_offset, my_self, shoot,spawn, start_pos])

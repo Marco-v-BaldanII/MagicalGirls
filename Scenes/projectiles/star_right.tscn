@@ -44,7 +44,7 @@ interpolation_speed = 1.0
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_1lr3o")
 broadcast = 1
-refresh_rate = 120
+refresh_rate = 200
 node_path = NodePath("..")
 property_name = "position"
 interpolated = false

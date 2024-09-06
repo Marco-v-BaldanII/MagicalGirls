@@ -147,11 +147,11 @@ func perform_move():
 		
 	elif input_buffer.back().contains("s_kick") and current_start_projectile == null :
 		if  enough_mp(grenade_cost) : #if you have enough mp
-			var grenade = instanciate_projectile("res://Scenes/projectiles/grenade.tscn","",Vector2.ZERO ,null , false, player_num)
-			current_start_projectile = grenade
-			#var grenade = instanciate_grenade()
-			GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
-			#GDSync.call_func(instanciate_grenade)
+			pass
+			#var grenade = instanciate_projectile("res://Scenes/projectiles/grenade.tscn","",Vector2.ZERO ,null , false, player_num)
+			#current_start_projectile = grenade
+			#GDSync.set_gdsync_owner(grenade,GDSync.get_client_id())
+
 
 
 		

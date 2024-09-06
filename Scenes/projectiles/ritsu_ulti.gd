@@ -10,11 +10,13 @@ const HADOKEN_RIGHT = preload("res://Scenes/projectiles/hadoken_right.tscn")
 @export var points : Array[Node2D]
 
 func _ready() -> void:
-		super()
+	GDSync.expose_node(self)
+	set_physics_process(false)
+	hide()
+	instanciated.emit()
 
 func _physics_process(delta: float) -> void:
 	pass
-
 func _process(delta: float) -> void:
 	alive_time -= delta
 	current_frame += 1
@@ -25,7 +27,7 @@ func _process(delta: float) -> void:
 		tween.tween_property(self,"scale",scale+Vector2(0.16,0.16),(1.0/60.0) * (frame_charge_time*0.6))
 		tween.set_ease(Tween.EASE_IN_OUT)
 		var tween2 : Tween = create_tween()
-		tween2.tween_property(self,"rotation",rotation + randf_range(1.3,1.8),(1.0/60.0) * (frame_charge_time*0.6))
+		tween2.tween_property(self,"rotation",rotation + 1.5 ,(1.0/60.0) * (frame_charge_time*0.6))
 		tween2.set_ease(Tween.EASE_IN_OUT)
 
 		current_growth_segment += 1
@@ -60,3 +62,8 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer((1.0/60.0) * (frame_charge_time*0.6)).timeout
 		queue_free()
 		pass
+
+func online_synch(player_num : int):
+	
+	pass
+		

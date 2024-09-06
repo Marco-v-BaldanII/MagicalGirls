@@ -104,10 +104,30 @@ func _process(delta: float) -> void:
 	pass
 
 func remap_controllers():
-	match Controls.connected_controllers:
-		0: 
-			p1.input_method = 2 #Player1 uses keyboard
-		1: 
-			p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
-		2: 
-			p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
+	if not GameManager.online:
+		
+		match Controls.connected_controllers:
+			0: 
+				p1.input_method = 2 #Player1 uses keyboard
+			1: 
+				p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
+			2: 
+				p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
+			_: 
+				p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
+	else:
+		
+		var my_player : Player = null
+		if GameManager.is_host:
+			my_player = p1
+		else:
+			my_player = p2
+			
+		match Controls.connected_controllers:
+			0: 
+				my_player.input_method = 2 #Player1 uses keyboard
+			1: 
+				my_player.input_method = 0; 
+			_: 
+				p1.input_method = 0; 
+		

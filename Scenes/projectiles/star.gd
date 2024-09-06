@@ -55,8 +55,12 @@ func destroy_projectile():
 
 	if current_frame < 20 and my_player and is_instance_valid(my_player): my_player.oponent.weak_knock = true
 	await  get_tree().create_timer(0.017).timeout
+	end_projectile()
+	GDSync.call_func(end_projectile)
+
+func end_projectile():
 	queue_free()
-	
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
 
 	
