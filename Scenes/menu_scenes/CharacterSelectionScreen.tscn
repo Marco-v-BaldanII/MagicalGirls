@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
-[ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
+[ext_resource type="PackedScene" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
 
 [sub_resource type="Texture2D" id="Texture2D_dtlya"]
 resource_local_to_scene = false

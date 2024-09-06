@@ -6,8 +6,17 @@ var player : Player
 var j_x : float
 var j_y : float
 
-func enter():
+func _ready() -> void:
+	await get_tree().create_timer(0.17).timeout
+	if not player:
+		
+			var e = get_parent()
+			while (e == null or not ( e is  Player)):
+				e = e.get_parent()
+			player = e
 	GDSync.expose_node(self)
+
+func enter():
 	
 	if not player:
 		
@@ -64,6 +73,7 @@ func physics_update(delta : float):
 		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0 and not player.lag:
 			player.jump_lag = 100
 			jump_anim()
+			GDSync.expose_func(jump_anim)
 			GDSync.call_func(jump_anim)
 			
 			
@@ -82,6 +92,7 @@ func physics_update(delta : float):
 		#LAND	
 		elif player.is_on_floor() and not player.grounded:
 			land_anim()
+			GDSync.expose_func(land_anim)
 			GDSync.call_func(land_anim)
 			
 			player.grounded = true
