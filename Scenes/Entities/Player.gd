@@ -174,7 +174,8 @@ func _ready():
 	
 	if player_num == 1:
 		$PositionSynchronizer.broadcast = 0
-	else: $PositionSynchronizer.broadcast = 1
+	else: 
+		$PositionSynchronizer.broadcast = 1
 		
 	
 	direction = "left"

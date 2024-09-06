@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func instanciate_star():
 	current_start_projectile = STAR_RIGHT.instantiate()
+	current_start_projectile.online_synch(player_num)
 	get_tree().root.add_child(current_start_projectile)
 	return current_start_projectile
 	

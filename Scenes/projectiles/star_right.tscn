@@ -26,6 +26,7 @@ shape = SubResource("CircleShape2D_xfwv1")
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
 script = ExtResource("3_1lr3o")
+broadcast = 1
 node_path = NodePath("..")
 property_name = "scale"
 interpolated = false
@@ -33,6 +34,7 @@ interpolation_speed = 1.0
 
 [node name="PropertySynchronizer3" type="Node" parent="."]
 script = ExtResource("3_1lr3o")
+broadcast = 1
 node_path = NodePath("..")
 property_name = "_visible"
 interpolation = null
@@ -41,6 +43,7 @@ interpolation_speed = 1.0
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("3_1lr3o")
+broadcast = 1
 refresh_rate = 120
 node_path = NodePath("..")
 property_name = "position"

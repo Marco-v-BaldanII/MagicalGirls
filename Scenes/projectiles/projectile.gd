@@ -9,6 +9,12 @@ class_name Projectile
 
 @export var dmg : float = 8
 
+@onready var property_synchronizer: Node = $PropertySynchronizer
+@onready var property_synchronizer2: Node = $PropertySynchronizer2
+@onready var property_synchronizer3: Node = $PropertySynchronizer3
+
+
+
 var my_player : Player
 var active : bool = false
 
@@ -92,14 +98,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func online_synch(player_num : int):
+
 	if player_num == 1:
-		$PositionSynchronizer.broadcast = 0
-		$PropertySynchronizer2.broadcast = 0
-		$PropertySynchronizer3.broadcast = 0
+		property_synchronizer.broadcast = 0
+		property_synchronizer2.broadcast = 0
+		property_synchronizer3.broadcast = 0
 		
 		
 	else: 
-		$PositionSynchronizer.broadcast = 1
-		$PropertySynchronizer2.broadcast = 1
-		$PropertySynchronizer3.broadcast = 1
+		property_synchronizer.broadcast = 1
+		property_synchronizer2.broadcast = 1
+		property_synchronizer3.broadcast = 1
 		
