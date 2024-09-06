@@ -39,10 +39,8 @@ func physics_update(delta : float):
 		else:
 
 			if player.animation_tree["parameters/conditions/idle_anim"] == false:
-				player.animation_tree["parameters/conditions/land"] = false
-				player.animation_tree["parameters/conditions/idle_anim"] = true
-				player.animation_tree["parameters/conditions/move_forward"] = false
-				player.animation_tree["parameters/conditions/move_backward"] = false
+				idle_anim()
+				GDSync.call_func(idle_anim)
 				
 			player.input_direction -= 0.2
 			player.input_direction = clamp(player.input_direction, 0,1)
@@ -60,10 +58,8 @@ func physics_update(delta : float):
 			player.input_direction -= 0.2
 			player.input_direction = clamp(player.input_direction, 0,1)
 			if player.animation_tree["parameters/conditions/idle_anim"] == false:
-				player.animation_tree["parameters/conditions/land"] = false
-				player.animation_tree["parameters/conditions/idle_anim"] = true
-				player.animation_tree["parameters/conditions/move_forward"] = false
-				player.animation_tree["parameters/conditions/move_backward"] = false
+				idle_anim()
+				GDSync.call_func(idle_anim)
 
 	if player.is_on_floor() and player.can_move: #Can move is turned on by the animation finished method
 		player.jump_lag -= delta
@@ -73,9 +69,8 @@ func physics_update(delta : float):
 			player.velocity.x = player.input_direction * player.SPEED
 			if player.animation_tree["parameters/conditions/move_forward"] == false: 
 
-				player.animation_tree["parameters/conditions/move_backward"] = false
-				player.animation_tree["parameters/conditions/move_forward"] = true
-				player.animation_tree["parameters/conditions/idle_anim"] = false
+				move_froward_anim()
+				GDSync.call_func(move_froward_anim)
 			#player.animation_tree["parameters/conditions/ilde_anim"] = false
 			
 		else:
@@ -83,9 +78,9 @@ func physics_update(delta : float):
 			player.velocity.x = player.input_direction * (player.SPEED*0.55)
 			if player.input_direction != 0 and  player.animation_tree["parameters/conditions/move_backward"] == false: 
 
-				player.animation_tree["parameters/conditions/move_backward"] = true
-				player.animation_tree["parameters/conditions/move_forward"] = false
-				player.animation_tree["parameters/conditions/idle_anim"] = false
+				move_backward_anim()
+				GDSync.call_func(move_backward_anim)
+				
 			if player.input_direction != 0 :player.moving_backwards = true
 			
 	elif player.is_on_floor():
@@ -97,10 +92,7 @@ func physics_update(delta : float):
 		player.animation_tree["parameters/conditions/land"] = false
 		Transitioned.emit(self, "air_move")
 
-	#Transition to jump
-	#if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0:
-		#Transitioned.emit(self, "air_move")
-		#
+
 	var joy_x := .0; var joy_y := .0;
 	if player.input_method != 2: #Not using keyboard
 		joy_x = Input.get_joy_axis(player.player_id, JOY_AXIS_LEFT_X)
@@ -130,3 +122,20 @@ func update(delta : float):
 func transition_to_crouch():
 	Transitioned.emit(self, "crouch")
 	crouching = true
+
+
+func move_froward_anim():
+	player.animation_tree["parameters/conditions/move_backward"] = false
+	player.animation_tree["parameters/conditions/move_forward"] = true
+	player.animation_tree["parameters/conditions/idle_anim"] = false
+	
+func idle_anim():
+	player.animation_tree["parameters/conditions/land"] = false
+	player.animation_tree["parameters/conditions/idle_anim"] = true
+	player.animation_tree["parameters/conditions/move_forward"] = false
+	player.animation_tree["parameters/conditions/move_backward"] = false
+	
+func move_backward_anim():
+	player.animation_tree["parameters/conditions/move_backward"] = true
+	player.animation_tree["parameters/conditions/move_forward"] = false
+	player.animation_tree["parameters/conditions/idle_anim"] = false

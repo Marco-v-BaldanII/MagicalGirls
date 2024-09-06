@@ -495,7 +495,7 @@ var hit_position : String
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
-	if GameManager.online and not GDSync.is_gdsync_owner(self):
+	if GameManager.online and not GDSync.is_gdsync_owner(self) and area.get_parent() is Projectile:
 		return
 	
 	print("hit on " + str(area.global_position.y))

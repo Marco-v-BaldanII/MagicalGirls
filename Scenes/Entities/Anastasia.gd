@@ -155,7 +155,7 @@ func perform_move():
 
 
 		
-	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching:
+	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching  and jump_lag < 0:
 
 			
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)

@@ -39,7 +39,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.2
 shader_parameter/green = 0.075
 shader_parameter/blue = 0.06
-shader_parameter/tex_anim_offset = 0.391026
+shader_parameter/tex_anim_offset = 0.0320513
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1068,7 +1068,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_obeqb")
 hframes = 12
 vframes = 13
-frame = 61
+frame = 6
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
