@@ -56,9 +56,8 @@ var character_banners = {
 	"Ritsu": preload("res://Assets/characters/concepts/RitsuConcept.png"),
 	"Anastasia": preload("res://Assets/characters/concepts/Magical_Girl_Game_Jam_Anastasia_concept-ezgif.com-crop.png"),
 	"Ellie Quinn": preload("res://Assets/characters/concepts/EllieQuinnConcept.png"),
-	"TextureRect4": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
-	"TextureRect5": preload("res://Assets/PlaceHolders/bomb.png"),
-	"TextureRect6": preload("res://Assets/PlaceHolders/bomb.png"),
+	"Random": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
+
 }
 
 func _ready():
@@ -308,6 +307,11 @@ func _on_start_button_button_down() -> void:
 			start_match()
 
 func start_match():
+	
+	if selected_fighter == "Random": selected_fighter = random_character()
+	if selected_fighter2 == "Random" : selected_fighter2 = random_character()
+	
+	
 	var p2_path : String = "res://Scenes/Entities/"
 	if mode == match_mode.CPU or mode == match_mode.ARCADE: 
 		p2_path = "res://Scenes/Entities/CPU/"
@@ -414,3 +418,12 @@ func _on_go_back_button_down() -> void:
 		
 	elif mode == match_mode.ARCADE or mode == match_mode.CPU or mode == match_mode.TRAINING and selected_fighter == "":
 		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+
+func random_character() ->String:
+	var id = randi_range(1,3)
+	
+	match id:
+		1: return "Ritsu"
+		2:return "Anastasia"
+		3: return "Ellie Quinn"
+	return "Ritsu"
