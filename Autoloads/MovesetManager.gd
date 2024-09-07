@@ -37,8 +37,8 @@ var Larissa : Dictionary = {}
 
 var anastasia_ulti : Array[String] = ["l_trigger", "r_trigger"]
 
-var triple_bombardment_right : Array[String] = ["move_left", "move_right", "move_left", "move_right" , "s_kick"]
-var triple_bombardment_left : Array[String] =  ["move_right", "move_left", "move_right" , "move_left", "s_kick"]
+var triple_bombardment_right : Array[String] = ["move_left", "move_right", "move_left","move_right", "s_kick"]
+var triple_bombardment_left : Array[String] =  ["move_right","move_left", "move_right", "move_left", "s_kick"]
 var power_shoot_left : Array[String] = ["crouch" , "move_left", "s_punch"]
 var power_shoot_right : Array[String] = ["crouch" , "move_right", "s_punch"]
 
@@ -52,8 +52,8 @@ var Anastasia : Dictionary = {
 	"triple_bombardment_right" : triple_bombardment_right,
 	"triple_bombardment_right_startup" : 10,
 	"triple_bombardment_right_lag" : 10,
-	"triple_bombardment_right_cost" : 300,
-	"triple_bombardment_left_cost" : 300,
+	"triple_bombardment_right_cost" : 0,
+	"triple_bombardment_left_cost" : 0,
 	"triple_bombardment_left" : triple_bombardment_left,
 	"triple_bombardment_left_startup" : 10,
 	"triple_bombardment_left_lag" : 10,

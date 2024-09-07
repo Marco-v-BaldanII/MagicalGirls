@@ -63,9 +63,11 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	#assign_phys_layer(layer, mask)
 	my_player = player
 	if dir == "right":
+		pass
 		speed *= -1
 	else:
-		og_speedX *= -1
+		pass
+		#og_speedX *= -1
 		
 	og_speedY = speedY; og_speedX = speed
 	if player:

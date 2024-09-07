@@ -37,6 +37,4 @@ show_percentage = false
 script = ExtResource("4_bgjxe")
 regenerate = true
 
-[connection signal="area_exited" from="Body" to="." method="_on_body_area_exited"]
-
 [editable path="AI_StateMachine"]

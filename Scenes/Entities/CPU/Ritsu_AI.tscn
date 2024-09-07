@@ -1,33 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn1lrqr5qecgc"]
+[gd_scene load_steps=7 format=3 uid="uid://dn1lrqr5qecgc"]
 
 [ext_resource type="PackedScene" uid="uid://c4xoe1y860pj5" path="res://Scenes/Entities/Ritsu.tscn" id="1_kmcq4"]
+[ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="2_335ic"]
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_rvqmf"]
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/attack_ritsu.gd" id="3_u2m73"]
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/camp_ritsu.gd" id="4_cboxs"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2k2dy"]
+shader = ExtResource("2_335ic")
+shader_parameter/fadeCont = true
+shader_parameter/fadeStep = 8.775
+shader_parameter/scale = 1.0
+shader_parameter/red = 0.05
+shader_parameter/green = 0.145
+shader_parameter/blue = 0.2
+shader_parameter/tex_anim_offset = 0.0320513
+
 [node name="NewRitsu2" instance=ExtResource("1_kmcq4")]
 ai_player = true
 
-[node name="hpBar" parent="CanvasLayer" index="0"]
-offset_left = 1034.0
-offset_top = 38.0
-offset_right = 1881.0
-offset_bottom = 87.0
+[node name="Sprite2D" parent="." index="0"]
+frame = 6
 
-[node name="mpBar" parent="CanvasLayer" index="1"]
-offset_left = 1034.0
-offset_top = 94.0
-offset_right = 1881.0
-offset_bottom = 143.0
+[node name="GPUParticles2D" parent="Sprite2D" index="0"]
+process_material = SubResource("ShaderMaterial_2k2dy")
 
-[node name="TextureProgressBar" parent="CanvasLayer" index="2"]
-texture_over = null
-texture_progress = null
-
-[node name="TextureProgressBar2" parent="CanvasLayer" index="3"]
-texture_under = null
-texture_over = null
-texture_progress = null
+[node name="portrait" parent="CanvasLayer/UI/hpBar_" index="0"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 345.0
+offset_bottom = 354.0
 
 [node name="PositionSynchronizer" parent="." index="10"]
 refresh_rate = 120

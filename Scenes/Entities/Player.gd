@@ -54,14 +54,15 @@ signal player_died(player_id : int)
 
 func change_hp(value : int):
 	hp = clamp(value,0,100)
-	hp_bar.value = hp
-	while hp_bar.value != hp:
-			hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
-			await get_tree().create_timer(0.1667).timeout
+	if hp_bar : 
+		hp_bar.value = hp
+		while hp_bar.value != hp:
+				hp_bar.value = lerp(hp_bar.value, float(hp), 0.75)
+				await get_tree().create_timer(0.1667).timeout
 			
 func change_mp(value : int):
 	mp = clamp(value,0,600)
-	mp_bar.value = mp
+	if mp_bar: mp_bar.value = mp
 
 var player_num : int = 0 #player_num is 1 or 2 and is independent of online or offline unlike player_id 
 @export var player_id : int = 0
@@ -88,6 +89,8 @@ var input_made : bool = false
 var input_direction : float = 0
 
 const BUFFER_FRAMES = 10
+
+const INPUT_EXTRA_BUFFER = 6
 
 var grounded : bool = false
 var crouching : bool = false
@@ -254,7 +257,10 @@ func _process(delta):
 	if input_made:
 		buffer_time -= delta
 	
-		if buffer_time <= 0:
+		if buffer_time <= 0 and (input_buffer.size() > 0 and (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))):
+			if input_buffer.size() > 0: perform_move()
+			clear_buffer()
+		elif buffer_time <= -(0.0167 * INPUT_EXTRA_BUFFER):
 			if input_buffer.size() > 0: perform_move()
 			clear_buffer()
 		

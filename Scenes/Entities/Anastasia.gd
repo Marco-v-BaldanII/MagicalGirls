@@ -90,9 +90,11 @@ func perform_move():
 								var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 								#GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-								
+								if specials.contains("triple"):
+									instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials,Vector2.ZERO,null,true,player_num,true)
+								else:
 									
-								instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+									instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
 								#else:
 									#instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials, Vector2.ZERO,null,true,1,false)
 								#

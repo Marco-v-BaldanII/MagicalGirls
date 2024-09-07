@@ -21,6 +21,9 @@ shader = ExtResource("7_ny6m3")
 [node name="ReMapControls" type="CanvasLayer"]
 script = ExtResource("1_02rww")
 
+[node name="goBack" parent="." instance=ExtResource("4_8bfuw")]
+script = ExtResource("5_tkyrv")
+
 [node name="TextEdit" type="TextEdit" parent="."]
 offset_left = 666.0
 offset_top = 728.0
@@ -162,9 +165,6 @@ custom_minimum_size = Vector2(300, 80)
 layout_mode = 2
 texture = SubResource("GradientTexture1D_aub08")
 
-[node name="goBack" parent="." instance=ExtResource("4_8bfuw")]
-script = ExtResource("5_tkyrv")
-
 [node name="TextureRect4" type="TextureRect" parent="."]
 z_index = -9
 texture_repeat = 2
@@ -176,7 +176,7 @@ offset_bottom = 1057.0
 scale = Vector2(1.03954, 1.04518)
 texture = ExtResource("8_kv7rk")
 
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="goBack/go_back" to="." method="_on_go_back_button_down"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 
 [editable path="goBack"]

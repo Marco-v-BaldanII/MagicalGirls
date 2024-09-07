@@ -16,6 +16,7 @@ var listening_input : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#current_controls = ControlSource.new()
+	current_controls.controls["w_kick"][0] = 0
 	
 	for child in grid_container.get_children():
 		if child is InputMapBox:
@@ -48,8 +49,8 @@ var timer := 0.15
 func _input(event: InputEvent) -> void:
 	if not listening_input:
 		
-		
-		if Controls.is_ui_action_pressed("go_back") and not text_edit.has_focus():
+		# and not text_edit.has_focus()
+		if Controls.is_ui_action_pressed("go_back"):
 			_on_go_back_button_down()
 		
 		if Controls.is_joy_button_just_pressed("accept"):
@@ -102,6 +103,24 @@ func reMap(action : String):
 func _on_button_button_down() -> void:
 	#SceneWrapper.change_scene(load("res://Scenes/Stages/test_map.tscn"))
 	
+	
+	var ids : Array[int]
+	var keys: String = ""
+	for key in current_controls.controls.keys():
+		if current_controls.controls[key][0] < 4:
+			ids.push_back(current_controls.controls[key][0])
+			keys += key
+	
+	
+	if not keys.contains("s_punch"):
+		current_controls.controls["s_punch"][0] = 0
+	if not keys.contains("w_punch"):
+		current_controls.controls["w_punch"][0] = 0
+	if not keys.contains("s_kick"):
+		current_controls.controls["s_kick"][0] = 0
+	if not keys.contains("s_kick"):
+		current_controls.controls["s_kick"][0] = 0
+	
 		# Define the path where you want to save the resource
 	current_controls.my_name = text_edit.text
 	
@@ -113,6 +132,7 @@ func _on_button_button_down() -> void:
 	# Check if the save was successful
 	if error == OK:
 		print("Resource saved successfully!")
+		_on_go_back_button_down()
 	else:
 		print("Failed to save resource with error code: ", error)
 	

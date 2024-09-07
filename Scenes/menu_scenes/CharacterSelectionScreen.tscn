@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=19 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
@@ -17,11 +17,19 @@
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
 
-[sub_resource type="Texture2D" id="Texture2D_dtlya"]
+[sub_resource type="Texture2D" id="Texture2D_1vj16"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("11_nw28w")
 path = "settings"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_dtlya"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("11_nw28w")
+path = "select"
 show_mode = 0
 force_type = 0
 
@@ -139,6 +147,13 @@ offset_right = 255.0
 offset_bottom = 815.0
 theme_override_font_sizes/font_size = 120
 text = "Start"
+
+[node name="TextureRect" type="TextureRect" parent="StartButton"]
+layout_mode = 0
+offset_left = 546.667
+offset_right = 744.667
+offset_bottom = 198.0
+texture = SubResource("Texture2D_1vj16")
 
 [node name="start_icon" type="TextureRect" parent="."]
 layout_mode = 0

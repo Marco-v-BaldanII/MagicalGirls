@@ -76,7 +76,7 @@ func deactivate():
 
 func _input(event):
 		
-		if is_joy_button_just_pressed("start"):
+		if is_joy_button_just_pressed("select"):
 			if _is_active: deactivate()
 			else: activate()
 		
@@ -193,7 +193,8 @@ var action_state : Dictionary = {
 	"move_up" : false,
 	"accept" : false,
 	"go_back" : false,
-	"start" : false
+	"start" : false,
+	"select" : false
 
 }
 

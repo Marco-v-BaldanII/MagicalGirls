@@ -75,6 +75,11 @@ func _ready():
 
 func reset_indexes():
 	selected_index = 0; selected_index2 = 0;
+	
+	
+func _input(event: InputEvent) -> void:
+	if Controls.is_ui_action_pressed("start"):
+		_on_start_button_button_down()
 
 func _process(delta: float) -> void:
 	if texture_rect.position != target_position:

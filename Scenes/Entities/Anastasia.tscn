@@ -1245,6 +1245,7 @@ height = 210.0
 position = Vector2(303, 871)
 collision_layer = 0
 script = ExtResource("1_0vdnb")
+mp = 600
 fly = false
 character_name = "Anastasia"
 
@@ -1393,4 +1394,5 @@ interpolation_speed = 60.0
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]
+[connection signal="area_exited" from="Body" to="." method="_on_body_area_exited"]
 [connection signal="area_entered" from="head_hurt_box" to="." method="_on_head_area_entered"]
