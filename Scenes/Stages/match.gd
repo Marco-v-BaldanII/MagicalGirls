@@ -26,9 +26,10 @@ func _ready():
 	else:
 		p1.player_id = 0; p2.player_id = 0
 	
-	if GameManager.is_host:
+	if GameManager.online and GameManager.is_host:
 		GDSync.set_gdsync_owner(p1, GDSync.get_client_id())
 	else:
+		await get_tree().create_timer(0.3).timeout
 		GDSync.set_gdsync_owner(p2, GDSync.get_client_id())
 		
 	p1.match_setting = self; p2.match_setting = self;
@@ -68,6 +69,7 @@ func _ready():
 			background.add_child(p)
 			await get_tree().create_timer(0.01667*20).timeout
 	
+	await get_tree().create_timer(0.3).timeout
 	$AnimationPlayer.play("start")
 	await get_tree().create_timer(0.01667*84).timeout
 	

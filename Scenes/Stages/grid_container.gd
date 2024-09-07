@@ -317,10 +317,10 @@ func start_match():
 		p2_path = "res://Scenes/Entities/CPU/"
 		selected_fighter2 += "_AI" #append suffix
 	
-	if FileAccess.file_exists("res://Scenes/Entities/"+selected_fighter+".tscn") and FileAccess.file_exists(p2_path + selected_fighter2+".tscn"):
-			
-			GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
-			GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
+	if true:
+			if mode != match_mode.ONLINE_2P:
+				GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
+				GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
 			if mode == match_mode.ARCADE:
 				SceneWrapper.change_scene(current_map)
 			elif mode != match_mode.ONLINE_2P:
@@ -331,7 +331,10 @@ func start_match():
 					
 					online_characters_consistent(selected_fighter,selected_fighter2)
 					GDSync.call_func(online_characters_consistent,[selected_fighter, selected_fighter2])
-
+					
+					await get_tree().create_timer(1).timeout
+					
+					
 					var id : int = randi_range(1,4)
 					var stage : String
 					match id:
