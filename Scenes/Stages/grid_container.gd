@@ -307,9 +307,9 @@ func _on_start_button_button_down() -> void:
 			start_match()
 
 func start_match():
-	
-	if selected_fighter == "Random": selected_fighter = random_character()
-	if selected_fighter2 == "Random" : selected_fighter2 = random_character()
+	if mode != match_mode.ONLINE_2P:
+		if selected_fighter == "Random": selected_fighter = random_character()
+		if selected_fighter2 == "Random" : selected_fighter2 = random_character()
 	
 	
 	var p2_path : String = "res://Scenes/Entities/"
@@ -326,7 +326,11 @@ func start_match():
 			elif mode != match_mode.ONLINE_2P:
 				SceneWrapper.change_scene(load("res://Scenes/menu_scenes/StageSelectionScreen.tscn"))
 			elif GameManager.is_host:
-				
+					if selected_fighter == "Random": selected_fighter = random_character()
+					if selected_fighter2 == "Random" : selected_fighter2 = random_character()
+					
+					online_characters_consistent(selected_fighter,selected_fighter2)
+					GDSync.call_func(online_characters_consistent,[selected_fighter, selected_fighter2])
 
 					var id : int = randi_range(1,4)
 					var stage : String
@@ -342,6 +346,10 @@ func start_match():
 					start_online_match()
 					GDSync.call_func(start_online_match)
 
+func online_characters_consistent(char1 : String, char2 : String):
+	GameManager.p1 = load("res://Scenes/Entities/"+char1+".tscn")
+	GameManager.p2 = load("res://Scenes/Entities/"+char2+".tscn")
+	pass
 
 func online_random_map(stage : String):
 
