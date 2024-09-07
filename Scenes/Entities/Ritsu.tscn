@@ -30,7 +30,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmhq5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0egh"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -38,7 +38,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.145
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0128205
+shader_parameter/tex_anim_offset = 0.0192308
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -243,7 +243,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.032, 0.0640002, 0.0960002, 0.128, 0.16, 0.192, 0.224, 0.256, 0.288, 0.32, 0.352, 0.384),
+"times": PackedFloat32Array(0, 0.032, 0.0640002, 0.0833333, 0.116667, 0.133333, 0.166667, 0.183333, 0.256, 0.288, 0.32, 0.352, 0.384),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96]
@@ -255,7 +255,7 @@ tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.2),
+"times": PackedFloat32Array(0, 0.166667, 0.233333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -1061,7 +1061,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_hmhq5")
+process_material = SubResource("ShaderMaterial_b0egh")
 texture = ExtResource("2_obeqb")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
