@@ -39,6 +39,7 @@ SceneWrapper="*res://Autoloads/SceneWrapper.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Audiomanager="*res://Scenes/audiomanager.tscn"
+Pause="*res://Scenes/menu_scenes/pause.tscn"
 
 [dialogue_manager]
 

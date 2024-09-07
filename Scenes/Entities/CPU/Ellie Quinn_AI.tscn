@@ -15,7 +15,6 @@ bg_color = Color(0.13863, 0.40582, 0.708132, 1)
 
 [node name="Ellie_AI" instance=ExtResource("1_2i38b")]
 ai_player = true
-character_name = "Ellie Quinn"
 
 [node name="AI_StateMachine" parent="." index="0" instance=ExtResource("2_cwos8")]
 

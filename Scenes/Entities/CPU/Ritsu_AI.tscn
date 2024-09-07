@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/attack_ritsu.gd" id="3_u2m73"]
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/camp_ritsu.gd" id="4_cboxs"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2k2dy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqgq4"]
 shader = ExtResource("2_335ic")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -23,7 +23,7 @@ ai_player = true
 frame = 6
 
 [node name="GPUParticles2D" parent="Sprite2D" index="0"]
-process_material = SubResource("ShaderMaterial_2k2dy")
+process_material = SubResource("ShaderMaterial_eqgq4")
 
 [node name="portrait" parent="CanvasLayer/UI/hpBar_" index="0"]
 offset_left = 0.0

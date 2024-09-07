@@ -12,11 +12,11 @@ var Ritsu : Dictionary = {
 	"triple_shot_right" : hadoken_input_r,
 	"triple_shot_right_lag" : 40,
 	"triple_shot_right_startup" : 5,
-	"triple_shot_right_cost" : 0,
+	"triple_shot_right_cost" : 300,
 	"triple_shot_left" : hadoken_input_l,
 	"triple_shot_left_lag" : 40,
 	"triple_shot_left_startup" : 5,
-	"triple_shot_left_cost" : 0,
+	"triple_shot_left_cost" : 300,
 	
 	"fire_shot_right" : fire_shot_r,
 	"fire_shot_left" : fire_shot_l,
@@ -96,6 +96,7 @@ var Anastasia : Dictionary = {
 
 var shield : Array[String] = ["crouch","move_left" ,"s_kick"]
 var shield_left : Array[String] = ["crouch","move_right" ,"s_kick"]
+var ellie_ulti : Array[String] = ["l_trigger", "r_trigger"]
 
 var Ellie : Dictionary = {
 	
@@ -108,6 +109,11 @@ var Ellie : Dictionary = {
 	"book_shield_left_lag" : 40,
 	"book_shield_left_startup" : 20,
 	"book_shield_left_cost" : 300,
+	
+	"ellie_ulti" : ellie_ulti,
+	"ellie_ulti_lag" : 0,
+	"ellie_ulti_startup" : 20,
+	"ellie_ulti_cost": 0
 }
 
 var movesets : Dictionary = {

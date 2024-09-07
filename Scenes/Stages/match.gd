@@ -138,3 +138,11 @@ func remap_controllers():
 			_: 
 				p1.input_method = 0; 
 		
+func _input(event: InputEvent) -> void:
+	
+	if Controls.is_joy_button_just_pressed("start"):
+	
+		if GameManager.character_selection_mode != 1:
+			Pause.activate()
+
+	

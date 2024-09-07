@@ -33,41 +33,6 @@ func instanciate_projectile_online(path : String, p_name : String, position_offs
 		if oponent : instance.shoot((player_num-1) + 2, oponent.hurt_box_layer, direction, self,startup)
 		else: instance.shoot((player_num-1) + 2, 0 , direction, self, startup)
 
-func _input(event):
-
-	
-	if not can_move or ai_player: return
-	
-	if not GameManager.online or GDSync.is_gdsync_owner(self):
-		if input_method != 2:
-			joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-			joy_y = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y)
-		
-		if is_joy_button_just_pressed("move_left") or (joy_x == -1 and abs(joy_y) < 0.4):
-			add_input_to_buffer("move_left")
-			perform_move()
-		if is_joy_button_just_pressed("move_right") or (joy_x == 1 and abs(joy_y) <0.4):
-			add_input_to_buffer("move_right")
-			perform_move()
-		if is_joy_button_just_pressed("crouch") or (joy_y ==  1 and abs(joy_x) < 0.4):
-			add_input_to_buffer("crouch")
-			perform_move()
-		if is_joy_button_just_pressed("jump") or (joy_y < -0.2 and abs(joy_x) < 0.4 ):
-			#print("jump with a y of " + str(joy_y) +"and a x of " + str(joy_x))
-			add_input_to_buffer("jump")
-			perform_move()
-		if is_joy_button_just_pressed("s_punch"):
-			add_input_to_buffer("s_punch")
-			perform_move()
-		if is_joy_button_just_pressed("w_punch"):
-			add_input_to_buffer("w_punch")
-			perform_move()
-		if is_joy_button_just_pressed("s_kick"):
-			add_input_to_buffer("s_kick")
-			perform_move()
-		if is_joy_button_just_pressed("w_kick"):
-			add_input_to_buffer("w_kick")
-			perform_move()
 		
 func instanciate_star():
 	current_start_projectile = STAR_RIGHT.instantiate()
@@ -106,8 +71,21 @@ func perform_move():
 			var dir = find_special_direction(specials)
 			if dir != direction or dir == "none":
 				print(specials + dir)
+				if specials == "ellie_ulti":
+					
+					for key in  move_dmg.keys():
+						
+						move_dmg[key] *= 2 #double damage on all moves
+					sprite_2d.modulate = Color.DARK_GOLDENROD
+					await get_tree().create_timer(6.24).timeout
+					sprite_2d.modulate = Color.WHITE
+					for key in  move_dmg.keys():
+						
+						move_dmg[key] /= 2 #return to normal damage
+					
+					pass
 				
-				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
+				elif FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 					
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")

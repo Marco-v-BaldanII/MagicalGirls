@@ -360,7 +360,7 @@ var joy_x : float
 var joy_y : float
 
 func _input(event):
-	if ai_player: return #CPUS don't receive input
+	if ai_player or  Pause.active: return #CPUS don't receive input
 	
 	if not GameManager.online or GDSync.is_gdsync_owner(self):
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
