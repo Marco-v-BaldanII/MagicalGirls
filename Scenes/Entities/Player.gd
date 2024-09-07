@@ -92,6 +92,8 @@ const BUFFER_FRAMES = 10
 
 const INPUT_EXTRA_BUFFER = 6
 
+const ATK_BUFFER = 50
+
 var grounded : bool = false
 var crouching : bool = false
 var buffer_time =  0.01666 * BUFFER_FRAMES 
@@ -153,7 +155,7 @@ var authority : bool
 }
 
 @export var move_vulnerable_on_shield : Dictionary = {
-	"w_punch" : 15,
+	"w_punch" : 14,
 	"s_punch" : 30,
 	"crouch_w_punch" : 15,
 	"crouch_s_punch" : 30,
@@ -643,7 +645,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("weak"):
 		if not blocked : GameManager.camera_shake()
 		GameManager.hit_stop_short()
-		state_machine.on_child_transition(state_machine.current_state, "knocked")
+		if (area.has_method("get_dmg") or oponent.last_used_move.contains("w_kick")) or atk_buffer < 2:
+			state_machine.on_child_transition(state_machine.current_state, "knocked")
+			atk_buffer = 3
+		else:
+			remove_atk_buffer()
+			
 	elif area.is_in_group("strong") or area.is_in_group("special"):
 		if not blocked : GameManager.camera_shake()
 		GameManager.hit_stop_long()
@@ -703,6 +710,17 @@ func set_hitboxes(player_id : int):
 		hurt_box.set_collision_layer_value(5,true)
 		head_hurt_box.set_collision_mask_value(2,true)
 		hurt_box_layer = 5
+
+var atk_buffer : int = 3
+
+func remove_atk_buffer():
+	atk_buffer -=1
+	
+	var buff = atk_buffer
+	await get_tree().create_timer(0.0167 * ATK_BUFFER).timeout
+	if buff == atk_buffer :#if there has no been new inputs
+		atk_buffer = 3
+	
 
 
 
@@ -796,8 +814,12 @@ func store_last_used_move(move:String):
 
 signal lag_finished
 
+var call : int = 0
 func add_lag(frames : int):
 	if frames == 0: return
+	call += 1
+	
+	var buff = call
 	
 	if is_on_floor():
 		velocity.x = 0
@@ -812,11 +834,12 @@ func add_lag(frames : int):
 	set_process_input(false)
 	
 	await get_tree().create_timer(0.01667 * frames).timeout
-	lag = false
-	
-	lag_finished.emit()
-	
-	set_process_input(true)
+	if call == buff: # only reveert lag if npo newer lag has been applied
+		lag = false
+		
+		lag_finished.emit()
+		
+		set_process_input(true)
 
 func shoot_projectile_wrap(projectile : Projectile):
 	shoot_projectile(projectile)
