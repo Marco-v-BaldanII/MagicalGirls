@@ -117,7 +117,6 @@ about  it. Who  wouldn’t  want  to  read  that?!
 "
 
 [node name="Normal attacks" type="Label" parent="."]
-visible = false
 z_index = 4
 layout_mode = 0
 offset_left = 199.0
@@ -150,6 +149,7 @@ s kick - Laser 90 degrees
 "
 
 [node name="Special attacks + combos" type="Label" parent="."]
+visible = false
 z_index = 4
 layout_mode = 0
 offset_left = 195.0
