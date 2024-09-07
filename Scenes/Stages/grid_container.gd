@@ -178,29 +178,33 @@ func move_selection(offset: int, player : int = 0, second_onlineP : bool = false
 	var children_count = grid_container.get_child_count()
 	var new_index : int
 	var actual_player_index : int
-	if selected_index == 3 and offset== 1:
+	if player == 0 and not second_onlineP: actual_player_index = selected_index
+	else: actual_player_index = selected_index2
+	
+	
+	if actual_player_index == 3 and offset== 1:
 		offset = -1
-	elif selected_index == 2 and offset == 1:
+	elif actual_player_index == 2 and offset == 1:
 		offset = 2
-	elif selected_index == 0 and offset == -1:
+	elif actual_player_index == 0 and offset == -1:
 		offset = 2
-	elif selected_index == 2 and offset == -2:
+	elif actual_player_index == 2 and offset == -2:
 		offset = -1
-	elif selected_index == 2 and offset == 2:
+	elif actual_player_index == 2 and offset == 2:
 		offset = 1
 		
-	elif selected_index == 0 and offset == -2:
+	elif actual_player_index == 0 and offset == -2:
 		offset = 1
-	elif selected_index == 0 and offset == 2:
+	elif actual_player_index == 0 and offset == 2:
 		offset = 3
 		
-	elif selected_index == 3 and offset == -1:
+	elif actual_player_index == 3 and offset == -1:
 		offset = -3
 		
-	elif selected_index == 1 and offset == -2:
+	elif actual_player_index == 1 and offset == -2:
 		offset = 2
 		
-	elif selected_index == 2 and offset == -1:
+	elif actual_player_index == 2 and offset == -1:
 		offset = 1
 	
 	if player == 0 and not second_onlineP:
@@ -259,7 +263,7 @@ func _update_selection(player : int = 0, second_onlineP : bool = false):
 	if children.size() > 0 and actual_player_index < children.size():
 		children[actual_player_index].modulate = Color(1, 1, 1, 1)  
 	
-	if player == 0:
+	if player == 0 and not second_onlineP:
 		
 		var selected_child = children[actual_player_index]
 		if character_banners.has(selected_child.name):
