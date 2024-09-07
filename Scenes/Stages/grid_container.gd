@@ -4,8 +4,8 @@ class_name CharacterSelect
 @export var selected_index : int = 0
 @export var selected_index2 : int = 0
 
-@export var grid_width : int = 3 
-@onready var grid_container : GridContainer = $GridContainer
+@export var grid_width : int = 2
+@onready var grid_container : Node2D = $characters
 @onready var banner_texture_rect : TextureRect = $TextureRect
 
 #Banner 1
@@ -132,20 +132,20 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 	if ((character_id == 0 and selected_fighter == "") or (character_id == 0 and selected_fighter2 == "" and second_onlineP)) or (character_id == 1 and selected_fighter2 == ""):
 		if is_joy_button_just_pressed("move_up", input_methods[character_id]) or( Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
 			$SelectCharacter.play()
-			move_selection(-grid_width,character_id, second_onlineP) 
-			GDSync.call_func(move_selection,[-grid_width,character_id,second_onlineP])
+			move_selection(-1,character_id, second_onlineP) 
+			GDSync.call_func(move_selection,[-1,character_id,second_onlineP])
 		elif is_joy_button_just_pressed("move_down", input_methods[character_id]) or (Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) > 0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
 			$SelectCharacter.play()
-			move_selection(grid_width,character_id,second_onlineP)  
-			GDSync.call_func(move_selection,[grid_width,character_id,second_onlineP])
+			move_selection(+1,character_id,second_onlineP)  
+			GDSync.call_func(move_selection,[+1,character_id,second_onlineP])
 		elif is_joy_button_just_pressed("move_left", input_methods[character_id]) or (Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) < -0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
 			$SelectCharacter.play()
-			move_selection(-1,character_id,second_onlineP) 
-			GDSync.call_func(move_selection,[-1,character_id,second_onlineP],)
+			move_selection(-2,character_id,second_onlineP) 
+			GDSync.call_func(move_selection,[-2,character_id,second_onlineP],)
 		elif is_joy_button_just_pressed("move_right", input_methods[character_id]) or (Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) > 0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
 			$SelectCharacter.play()
-			move_selection(1,character_id,second_onlineP) 
-			GDSync.call_func(move_selection,[1,character_id,second_onlineP])
+			move_selection(2,character_id,second_onlineP) 
+			GDSync.call_func(move_selection,[2,character_id,second_onlineP])
 		elif is_joy_button_just_pressed("accept", input_methods[character_id]):
 			$MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
@@ -178,6 +178,30 @@ func move_selection(offset: int, player : int = 0, second_onlineP : bool = false
 	var children_count = grid_container.get_child_count()
 	var new_index : int
 	var actual_player_index : int
+	if selected_index == 3 and offset== 1:
+		offset = -1
+	elif selected_index == 2 and offset == 1:
+		offset = 2
+	elif selected_index == 0 and offset == -1:
+		offset = 2
+	elif selected_index == 2 and offset == -2:
+		offset = -1
+	elif selected_index == 2 and offset == 2:
+		offset = 1
+		
+	elif selected_index == 0 and offset == -2:
+		offset = 1
+	elif selected_index == 0 and offset == 2:
+		offset = 3
+		
+	elif selected_index == 3 and offset == -1:
+		offset = -3
+		
+	elif selected_index == 1 and offset == -2:
+		offset = 2
+		
+	elif selected_index == 2 and offset == -1:
+		offset = 1
 	
 	if player == 0 and not second_onlineP:
 		new_index = selected_index + offset
@@ -185,21 +209,25 @@ func move_selection(offset: int, player : int = 0, second_onlineP : bool = false
 	else:
 		new_index = selected_index2 + offset
 		actual_player_index = selected_index2
-
-	if offset == -1 and actual_player_index % grid_width == 0:
-		new_index = actual_player_index + (grid_width - 1)
 	
-	elif offset == 1 and (actual_player_index + 1) % grid_width == 0:
-		new_index = actual_player_index - (grid_width - 1)
 	
-	elif offset == -grid_width and new_index < 0:
-		new_index = (children_count - grid_width) + (actual_player_index % grid_width)
-		if new_index >= children_count:
-			new_index -= grid_width
 	
-	elif offset == grid_width and new_index >= children_count:
-		new_index = actual_player_index % grid_width
-
+	#if offset == -1 and actual_player_index % grid_width == 0:
+		#new_index = actual_player_index + (grid_width - 1)
+	#
+	#elif offset == 1 and (actual_player_index + 1) % grid_width == 0:
+		#new_index = actual_player_index - (grid_width - 1)
+	#
+	#elif offset == -grid_width and new_index < 0:
+		#new_index = (children_count - grid_width) + (actual_player_index % grid_width)
+		#if new_index >= children_count:
+			#new_index -= grid_width
+	#
+	#elif offset == grid_width and new_index >= children_count:
+		#new_index = actual_player_index % grid_width
+	
+	
+	new_index = new_index%children_count
 	if new_index < 0:
 		new_index = 0
 	elif new_index >= children_count:

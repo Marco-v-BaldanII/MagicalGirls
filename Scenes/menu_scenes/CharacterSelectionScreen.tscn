@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=19 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 [ext_resource type="Texture2D" uid="uid://dabpluqqm3tfa" path="res://Assets/UI/anastasia portrait(1).png" id="4_e7lsl"]
 [ext_resource type="Texture2D" uid="uid://oi674s6pvdsw" path="res://Assets/portraits/Ellie Quinn.png" id="5_dti1v"]
+[ext_resource type="Texture2D" uid="uid://dvflxfhpwmq36" path="res://Scenes/menu_scenes/options/question.png" id="6_82r14"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/controler_menu.gd" id="7_5016i"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="7_hiedg"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="8_l0m68"]
@@ -47,6 +48,45 @@ size_flags_vertical = 4
 script = ExtResource("1_iyl6b")
 current_map = ExtResource("2_514jg")
 metadata/_edit_use_anchors_ = true
+
+[node name="characters" type="Node2D" parent="."]
+
+[node name="Ritsu" type="TextureRect" parent="characters"]
+offset_left = -311.667
+offset_top = -875.0
+offset_right = 200.333
+offset_bottom = -243.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("3_q1jj1")
+
+[node name="Anastasia" type="TextureRect" parent="characters"]
+offset_left = -632.333
+offset_top = -449.333
+offset_right = -120.333
+offset_bottom = 182.667
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("4_e7lsl")
+
+[node name="Random" type="TextureRect" parent="characters"]
+offset_left = -311.667
+offset_top = -31.6667
+offset_right = 200.333
+offset_bottom = 600.333
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("6_82r14")
+expand_mode = 1
+
+[node name="Ellie Quinn" type="TextureRect" parent="characters"]
+offset_left = 3.66699
+offset_top = -449.333
+offset_right = 515.667
+offset_bottom = 182.667
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("5_dti1v")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -121,24 +161,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
 metadata/_edit_use_anchors_ = true
-
-[node name="Ritsu" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-texture = ExtResource("3_q1jj1")
-
-[node name="Anastasia" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-texture = ExtResource("4_e7lsl")
-
-[node name="Ellie Quinn" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-texture = ExtResource("5_dti1v")
 
 [node name="SelectCharacter" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gyvyi")
