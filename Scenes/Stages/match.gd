@@ -27,9 +27,10 @@ func _ready():
 		p1.player_id = 0; p2.player_id = 0
 	
 	if GameManager.online and GameManager.is_host:
+		await get_tree().create_timer(0.4).timeout
 		GDSync.set_gdsync_owner(p1, GDSync.get_client_id())
 	else:
-		await get_tree().create_timer(0.3).timeout
+		
 		GDSync.set_gdsync_owner(p2, GDSync.get_client_id())
 		
 	p1.match_setting = self; p2.match_setting = self;
