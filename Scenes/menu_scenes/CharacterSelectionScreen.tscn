@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=25 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
@@ -16,6 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/fadin_backgrounds.gd" id="17_8mgq6"]
+[ext_resource type="PackedScene" uid="uid://bh58ivkbsm6kl" path="res://Scenes/Stages/parallax/Anastasia.tscn" id="17_xpbvb"]
+[ext_resource type="PackedScene" uid="uid://y386gryjkvww" path="res://Scenes/Stages/parallax/Ritsu.tscn" id="19_n3wxp"]
+[ext_resource type="PackedScene" uid="uid://b2nlief7kyebf" path="res://Scenes/Stages/parallax/Larissa.tscn" id="20_4ervh"]
+[ext_resource type="PackedScene" uid="uid://bpmopv12racrh" path="res://Scenes/Stages/parallax/Ellie Quinn.tscn" id="21_xnevo"]
 
 [sub_resource type="Texture2D" id="Texture2D_1vj16"]
 resource_local_to_scene = false
@@ -33,6 +38,9 @@ path = "select"
 show_mode = 0
 force_type = 0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5yve"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="CharacterSelectionScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 8
@@ -49,47 +57,49 @@ script = ExtResource("1_iyl6b")
 current_map = ExtResource("2_514jg")
 metadata/_edit_use_anchors_ = true
 
-[node name="characters" type="Node2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Ritsu" type="TextureRect" parent="characters"]
-offset_left = -311.667
-offset_top = -875.0
-offset_right = 200.333
-offset_bottom = -243.0
+[node name="characters" type="Node2D" parent="Camera2D"]
+position = Vector2(0, -60)
+
+[node name="Ritsu" type="TextureRect" parent="Camera2D/characters"]
+offset_left = -257.667
+offset_top = -746.667
+offset_right = 254.333
+offset_bottom = -114.667
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("3_q1jj1")
 
-[node name="Anastasia" type="TextureRect" parent="characters"]
-offset_left = -632.333
-offset_top = -449.333
-offset_right = -120.333
-offset_bottom = 182.667
+[node name="Anastasia" type="TextureRect" parent="Camera2D/characters"]
+offset_left = -578.333
+offset_top = -321.0
+offset_right = -66.3334
+offset_bottom = 311.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("4_e7lsl")
 
-[node name="Random" type="TextureRect" parent="characters"]
-offset_left = -311.667
-offset_top = -31.6667
-offset_right = 200.333
-offset_bottom = 600.333
+[node name="Random" type="TextureRect" parent="Camera2D/characters"]
+offset_left = -257.667
+offset_top = 96.6666
+offset_right = 254.333
+offset_bottom = 728.667
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("6_82r14")
 expand_mode = 1
 
-[node name="Ellie Quinn" type="TextureRect" parent="characters"]
-offset_left = 3.66699
-offset_top = -449.333
-offset_right = 515.667
-offset_bottom = 182.667
+[node name="Ellie Quinn" type="TextureRect" parent="Camera2D/characters"]
+offset_left = 57.6666
+offset_top = -321.0
+offset_right = 569.667
+offset_bottom = 311.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("5_dti1v")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -102,22 +112,19 @@ grow_vertical = 2
 scale = Vector2(0.376963, 0.376963)
 texture = ExtResource("3_hp4ll")
 
-[node name="Position" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="Position" type="TextureRect" parent="Camera2D"]
 offset_left = -1883.33
 offset_top = -883.333
 offset_right = -1843.33
 offset_bottom = -843.333
 
-[node name="PositionDown" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="PositionDown" type="TextureRect" parent="Camera2D"]
 offset_left = -1883.33
 offset_top = 563.333
 offset_right = -1843.33
 offset_bottom = 603.333
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="TextureRect2" type="TextureRect" parent="Camera2D"]
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -130,22 +137,19 @@ grow_vertical = 2
 scale = Vector2(0.376963, 0.376963)
 texture = ExtResource("3_hp4ll")
 
-[node name="Position2" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="Position2" type="TextureRect" parent="Camera2D"]
 offset_left = 390.0
 offset_top = -883.333
 offset_right = 430.0
 offset_bottom = -843.333
 
-[node name="PositionDown2" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="PositionDown2" type="TextureRect" parent="Camera2D"]
 offset_left = 390.0
 offset_top = 563.333
 offset_right = 430.0
 offset_bottom = 603.333
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
+[node name="GridContainer" type="GridContainer" parent="Camera2D"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -162,16 +166,15 @@ size_flags_vertical = 4
 columns = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="SelectCharacter" type="AudioStreamPlayer" parent="."]
+[node name="SelectCharacter" type="AudioStreamPlayer" parent="Camera2D"]
 stream = ExtResource("3_gyvyi")
 
-[node name="MenuSelect" type="AudioStreamPlayer" parent="."]
+[node name="MenuSelect" type="AudioStreamPlayer" parent="Camera2D"]
 stream = ExtResource("4_8ix2s")
 volume_db = -11.243
 
-[node name="StartButton" type="Button" parent="."]
+[node name="StartButton" type="Button" parent="Camera2D"]
 custom_minimum_size = Vector2(500, 200)
-layout_mode = 0
 offset_left = -245.0
 offset_top = 615.0
 offset_right = 255.0
@@ -179,24 +182,23 @@ offset_bottom = 815.0
 theme_override_font_sizes/font_size = 120
 text = "Start"
 
-[node name="TextureRect" type="TextureRect" parent="StartButton"]
+[node name="TextureRect" type="TextureRect" parent="Camera2D/StartButton"]
 layout_mode = 0
 offset_left = 546.667
 offset_right = 744.667
 offset_bottom = 198.0
 texture = SubResource("Texture2D_1vj16")
 
-[node name="start_icon" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="start_icon" type="TextureRect" parent="Camera2D"]
 offset_left = -815.0
 offset_top = -865.0
 offset_right = -658.0
 offset_bottom = -708.0
 texture = SubResource("Texture2D_dtlya")
 
-[node name="ControlSelection" parent="." instance=ExtResource("8_l0m68")]
+[node name="ControlSelection" parent="Camera2D" instance=ExtResource("8_l0m68")]
 
-[node name="Button" type="Button" parent="ControlSelection"]
+[node name="Button" type="Button" parent="Camera2D/ControlSelection"]
 offset_left = -1547.0
 offset_top = -863.0
 offset_right = -848.0
@@ -204,13 +206,13 @@ offset_bottom = -706.0
 theme_override_font_sizes/font_size = 60
 text = "Change Control Scheme"
 
-[node name="tag_panel" type="Panel" parent="ControlSelection"]
+[node name="tag_panel" type="Panel" parent="Camera2D/ControlSelection"]
 offset_left = -1500.0
 offset_top = -690.0
 offset_right = -870.0
 offset_bottom = -598.0
 
-[node name="tag_label" type="Label" parent="ControlSelection/tag_panel"]
+[node name="tag_label" type="Label" parent="Camera2D/ControlSelection/tag_panel"]
 layout_mode = 0
 offset_left = 13.0
 offset_right = 615.0
@@ -218,14 +220,14 @@ offset_bottom = 86.0
 theme_override_font_sizes/font_size = 60
 text = "Player 1"
 
-[node name="ControlSelection2" type="Node2D" parent="."]
+[node name="ControlSelection2" type="Node2D" parent="Camera2D"]
 position = Vector2(2230, 0)
 
-[node name="cursor" type="Sprite2D" parent="ControlSelection2"]
+[node name="cursor" type="Sprite2D" parent="Camera2D/ControlSelection2"]
 position = Vector2(-926.667, -522.667)
 texture = ExtResource("9_n26ix")
 
-[node name="P2_control_selection" type="ScrollContainer" parent="ControlSelection2"]
+[node name="P2_control_selection" type="ScrollContainer" parent="Camera2D/ControlSelection2"]
 offset_left = -1502.0
 offset_top = -579.0
 offset_right = -845.0
@@ -237,16 +239,16 @@ _is_active = false
 num_of_options_fit = 5
 scroll_offset = 120
 
-[node name="ControlerMenu1" type="GridContainer" parent="ControlSelection2/P2_control_selection"]
+[node name="ControlerMenu1" type="GridContainer" parent="Camera2D/ControlSelection2/P2_control_selection"]
 custom_minimum_size = Vector2(500, 1000)
 layout_mode = 2
 theme_override_constants/v_separation = 20
 script = ExtResource("7_5016i")
 
-[node name="Controler_Option" parent="ControlSelection2/P2_control_selection/ControlerMenu1" instance=ExtResource("8_ll86b")]
+[node name="Controler_Option" parent="Camera2D/ControlSelection2/P2_control_selection/ControlerMenu1" instance=ExtResource("8_ll86b")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ControlSelection2"]
+[node name="Button" type="Button" parent="Camera2D/ControlSelection2"]
 offset_left = -1547.0
 offset_top = -863.0
 offset_right = -848.0
@@ -254,20 +256,20 @@ offset_bottom = -706.0
 theme_override_font_sizes/font_size = 60
 text = "Change Control Scheme"
 
-[node name="start_icon" type="TextureRect" parent="ControlSelection2"]
+[node name="start_icon" type="TextureRect" parent="Camera2D/ControlSelection2"]
 offset_left = -815.0
 offset_top = -865.0
 offset_right = -658.0
 offset_bottom = -708.0
 texture = SubResource("Texture2D_dtlya")
 
-[node name="tag_panel" type="Panel" parent="ControlSelection2"]
+[node name="tag_panel" type="Panel" parent="Camera2D/ControlSelection2"]
 offset_left = -1500.0
 offset_top = -690.0
 offset_right = -870.0
 offset_bottom = -598.0
 
-[node name="tag_label" type="Label" parent="ControlSelection2/tag_panel"]
+[node name="tag_label" type="Label" parent="Camera2D/ControlSelection2/tag_panel"]
 layout_mode = 0
 offset_left = 13.0
 offset_right = 615.0
@@ -276,12 +278,50 @@ theme_override_font_sizes/font_size = 60
 text = "Player 2
 "
 
-[node name="goBack" parent="." instance=ExtResource("15_x5w14")]
+[node name="goBack" parent="Camera2D" instance=ExtResource("15_x5w14")]
 position = Vector2(-1948.33, -1135)
 
-[connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
-[connection signal="button_down" from="ControlSelection2/Button" to="ControlSelection2/P2_control_selection" method="_on_button_button_down"]
-[connection signal="button_down" from="goBack/go_back" to="." method="_on_go_back_button_down"]
+[node name="Node2D" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("backgrounds")]
+position = Vector2(53.3333, 48.3333)
+script = ExtResource("17_8mgq6")
+backgrounds = [NodePath("AnastasiaBG"), NodePath("RitsuBG"), NodePath("LarissaBG"), NodePath("EllieBG")]
 
-[editable path="ControlSelection"]
-[editable path="goBack"]
+[node name="AnastasiaBG" parent="Camera2D/Node2D" instance=ExtResource("17_xpbvb")]
+visible = false
+
+[node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/AnastasiaBG" index="6"]
+autoplay = false
+
+[node name="RitsuBG" parent="Camera2D/Node2D" instance=ExtResource("19_n3wxp")]
+
+[node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/RitsuBG" index="4"]
+autoplay = false
+
+[node name="LarissaBG" parent="Camera2D/Node2D" instance=ExtResource("20_4ervh")]
+visible = false
+
+[node name="EllieBG" parent="Camera2D/Node2D" instance=ExtResource("21_xnevo")]
+visible = false
+
+[node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/EllieBG" index="8"]
+autoplay = false
+
+[node name="Panel" type="Panel" parent="Camera2D/Node2D"]
+modulate = Color(0.286, 0.115, 0.264, 0.4)
+z_index = -3
+offset_left = -1742.0
+offset_top = -978.0
+offset_right = 1575.0
+offset_bottom = 913.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u5yve")
+
+[connection signal="button_down" from="Camera2D/StartButton" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="Camera2D/ControlSelection2/Button" to="Camera2D/ControlSelection2/P2_control_selection" method="_on_button_button_down"]
+[connection signal="button_down" from="Camera2D/goBack/go_back" to="." method="_on_go_back_button_down"]
+
+[editable path="Camera2D/ControlSelection"]
+[editable path="Camera2D/goBack"]
+[editable path="Camera2D/Node2D/AnastasiaBG"]
+[editable path="Camera2D/Node2D/RitsuBG"]
+[editable path="Camera2D/Node2D/LarissaBG"]
+[editable path="Camera2D/Node2D/EllieBG"]

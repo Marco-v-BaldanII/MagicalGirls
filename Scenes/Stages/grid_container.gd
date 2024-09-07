@@ -5,24 +5,25 @@ class_name CharacterSelect
 @export var selected_index2 : int = 0
 
 @export var grid_width : int = 2
-@onready var grid_container : Node2D = $characters
-@onready var banner_texture_rect : TextureRect = $TextureRect
+@onready var grid_container : Node2D = $Camera2D/characters
+@onready var banner_texture_rect : TextureRect = $Camera2D/TextureRect
 
 #Banner 1
-@onready var texture_rect := $TextureRect
-@onready var positionn := $Position
-@onready var position_down := $PositionDown
+@onready var texture_rect := $Camera2D/TextureRect
+@onready var positionn := $Camera2D/Position
+@onready var position_down := $Camera2D/PositionDown
 
 #Banner 2
-@onready var texture_rect2 := $TextureRect2
-@onready var positionn2 := $Position2
-@onready var position_down2 := $PositionDown2
+@onready var texture_rect2 := $Camera2D/TextureRect2
+@onready var positionn2 := $Camera2D/Position2
+@onready var position_down2 := $Camera2D/PositionDown2
 
+@onready var select_character: AudioStreamPlayer = $Camera2D/SelectCharacter
 
 @export var current_map : PackedScene 
 
-@onready var p1_control_selection: ScrollMenu = $ControlSelection/P1_control_selection
-@onready var p2_control_selection: ScrollMenu = $ControlSelection2/P2_control_selection
+@onready var p1_control_selection: ScrollMenu = $Camera2D/ControlSelection/P1_control_selection
+@onready var p2_control_selection: ScrollMenu = $Camera2D/ControlSelection2/P2_control_selection
 
 
 var input_methods : Array[INPUT_METHOD]
@@ -130,23 +131,23 @@ var back : bool = false
 func input_movement(character_id : int, second_onlineP : bool = false):
 	if ((character_id == 0 and selected_fighter == "") or (character_id == 0 and selected_fighter2 == "" and second_onlineP)) or (character_id == 1 and selected_fighter2 == ""):
 		if is_joy_button_just_pressed("move_up", input_methods[character_id]) or( Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) < -0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
-			$SelectCharacter.play()
+			select_character.play()
 			move_selection(-1,character_id, second_onlineP) 
 			GDSync.call_func(move_selection,[-1,character_id,second_onlineP])
 		elif is_joy_button_just_pressed("move_down", input_methods[character_id]) or (Input.get_joy_axis(character_id, JOY_AXIS_LEFT_Y) > 0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
-			$SelectCharacter.play()
+			select_character.play()
 			move_selection(+1,character_id,second_onlineP)  
 			GDSync.call_func(move_selection,[+1,character_id,second_onlineP])
 		elif is_joy_button_just_pressed("move_left", input_methods[character_id]) or (Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) < -0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
-			$SelectCharacter.play()
+			select_character.play()
 			move_selection(-2,character_id,second_onlineP) 
 			GDSync.call_func(move_selection,[-2,character_id,second_onlineP],)
 		elif is_joy_button_just_pressed("move_right", input_methods[character_id]) or (Input.get_joy_axis(character_id, JOY_AXIS_LEFT_X) > 0.5 and input_methods[character_id] != INPUT_METHOD.KEYBOARD):
-			$SelectCharacter.play()
+			select_character.play()
 			move_selection(2,character_id,second_onlineP) 
 			GDSync.call_func(move_selection,[2,character_id,second_onlineP])
 		elif is_joy_button_just_pressed("accept", input_methods[character_id]):
-			$MenuSelect.play()
+			$Camera2D/MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])
 
@@ -160,7 +161,7 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 				
 				_on_go_back_button_down()
 				
-				$MenuSelect.play()
+				$Camera2D/MenuSelect.play()
 				if mode == match_mode.CPU:
 					if selected_fighter2 != "": selected_fighter2 = ""
 					else: selected_fighter = ""
