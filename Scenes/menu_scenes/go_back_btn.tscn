@@ -1,6 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn8baxe5jwlvy"]
+[gd_scene load_steps=6 format=3 uid="uid://dn8baxe5jwlvy"]
 
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="1_mphbw"]
+
+[sub_resource type="Gradient" id="Gradient_vbrn6"]
+colors = PackedColorArray(1, 0.588235, 0.701961, 1, 1, 0.588235, 0.701961, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n025u"]
+gradient = SubResource("Gradient_vbrn6")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4s52x"]
+texture = SubResource("GradientTexture2D_n025u")
 
 [sub_resource type="Texture2D" id="Texture2D_r8uyx"]
 resource_local_to_scene = false
@@ -19,6 +28,7 @@ offset_top = 1897.0
 offset_right = 709.0
 offset_bottom = 2001.0
 theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxTexture_4s52x")
 text = "go back"
 metadata/_edit_use_anchors_ = true
 

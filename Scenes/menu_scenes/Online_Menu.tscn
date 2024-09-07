@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=20 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="2_1hqwr"]
@@ -9,6 +9,31 @@
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="4_v2qc8"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/input_field_option.gd" id="5_jqadj"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/my_lobby.gd" id="7_8vq33"]
+[ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="9_fgoy1"]
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="11_fj6tj"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="12_7nucy"]
+
+[sub_resource type="Gradient" id="Gradient_fwpbm"]
+colors = PackedColorArray(1, 0.458824, 0.627451, 1, 1, 0.588235, 0.701961, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lygcx"]
+gradient = SubResource("Gradient_fwpbm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbkfl"]
+texture = SubResource("GradientTexture1D_lygcx")
+
+[sub_resource type="Gradient" id="Gradient_0y7gk"]
+offsets = PackedFloat32Array(0.0203046, 1)
+colors = PackedColorArray(1, 0.588235, 0.701961, 1, 1, 0.458824, 0.627451, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ex3ec"]
+gradient = SubResource("Gradient_0y7gk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qi6ro"]
+texture = SubResource("GradientTexture1D_ex3ec")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdoj3"]
+shader = ExtResource("11_fj6tj")
 
 [node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
@@ -30,6 +55,9 @@ text = "Online"
 [node name="LobbySelection" parent="CanvasLayer" instance=ExtResource("2_561r3")]
 visible = false
 position = Vector2(2165, 993)
+
+[node name="cursor" parent="CanvasLayer/LobbySelection" index="0"]
+texture = ExtResource("9_fgoy1")
 
 [node name="P1_control_selection" parent="CanvasLayer/LobbySelection" index="1" node_paths=PackedStringArray("lobby_selection", "connect")]
 _is_active = true
@@ -120,7 +148,7 @@ visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/connect_menu"]
 position = Vector2(117, 317)
-texture = ExtResource("4_v2qc8")
+texture = ExtResource("9_fgoy1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/connect_menu"]
 offset_left = 199.0
@@ -134,12 +162,25 @@ script = ExtResource("4_6a1dq")
 [node name="host_button" type="Button" parent="CanvasLayer/connect_menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxTexture_tbkfl")
 text = "Host"
 
 [node name="join_button" type="Button" parent="CanvasLayer/connect_menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxTexture_qi6ro")
 text = "Join"
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qdoj3")
+offset_left = -73.0
+offset_top = -50.0
+offset_right = 1847.0
+offset_bottom = 1030.0
+scale = Vector2(1.08867, 1.09458)
+texture = ExtResource("12_7nucy")
 
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]

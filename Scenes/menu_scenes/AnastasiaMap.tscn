@@ -74,6 +74,7 @@ the test in the tournament, and, why not, claim
 the glory of a well-deserved victory paid in vodka."
 
 [node name="Normal attacks" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 199.0
 offset_top = 179.0
@@ -104,7 +105,7 @@ s kick - Grenade
 "
 
 [node name="Special attacks + combos" type="Label" parent="."]
-visible = false
+z_index = 1
 layout_mode = 0
 offset_left = 199.0
 offset_top = 179.0
@@ -116,10 +117,10 @@ theme_override_constants/line_spacing = -50
 theme_override_fonts/font = ExtResource("5_t3cci")
 theme_override_font_sizes/font_size = 70
 text = "Special Attacks:
--facing, facing, -facing, facing, B - Three grenades
-down, facing, Y - Powered shoot
-down, -facing, Y - Molotov
-facing, facing, X - Two knife attack"
+back, forward, back, forward, s kick - Three grenades
+down, forward, s punch - Powered shoot
+down, back, s punch - Molotov
+forward, forward, w punch - Two knife attack"
 
 [node name="FlagOfJapan_svg" type="Sprite2D" parent="."]
 z_index = 1
