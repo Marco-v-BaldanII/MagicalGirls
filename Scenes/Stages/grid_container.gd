@@ -8,10 +8,16 @@ class_name CharacterSelect
 @onready var grid_container : GridContainer = $GridContainer
 @onready var banner_texture_rect : TextureRect = $TextureRect
 
-
+#Banner 1
 @onready var texture_rect := $TextureRect
 @onready var positionn := $Position
 @onready var position_down := $PositionDown
+
+#Banner 2
+@onready var texture_rect2 := $TextureRect2
+@onready var positionn2 := $Position2
+@onready var position_down2 := $PositionDown2
+
 
 @export var current_map : PackedScene 
 
@@ -41,6 +47,8 @@ var offscreen_position: Vector2
 var real_target_position: Vector2
 var target_position: Vector2  
 
+var target_position2 : Vector2
+
 var selected_fighter : String = ""
 var selected_fighter2 : String = ""
 
@@ -60,12 +68,16 @@ func _ready():
 	offscreen_position = position_down.position
 	texture_rect.position = offscreen_position  
 	target_position = texture_rect.position 
+	target_position2 = texture_rect2.position
 	real_target_position = positionn.position
 	
 	mode = GameManager.character_selection_mode
 	input_methods = [2,2]
 	remap_controllers()
 	Controls.changed_controllers.connect(remap_controllers)
+	
+	
+	_update_selection(0,false); _update_selection(1,false)
 	
 	await GameManager.online_setup
 	
@@ -88,6 +100,14 @@ func _process(delta: float) -> void:
 
 		if (texture_rect.position - target_position).length() < move_speed * delta:
 			texture_rect.position = target_position
+	
+	if texture_rect2.position != target_position2:
+		var direction = (target_position2 - texture_rect2.position).normalized()
+		texture_rect2.position += direction * move_speed * delta
+
+		if (texture_rect2.position - target_position2).length() < move_speed * delta:
+			texture_rect2.position = target_position2
+
 	choose_cooldown += delta
 	choose_cooldown2 += delta
 	
@@ -211,12 +231,23 @@ func _update_selection(player : int = 0, second_onlineP : bool = false):
 	if children.size() > 0 and actual_player_index < children.size():
 		children[actual_player_index].modulate = Color(1, 1, 1, 1)  
 	
-	var selected_child = children[actual_player_index]
-	if character_banners.has(selected_child.name):
-		banner_texture_rect.texture = character_banners[selected_child.name]
+	if player == 0:
+		
+		var selected_child = children[actual_player_index]
+		if character_banners.has(selected_child.name):
+			banner_texture_rect.texture = character_banners[selected_child.name]
 
-	texture_rect.position = offscreen_position
-	target_position = real_target_position
+
+		texture_rect.position = offscreen_position
+		target_position = real_target_position
+	else:
+		var selected_child = children[actual_player_index]
+		if character_banners.has(selected_child.name):
+			texture_rect2.texture = character_banners[selected_child.name]
+
+
+		texture_rect2.position = position_down2.position
+		target_position2 = positionn2.position
 
 func _select_fighter(player : int = 0, second_onlineP : bool = false):
 	var children = grid_container.get_children()

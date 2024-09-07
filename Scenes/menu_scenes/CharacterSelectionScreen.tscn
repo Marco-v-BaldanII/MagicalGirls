@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=18 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_jt3s1"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
 [ext_resource type="Texture2D" uid="uid://d2ry206yui2an" path="res://Assets/characters/concepts/RitsuConcept.png" id="3_hp4ll"]
@@ -54,9 +53,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1980.0
+offset_left = -2280.0
 offset_top = 81.6666
-offset_right = 1520.0
+offset_right = 1220.0
 offset_bottom = 5081.67
 grow_horizontal = 2
 grow_vertical = 2
@@ -65,16 +64,44 @@ texture = ExtResource("3_hp4ll")
 
 [node name="Position" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -1583.33
+offset_left = -1883.33
 offset_top = -883.333
-offset_right = -1543.33
+offset_right = -1843.33
 offset_bottom = -843.333
 
 [node name="PositionDown" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -1583.33
+offset_left = -1883.33
 offset_top = 563.333
-offset_right = -1543.33
+offset_right = -1843.33
+offset_bottom = 603.333
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.3334
+offset_top = 81.6666
+offset_right = 3486.67
+offset_bottom = 5081.67
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.376963, 0.376963)
+texture = ExtResource("3_hp4ll")
+
+[node name="Position2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 390.0
+offset_top = -883.333
+offset_right = 430.0
+offset_bottom = -843.333
+
+[node name="PositionDown2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 563.333
+offset_right = 430.0
 offset_bottom = 603.333
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -112,24 +139,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 texture = ExtResource("5_dti1v")
-
-[node name="Larissa" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-texture = ExtResource("1_jt3s1")
-
-[node name="Random" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-texture = ExtResource("1_jt3s1")
-
-[node name="World Vanquisher" type="TextureRect" parent="GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-texture = ExtResource("1_jt3s1")
 
 [node name="SelectCharacter" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gyvyi")
