@@ -705,6 +705,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		play_sfx("block")
 	else:
 		play_sfx("hit")
+		Controls.controller_rumble()
 	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false

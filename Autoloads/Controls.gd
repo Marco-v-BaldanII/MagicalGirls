@@ -122,3 +122,8 @@ func _ready() -> void:
 func change_controllers(device: int, connected: bool):
 	connected_controllers = Input.get_connected_joypads().size()
 	changed_controllers.emit()
+
+func controller_rumble():
+	Input.start_joy_vibration(1,1,1,2)
+	
+	
