@@ -7,6 +7,7 @@ const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
 
 @export var star_cost : int = 10
 
+const SLIDE_KICK_SPEED : int = 700
 
 func _ready() -> void:
 
@@ -75,6 +76,7 @@ func perform_move():
 				audio_stream.play()
 		velocity.x = 0
 		
+		
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
 			last_used_move =  move
@@ -91,6 +93,12 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = true
 			await get_tree().create_timer(0.017 * 6).timeout
 			$AnimationTree["parameters/conditions/" + "crouch_" + move] = false
+			
+			if last_used_move == "crouch_s_kick":
+				if direction == "left": velocity.x = SLIDE_KICK_SPEED
+				else: velocity.x = -SLIDE_KICK_SPEED
+				await get_tree().create_timer(0.0167 * 10).timeout
+				velocity.x = 0
 			
 			clear_buffer()
 			GDSync.call_func(_sync_move,["crouch_" + move])
@@ -204,3 +212,22 @@ func _on_head_hurt_box_area_entered(area: Area2D) -> void:
 		head = false
 
 	pass # Replace with function body.
+
+func set_hitboxes(player_id : int):
+	if player_num == 1:
+		$hit_boxes/special_box.set_collision_layer_value(2, true)
+		hit_box_1.set_collision_layer_value(2, true)
+		hit_box_2.set_collision_layer_value(2, true)
+		hurt_box.set_collision_mask_value(3, true)
+		hurt_box.set_collision_layer_value(4,true)
+		head_hurt_box.set_collision_mask_value(3,true)
+		hurt_box_layer = 4
+
+	else:
+		$hit_boxes/special_box.set_collision_layer_value(3, true)
+		hit_box_1.set_collision_layer_value(3, true)
+		hit_box_2.set_collision_layer_value(3, true)
+		hurt_box.set_collision_mask_value(2, true)
+		hurt_box.set_collision_layer_value(5,true)
+		head_hurt_box.set_collision_mask_value(2,true)
+		hurt_box_layer = 5

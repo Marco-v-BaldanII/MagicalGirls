@@ -13,6 +13,7 @@ func enter():
 			player = e
 
 	player.velocity.x = 0
+	player.animation_tree["parameters/conditions/idle_anim"] = true
 	player.animation_tree["parameters/conditions/crouch"] = true
 
 	player.animation_tree["parameters/conditions/not_crouch"] = false
