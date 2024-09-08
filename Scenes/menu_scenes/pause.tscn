@@ -102,10 +102,12 @@ script = ExtResource("6_k0al4")
 [node name="RitsuMap" parent="MovePages" instance=ExtResource("9_u44mc")]
 
 [node name="AnastasiaMap" parent="MovePages" instance=ExtResource("7_0js2q")]
+visible = false
 offset_left = 1940.0
 offset_right = 1940.0
 
 [node name="EllieQuinnMap" parent="MovePages" instance=ExtResource("8_wgel7")]
+visible = false
 offset_left = -1940.0
 offset_right = -1940.0
 

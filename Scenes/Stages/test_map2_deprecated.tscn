@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cf18ypury8705"]
+[gd_scene load_steps=16 format=3 uid="uid://cf18ypury8705"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/match.gd" id="1_to0e0"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="2_3djuc"]
@@ -50,6 +50,102 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(151, 1123)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-101, -716)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label3:theme_override_colors/font_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.937255, 0.772549, 0.317647, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label3:theme_override_colors/font_outline_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.494118, 0.172549, 0.286275, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Label2:theme_override_colors/font_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.939128, 0.770879, 0.31949, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Label2:theme_override_colors/font_outline_color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.493167, 0.172774, 0.286887, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Label2:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Label3:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_vm6og"]
 resource_name = "start"
@@ -93,8 +189,110 @@ tracks/2/keys = {
 "values": [Color(1.41986e-06, 0.334384, 0.445514, 1), Color(0.809118, 0.338369, 0.186941, 1), Color(0.159675, 0.441952, 0.448434, 1), Color(0.549674, 0.148092, 0.453265, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_2ve1c"]
+resource_name = "K.O"
+length = 0.800003
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label2:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.300001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-101, -716), Vector2(-101, 107)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label3:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.300001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(151, 961), Vector2(151, 115)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label3:theme_override_colors/font_color")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.366667, 0.583333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.937255, 0.772549, 0.317647, 1), Color(0.937255, 0.772549, 0.317647, 1), Color(1, 1, 1, 1), Color(0.937255, 0.772549, 0.317647, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label3:theme_override_colors/font_outline_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.366667, 0.583334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.494118, 0.172549, 0.286275, 1), Color(0.494118, 0.172549, 0.286275, 1), Color(1, 1, 1, 1), Color(0.494118, 0.172549, 0.286275, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label2:theme_override_colors/font_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.366667, 0.583334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.939128, 0.770879, 0.31949, 1), Color(0.939128, 0.770879, 0.31949, 1), Color(1, 1, 1, 1), Color(0.939128, 0.770879, 0.31949, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label2:theme_override_colors/font_outline_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.366667, 0.583334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.493167, 0.172774, 0.286887, 1), Color(0.493167, 0.172774, 0.286887, 1), Color(1, 1, 1, 1), Color(0.493167, 0.172774, 0.286887, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.783333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Label3:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.783333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r6lye"]
 _data = {
+"K.O": SubResource("Animation_2ve1c"),
 "RESET": SubResource("Animation_lrx8f"),
 "start": SubResource("Animation_vm6og")
 }
@@ -198,6 +396,32 @@ theme_override_font_sizes/font_size = 600
 text = "3"
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="."]
+offset_left = -101.0
+offset_top = -716.0
+offset_right = 1817.0
+offset_bottom = 182.0
+theme_override_colors/font_color = Color(0.939128, 0.770879, 0.31949, 1)
+theme_override_colors/font_outline_color = Color(0.493167, 0.172774, 0.286887, 1)
+theme_override_constants/outline_size = 40
+theme_override_fonts/font = ExtResource("5_fqbbx")
+theme_override_font_sizes/font_size = 600
+text = "K"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 151.0
+offset_top = 1123.0
+offset_right = 2069.0
+offset_bottom = 2021.0
+theme_override_colors/font_color = Color(0.937255, 0.772549, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0.494118, 0.172549, 0.286275, 1)
+theme_override_constants/outline_size = 40
+theme_override_fonts/font = ExtResource("5_fqbbx")
+theme_override_font_sizes/font_size = 600
+text = "O"
+horizontal_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_r6lye")
@@ -228,3 +452,27 @@ scale = Vector2(23, 14.92)
 shape = SubResource("WorldBoundaryShape2D_vob0p")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="timer_label" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -1136.0
+offset_right = 103.0
+offset_bottom = -802.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(110, 0)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.42, 0.85, 0.99, 1)
+theme_override_colors/font_outline_color = Color(0.46, 0, 0.2, 1)
+theme_override_constants/outline_size = 22
+theme_override_font_sizes/font_size = 230
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1

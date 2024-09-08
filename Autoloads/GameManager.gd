@@ -87,6 +87,10 @@ var set_points : Array[int] = [0,0]
 
 
 func match_results(winner_id : int):
+	if winner_id == -1: #Tie
+		SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
+		return
+		
 	winner_id -= 1
 	players.clear()
 	set_points[winner_id] += 1

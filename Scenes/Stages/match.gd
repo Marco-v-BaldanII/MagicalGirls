@@ -8,6 +8,8 @@ var p2 : Player
 const BALLOON = preload("res://Dialogues/balloon.tscn")
 var baloon = null
 @onready var background: Node = $Background
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func _ready():
 	
@@ -102,12 +104,31 @@ func _ready():
 	GameManager.initialized_players.emit(p1 ,p2)
 	
 	Controls.changed_controllers.connect(remap_controllers)
-	
+	started = true
 	#p2.queue_free()
+var started : bool = false
+var time : float = 99.0
+
+@onready var timer_label: Label = $CanvasLayer/timer_label
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if started:
+		time -= delta
+		timer_label.text = str(floori(time))
+		
+	if time <= 0:
+		if p1.hp < p2.hp:
+			GameManager.match_results(2)
+		elif p1.hp > p2.hp:
+			GameManager.match_results(1)
+		else:
+			GameManager.match_results(-1)
+			#Tie
+		time = 99
+
+		
 	pass
 
 func remap_controllers():
@@ -149,3 +170,5 @@ func _input(event: InputEvent) -> void:
 			Pause.activate()
 
 	
+func match_ko():
+	animation_player.play("K.O")

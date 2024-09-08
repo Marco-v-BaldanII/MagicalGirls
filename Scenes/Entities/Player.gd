@@ -40,6 +40,10 @@ signal player_died(player_id : int)
 				await get_tree().create_timer(0.1667).timeout
 		
 		if hp == 0:
+			match_setting.match_ko()
+			can_move = false; oponent.can_move = false
+			add_lag(60); oponent.add_lag(60)
+			await get_tree().create_timer(0.8).timeout
 			player_died.emit(oponent.player_num)
 			
 @export var mp : int = 200:
