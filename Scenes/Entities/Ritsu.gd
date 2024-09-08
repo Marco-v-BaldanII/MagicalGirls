@@ -7,7 +7,7 @@ const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
 
 @export var star_cost : int = 10
 
-const SLIDE_KICK_SPEED : int = 700
+const SLIDE_KICK_SPEED : int = 1400
 
 func _ready() -> void:
 

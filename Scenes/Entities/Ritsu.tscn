@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_28h7u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfrej"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0512821
+shader_parameter/tex_anim_offset = 0.532051
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3nutt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eater"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0512821
+shader_parameter/tex_anim_offset = 0.532051
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -299,6 +299,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(30, -119), Vector2(148, 92), Vector2(242, 90)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hurt_box/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.316667, 0.333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(21, -221), Vector2(17, 35), Vector2(17, 35), Vector2(21, -221)]
+}
 
 [sub_resource type="Animation" id="Animation_aa86y"]
 resource_name = "crouch_s_punch"
@@ -316,6 +328,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [97, 98, 99, 100, 101, 102, 103, 104]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurt_box/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.216667, 0.233334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(21, -221), Vector2(15, 23), Vector2(15, 23), Vector2(21, -221)]
 }
 
 [sub_resource type="Animation" id="Animation_os8hj"]
@@ -399,7 +423,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_c2qpf"]
 resource_name = "crouch_w_punch"
-length = 0.283336
+length = 0.233335
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -432,10 +456,22 @@ tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.116667, 0.166667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hurt_box/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.2, 0.216667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(21, -221), Vector2(13, 14), Vector2(13, 14), Vector2(21, -221)]
 }
 
 [sub_resource type="Animation" id="Animation_oy3v6"]
@@ -1127,7 +1163,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_obeqb")
 hframes = 12
 vframes = 13
-frame = 8
+frame = 83
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1135,7 +1171,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_28h7u")
+process_material = SubResource("ShaderMaterial_kfrej")
 texture = ExtResource("2_obeqb")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
@@ -1146,7 +1182,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_3nutt")
+process_material = SubResource("ShaderMaterial_eater")
 texture = ExtResource("2_obeqb")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
@@ -1214,7 +1250,9 @@ disabled = true
 [node name="special_box" type="Area2D" parent="hit_boxes" groups=["special"]]
 
 [node name="barrido_attack" type="CollisionShape2D" parent="hit_boxes/special_box"]
+position = Vector2(242, 90)
 shape = SubResource("CircleShape2D_85vqt")
+disabled = true
 
 [node name="hurt_box" type="Area2D" parent="."]
 position = Vector2(-28, 232)
@@ -1355,7 +1393,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head_hurt_box"]
-position = Vector2(-23, -46)
+position = Vector2(-31, -55)
 scale = Vector2(4.5, 4.79296)
 shape = SubResource("CircleShape2D_1w6pk")
 debug_color = Color(0.751288, 0.421384, 0.490502, 0.42)
