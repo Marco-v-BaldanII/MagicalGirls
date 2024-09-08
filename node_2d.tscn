@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b51a6hsce4jqk"]
+
+[ext_resource type="AudioStream" uid="uid://bjirl7m4mync" path="res://Assets/SFX/UI/menu audio.mp3" id="1_rsyd8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_rsyd8")

@@ -90,4 +90,5 @@ texture = ExtResource("6_y0rnf")
 stream = ExtResource("7_k7jb6")
 volume_db = -5.0
 autoplay = true
+max_distance = 10000.0
 bus = &"Music"
