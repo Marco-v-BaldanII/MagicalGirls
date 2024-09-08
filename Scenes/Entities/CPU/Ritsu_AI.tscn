@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn1lrqr5qecgc"]
+[gd_scene load_steps=8 format=3 uid="uid://dn1lrqr5qecgc"]
 
 [ext_resource type="PackedScene" uid="uid://c4xoe1y860pj5" path="res://Scenes/Entities/Ritsu.tscn" id="1_kmcq4"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="2_335ic"]
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_rvqmf"]
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/attack_ritsu.gd" id="3_u2m73"]
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/camp_ritsu.gd" id="4_cboxs"]
+[ext_resource type="AudioStream" uid="uid://bdyxwxrw7s45i" path="res://Assets/SFX/swing 2.wav" id="6_ueyg6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctxxi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cj03f"]
 shader = ExtResource("2_335ic")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -19,8 +20,16 @@ shader_parameter/tex_anim_offset = 0.0192308
 [node name="NewRitsu2" instance=ExtResource("1_kmcq4")]
 ai_player = true
 
+[node name="Sprite2D" parent="." index="0"]
+frame = 2
+
 [node name="GPUParticles2D" parent="Sprite2D" index="0"]
-process_material = SubResource("ShaderMaterial_ctxxi")
+modulate = Color(1, 1, 1, 0.368627)
+process_material = SubResource("ShaderMaterial_cj03f")
+
+[node name="AnimationTree" parent="." index="2"]
+parameters/conditions/not_crouch_s_punch = false
+parameters/conditions/not_s_punch = false
 
 [node name="portrait" parent="CanvasLayer/UI/hpBar_" index="0"]
 offset_left = 0.0
@@ -42,5 +51,9 @@ script = ExtResource("4_cboxs")
 retreating_special = "fire_shot_"
 shoot_input = "w_punch"
 retreat_atk = "w_punch"
+
+[node name="swing 2" type="AudioStreamPlayer2D" parent="." index="14"]
+stream = ExtResource("6_ueyg6")
+volume_db = 5.0
 
 [editable path="AI_StateMachine"]

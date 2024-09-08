@@ -15,6 +15,7 @@ func _ready() -> void:
 				e = e.get_parent()
 			player = e
 	GDSync.expose_node(self)
+	
 
 func enter():
 	
@@ -25,6 +26,7 @@ func enter():
 				e = e.get_parent()
 			player = e
 	else:
+		player.play_sfx("jump")
 		player.animation_tree["parameters/conditions/not_crouch"] = true
 		player.animation_tree["parameters/conditions/crouch"] = false
 		player.animation_tree["parameters/conditions/land"] = false
@@ -107,7 +109,7 @@ func physics_update(delta : float):
 			if player.velocity.y < 0:
 				player.velocity.y += (player.gravity*0.2) * delta
 			else:
-				player.velocity.y += (player.gravity/5) * delta
+				player.velocity.y += (player.gravity/20) * delta
 		
 		else:
 			player.velocity.y += (player.gravity) * delta

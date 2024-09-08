@@ -4,7 +4,6 @@ class_name Ritsu
 var current_start_projectile : Projectile
 const STAR_RIGHT = preload("res://Scenes/projectiles/star_right.tscn")
 const STAR_DIAGONAL = preload("res://Scenes/projectiles/star_diagonal.tscn")
-@onready var placeholder = $placeholder
 
 @export var star_cost : int = 10
 
@@ -66,9 +65,14 @@ func perform_move():
 						#Here will call the animation in the animation tree , which will have it's hitstun
 
 						return
-			
+	
+	
+	
 	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_punch"):
-		
+		if sfx.has(input_buffer.back()) and not sfx[input_buffer.back()] is bool:
+			
+				audio_stream.stream = sfx[input_buffer.back()]
+				audio_stream.play()
 		velocity.x = 0
 		
 		var move : String = input_buffer.back()
@@ -104,6 +108,12 @@ func perform_move():
 	elif input_buffer.back().contains("s_punch") and current_start_projectile == null and  is_on_floor():
 		
 		if enough_mp(50):
+			var move : String = "s_punch"
+			if crouching: move = "crouch_s_punch"
+			$AnimationTree["parameters/conditions/" + move] = true
+			
+			GDSync.call_func(_sync_move,[move])
+			
 			var star = instanciate_star()
 			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
 			GDSync.call_func(instanciate_star)
@@ -152,9 +162,22 @@ func _physics_process(delta: float) -> void:
 		if current_start_projectile != null and (is_mapped_action_pressed("s_punch") or is_input_pressed("s_punch")) and enough_mp(1):
 			current_start_projectile.charge(global_position)
 			charging_mp = false
+			
+			var move : String = "s_punch"
+			if crouching: move = "crouch_s_punch"
+			
+			$AnimationTree["parameters/conditions/" + move] = true
+			GDSync.call_func(_sync_move,[move])
 			pass
 		elif current_start_projectile != null:
 			charging_mp = true
+			
+			var move : String = "s_punch"
+			if crouching: move = "crouch_s_punch"
+			
+			$AnimationTree["parameters/conditions/" + move] = false
+			GDSync.call_func(_sync_move,["not_"+ move])
+			_sync_move("not_"+ move)
 			if oponent : current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
 			else : current_start_projectile.shoot((player_num-1) + 2, 0 ,direction, self)
 			velocity.x = 0
@@ -163,6 +186,8 @@ func _physics_process(delta: float) -> void:
 				current_start_projectile.position.y += 82
 		
 			current_start_projectile = null
+
+			
 			
 
 

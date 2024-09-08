@@ -7,6 +7,30 @@ class_name Player
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hp_bar: TextureProgressBar =  $CanvasLayer/UI/hpBar_
 @onready var mp_bar: TextureProgressBar = $CanvasLayer/UI/mpBar_
+@onready var audio_stream: AudioStreamPlayer2D = $audio_stream
+
+
+
+@export var sfx : Dictionary = {
+	
+	"move_left" : false,
+	"move_right" : false,
+	"crouch" : false,
+	"jump" : preload("res://Assets/SFX/placeholder.wav"),
+	"w_punch" : SWING_2,
+	"s_punch" : SWING_2,
+	"w_kick" : SWING_2,
+	"s_kick" : SWING_2,
+	"l_trigger" : false,
+	"r_trigger" : false,
+	"block" : preload("res://Assets/SFX/placeholder.wav"),
+	"hit" : preload("res://Assets/SFX/swing.wav")
+	
+	
+	
+}
+
+const SWING_2 := preload("res://Assets/SFX/swing 2.wav")
 
 var charging_mp : bool = true
 
@@ -435,11 +459,16 @@ func perform_move():
 			clear_buffer()
 
 			return
-			
+	
+	if sfx.has(input_buffer.back()) and not sfx[input_buffer.back()] is bool:
+
+				audio_stream.stream = sfx[input_buffer.back()]
+				audio_stream.play()
+	
 	if input_buffer.back().contains("punch") or input_buffer.back().contains("kick"):
 		var move : String = input_buffer.back()
-
-
+		
+		
 		if is_on_floor() and not crouching:
 			velocity.x = 0
 			last_used_move = move
@@ -668,6 +697,14 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		GDSync.call_func(show_tint, [blocked])
 		GDSync.call_func(online_receive_dmg,[area])
 	if ai_player: ai_on_hit()
+	
+	
+	
+	#Handle sfx
+	if blocked:
+		play_sfx("block")
+	else:
+		play_sfx("hit")
 	
 	await get_tree().create_timer(0.017 * 20).timeout
 	hit = false
@@ -923,6 +960,8 @@ func _on_body_area_exited(area: Area2D) -> void:
 	pass # Replace with function body.
 
 func _on_body_area_entered(area: Area2D) -> void:
+	if not area.is_in_group("player"): return
+	
 	on_body = true
 
 	if input_direction != 0 and is_on_floor():
@@ -933,3 +972,8 @@ func _on_body_area_entered(area: Area2D) -> void:
 	#Don't apply knock back if im not moving
 	
 	pass # Replace with function body.
+
+func play_sfx(key : String):
+	if sfx.has(key) and not sfx[key] is bool:
+		audio_stream.stream = sfx[key]
+		audio_stream.play()

@@ -291,11 +291,13 @@ visible = false
 
 [node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/AnastasiaBG" index="6"]
 autoplay = false
+max_distance = 2000.0
 
 [node name="RitsuBG" parent="Camera2D/Node2D" instance=ExtResource("19_n3wxp")]
 
 [node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/RitsuBG" index="4"]
 autoplay = false
+max_distance = 2000.0
 
 [node name="LarissaBG" parent="Camera2D/Node2D" instance=ExtResource("20_4ervh")]
 visible = false
@@ -305,6 +307,7 @@ visible = false
 
 [node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/EllieBG" index="8"]
 autoplay = false
+max_distance = 2000.0
 
 [node name="Panel" type="Panel" parent="Camera2D/Node2D"]
 modulate = Color(0.286, 0.115, 0.264, 0.4)

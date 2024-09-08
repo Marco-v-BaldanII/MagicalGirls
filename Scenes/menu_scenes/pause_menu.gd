@@ -47,24 +47,24 @@ func _ready():
 		_change_cursor_pos()
 	
 
-func _input(event: InputEvent) -> void:
+func _process(delta: float) -> void:
 	
-	#timer -= delta
+	timer -= delta
 	
 	if options.size() > 0  and grid_container.visible and _is_active :
-
-			if Controls.is_ui_action_pressed("move_down"):
-				_index += 1
-				while options[_index % options.size()].is_visible_in_tree() == false:
+			if timer <= 0:
+				if Controls.is_ui_action_pressed("move_down"):
 					_index += 1
-				_change_cursor_pos()
-				
+					while options[_index % options.size()].is_visible_in_tree() == false:
+						_index += 1
+					_change_cursor_pos()
 					
-			if Controls.is_ui_action_pressed("move_up"):
-				_index -= 1
-				while options[_index % options.size()].is_visible_in_tree() == false:
+						
+				if Controls.is_ui_action_pressed("move_up"):
 					_index -= 1
-				_change_cursor_pos()
+					while options[_index % options.size()].is_visible_in_tree() == false:
+						_index -= 1
+					_change_cursor_pos()
 			
 			if Controls.is_ui_action_pressed("accept") and current_option != null:
 				

@@ -29,7 +29,7 @@ var online : bool:
 				players[i].player_id = 0
 		else:
 			for i in players.size():
-				players[i].player_id = i
+				if is_instance_valid(players[i]): players[i].player_id = i
 
 var players : Array[Player]
 var camera : Camera2D
