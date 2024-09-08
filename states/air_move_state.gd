@@ -18,6 +18,8 @@ func _ready() -> void:
 	
 
 func enter():
+	floaty = false
+	jump_press = 0
 	
 	if not player:
 		
@@ -38,6 +40,9 @@ func enter():
 
 
 var air_buffer 
+
+
+var floaty : bool = false
 
 func physics_update(delta : float):
 	
@@ -80,10 +85,10 @@ func physics_update(delta : float):
 			
 			
 			
-			if not player.fly:
+			if not floaty:
 				player.velocity.y = player.JUMP_VELOCITY
 			else:
-				player.velocity.y = player.JUMP_VELOCITY*0.47
+				player.velocity.y = player.JUMP_VELOCITY *0.47
 
 			if player.is_mapped_action_pressed("move_left") or  j_x < -0.1 or player.is_input_pressed("move_left") :
 					player.velocity.x += -player.air_speed
@@ -101,19 +106,33 @@ func physics_update(delta : float):
 			player.jump_lag = 0.01666 * player.JUMP_LAG_FPS
 			print("rest_jump_lag")
 			Transitioned.emit(self, "ground_move")
-
+	
+	
+	
+	if is_action_pressed("jump") and player.fly:
+		jump_press += 1
+		if jump_press >= 2:
+			floaty = true
+	
 	# Add the gravity.
 	if not player.is_on_floor() :
 		if player.fly and not player.is_mapped_action_pressed("crouch") and not joy_y > 0.7:
-
-			if player.velocity.y < 0:
-				player.velocity.y += (player.gravity*0.2) * delta
+			
+			
+			if is_action_pressed("jump") or (player.input_method != 2 and joy_y < -0.5) :
+				
+				if player.velocity.y < 0:
+					player.velocity.y += (player.gravity) * delta
+				else:
+					player.velocity.y += (player.gravity/25) * delta
 			else:
-				player.velocity.y += (player.gravity/20) * delta
+				player.velocity.y += (player.gravity) * delta
+			
 		
 		else:
 			player.velocity.y += (player.gravity) * delta
 
+var jump_press : int = 0
 
 func jump_anim():
 	player.animation_tree["parameters/conditions/jump"] = true
@@ -122,3 +141,38 @@ func jump_anim():
 func land_anim():
 	player.animation_tree["parameters/conditions/land"] = true
 	player.animation_tree["parameters/conditions/jump"] = false
+
+
+
+func is_action_pressed(action_name : String) -> bool:
+	if player.input_method != 2:
+		if action_state[action_name] == false and Input.is_joy_button_pressed( player.input_method, Controls.mapping[player.player_id][action_name][0]) :
+			#action_state[action_name] = true
+			#listen_for_not_input(action_name)
+			return true
+		if not Input.is_joy_button_pressed(player.input_method, Controls.mapping[player.input_method][action_name][0]):
+			pass
+			#action_state[action_name] = false
+		return false
+	else:
+		if action_state[action_name] == false and Input.is_physical_key_pressed(Controls.mapping[player.player_id][action_name][1]) :
+			#action_state[action_name] = true
+			#listen_for_not_input(action_name)
+			return true
+		if not Input.is_physical_key_pressed(Controls.mapping[player.player_id][action_name][1]):
+			pass
+			#action_state[action_name] = false
+		return false
+
+var action_state : Dictionary = {
+	"move_left" : false,
+	"move_right" : false,
+	"crouch" : false,
+	"jump" : false,
+	"w_punch" : false,
+	"s_punch" : false,
+	"w_kick" : false,
+	"s_kick" : false,
+	"l_trigger" : false,
+	"r_trigger" : false
+}
