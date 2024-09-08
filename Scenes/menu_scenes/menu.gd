@@ -6,6 +6,10 @@ class_name Menu
 @export var cursor_offset : int = 5
 @export var timer : float = 0.1 
 
+@onready var select_character = $SelectCharacter
+@onready var menu_select = $MenuSelect
+
+
 var options : Array;
 
 var num_options : int
@@ -68,6 +72,7 @@ func _process(delta: float) -> void:
 			
 			if Controls.is_ui_action_pressed("accept") and current_option != null:
 				if current_option is Option:
+					menu_select.play()
 					var  done : bool = current_option.execute_option()
 					if done:
 						deactivate()
@@ -80,7 +85,7 @@ func _process(delta: float) -> void:
 func _change_cursor_pos():
 	
 	timer = 0.15
-	
+	select_character.play()
 	num_options = options.size()
 	if my_axis == axis.X:
 		cursor.global_position.x = options[_index % num_options].global_position.x + cursor_offset

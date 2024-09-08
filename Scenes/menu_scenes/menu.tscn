@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://2ri16duvgw33"]
+[gd_scene load_steps=26 format=3 uid="uid://2ri16duvgw33"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
 [ext_resource type="PackedScene" uid="uid://ci1182rw4g6ub" path="res://Scenes/menu_scenes/cursor.tscn" id="2_6m5h7"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bvw4onoh3yjgb" path="res://Assets/UI/settings button.png" id="14_s5nr1"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="15_w6deo"]
 [ext_resource type="Texture2D" uid="uid://iwrjbwx2868k" path="res://Assets/UI/off button.png" id="15_y08sq"]
+[ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="18_n0spr"]
+[ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="19_t8exk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gcixg"]
 shader = ExtResource("7_xvlvo")
@@ -293,6 +295,13 @@ offset_left = 26.0
 offset_top = 829.0
 offset_right = 128.0
 offset_bottom = 929.0
+
+[node name="SelectCharacter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_n0spr")
+
+[node name="MenuSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_t8exk")
+volume_db = -11.243
 
 [connection signal="button_down" from="OffButton/offButton" to="." method="_on_off_button_button_down"]
 [connection signal="button_down" from="arcade_button" to="." method="_on_arcade_button_button_down"]
