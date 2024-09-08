@@ -132,7 +132,7 @@ func perform_move():
 		if  enough_mp(star_cost):
 			instanciate_diagonal_star()
 			GDSync.call_func(instanciate_diagonal_star)
-			
+			clear_buffer()
 			var i = 0
 			can_move = false
 			if direction == "left":
