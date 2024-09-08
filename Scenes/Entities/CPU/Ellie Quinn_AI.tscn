@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://1ngjbdm0xxxg"]
 
-[ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie Quinn.tscn" id="1_2i38b"]
+[ext_resource type="PackedScene" uid="uid://cw2grg2ehu335" path="res://Scenes/Entities/Ellie Quinndeprecated.tscn" id="1_2i38b"]
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_cwos8"]
 [ext_resource type="Script" path="res://states/camp.gd" id="3_5nbar"]
 [ext_resource type="Script" path="res://Scenes/Entities/hp_bar.gd" id="4_bgjxe"]

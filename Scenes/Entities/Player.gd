@@ -73,6 +73,7 @@ signal player_died(player_id : int)
 @export var mp : int = 200:
 	set(value):
 		if GameManager.character_selection_mode == 4:
+			mp = 600
 			return #no damagein training mode
 		mp = clamp(value,0,600)
 		if GDSync.is_gdsync_owner(self) : GDSync.call_func(change_mp,[value])
