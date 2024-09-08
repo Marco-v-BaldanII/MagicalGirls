@@ -58,7 +58,9 @@ var ui: Dictionary = {
 	"w_kick" : [0, KEY_K],
 	"s_kick" : [1, KEY_I],
 	"start" : [6,KEY_R],
-	"select" : [4, KEY_T]
+	"select" : [4, KEY_T],
+	"l_trigger" : [9,KEY_A],
+	"r_trigger" : [10,KEY_D],
 }
 signal changed_controllers
 
@@ -78,7 +80,9 @@ var action_state : Dictionary = {
 	"s_kick" : false,
 	"accept" : false,
 	"go_back" : false,
-	"start" : false
+	"start" : false,
+	"l_trigger" : false,
+	"r_trigger" : false
 }
 
 func is_ui_action_pressed(action : String)-> bool:

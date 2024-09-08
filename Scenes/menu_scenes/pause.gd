@@ -6,12 +6,12 @@ var active : bool = false
 
 func activate():
 	active = true
-	Engine.time_scale = 0
+	get_tree().paused = true
 	show()
 	node_2d.activate()
 	
 func deactivate():
 	active = false
-	Engine.time_scale = 1
+	get_tree().paused = false
 	hide()
 	node_2d.deactivate()

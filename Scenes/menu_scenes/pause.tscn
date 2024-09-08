@@ -1,15 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://ejllwsx3yeen"]
+[gd_scene load_steps=15 format=3 uid="uid://ejllwsx3yeen"]
 
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="1_4mp6j"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/pause_menu.gd" id="1_oxo45"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/pause.gd" id="1_pysv4"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/continue_button.gd" id="4_fsbig"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/quit_button.gd" id="5_1tqmp"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/options/move_option.gd" id="6_cu6ln"]
+[ext_resource type="Script" path="res://Scenes/menu_scenes/move_pages.gd" id="6_k0al4"]
+[ext_resource type="PackedScene" uid="uid://cdamr53sejuvy" path="res://Scenes/menu_scenes/AnastasiaMap.tscn" id="7_0js2q"]
+[ext_resource type="PackedScene" uid="uid://br05ovabubfam" path="res://Scenes/menu_scenes/EllieQuinnMap.tscn" id="8_wgel7"]
+[ext_resource type="PackedScene" uid="uid://ch2ran87rv8my" path="res://Scenes/menu_scenes/RitsuMap.tscn" id="9_u44mc"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_ksfll"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70dnk"]
 bg_color = Color(0.985866, 0.345646, 0.402613, 1)
 
+[sub_resource type="Texture2D" id="Texture2D_fm0yx"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("11_ksfll")
+path = "R_trigger"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Texture2D" id="Texture2D_xbqcq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("11_ksfll")
+path = "L_trigger"
+show_mode = 0
+force_type = 0
+
 [node name="Pause" type="CanvasLayer"]
+process_mode = 3
 visible = false
 script = ExtResource("1_pysv4")
 
@@ -48,12 +71,13 @@ text = "    Quit"
 alignment = 0
 script = ExtResource("5_1tqmp")
 
-[node name="Button3" type="Button" parent="Node2D/GridContainer"]
+[node name="move_option" type="Button" parent="Node2D/GridContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 text = "    Moves"
 alignment = 0
+script = ExtResource("6_cu6ln")
 
 [node name="Panel2" type="Panel" parent="."]
 offset_right = 811.0
@@ -68,3 +92,31 @@ offset_right = 870.0
 offset_bottom = 241.0
 theme_override_font_sizes/font_size = 200
 text = "Pause"
+
+[node name="MovePages" type="Node2D" parent="."]
+process_mode = 3
+visible = false
+position = Vector2(0, 35)
+script = ExtResource("6_k0al4")
+
+[node name="RitsuMap" parent="MovePages" instance=ExtResource("9_u44mc")]
+
+[node name="AnastasiaMap" parent="MovePages" instance=ExtResource("7_0js2q")]
+offset_left = 1940.0
+offset_right = 1940.0
+
+[node name="EllieQuinnMap" parent="MovePages" instance=ExtResource("8_wgel7")]
+offset_left = -1940.0
+offset_right = -1940.0
+
+[node name="TextureRect2" type="TextureRect" parent="MovePages"]
+offset_left = 1708.0
+offset_right = 1888.0
+offset_bottom = 180.0
+texture = SubResource("Texture2D_fm0yx")
+
+[node name="TextureRect" type="TextureRect" parent="MovePages"]
+offset_left = 40.0
+offset_right = 220.0
+offset_bottom = 180.0
+texture = SubResource("Texture2D_xbqcq")

@@ -100,7 +100,7 @@ size_flags_vertical = 6
 texture = ExtResource("5_dti1v")
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2280.0
@@ -125,7 +125,7 @@ offset_right = -1843.33
 offset_bottom = 603.333
 
 [node name="TextureRect2" type="TextureRect" parent="Camera2D"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -13.3334

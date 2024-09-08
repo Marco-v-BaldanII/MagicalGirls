@@ -30,7 +30,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3alqu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_htug2"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -1061,7 +1061,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_3alqu")
+process_material = SubResource("ShaderMaterial_htug2")
 texture = ExtResource("2_obeqb")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
