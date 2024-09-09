@@ -41,7 +41,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 3.9, 7.73333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(482, 37), Vector2(482, -20), Vector2(482, 37)]
+"values": [Vector2(436, 37), Vector2(436, -20), Vector2(436, 37)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bpane"]
@@ -80,9 +80,9 @@ texture = ExtResource("7_vdw78")
 [node name="Label" type="Label" parent="."]
 z_index = 5
 layout_mode = 0
-offset_left = 1083.0
+offset_left = 1101.0
 offset_top = 77.0
-offset_right = 1374.0
+offset_right = 1392.0
 offset_bottom = 367.0
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
 theme_override_colors/font_shadow_color = Color(0.466667, 0, 0.309804, 0.407843)
@@ -95,10 +95,10 @@ text = "Ritsu"
 [node name="Label2" type="Label" parent="."]
 z_index = 5
 layout_mode = 0
-offset_left = 1088.0
-offset_top = 274.0
-offset_right = 30234.0
-offset_bottom = 1248.0
+offset_left = 1004.0
+offset_top = 299.0
+offset_right = 30150.0
+offset_bottom = 1273.0
 scale = Vector2(0.696023, 0.696023)
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 0.666667)
 theme_override_constants/line_spacing = -50
@@ -106,20 +106,16 @@ theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
 theme_override_fonts/font = ExtResource("9_aceli")
 theme_override_font_sizes/font_size = 75
-text = "Since she was little, Ritsu has always 
-dreamed of becoming a magical girl. 
-In  her  case,  being  the  kind  of fan
-who  has  a  room  full of figures and 
-practically  wallpapered  with photos 
-of her idols actually paid off, as Ritsu 
-trained tirelessly until she mastered 
-her   magical  abilities.  Despite  the 
-mockery  and   disbelief   of   others,
-she  never   lost  sight  of   her  goal, 
-and now she’s found the opportunity 
-of a lifetime. She’s ready to give it her 
-all to prove she’s got what it takes to 
-be a real magical girl.
+text = "Since she was little, Ritsu has always dreamed of 
+becoming a magical girl. In  her  case,  being  the
+kind  of fan who  has a  room  full of figures and 
+practically  wallpapered  with photos of her idols
+actually paid off, as Ritsu trained tirelessly until she
+mastered her   magical  abilities. Despite  the mockery
+anddisbelief   of   others, she  never   lost sight  of   her 
+goal, and now she’s found the opportunity of a lifetime.
+She’s ready to give it her all to prove she’s got what it 
+takes to be a real magical girl.
 "
 
 [node name="Normal attacks" type="Label" parent="."]
@@ -158,10 +154,10 @@ s kick - 180 degree sweep
 [node name="Special attacks + combos" type="Label" parent="."]
 z_index = 5
 layout_mode = 0
-offset_left = 199.0
-offset_top = 179.0
-offset_right = 29345.0
-offset_bottom = 1483.0
+offset_left = 1004.0
+offset_top = 739.0
+offset_right = 30150.0
+offset_bottom = 2043.0
 scale = Vector2(0.696023, 0.696023)
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
 theme_override_constants/line_spacing = -50
