@@ -100,7 +100,6 @@ position = Vector2(0, 35)
 script = ExtResource("6_k0al4")
 
 [node name="RitsuMap" parent="MovePages" instance=ExtResource("9_u44mc")]
-visible = true
 
 [node name="AnastasiaMap" parent="MovePages" instance=ExtResource("7_0js2q")]
 offset_left = 1940.0

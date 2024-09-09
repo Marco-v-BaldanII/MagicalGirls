@@ -307,6 +307,8 @@ func _on_start_button_button_down() -> void:
 			selected_fighter2 = arcade_route.oponents[0] #first oponent
 			start_match()
 
+var transitioned : bool = false
+
 func start_match():
 	if mode != match_mode.ONLINE_2P:
 		if selected_fighter == "Random": selected_fighter = random_character()
@@ -318,14 +320,16 @@ func start_match():
 		p2_path = "res://Scenes/Entities/CPU/"
 		selected_fighter2 += "_AI" #append suffix
 	
-	if true:
+	if not transitioned:
 			if mode != match_mode.ONLINE_2P:
 				GameManager.p1 = load("res://Scenes/Entities/"+selected_fighter+".tscn")
 				GameManager.p2 = load(p2_path + selected_fighter2+".tscn")
 			if mode == match_mode.ARCADE:
 				SceneWrapper.change_scene(current_map)
+				transitioned = true
 			elif mode != match_mode.ONLINE_2P:
 				SceneWrapper.change_scene(load("res://Scenes/menu_scenes/StageSelectionScreen.tscn"))
+				transitioned = true
 			elif GameManager.is_host:
 					if selected_fighter == "Random": selected_fighter = random_character()
 					if selected_fighter2 == "Random" : selected_fighter2 = random_character()
@@ -360,6 +364,7 @@ func online_random_map(stage : String):
 	GameManager.back_ground = load("res://Scenes/Stages/parallax/" + stage + ".tscn")
 
 func start_online_match():
+	transitioned = true
 	SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
 
 var action_state : Dictionary = {

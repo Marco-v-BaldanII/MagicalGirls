@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_sb37j"]
 [ext_resource type="Script" path="res://states/camp.gd" id="4_44hm8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g1dqf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kjxwb"]
 shader = ExtResource("2_cyt34")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -13,9 +13,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0320513
+shader_parameter/tex_anim_offset = 0.0512821
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsblj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m5m4x"]
 shader = ExtResource("2_cyt34")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -23,19 +23,20 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0320513
+shader_parameter/tex_anim_offset = 0.0512821
 
 [node name="Anastasia_AI" instance=ExtResource("1_iq8tj")]
+process_mode = 1
 ai_player = true
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 6
+frame = 9
 
 [node name="GPUParticles2D" parent="Sprite2D" index="0"]
-process_material = SubResource("ShaderMaterial_g1dqf")
+process_material = SubResource("ShaderMaterial_kjxwb")
 
 [node name="GPUParticles2D2" parent="Sprite2D" index="1"]
-process_material = SubResource("ShaderMaterial_gsblj")
+process_material = SubResource("ShaderMaterial_m5m4x")
 
 [node name="AI_StateMachine" parent="." index="14" instance=ExtResource("2_sb37j")]
 
