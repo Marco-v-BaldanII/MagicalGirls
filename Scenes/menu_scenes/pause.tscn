@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://ejllwsx3yeen"]
 
-[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="1_4mp6j"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/pause_menu.gd" id="1_oxo45"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/pause.gd" id="1_pysv4"]
+[ext_resource type="PackedScene" uid="uid://ci1182rw4g6ub" path="res://Scenes/menu_scenes/cursor.tscn" id="3_gk3fp"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/continue_button.gd" id="4_fsbig"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/quit_button.gd" id="5_1tqmp"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/options/move_option.gd" id="6_cu6ln"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_ksfll"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70dnk"]
-bg_color = Color(0.985866, 0.345646, 0.402613, 1)
+bg_color = Color(0.466667, 0, 0.309804, 1)
 
 [sub_resource type="Texture2D" id="Texture2D_fm0yx"]
 resource_local_to_scene = false
@@ -43,10 +43,8 @@ offset_bottom = 1086.0
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("1_oxo45")
 
-[node name="cursor" type="Sprite2D" parent="Node2D"]
-position = Vector2(67, 369)
-scale = Vector2(0.648438, 0.648438)
-texture = ExtResource("1_4mp6j")
+[node name="cursor2" parent="Node2D" instance=ExtResource("3_gk3fp")]
+position = Vector2(64, 358)
 
 [node name="GridContainer" type="GridContainer" parent="Node2D"]
 offset_left = 129.0
@@ -82,6 +80,7 @@ script = ExtResource("6_cu6ln")
 [node name="Panel2" type="Panel" parent="."]
 offset_right = 811.0
 offset_bottom = 169.0
+scale = Vector2(0.922984, 0.926515)
 theme_override_styles/panel = SubResource("StyleBoxFlat_70dnk")
 
 [node name="Label" type="Label" parent="Panel2"]
@@ -90,6 +89,7 @@ offset_left = 57.0
 offset_top = -49.0
 offset_right = 870.0
 offset_bottom = 241.0
+theme_override_colors/font_color = Color(0.419608, 0.858824, 1, 1)
 theme_override_font_sizes/font_size = 200
 text = "Pause"
 
