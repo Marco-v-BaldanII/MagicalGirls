@@ -1,7 +1,7 @@
 extends Node2D
 class_name PauseMenu
 
-@onready var cursor = $cursor
+@onready var cursor = $cursor2
 @onready var grid_container = $GridContainer
 @export var cursor_offset : int = 5
 @export var timer : float = 0.1 
