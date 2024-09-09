@@ -54,10 +54,10 @@ text = "Anastasia"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 969.0
-offset_top = 326.0
-offset_right = 30115.0
-offset_bottom = 1300.0
+offset_left = 965.0
+offset_top = 270.0
+offset_right = 30111.0
+offset_bottom = 1244.0
 scale = Vector2(0.696023, 0.696023)
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 0.666667)
 theme_override_constants/line_spacing = -50
@@ -75,7 +75,6 @@ the test in the tournament, and, why not, claim
 the glory of a well-deserved victory paid in vodka."
 
 [node name="Normal attacks" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 199.0
 offset_top = 179.0
@@ -108,10 +107,10 @@ s kick - Grenade
 [node name="Special attacks + combos" type="Label" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 199.0
-offset_top = 179.0
-offset_right = 29345.0
-offset_bottom = 1483.0
+offset_left = 963.0
+offset_top = 647.0
+offset_right = 30109.0
+offset_bottom = 1951.0
 scale = Vector2(0.696023, 0.696023)
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
 theme_override_constants/line_spacing = -50

@@ -507,6 +507,7 @@ scale = Vector2(1931, 1080)
 texture = ExtResource("7_bkjje")
 
 [node name="RitsuFrame" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 position = Vector2(1438, 319)
 texture = ExtResource("8_lmgve")
 script = ExtResource("9_fc4pr")
