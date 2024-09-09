@@ -9,6 +9,7 @@ const BALLOON = preload("res://Dialogues/balloon.tscn")
 var baloon = null
 @onready var background: Node = $Background
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var inverted_shader: Sprite2D = $CanvasLayer/inverted_shader
 
 
 func _ready():
@@ -185,3 +186,28 @@ func _input(event: InputEvent) -> void:
 	
 func match_ko():
 	animation_player.play("K.O")
+
+@onready var action_lines: Sprite2D = $CanvasLayer/ActionLines
+
+func inverted_effect(pos : Vector2):
+	
+	GameManager.camera_shake()
+	inverted_shader.show()
+	$CanvasLayer/RitsuFrame.shake_routine()
+	
+	action_lines.global_position = pos
+	action_lines.scale = Vector2(12,12)
+	var tween := create_tween()
+	tween.tween_property(action_lines,"scale",Vector2(4.5,4.5),0.3)
+	tween.set_process_mode(Tween.TWEEN_PROCESS_IDLE)
+	
+	action_lines.show()
+	
+	GameManager.hit_stop_verylong()
+	await get_tree().create_timer(0.4,true,false,true).timeout
+	GameManager.camera_shake()
+	inverted_shader.hide()
+	action_lines.scale = Vector2(12,12)
+	action_lines.hide()
+	#var tween2 = create_tween()
+	#tween2.tween_property(inverted_shader,"modulate",Color(1,1,1,0),3)

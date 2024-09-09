@@ -60,6 +60,12 @@ func hit_stop_long():
 	Engine.time_scale = 0
 	await get_tree().create_timer(0.16,true,false,true).timeout
 	Engine.time_scale = 1
+	
+func hit_stop_verylong():
+	#GDSync.call_func(hit_stop_long)
+	get_tree().paused = true
+	await get_tree().create_timer(0.3,true,false,true).timeout
+	get_tree().paused = false
 
 func camera_shake():
 	#GDSync.call_func(camera_shake)

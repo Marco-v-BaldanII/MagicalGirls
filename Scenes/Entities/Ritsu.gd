@@ -53,6 +53,27 @@ func perform_move():
 					
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						
+						if specials.contains("ulti"):
+							sprite_2d.modulate = Color(0,0.39,0.95,1)
+							match_setting.inverted_effect(global_position)
+							
+							var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+
+							GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+							instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+							
+							clear_buffer()
+							await get_tree().create_timer(0.4).timeout
+							sprite_2d.modulate = Color.WHITE
+							await lag_finished
+							
+							add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
+							
+							#await get_tree().create_timer(0.1).timeout
+							
+							return
+						
+						
 						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 						GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
@@ -64,7 +85,7 @@ func perform_move():
 						
 						add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
 						#Here will call the animation in the animation tree , which will have it's hitstun
-
+					
 						return
 	
 	

@@ -1,10 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cf18ypury8705"]
+[gd_scene load_steps=22 format=3 uid="uid://cf18ypury8705"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/match.gd" id="1_to0e0"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="2_3djuc"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera_move.gd" id="2_8b5io"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="3_mwgqu"]
 [ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="5_fqbbx"]
+[ext_resource type="Shader" path="res://Scenes/Stages/inverted.gdshader" id="6_v4pcs"]
+[ext_resource type="Texture2D" uid="uid://dumwi1fvk4s57" path="res://star.webp" id="7_bkjje"]
+[ext_resource type="Texture2D" uid="uid://d3gl7n0d1u206" path="res://Scenes/Entities/RitsuFrame.png" id="8_lmgve"]
+[ext_resource type="Script" path="res://Scenes/Stages/ritsu_frame.gd" id="9_fc4pr"]
+[ext_resource type="Texture2D" uid="uid://bt55iwjc5eike" path="res://Scenes/Entities/action_lines.png" id="10_niy4a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cj0l7"]
 size = Vector2(116, 1024)
@@ -307,7 +312,11 @@ distance = 0.378624
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vob0p"]
 distance = -9.00903
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qusk"]
+shader = ExtResource("6_v4pcs")
+
 [node name="TestMap2" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_to0e0")
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["floor"]]
@@ -444,9 +453,9 @@ horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CanvasLayer"]
 offset_left = 151.0
-offset_top = 961.0
+offset_top = 1123.0
 offset_right = 2069.0
-offset_bottom = 1859.0
+offset_bottom = 2021.0
 theme_override_colors/font_color = Color(0.937255, 0.772549, 0.317647, 1)
 theme_override_colors/font_outline_color = Color(0.494118, 0.172549, 0.286275, 1)
 theme_override_constants/outline_size = 40
@@ -476,3 +485,21 @@ theme_override_font_sizes/font_size = 230
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="inverted_shader" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_1qusk")
+scale = Vector2(1931, 1080)
+texture = ExtResource("7_bkjje")
+
+[node name="RitsuFrame" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(1438, 319)
+texture = ExtResource("8_lmgve")
+script = ExtResource("9_fc4pr")
+
+[node name="ActionLines" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(526, 635)
+scale = Vector2(9.26477, 9.26477)
+texture = ExtResource("10_niy4a")
