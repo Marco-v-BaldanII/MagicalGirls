@@ -55,13 +55,13 @@ func perform_move():
 						
 						if specials.contains("ulti"):
 							sprite_2d.modulate = Color(0,0.39,0.95,1)
-							match_setting.inverted_effect(global_position, direction)
-							if GameManager.online: GDSync.call_func(match_setting.inverted_effect, [global_position, direction])
+							special_effect_wrapper(global_position, direction)
+							if GameManager.online: GDSync.call_func(special_effect_wrapper, [global_position, direction])
 							
 							var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
 							GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-							instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)
+							instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)                      
 							
 							clear_buffer()
 							await get_tree().create_timer(0.4).timeout
@@ -265,3 +265,7 @@ func set_hitboxes(player_id : int):
 		hurt_box.set_collision_layer_value(5,true)
 		head_hurt_box.set_collision_mask_value(2,true)
 		hurt_box_layer = 5
+
+func special_effect_wrapper(glob_pos : Vector2, dir : String):
+	match_setting.inverted_effect(glob_pos, dir)
+	
