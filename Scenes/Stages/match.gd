@@ -189,11 +189,11 @@ func match_ko():
 
 @onready var action_lines: Sprite2D = $CanvasLayer/ActionLines
 
-func inverted_effect(pos : Vector2):
+func inverted_effect(pos : Vector2, dir : String = "left"):
 	
 	GameManager.camera_shake()
 	inverted_shader.show()
-	$CanvasLayer/RitsuFrame.shake_routine()
+	$CanvasLayer/RitsuFrame.shake_routine(dir)
 	
 	action_lines.global_position = pos
 	action_lines.scale = Vector2(12,12)
@@ -211,3 +211,6 @@ func inverted_effect(pos : Vector2):
 	action_lines.hide()
 	#var tween2 = create_tween()
 	#tween2.tween_property(inverted_shader,"modulate",Color(1,1,1,0),3)
+
+func call_hit_stop():
+	GameManager.hit_stop_long()

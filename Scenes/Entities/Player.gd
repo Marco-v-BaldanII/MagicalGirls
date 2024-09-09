@@ -585,13 +585,13 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 						blocked = false
 				else:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD and is_on_floor() :
-						hp -= oponent.move_dmg[oponent.last_used_move] /3
+						deal_dmg(true)
 						sprite_2d.modulate = Color.SKY_BLUE
 						oponent.add_lag(4)
 						blocked = true
 					else:
 						blocked = false
-						hp -= oponent.move_dmg[oponent.last_used_move]
+						deal_dmg(false)
 						hit_position = "body"
 			else:
 
@@ -608,12 +608,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 						blocked = false
 				else:
 					if moving_backwards and hit_pos < DOWN_HIT_POS_THRESHOLD  and is_on_floor() :
-						hp -= oponent.move_dmg[oponent.last_used_move] /3
+						deal_dmg(true)
 						sprite_2d.modulate = Color.SKY_BLUE
 						oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 						blocked = true
 					else:
-						hp -= oponent.move_dmg[oponent.last_used_move] 
+						deal_dmg(false)
 						blocked = false
 						hit_position = "body"
 		else : #Hit body while crouching
@@ -637,7 +637,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 				if area.is_in_group("strong"):
 
 					strong_knock = true
-					hp -= oponent.move_dmg[oponent.last_used_move] /3
+					deal_dmg(false)
 					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
 					sprite_2d.modulate = Color.SKY_BLUE
 				else:
@@ -645,7 +645,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 					strong_knock = false
 					sprite_2d.modulate = Color.SKY_BLUE
 					oponent.add_lag(oponent.move_vulnerable_on_shield[oponent.last_used_move])
-					hp -= oponent.move_dmg[oponent.last_used_move] /3
+					deal_dmg(false)
 	else: #hit Head while crouching
 		if crouching:
 			blocked = false
@@ -667,6 +667,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 				else:
 					GameManager.hit_stop_short()
 					strong_knock = false
+					
 					hp -= oponent.move_dmg[oponent.last_used_move] 
 					hit_position = "head"
 					
@@ -981,3 +982,15 @@ func play_sfx(key : String):
 	if sfx.has(key) and not sfx[key] is bool:
 		audio_stream.stream = sfx[key]
 		audio_stream.play()
+
+func deal_dmg(blocked : bool):
+	if oponent.move_dmg.has(oponent.last_used_move):
+		if blocked:
+			hp -= oponent.move_dmg[oponent.last_used_move] / 3
+		else:
+			hp -= oponent.move_dmg[oponent.last_used_move] 
+	else: 
+		if blocked :
+			hp -= 8
+		else:
+			hp -= 2

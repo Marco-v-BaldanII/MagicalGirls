@@ -55,7 +55,7 @@ func perform_move():
 						
 						if specials.contains("ulti"):
 							sprite_2d.modulate = Color(0,0.39,0.95,1)
-							match_setting.inverted_effect(global_position)
+							match_setting.inverted_effect(global_position, direction)
 							
 							var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 

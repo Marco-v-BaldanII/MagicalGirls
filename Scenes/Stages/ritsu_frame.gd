@@ -1,6 +1,7 @@
 extends Sprite2D
 
 var og_pos : Vector2
+var og_pos_left : Vector2 = Vector2(506,319)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	og_pos = position
@@ -10,7 +11,14 @@ var shake_amount : int = 16
 
 var shake: bool = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func shake_routine():
+func shake_routine(dir : String):
+	if dir == "left":
+		position = og_pos
+		scale = Vector2(1,1)
+	else:
+		position = og_pos_left
+		scale = Vector2(-1,1)
+	
 	if shake:
 		show()
 		var i = 0
