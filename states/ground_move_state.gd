@@ -19,7 +19,11 @@ func enter():
 		player.animation_tree["parameters/conditions/jump"] = false
 		player.animation_tree["parameters/conditions/land"] = true
 		player.animation_tree.set("parameters/playback/current", "idle_anim")
-		return
+	
+	await get_tree().create_timer(0.01667 * 9).timeout
+	if player.is_on_floor() and player.can_move:
+		player.jump_lag = 0
+	
 
 
 
@@ -62,7 +66,7 @@ func physics_update(delta : float):
 				GDSync.call_func(idle_anim)
 
 	if player.is_on_floor() and player.can_move: #Can move is turned on by the animation finished method
-		player.jump_lag -= delta
+		#player.jump_lag -= delta
 		player.moving_backwards = false
 		if(player.input_direction > 0 and player.direction == "left") or (player.input_direction < 0 and player.direction == "right"):
 			

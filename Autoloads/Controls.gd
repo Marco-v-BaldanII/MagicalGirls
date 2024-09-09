@@ -57,7 +57,7 @@ var ui: Dictionary = {
 	"s_punch" : [3, KEY_U],
 	"w_kick" : [0, KEY_K],
 	"s_kick" : [1, KEY_I],
-	"start" : [6,KEY_R],
+	"start" : [6,KEY_R, KEY_ESCAPE],
 	"select" : [4, KEY_T],
 	"l_trigger" : [9,KEY_A],
 	"r_trigger" : [10,KEY_D],

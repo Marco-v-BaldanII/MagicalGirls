@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0qbn6ue78ryd"]
+
+[ext_resource type="Script" path="res://Scenes/retry.gd" id="1_gci3x"]
+[ext_resource type="Texture2D" uid="uid://df8g0yxsec1nb" path="res://Assets/portraits/Ritsu.png" id="1_p2c82"]
+[ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="1_xgstd"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_7x1hy"]
+[ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="2_r8ej8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1t70n"]
+shader = ExtResource("1_xgstd")
+
+[sub_resource type="Texture2D" id="Texture2D_buwnq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_7x1hy")
+path = "settings"
+show_mode = 0
+force_type = 0
+
+[sub_resource type="Gradient" id="Gradient_jw3ws"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0u0eg"]
+gradient = SubResource("Gradient_jw3ws")
+
+[node name="Retry" type="Node2D"]
+script = ExtResource("1_gci3x")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+modulate = Color(0.018277, 0.305814, 0.517775, 1)
+z_index = -9
+texture_repeat = 2
+material = SubResource("ShaderMaterial_1t70n")
+offset_left = -649.0
+offset_top = -336.0
+offset_right = 1271.0
+offset_bottom = 744.0
+scale = Vector2(1.77497, 1.7846)
+texture = ExtResource("2_r8ej8")
+
+[node name="portrait" type="Sprite2D" parent="."]
+position = Vector2(401, 540)
+texture = ExtResource("1_p2c82")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 91.0
+offset_top = 28.0
+offset_right = 700.0
+offset_bottom = 318.0
+theme_override_font_sizes/font_size = 200
+text = "Continue ?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 737.0
+offset_top = 104.0
+offset_right = 870.0
+offset_bottom = 237.0
+texture = SubResource("Texture2D_buwnq")
+
+[node name="time_label" type="Label" parent="."]
+offset_left = 1146.0
+offset_top = -381.0
+offset_right = 1733.0
+offset_bottom = 1791.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.709804)
+theme_override_constants/shadow_offset_x = 40
+theme_override_constants/shadow_offset_y = 60
+theme_override_font_sizes/font_size = 1500
+text = "9"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 816.0
+offset_right = 886.0
+offset_bottom = 1046.0
+theme_override_constants/line_spacing = -60
+theme_override_font_sizes/font_size = 100
+text = "Looks like you didn't study enough for this fight !"
+autowrap_mode = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(942.22, 550.34)
+rotation = -1.5708
+scale = Vector2(4.48703, 2039.78)
+texture = SubResource("GradientTexture1D_0u0eg")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.25614, 0.260047, 0.220691, 1)

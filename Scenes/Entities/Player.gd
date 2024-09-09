@@ -285,12 +285,12 @@ func _process(delta):
 		mp += 10
 		mp_timer = 0.75
 	
-	if input_made:
+	if input_buffer.size() > 0:
 		buffer_time -= delta
 	
-		if buffer_time <= 0 and (input_buffer.size() > 0 and (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))):
+		if buffer_time <= 0 and (input_buffer.size() > 0 and (input_buffer.back().contains("punch") or input_buffer.back().contains("kick") or input_buffer.back().contains("jump"))):
 			if input_buffer.size() > 0: perform_move()
-			clear_buffer()
+			if not input_buffer.back().contains("jump") : clear_buffer()
 		elif buffer_time <= -(0.0167 * INPUT_EXTRA_BUFFER):
 			if input_buffer.size() > 0: perform_move()
 			clear_buffer()
@@ -502,10 +502,12 @@ func perform_move():
 			clear_buffer()
 			GDSync.call_func(_sync_move,["air_" + move])
 		GDSync.call_func(store_last_used_move,[last_used_move])
-	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching and jump_lag <= 0:
+	if input_buffer.size() > 0 and  input_buffer.back().contains("jump") and is_on_floor() and not crouching and jump_lag <= 0:
 
 		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
 		state_machine.on_child_transition(state_machine.current_state, "air_move")
+		
+	
 
 func _sync_move(animation : String):
 

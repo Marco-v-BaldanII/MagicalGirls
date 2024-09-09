@@ -78,7 +78,7 @@ func physics_update(delta : float):
 
 		
 		if player.input_buffer.has("jump") and player.is_on_floor() and player.jump_lag <= 0 and not player.lag:
-			player.jump_lag = 100
+			player.jump_lag = 9
 			jump_anim()
 			GDSync.expose_func(jump_anim)
 			GDSync.call_func(jump_anim)

@@ -12,10 +12,16 @@ var baloon = null
 
 
 func _ready():
+	if GameManager.p1 != null and GameManager.p2 != null:
+		p1 = GameManager.p1.instantiate()
+		p2  = GameManager.p2.instantiate()
+	else:
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+		return
 	
-	p1 = GameManager.p1.instantiate()
-	p2  = GameManager.p2.instantiate()
-	
+	if not is_instance_valid(p1) or not is_instance_valid(p2):
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
+		return
 
 	p1.global_position = $spawn_p1.global_position
 	p2.global_position = $spawn_p2.global_position
@@ -121,7 +127,7 @@ var time : float = 99.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if started:
+	if started and  GameManager.character_selection_mode != 4:
 		time -= delta
 		timer_label.text = str(floori(time))
 		

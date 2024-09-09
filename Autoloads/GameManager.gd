@@ -117,8 +117,9 @@ func match_results(winner_id : int):
 		elif character_selection_mode ==  1:
 			back_to_character_selection(); GDSync.call_func(back_to_character_selection)
 		elif character_selection_mode == 3 : #Arcade
-			arcade_index += 1
-			back_to_character_selection()
+			SceneWrapper.change_scene(load("res://Scenes/retry.tscn"))
+			pass
+			#back_to_character_selection()
 	else:
 		SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
 
@@ -128,3 +129,9 @@ func total_set_matches():
 func back_to_character_selection():
 
 	SceneWrapper.change_scene(load( "res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))
+
+func load_arcade_battle():
+	if FileAccess.file_exists("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn"):
+				
+				p2 = load("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn")
+				SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))

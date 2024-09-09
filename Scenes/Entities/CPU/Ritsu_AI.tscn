@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Entities/CPU/camp_ritsu.gd" id="4_cboxs"]
 [ext_resource type="AudioStream" uid="uid://bdyxwxrw7s45i" path="res://Assets/SFX/swing 2.wav" id="6_ueyg6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wt3ri"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdhj5"]
 shader = ExtResource("2_335ic")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -15,9 +15,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.145
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0192308
+shader_parameter/tex_anim_offset = 0.0448718
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8uelc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdjf1"]
 shader = ExtResource("2_335ic")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -25,20 +25,20 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.025641
+shader_parameter/tex_anim_offset = 0.0448718
 
 [node name="NewRitsu2" instance=ExtResource("1_kmcq4")]
 ai_player = true
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 2
+frame = 7
 
 [node name="GPUParticles2D" parent="Sprite2D" index="0"]
 modulate = Color(1, 1, 1, 0.368627)
-process_material = SubResource("ShaderMaterial_wt3ri")
+process_material = SubResource("ShaderMaterial_qdhj5")
 
 [node name="GPUParticles2D2" parent="Sprite2D" index="1"]
-process_material = SubResource("ShaderMaterial_8uelc")
+process_material = SubResource("ShaderMaterial_mdjf1")
 
 [node name="portrait" parent="CanvasLayer/UI/hpBar_" index="0"]
 offset_left = 0.0

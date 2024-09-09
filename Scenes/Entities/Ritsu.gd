@@ -118,6 +118,7 @@ func perform_move():
 		if enough_mp(50):
 			var move : String = "s_punch"
 			if crouching: move = "crouch_s_punch"
+			$AnimationTree["parameters/conditions/not_" + move] = false
 			$AnimationTree["parameters/conditions/" + move] = true
 			
 			GDSync.call_func(_sync_move,[move])
@@ -125,6 +126,10 @@ func perform_move():
 			var star = instanciate_star()
 			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
 			GDSync.call_func(instanciate_star)
+			while is_mapped_action_pressed("s_punch"):
+				await get_tree().create_timer(0.0167).timeout
+			$AnimationTree["parameters/conditions/not_" + move] = true
+			$AnimationTree["parameters/conditions/" + move] = false
 
 		
 	#diagonal non chargeable projectile on  air
@@ -149,8 +154,7 @@ func perform_move():
 					await get_tree().create_timer(0.01667).timeout
 			can_move = true
 			#input_direction = 0
-		
-	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching and jump_lag < 0:
+	if input_buffer.size() > 0 and input_buffer.back().contains("jump") and is_on_floor() and not crouching and jump_lag <= 0:
 		#Force the player to throw the projectile when jumping
 		if current_start_projectile != null:
 			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
@@ -195,8 +199,16 @@ func _physics_process(delta: float) -> void:
 		
 			current_start_projectile = null
 
-			
-			
+	#if input_buffer.size() > 0:
+	#if input_buffer.back().contains("jump") and is_on_floor() and not crouching and jump_lag <= 0:
+		##Force the player to throw the projectile when jumping
+		#if current_start_projectile != null:
+			#current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+			#current_start_projectile = null
+			#
+		#joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
+#
+		#state_machine.on_child_transition(state_machine.current_state, "air_move")
 
 
 func _on_body_body_entered(body: Node2D) -> void:
