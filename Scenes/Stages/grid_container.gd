@@ -423,7 +423,11 @@ func remap_controllers():
 
 
 func _on_go_back_button_down() -> void:
-	if mode == match_mode.ONLINE_2P: return
+	if mode == match_mode.ONLINE_2P: 
+		GDSync.close_lobby()
+		GDSync.stop_multiplayer()
+		GameManager.online = false
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))
 	
 	elif mode == match_mode.LOCAL_2P and selected_fighter == "" and selected_fighter2 == "":
 		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn"))

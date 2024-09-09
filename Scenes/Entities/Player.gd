@@ -994,3 +994,13 @@ func deal_dmg(blocked : bool):
 			hp -= 8
 		else:
 			hp -= 2
+
+func special_effect_wrapper(glob_pos : Vector2, dir : String):
+	
+	if GameManager.online and  GDSync.is_gdsync_owner(self):
+		await get_tree().create_timer(0.1).timeout
+	sprite_2d.modulate = Color(0,0.39,0.95,1)
+	match_setting.inverted_effect(glob_pos, dir, character_name)
+	await get_tree().create_timer(0.4).timeout
+	sprite_2d.modulate = Color.WHITE
+	

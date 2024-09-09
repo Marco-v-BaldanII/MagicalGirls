@@ -86,6 +86,23 @@ func perform_move():
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 							
+								if specials.contains("ulti"):
+									special_effect_wrapper(global_position, direction)
+									if GameManager.online: 
+										GDSync.call_func(special_effect_wrapper, [global_position, direction])
+									
+									var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
+
+									GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
+									instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)                      
+									
+									clear_buffer()
+
+									await lag_finished
+									
+									add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
+
+									return
 							
 								var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
