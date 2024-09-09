@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="5_fqbbx"]
 [ext_resource type="Shader" path="res://Scenes/Stages/inverted.gdshader" id="6_v4pcs"]
 [ext_resource type="Texture2D" uid="uid://dumwi1fvk4s57" path="res://star.webp" id="7_bkjje"]
-[ext_resource type="Texture2D" uid="uid://d3gl7n0d1u206" path="res://Scenes/Entities/RitsuFrame.png" id="8_lmgve"]
+[ext_resource type="Texture2D" uid="uid://d3gl7n0d1u206" path="res://Assets/Ulti/Ritsu.png" id="8_lmgve"]
 [ext_resource type="Script" path="res://Scenes/Stages/ritsu_frame.gd" id="9_fc4pr"]
 [ext_resource type="Texture2D" uid="uid://bt55iwjc5eike" path="res://Scenes/Entities/action_lines.png" id="10_niy4a"]
 
@@ -467,9 +467,9 @@ horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CanvasLayer"]
 offset_left = 151.0
-offset_top = 961.0
+offset_top = 1123.0
 offset_right = 2069.0
-offset_bottom = 1859.0
+offset_bottom = 2021.0
 theme_override_colors/font_color = Color(0.937255, 0.772549, 0.317647, 1)
 theme_override_colors/font_outline_color = Color(0.494118, 0.172549, 0.286275, 1)
 theme_override_constants/outline_size = 40

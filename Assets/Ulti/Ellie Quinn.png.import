@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3gl7n0d1u206"
-path="res://.godot/imported/RitsuFrame.png-14322b2a3c96075a00679ef1d385da97.ctex"
+uid="uid://cnkmgoi8mpq2m"
+path="res://.godot/imported/Ellie Quinn.png-2d50f2d122350161227bf9615fede963.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Entities/RitsuFrame.png"
-dest_files=["res://.godot/imported/RitsuFrame.png-14322b2a3c96075a00679ef1d385da97.ctex"]
+source_file="res://Assets/Ulti/Ellie Quinn.png"
+dest_files=["res://.godot/imported/Ellie Quinn.png-2d50f2d122350161227bf9615fede963.ctex"]
 
 [params]
 

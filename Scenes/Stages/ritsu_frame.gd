@@ -9,9 +9,20 @@ func _ready() -> void:
 
 var shake_amount : int = 16
 
+var textures : Dictionary = {
+	
+	"Ritsu" : preload("res://Assets/Ulti/Ritsu.png"),
+	"Ellie Quinn" : preload("res://Assets/Ulti/Ellie Quinn.png"),
+	"Anastasia" : preload("res://Assets/Ulti/Anastasia.png")
+	
+}
+
 var shake: bool = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func shake_routine(dir : String):
+func shake_routine(dir : String, char_name : String):
+	if textures.has(char_name):
+		texture = textures[char_name]
+	
 	if dir == "left":
 		position = og_pos
 		scale = Vector2(1,1)

@@ -54,11 +54,9 @@ func perform_move():
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						
 						if specials.contains("ulti"):
-							sprite_2d.modulate = Color(0,0.39,0.95,1)
 							special_effect_wrapper(global_position, direction)
 							if GameManager.online: 
 								GDSync.call_func(special_effect_wrapper, [global_position, direction])
-
 							
 							var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
@@ -66,8 +64,7 @@ func perform_move():
 							instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)                      
 							
 							clear_buffer()
-							await get_tree().create_timer(0.4).timeout
-							sprite_2d.modulate = Color.WHITE
+
 							await lag_finished
 							
 							add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
@@ -269,7 +266,11 @@ func set_hitboxes(player_id : int):
 		hurt_box_layer = 5
 
 func special_effect_wrapper(glob_pos : Vector2, dir : String):
-	if GameManager.oline and not GDSync.is_gdsync_owner(self):
-		await get_tree().create_timer(0.5).timeout
-	match_setting.inverted_effect(glob_pos, dir)
+	
+	if GameManager.online and  GDSync.is_gdsync_owner(self):
+		await get_tree().create_timer(0.1).timeout
+	sprite_2d.modulate = Color(0,0.39,0.95,1)
+	match_setting.inverted_effect(glob_pos, dir, character_name)
+	await get_tree().create_timer(0.4).timeout
+	sprite_2d.modulate = Color.WHITE
 	
