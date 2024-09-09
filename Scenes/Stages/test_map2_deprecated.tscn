@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://clal3sy8l41kj" path="res://Assets/UI/Dongle-Bold.ttf" id="5_fqbbx"]
 [ext_resource type="Shader" path="res://Scenes/Stages/inverted.gdshader" id="6_v4pcs"]
 [ext_resource type="Texture2D" uid="uid://dumwi1fvk4s57" path="res://star.webp" id="7_bkjje"]
-[ext_resource type="Texture2D" uid="uid://d3gl7n0d1u206" path="res://Scenes/Entities/RitsuFrame.png" id="8_lmgve"]
+[ext_resource type="Texture2D" uid="uid://d3gl7n0d1u206" path="res://Assets/Ulti/Ritsu.png" id="8_lmgve"]
 [ext_resource type="Script" path="res://Scenes/Stages/ritsu_frame.gd" id="9_fc4pr"]
 [ext_resource type="Texture2D" uid="uid://bt55iwjc5eike" path="res://Scenes/Entities/action_lines.png" id="10_niy4a"]
 

@@ -189,11 +189,11 @@ func match_ko():
 
 @onready var action_lines: Sprite2D = $CanvasLayer/ActionLines
 
-func inverted_effect(pos : Vector2, dir : String = "left"):
+func inverted_effect(pos : Vector2, dir : String = "left", char_name : String = "Ritsu"):
 	
 	GameManager.camera_shake()
 	inverted_shader.show()
-	$CanvasLayer/RitsuFrame.shake_routine(dir)
+	$CanvasLayer/RitsuFrame.shake_routine(dir, char_name)
 	
 	action_lines.global_position = pos
 	action_lines.scale = Vector2(12,12)
