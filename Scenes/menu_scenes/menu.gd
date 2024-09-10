@@ -36,6 +36,11 @@ func is_descendant_of(node: Node, potential_ancestor: Node) -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	if not MenuMusic.audio_stream_player.is_playing():
+		MenuMusic.play()
+	
+	
 	if not _is_active:
 		deactivate()
 	var opt = grid_container.get_children()

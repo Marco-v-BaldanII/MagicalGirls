@@ -50,6 +50,8 @@ func charge(_position : Vector2):
 func change_animation(anim):
 	animation_tree["parameters/conditions/" + anim] = true
 
+func set_mask(mask : int):
+	area_2d.set_collision_mask_value(mask,true)
 
 func shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
 	if startup != 0:
@@ -58,6 +60,14 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	else:
 		player.lag_finished.emit() #No startup lag, so start end_lag
 	working = true
+	
+	var mask_layer : int = 0
+	if layer == 2: mask_layer = 3
+	else: mask_layer = 2
+	
+	set_mask(mask_layer)
+	if GameManager.online: GDSync.call_func(set_mask, [mask_layer])
+	
 	#GDSync.call_func(assign_phys_layer,[layer,mask])
 	set_physics_process(true)
 	#assign_phys_layer(layer, mask)
@@ -143,7 +153,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	can_bounce = true
 	pass # Replace with function body.
-"res://Scenes/projectiles/grenade.tscn"
+
 
 func destroy():
 	queue_free()

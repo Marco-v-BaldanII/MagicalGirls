@@ -14,6 +14,7 @@ func _ready() -> void:
 	super()
 	await fully_instanciated
 	
+	
 	if player_num == 1:
 		$PositionSynchronizer.broadcast = 0
 	else: $PositionSynchronizer.broadcast = 1
@@ -135,6 +136,8 @@ func perform_move():
 	elif input_buffer.back().contains("s_punch") and current_start_projectile == null and  is_on_floor():
 		
 		if enough_mp(50):
+			play_sfx("s_punch")
+			
 			var move : String = "s_punch"
 			if crouching: move = "crouch_s_punch"
 			$AnimationTree["parameters/conditions/not_" + move] = false
@@ -154,6 +157,7 @@ func perform_move():
 	#diagonal non chargeable projectile on  air
 	elif not is_on_floor() and input_buffer.back().contains("s_punch") and not current_start_projectile:
 		if  enough_mp(star_cost):
+			play_sfx("s_punch")
 			instanciate_diagonal_star()
 			GDSync.call_func(instanciate_diagonal_star)
 			clear_buffer()
@@ -234,6 +238,7 @@ func _on_body_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 
 
+
 func _on_head_hurt_box_area_entered(area: Area2D) -> void:
 	
 	if crouching:
@@ -262,3 +267,11 @@ func set_hitboxes(player_id : int):
 		hurt_box.set_collision_layer_value(5,true)
 		head_hurt_box.set_collision_mask_value(2,true)
 		hurt_box_layer = 5
+
+
+func _on_audio_stream_finished() -> void:
+	
+	if current_start_projectile != null: #this means that ritsu is charging projectile, so plkay the sound on loop
+		audio_stream.play() 
+	
+	pass # Replace with function body.

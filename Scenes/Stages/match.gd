@@ -13,6 +13,8 @@ var baloon = null
 
 
 func _ready():
+	MenuMusic.stop()
+	
 	if GameManager.p1 != null and GameManager.p2 != null:
 		p1 = GameManager.p1.instantiate()
 		p2  = GameManager.p2.instantiate()
@@ -108,6 +110,8 @@ func _ready():
 				p1.input_method = 0; p2.input_method = 2; #Player1 uses controller and p2 uses keyboard
 			2: 
 				p1.input_method = 0; p2.input_method = 1; #Player1 uses controller and p2 uses controller
+		if GameManager.character_selection_mode != 0:
+				p2.input_method = 1 #not controllable
 
 
 	
@@ -128,7 +132,7 @@ var time : float = 99.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if started and  GameManager.character_selection_mode != 4:
+	if started and  GameManager.character_selection_mode != 4 and not Pause.active:
 		time -= delta
 		timer_label.text = str(floori(time))
 		

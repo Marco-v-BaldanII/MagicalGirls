@@ -10,6 +10,7 @@ scale = Vector2(0.255102, 0.255102)
 texture = ExtResource("1_6mqy7")
 script = ExtResource("2_b0vdv")
 points = [NodePath("Node2D"), NodePath("Node2D4"), NodePath("Node2D2"), NodePath("Node2D5"), NodePath("Node2D3")]
+dmg = 30.0
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0, -1097.6)

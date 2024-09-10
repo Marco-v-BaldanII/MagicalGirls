@@ -96,6 +96,14 @@ func physics_update(delta : float):
 		player.weak_knock = false;
 		Transitioned.emit(self, "ground_move")
 	
+	
+	
+	# Add the gravity.
+	if not player.is_on_floor() :
+
+		player.velocity.y += (player.gravity) * delta
+
+	
 	pass
 
 func exit():

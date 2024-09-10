@@ -21,8 +21,8 @@ class_name Player
 	"s_punch" : SWING_2,
 	"w_kick" : SWING_2,
 	"s_kick" : SWING_2,
-	"l_trigger" : false,
-	"r_trigger" : false,
+	"l_trigger" : preload("res://Assets/SFX/placeholder.wav"),
+	"r_trigger" : preload("res://Assets/SFX/placeholder.wav"),
 	"block" : preload("res://Assets/SFX/placeholder.wav"),
 	"hit" : preload("res://Assets/SFX/swing.wav")
 	
@@ -156,7 +156,8 @@ var action_state : Dictionary = {
 enum INPUT_METHOD{
 	CONTROLLER_1,
 	CONTROLLER_2,
-	KEYBOARD
+	KEYBOARD,
+	NONE
 }
 
 var input_method : INPUT_METHOD = INPUT_METHOD.KEYBOARD:
@@ -982,6 +983,14 @@ func play_sfx(key : String):
 	if sfx.has(key) and not sfx[key] is bool:
 		audio_stream.stream = sfx[key]
 		audio_stream.play()
+		
+		if GameManager.online:
+			GDSync.call_func(wrapped_play, [key])
+
+func wrapped_play(key : String):
+
+		audio_stream.stream = sfx[key]
+		audio_stream.play()
 
 func deal_dmg(blocked : bool):
 	if oponent.move_dmg.has(oponent.last_used_move):
@@ -996,6 +1005,8 @@ func deal_dmg(blocked : bool):
 			hp -= 2
 
 func special_effect_wrapper(glob_pos : Vector2, dir : String):
+	
+	play_sfx("l_trigger")
 	
 	if GameManager.online and  GDSync.is_gdsync_owner(self):
 		await get_tree().create_timer(0.1).timeout

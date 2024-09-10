@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdaxy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fk76w"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0384615
+shader_parameter/tex_anim_offset = 0.0512821
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6grs0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0qgy"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0384615
+shader_parameter/tex_anim_offset = 0.0512821
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1114,7 +1114,8 @@ height = 376.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1w6pk"]
 
-[node name="NewRitsu" type="CharacterBody2D"]
+[node name="NewRitsu2" type="CharacterBody2D"]
+process_mode = 1
 script = ExtResource("1_r7jln")
 character_name = "Ellie Quinn"
 
@@ -1127,7 +1128,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_43vul")
 hframes = 12
 vframes = 13
-frame = 6
+frame = 8
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1135,7 +1136,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_vdaxy")
+process_material = SubResource("ShaderMaterial_fk76w")
 texture = ExtResource("2_43vul")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1146,7 +1147,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_6grs0")
+process_material = SubResource("ShaderMaterial_n0qgy")
 texture = ExtResource("2_43vul")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
