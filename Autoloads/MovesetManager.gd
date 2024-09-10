@@ -29,7 +29,7 @@ var Ritsu : Dictionary = {
 	
 	"ritsu_ulti" : ritsu_ulti,
 	"ritsu_ulti_lag" : 48,
-	"ritsu_ulti_cost" : 0,
+	"ritsu_ulti_cost" : 600,
 	"ritsu_ulti_startup" : 18,
 	
 }
@@ -91,7 +91,7 @@ var Anastasia : Dictionary = {
 	"anastasia_ulti" : ritsu_ulti,
 	"anastasia_ulti_lag" : 15,
 	"anastasia_ulti_startup" : 0,
-	"anastasia_ulti_cost" : 0
+	"anastasia_ulti_cost" : 600
 }
 
 var shield : Array[String] = ["crouch","move_left" ,"s_kick"]
@@ -103,12 +103,12 @@ var Ellie : Dictionary = {
 	"book_shield_right" : shield,
 	"book_shield_right_lag" : 40,
 	"book_shield_right_startup" : 20,
-	"book_shield_right_cost" : 300,
+	"book_shield_right_cost" : 600,
 	
 	"book_shield_left" : shield_left,
 	"book_shield_left_lag" : 40,
 	"book_shield_left_startup" : 20,
-	"book_shield_left_cost" : 300,
+	"book_shield_left_cost" : 600,
 	
 	"ellie_ulti" : ellie_ulti,
 	"ellie_ulti_lag" : 0,

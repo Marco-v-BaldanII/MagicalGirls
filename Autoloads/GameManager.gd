@@ -37,6 +37,8 @@ var camera : Camera2D
 var shake_amount : float = 8
 var default_camera_pos : Vector2 = Vector2(0,0)
 
+
+
 var character_selection_mode : int = 0
 #0 = LOCAL_2P , 1 = ONLINE_2P , 2 = CPU, 3 = ARCADE, 4 = TRAINING
 
@@ -92,6 +94,8 @@ func shaking_cam():
 
 var set_points : Array[int] = [0,0]
 
+var winner_name : String = "Ritsu"
+var looser_name : String = "Ellie Quinn"
 
 func match_results(winner_id : int):
 	if winner_id == -1: #Tie

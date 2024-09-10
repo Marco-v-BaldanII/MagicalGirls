@@ -299,7 +299,7 @@ func _on_start_button_button_down() -> void:
 		GDSync.call_func(start_match)
 		
 	elif mode == match_mode.ARCADE and selected_fighter != "":
-		if FileAccess.file_exists("res://ArcadeRuns/" + selected_fighter + ".tres"):
+
 			
 			var arcade_route : ArcadeRun = load("res://ArcadeRuns/" + selected_fighter + ".tres")
 			GameManager.arcade_route = arcade_route

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhe6lj8x5nk7d"]
+[gd_scene load_steps=21 format=3 uid="uid://dhe6lj8x5nk7d"]
 
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="2_1hqwr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/menu_scenes/v_box_menu.gd" id="4_6a1dq"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="4_v2qc8"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/input_field_option.gd" id="5_jqadj"]
+[ext_resource type="PackedScene" uid="uid://k1lv633wv3h4" path="res://Scenes/menu_scenes/options/lobby_option.tscn" id="6_38mf0"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/my_lobby.gd" id="7_8vq33"]
 [ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="9_fgoy1"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="11_fj6tj"]
@@ -66,6 +67,9 @@ connect = NodePath("../../connect_menu")
 
 [node name="ControlerMenu1" parent="CanvasLayer/LobbySelection/P1_control_selection" index="0"]
 script = ExtResource("3_hbw2o")
+
+[node name="ColorRect" parent="CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1" index="0" instance=ExtResource("6_38mf0")]
+layout_mode = 2
 
 [node name="password_edit" type="TextEdit" parent="CanvasLayer/LobbySelection"]
 offset_left = -1405.0
