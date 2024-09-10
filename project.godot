@@ -41,7 +41,8 @@ SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Audiomanager="*res://Scenes/audiomanager.tscn"
 Pause="*res://Scenes/menu_scenes/pause.tscn"
-MenuMusic="*res://Autoloads/MenuMusic.tscn"
+Node2d="*res://node_2d.tscn"
+MenuMusic="*res://node_2d.tscn"
 
 [dialogue_manager]
 

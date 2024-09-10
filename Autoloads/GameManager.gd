@@ -19,6 +19,7 @@ var p2_spawns : Node2D
 
 signal initialized_players(p1 : Player , p2 : Player)
 
+var in_lobby : bool = false
 
 var online : bool:
 	set(value):
