@@ -33,6 +33,14 @@ func receive_lobbies(lobbies : Array):
 
 	
 	GDSync.join_lobby(label.text, password)
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	if GameManager.in_lobby == false:
+		$"Error Pannel".show()
+		await get_tree().create_timer(2).timeout
+		$"Error Pannel".hide()
+	
 	pass
 
 func show_lock(show : bool):

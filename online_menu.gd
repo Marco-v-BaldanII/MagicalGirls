@@ -50,6 +50,7 @@ func lobby_created(lobby_name : String):
 #	Now you can join the lobby!
 
 func lobby_creation_failed(lobby_name : String, error : int):
+	GameManager.in_lobby = false
 	match(error):
 		ENUMS.LOBBY_CREATION_ERROR.LOBBY_ALREADY_EXISTS:
 			push_error("A lobby with the name "+lobby_name+" already exists.")
@@ -70,9 +71,11 @@ func lobby_creation_failed(lobby_name : String, error : int):
 func lobby_joined(lobby_name : String):
 	print("Succesfully joined lobby "+lobby_name)
 	connect_menu.hide()
+	GameManager.in_lobby = true
 	
 
 func lobby_join_failed(lobby_name : String, error : int):
+	GameManager.in_lobby = false
 	match(error):
 		ENUMS.LOBBY_JOIN_ERROR.LOBBY_DOES_NOT_EXIST:
 			push_error("The lobby "+lobby_name+" does not exist.")

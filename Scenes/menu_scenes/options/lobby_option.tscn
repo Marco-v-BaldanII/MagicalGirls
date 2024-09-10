@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://k1lv633wv3h4"]
+[gd_scene load_steps=4 format=3 uid="uid://k1lv633wv3h4"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/join_lobby_option.gd" id="1_jbhlh"]
 [ext_resource type="Texture2D" uid="uid://bucxtu0e130p2" path="res://Scenes/menu_scenes/options/61457.png" id="2_pidub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbujl"]
+bg_color = Color(0.480309, 0.0919996, 0.318352, 1)
 
 [node name="ColorRect" type="ColorRect"]
 custom_minimum_size = Vector2(500, 80)
@@ -24,3 +27,21 @@ offset_right = 518.0
 offset_bottom = 521.0
 scale = Vector2(0.122308, 0.122308)
 texture = ExtResource("2_pidub")
+
+[node name="Error Pannel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 96.0
+offset_right = 522.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bbujl")
+
+[node name="Label" type="Label" parent="Error Pannel"]
+layout_mode = 0
+offset_right = 541.0
+offset_bottom = 271.0
+theme_override_font_sizes/font_size = 50
+text = "ERROR attempting to join lobby, password may be incorrect."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

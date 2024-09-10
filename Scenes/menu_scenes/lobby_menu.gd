@@ -1,8 +1,14 @@
 extends GridContainer
 class_name LobbyMenu
-@onready var p1_control_selection: ScrollMenu = $CanvasLayer/ControlSelection/P1_control_selection
+@onready var p1_control_selection: ScrollMenu = $"../"
 
 const LOBBY_OPTION = preload("res://Scenes/menu_scenes/options/lobby_option.tscn")
+
+var _lobbies : Dictionary = {
+	
+	"bcfgkdbhri7ghdrbgyu" : true
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GDSync.lobbies_received.connect(receive_lobbies)
@@ -18,14 +24,17 @@ func _process(delta: float) -> void:
 
 func receive_lobbies(lobbies : Array):
 	for lobby in lobbies:
-		var option = LOBBY_OPTION.instantiate()
-		add_child(option)
-		option.label.text = lobby["Name"]
-		option.password_edit = $"../../password_edit"    
-		get_parent().options.push_back(option)
-		
-		if lobby["Tags"]["public"] == true:
-			return
-			option.show_lock()
+		if not _lobbies.has(lobby["Name"]):
+			var option = LOBBY_OPTION.instantiate() as JoinLobbyOption
+			add_child(option)
+			
+			_lobbies[lobby["Name"]] = true
+			option.label.text = lobby["Name"]
+			option.password_edit = $"../../password_edit"    
+			p1_control_selection.options.push_back(option)
+			p1_control_selection._change_cursor_pos()
+			
+			if lobby["Tags"]["public"] == false:
+				option.show_lock(true)
 		
 	pass
