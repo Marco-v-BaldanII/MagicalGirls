@@ -167,7 +167,7 @@ func _physics_process(delta: float) -> void:
 		
 	
 		super._physics_process(delta)
-		if not GDSync.is_gdsync_owner(self) or lag: return
+		if not GDSync.is_gdsync_owner(self): return
 		
 		if  (is_mapped_action_pressed("s_punch") or (ai_player and is_input_pressed("s_punch"))) and not lag:
 			#get_tree().root.add_child(AK[current_shot])

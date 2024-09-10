@@ -236,7 +236,6 @@ func _ready():
 	GameManager.add_player(self)
 	set_hitboxes(player_id)
 
-
 	#var animation = $AnimationPlayer.get_animation("idle_anim")
 	#animation.loop_mode = Animation.LOOP_PINGPONG
 	
@@ -311,8 +310,9 @@ func _process(delta):
 
 func _physics_process(delta):
 	if not is_initialized: return
-
-	move_and_slide()
+	
+	if not GameManager.online or (GameManager.online and GDSync.is_gdsync_owner(self)):
+		move_and_slide()
 
 	if not oponent: return
 	
@@ -333,8 +333,6 @@ func _physics_process(delta):
 			
 			match_setting.camera.velocity.x = velocity.x*0.6
 
-
-	
 
 func is_joy_button_just_pressed(action_name : String) -> bool:
 	if input_method != INPUT_METHOD.KEYBOARD:

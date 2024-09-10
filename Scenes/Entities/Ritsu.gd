@@ -189,9 +189,9 @@ func perform_move():
 
 
 func _physics_process(delta: float) -> void:
-	if not GDSync.is_gdsync_owner(self): return
 
 	super._physics_process(delta)
+	if not GDSync.is_gdsync_owner(self): return
 	
 	if is_on_floor():
 		if current_start_projectile != null and (is_mapped_action_pressed("s_punch") or is_input_pressed("s_punch")) and enough_mp(1):
