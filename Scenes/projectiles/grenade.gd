@@ -21,14 +21,9 @@ func _ready() -> void:
 	set_physics_process(false)
 	await get_tree().create_timer(0.01667).timeout
 	
-	if GDSync.is_gdsync_owner(self):
-		
-		if GDSync.is_host():
-			$PropertySynchronizer.broadcast = 	0
-		else:
-			$PropertySynchronizer.broadcast = 	1
-			
+
 	emergency_difuse()
+	instanciated.emit()
 
 
 var working : bool = false
