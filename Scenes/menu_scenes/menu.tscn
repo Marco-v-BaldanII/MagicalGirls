@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://2ri16duvgw33"]
+[gd_scene load_steps=25 format=3 uid="uid://2ri16duvgw33"]
 
 [ext_resource type="Script" path="res://Scenes/menu_scenes/menu.gd" id="1_klk57"]
 [ext_resource type="PackedScene" uid="uid://ci1182rw4g6ub" path="res://Scenes/menu_scenes/cursor.tscn" id="2_6m5h7"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="8_fnxuv"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/training_mode_option.gd" id="9_p4ytc"]
 [ext_resource type="Texture2D" uid="uid://m5cvofrcf6w1" path="res://Assets/UI/Menus/title(1).png" id="10_yjb53"]
-[ext_resource type="AudioStream" uid="uid://bjirl7m4mync" path="res://Assets/SFX/UI/menu audio.mp3" id="13_gw8y1"]
 [ext_resource type="Texture2D" uid="uid://bvw4onoh3yjgb" path="res://Assets/UI/settings button.png" id="14_s5nr1"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="15_w6deo"]
 [ext_resource type="Texture2D" uid="uid://iwrjbwx2868k" path="res://Assets/UI/off button.png" id="15_y08sq"]
@@ -231,10 +230,6 @@ libraries = {
 "": SubResource("AnimationLibrary_ia266")
 }
 autoplay = "breath"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_gw8y1")
-bus = &"Music"
 
 [node name="SettingsButton_" type="Sprite2D" parent="."]
 position = Vector2(79, 877)

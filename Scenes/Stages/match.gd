@@ -81,9 +81,7 @@ func _ready():
 	else:
 		parallax  = GameManager.back_ground
 		if parallax != null:
-			var p = parallax.instantiate()
-			background.add_child(p)
-			await get_tree().create_timer(0.01667*20).timeout
+			pass
 		else:
 			parallax = load("res://Scenes/Stages/parallax/Larissa.tscn")
 		var p = parallax.instantiate()

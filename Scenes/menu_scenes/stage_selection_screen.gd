@@ -231,12 +231,15 @@ func _on_start_button_button_down() -> void:
 			#start_match()
 
 func start_match():
+	print("res://Scenes/Stages/parallax/" + selected_fighter +".tscn")
+	var path = "res://Scenes/Stages/parallax/" + selected_fighter + ".tscn"
 	
-	if FileAccess.file_exists("res://Scenes/Stages/parallax/" + selected_fighter +".tscn"):
-		
-		GameManager.back_ground = load("res://Scenes/Stages/parallax/" + selected_fighter +".tscn")
+	var scene_resource = ResourceLoader.exists(path, "PackedScene")
+	if scene_resource:
+		GameManager.back_ground = load(path)
 		SceneWrapper.change_scene(current_map)
-		
+	else:
+		print("error: the file doesn't exist")
 
 
 var action_state : Dictionary = {
