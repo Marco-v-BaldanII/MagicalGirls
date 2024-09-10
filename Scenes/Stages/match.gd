@@ -84,6 +84,11 @@ func _ready():
 			var p = parallax.instantiate()
 			background.add_child(p)
 			await get_tree().create_timer(0.01667*20).timeout
+		else:
+			parallax = load("res://Scenes/Stages/parallax/Larissa.tscn")
+		var p = parallax.instantiate()
+		background.add_child(p)
+		await get_tree().create_timer(0.01667*20).timeout
 			
 	if GameManager.character_selection_mode == 4: #max mp in training mode
 		p1.mp = 600; p2.mp = 600
