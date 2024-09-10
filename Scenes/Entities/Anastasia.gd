@@ -160,7 +160,7 @@ func perform_move():
 			clear_buffer()
 			
 			
-		jump_code()
+	jump_code()
 
 
 func _physics_process(delta: float) -> void:
