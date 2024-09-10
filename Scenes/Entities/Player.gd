@@ -327,12 +327,16 @@ func _physics_process(delta):
 			#if far away from rival
 			if distance_to_rival > DisplayServer.screen_get_size().x * 0.3:
 				match_setting.camera.velocity.x = velocity.x*0.6
+				GDSync.call_func(send_camera_velocity, [velocity.x * 0.6])
 		
 		#moving backwards
 		elif velocity.x != 0 and distance_to_rival < DisplayServer.screen_get_size().x * 0.95:
 			
 			match_setting.camera.velocity.x = velocity.x*0.6
+			GDSync.call_func(send_camera_velocity, [velocity.x * 0.6])
 
+func send_camera_velocity(velocity : float):
+	match_setting.camera.velocity.x = velocity
 
 func is_joy_button_just_pressed(action_name : String) -> bool:
 	if input_method != INPUT_METHOD.KEYBOARD:
