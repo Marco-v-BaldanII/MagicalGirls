@@ -135,11 +135,7 @@ func perform_move():
 				
 		GDSync.call_func(store_last_used_move,[last_used_move])
 		
-	elif  input_buffer.is_empty() == false and input_buffer.back().contains("jump") and is_on_floor() and not crouching  and jump_lag < 0:
-			if input_method != 2:
-				joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-
-			state_machine.on_child_transition(state_machine.current_state, "air_move")
+	jump_code()
 
 
 

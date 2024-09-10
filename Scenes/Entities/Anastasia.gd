@@ -86,23 +86,6 @@ func perform_move():
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
 							
-								if specials.contains("ulti"):
-									special_effect_wrapper(global_position, direction)
-									if GameManager.online: 
-										GDSync.call_func(special_effect_wrapper, [global_position, direction])
-									
-									var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
-
-									GDSync.call_func(instanciate_projectile,["res://Scenes/projectiles/"+specials+".tscn"])
-									instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)                      
-									
-									clear_buffer()
-
-									await lag_finished
-									
-									add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
-
-									return
 							
 								var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
 
@@ -175,17 +158,9 @@ func perform_move():
 
 			current_start_projectile = instance
 			clear_buffer()
-
-
-
-
-		
-	elif input_buffer.back().contains("jump") and is_on_floor() and not crouching  and jump_lag < 0:
-
 			
-		joy_x = Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X)
-
-		state_machine.on_child_transition(state_machine.current_state, "air_move")
+			
+		jump_code()
 
 
 func _physics_process(delta: float) -> void:

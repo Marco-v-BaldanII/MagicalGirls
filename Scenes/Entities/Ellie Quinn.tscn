@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fk76w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_obbgn"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -41,7 +41,7 @@ shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
 shader_parameter/tex_anim_offset = 0.0512821
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0qgy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yulu"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -1136,7 +1136,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_fk76w")
+process_material = SubResource("ShaderMaterial_obbgn")
 texture = ExtResource("2_43vul")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1147,7 +1147,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_n0qgy")
+process_material = SubResource("ShaderMaterial_0yulu")
 texture = ExtResource("2_43vul")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
