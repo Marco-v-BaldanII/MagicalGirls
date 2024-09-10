@@ -71,11 +71,20 @@ func perform_move():
 			var dir = find_special_direction(specials)
 			if dir != direction or dir == "none":
 				print(specials + dir)
-				if specials == "ellie_ulti":
+
+				if specials == "ellie_ulti" and enough_mp(moveset[specials + "_cost"]):
+					
+					special_effect_wrapper(global_position, direction)
+					if GameManager.online: 
+						GDSync.call_func(special_effect_wrapper, [global_position, direction])
+					
+					clear_buffer()
 					
 					for key in  move_dmg.keys():
 						
 						move_dmg[key] *= 2 #double damage on all moves
+					
+					await get_tree().create_timer(0.5).timeout
 					sprite_2d.modulate = Color.DARK_GOLDENROD
 					await get_tree().create_timer(6.24).timeout
 					sprite_2d.modulate = Color.WHITE
@@ -83,9 +92,12 @@ func perform_move():
 						
 						move_dmg[key] /= 2 #return to normal damage
 					
-					pass
+
+					add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
+					return
+					
 				
-				elif FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
+				else:
 					
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
@@ -169,6 +181,8 @@ func _physics_process(delta: float) -> void:
 				pass
 			
 			elif ai_player and is_input_pressed("s_kick"):
+				
+				
 				var fire_projectile = instanciate_fire()
 				GDSync.call_func(instanciate_fire)
 				fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
@@ -199,7 +213,8 @@ func book_laser():
 			charging_laser = false; started_charge = true;
 
 		elif current_start_projectile and charging_laser  and is_mapped_action_pressed("s_kick"):
-			
+			add_lag(20)
+			await get_tree().create_timer(0.0167 * 20).timeout
 			shoot_laser()
 			
 

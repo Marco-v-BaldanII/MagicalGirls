@@ -10,7 +10,7 @@ signal online_setup
 var is_host : bool = false
 
 @onready var p1 : PackedScene = preload( "res://Scenes/Entities/Ritsu.tscn")
-@onready var p2 : PackedScene = preload( "res://Scenes/Entities/Ritsu.tscn")
+@onready var p2 : PackedScene = preload( "res://Scenes/Entities/Ellie Quinn.tscn")
 
 var back_ground : PackedScene
 

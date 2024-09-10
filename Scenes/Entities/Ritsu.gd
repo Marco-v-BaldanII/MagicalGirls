@@ -50,7 +50,7 @@ func perform_move():
 			if dir != direction:
 				print(specials + dir)
 				
-				if FileAccess.file_exists("res://Scenes/projectiles/"+specials+".tscn"):
+				if true:
 					
 					if  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
 						
@@ -65,8 +65,6 @@ func perform_move():
 							instanciate_projectile("res://Scenes/projectiles/"+specials+".tscn",specials)                      
 							
 							clear_buffer()
-
-							await lag_finished
 							
 							add_lag(MovesetManager.movesets[character_name][specials + "_lag"])
 

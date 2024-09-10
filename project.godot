@@ -20,7 +20,7 @@ uniqueUsername=false
 
 config/name="I wanna be a Magical Girl!"
 config/description="uwu"
-run/main_scene="res://Scenes/menu_scenes/menu.tscn"
+run/main_scene="res://Scenes/Stages/test_map2_deprecated.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(1, 0.458824, 0.627451, 1)
@@ -41,8 +41,7 @@ SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Audiomanager="*res://Scenes/audiomanager.tscn"
 Pause="*res://Scenes/menu_scenes/pause.tscn"
-Node2d="*res://node_2d.tscn"
-MenuMusic="*res://node_2d.tscn"
+MenuMusic="*res://Autoloads/MenuMusic.tscn"
 
 [dialogue_manager]
 

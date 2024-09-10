@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dds7s6ldsbp6s" path="res://states/ai_state_machine.tscn" id="2_cwos8"]
 [ext_resource type="Script" path="res://states/camp.gd" id="3_5nbar"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j75mw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qyl18"]
 shader = ExtResource("2_3oqnj")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -15,7 +15,7 @@ shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
 shader_parameter/tex_anim_offset = 0.025641
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjbpo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po778"]
 shader = ExtResource("2_3oqnj")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -32,10 +32,10 @@ ai_player = true
 frame = 4
 
 [node name="GPUParticles2D" parent="Sprite2D" index="0"]
-process_material = SubResource("ShaderMaterial_j75mw")
+process_material = SubResource("ShaderMaterial_qyl18")
 
 [node name="GPUParticles2D2" parent="Sprite2D" index="1"]
-process_material = SubResource("ShaderMaterial_tjbpo")
+process_material = SubResource("ShaderMaterial_po778")
 
 [node name="AI_StateMachine" parent="." index="14" instance=ExtResource("2_cwos8")]
 

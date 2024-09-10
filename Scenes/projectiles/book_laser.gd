@@ -2,7 +2,7 @@ extends Projectile
 class_name Book_Laser
 
 var power : int = 0
-@export var frame_charge_time : float =  100
+@export var frame_charge_time : float =  185
 var current_frame : int = 0
 
 var power_multiply : float
@@ -19,6 +19,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	pass # Replace with function body.
 
+var stage : int = 1
 
 func charge(position : Vector2):
 	#GDSync.call_func(charge,[position])
@@ -27,8 +28,14 @@ func charge(position : Vector2):
 	
 	if current_frame < frame_charge_time:
 		current_frame += 1
-		dmg += power_multiply
-		scale += Vector2(0.005,0.005)
+		if current_frame > (frame_charge_time/3) * stage:
+			stage += 1
+			dmg *= 2
+			speed -= 300
+			scale += Vector2(0.2,0.2)
+		
+		#dmg += power_multiply
+		#scale += Vector2(0.005,0.005)
 	elif not current_frame < frame_charge_time:
 		fully_charged = true
 
