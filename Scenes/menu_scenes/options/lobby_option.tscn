@@ -17,11 +17,10 @@ text = "Super Lobby"
 horizontal_alignment = 1
 
 [node name="lock" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
-offset_left = -95.0
-offset_top = -1.0
-offset_right = 417.0
-offset_bottom = 511.0
-scale = Vector2(0.16, 0.16)
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 518.0
+offset_bottom = 521.0
+scale = Vector2(0.122308, 0.122308)
 texture = ExtResource("2_pidub")
