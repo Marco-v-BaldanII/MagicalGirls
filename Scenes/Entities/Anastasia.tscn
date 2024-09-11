@@ -1,7 +1,8 @@
-[gd_scene load_steps=126 format=3 uid="uid://1v0odfkmjeau"]
+[gd_scene load_steps=127 format=3 uid="uid://1v0odfkmjeau"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_0vdnb"]
-[ext_resource type="Texture2D" uid="uid://ditutvvfdtptp" path="res://Assets/characters/Ritsu/spritesheet.png" id="2_s86ju"]
+[ext_resource type="Texture2D" uid="uid://cyb27s8pjujx6" path="res://Assets/characters/Anastasia/Anastasia FullSpriteSheet Lineart.png" id="2_cmqs0"]
+[ext_resource type="Texture2D" uid="uid://cb60dwkjvle4" path="res://Assets/characters/Ellie/spritesheet.png" id="2_s86ju"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_brlms"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_dfxhb"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_5k66o"]
@@ -31,7 +32,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bi821"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iho22"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +40,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0320513
+shader_parameter/tex_anim_offset = 0.423077
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1ptd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwtg1"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +50,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0320513
+shader_parameter/tex_anim_offset = 0.423077
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1124,12 +1125,12 @@ character_name = "Anastasia"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
 z_as_relative = false
-position = Vector2(-3, -12)
+position = Vector2(335, -79)
 scale = Vector2(1.35, 1.35)
-texture = ExtResource("2_s86ju")
-hframes = 12
-vframes = 13
-frame = 5
+texture = ExtResource("2_cmqs0")
+hframes = 5
+vframes = 14
+frame = 66
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1137,7 +1138,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_bi821")
+process_material = SubResource("ShaderMaterial_iho22")
 texture = ExtResource("2_s86ju")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1148,7 +1149,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_i1ptd")
+process_material = SubResource("ShaderMaterial_lwtg1")
 texture = ExtResource("2_s86ju")
 lifetime = 0.35
 script = ExtResource("4_nib11")
