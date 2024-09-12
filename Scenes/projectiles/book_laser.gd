@@ -23,7 +23,7 @@ var stage : int = 1
 
 func charge(position : Vector2):
 	#GDSync.call_func(charge,[position])
-	show()
+	hide()
 	global_position = position
 	
 	if current_frame < frame_charge_time:

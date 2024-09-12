@@ -99,9 +99,9 @@ func perform_move():
 						move_dmg[key] *= 2 #double damage on all moves
 					
 					await get_tree().create_timer(0.5).timeout
-					sprite_2d.modulate = Color.DARK_GOLDENROD
+					$Sprite2D/GPUParticles_ulti.show()
 					await get_tree().create_timer(6.24).timeout
-					sprite_2d.modulate = Color.WHITE
+					$Sprite2D/GPUParticles_ulti.hide()
 					for key in  move_dmg.keys():
 						
 						move_dmg[key] /= 2 #return to normal damage
@@ -176,17 +176,22 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and charging_laser and not (is_mapped_action_pressed("move_right") or is_mapped_action_pressed("move_left")) and not (is_input_pressed("move_right") or is_input_pressed("move_left")):
 		if current_start_projectile != null and charging_laser:
 			current_start_projectile.charge(global_position)
+			flash_charge()
+			print("flash chargeaaaaaaaaaaa")
 			charging_mp = false
 			pass
 	elif charging_laser:
 		charging_laser = false
 		charging_mp = true
+		online_tint_sprite(Color.WHITE)
+		if GameManager.online: GDSync.call_func(online_tint_sprite,[Color.WHITE])
+		
 	if is_on_floor() and not crouching:
 		
 		if not ai_player: book_laser()
 		else: ai_book_laser()
 		
-	
+
 		
 
 		if not ai_player and is_mapped_action_pressed("s_kick") :
@@ -304,22 +309,18 @@ func _physics_process(delta: float) -> void:
 
 func book_laser():
 		if is_mapped_action_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser :
-
-			var star = instanciate_star()
-			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
-			GDSync.call_func(instanciate_star)
-			charging_laser = false
-			started_charge = true	
+			
+			while is_mapped_action_pressed("s_kick"):
+				await get_tree().create_timer(0.0167).timeout
+				
+			if current_start_projectile == null:
+				current_start_projectile = instanciate_star()
+				#GDSync.set_gdsync_owner(current_start_projectile,GDSync.get_client_id())
+				GDSync.call_func(instanciate_star)
+				charging_laser = true
+				started_charge = false	
 		
-		if not charging_laser and started_charge and not is_mapped_action_pressed("s_kick"):
-			
-			charging_laser = true
-			started_charge = false
-			
-		elif not charging_laser and not started_charge and is_mapped_action_pressed("s_kick"):
-			charging_laser = false; started_charge = true;
-
-		elif current_start_projectile and charging_laser  and is_mapped_action_pressed("s_kick"):
+		elif current_start_projectile  and is_mapped_action_pressed("s_kick"):
 			add_lag(20)
 			await get_tree().create_timer(0.0167 * 20).timeout
 			shoot_laser()
@@ -327,7 +328,8 @@ func book_laser():
 
 func shoot_laser():
 	current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-	
+	sprite_2d.modulate = Color.WHITE
+	if GameManager.online: GDSync.call_func(online_tint_sprite, [Color.WHITE])
 	current_start_projectile = null
 	charging_laser = false
 	add_lag(10)
@@ -335,23 +337,22 @@ func shoot_laser():
 func ai_book_laser():
 		if is_input_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser:
 
-			var star = instanciate_star()
-			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
-			GDSync.call_func(instanciate_star)
-			charging_laser = false
-			started_charge = true	
+			while is_input_pressed("s_kick"):
+				await get_tree().create_timer(0.0167).timeout
+				
+			if current_start_projectile == null:
+				current_start_projectile = instanciate_star()
+				#GDSync.set_gdsync_owner(current_start_projectile,GDSync.get_client_id())
+				GDSync.call_func(instanciate_star)
+				charging_laser = true
+				started_charge = false	
 		
-		if not charging_laser and started_charge and not is_input_pressed("s_kick"):
+		elif current_start_projectile   and is_input_pressed("s_kick"):
 			
-			charging_laser = true
-			started_charge = false
-			
-		elif not charging_laser and not started_charge and is_input_pressed("s_kick"):
-			charging_laser = false; started_charge = true;
-
-		elif current_start_projectile and charging_laser  and is_input_pressed("s_kick"):
-			
+			add_lag(20)
+			await get_tree().create_timer(0.0167 * 20).timeout
 			shoot_laser()
+			
 			
 
 
@@ -388,3 +389,21 @@ func ai_on_hit():
 			else:
 				$AI_StateMachine.on_child_transition($AI_StateMachine.current_state, "camp")
 			pass
+
+var flash_frames = 12
+
+func flash_charge():
+	flash_frames -= 1
+	
+	if flash_frames <= 0:
+		if sprite_2d.modulate == Color.WHITE:
+			sprite_2d.modulate = Color.AQUA
+			if GameManager.online: GDSync.call_func(online_tint_sprite, [Color.AQUA])
+		else:
+			sprite_2d.modulate = Color.WHITE
+			if GameManager.online: GDSync.call_func(online_tint_sprite, [Color.WHITE])
+			
+		flash_frames = 12
+
+func online_tint_sprite(color : Color):
+	sprite_2d.color = color

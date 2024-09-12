@@ -8,9 +8,13 @@ script = ExtResource("1_v2xtq")
 delayed = true
 
 [node name="book" parent="." instance=ExtResource("2_f06cy")]
+alive_time = 4.2
 
 [node name="book2" parent="." instance=ExtResource("2_f06cy")]
+alive_time = 4.2
 
 [node name="book3" parent="." instance=ExtResource("2_f06cy")]
+alive_time = 4.2
 
 [node name="book4" parent="." instance=ExtResource("2_f06cy")]
+alive_time = 4.2

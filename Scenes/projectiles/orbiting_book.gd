@@ -4,6 +4,7 @@ class_name OrbitingBook
 var radius : int = 0
 
 func _ready() -> void:
+	$AnimationPlayer.play("book")
 	super()
 
 

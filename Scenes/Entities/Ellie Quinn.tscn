@@ -31,7 +31,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufhh4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e84kg"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,17 +39,17 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0448718
+shader_parameter/tex_anim_offset = 0.0128205
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0k3b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv7pg"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
-shader_parameter/fadeStep = 8.775
+shader_parameter/fadeStep = 10.0
 shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
-shader_parameter/green = 0.2
+shader_parameter/green = 0.13
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0448718
+shader_parameter/tex_anim_offset = 0.0128205
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1260,7 +1260,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
-frame = 7
+frame = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1268,20 +1268,20 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_ufhh4")
+process_material = SubResource("ShaderMaterial_e84kg")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="Sprite2D"]
+[node name="GPUParticles_ulti" type="GPUParticles2D" parent="Sprite2D"]
 visible = false
+modulate = Color(1, 1, 1, 0.843)
 z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
-amount = 4
-process_material = SubResource("ShaderMaterial_c0k3b")
+process_material = SubResource("ShaderMaterial_sv7pg")
 texture = ExtResource("2_ca8wd")
-lifetime = 0.35
+lifetime = 0.5
 script = ExtResource("4_4mixf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

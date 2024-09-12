@@ -1,28 +1,30 @@
 [gd_scene load_steps=6 format=3 uid="uid://dbw8iuyppab1u"]
 
-[ext_resource type="Texture2D" uid="uid://y6ows84ekjy3" path="res://Scenes/projectiles/laser.webp" id="1_v1v4p"]
+[ext_resource type="Texture2D" uid="uid://cogoxts5j525e" path="res://Assets/characters/Ellie/llaser.png" id="1_72601"]
 [ext_resource type="Script" path="res://Scenes/projectiles/book_laser.gd" id="2_lj28k"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_seovh"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_8ruoc"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
-radius = 167.966
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7emej"]
+radius = 153.891
+height = 611.45
 
 [node name="Laser" type="Sprite2D" groups=["projectile"]]
 position = Vector2(113, 57)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_v1v4p")
+texture = ExtResource("1_72601")
 script = ExtResource("2_lj28k")
 speed = 2200
 
-[node name="Area2D" type="Area2D" parent="." groups=["weak"]]
+[node name="Area2D" type="Area2D" parent="." groups=["strong"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_seovh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(40, 0)
-shape = SubResource("CircleShape2D_xfwv1")
+position = Vector2(-367.5, 0)
+scale = Vector2(5.58836, 0.834083)
+shape = SubResource("CapsuleShape2D_7emej")
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
 script = ExtResource("4_8ruoc")
