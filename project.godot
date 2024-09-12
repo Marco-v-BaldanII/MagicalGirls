@@ -20,7 +20,7 @@ uniqueUsername=false
 
 config/name="I wanna be a Magical Girl!"
 config/description="uwu"
-run/main_scene="res://Scenes/Stages/test_map2_deprecated.tscn"
+run/main_scene="res://Scenes/menu_scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(1, 0.458824, 0.627451, 1)
