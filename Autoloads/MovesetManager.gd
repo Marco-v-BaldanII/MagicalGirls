@@ -45,7 +45,8 @@ var power_shoot_right : Array[String] = ["crouch" , "move_right", "s_punch"]
 var molotov_left : Array[String] = ["crouch","move_right","s_punch"]
 var molotov_right : Array[String] = ["crouch","move_left","s_punch"]
 
-var two_kinfe_attack : Array[String] = ["move_right","w_punch"]
+var two_kinfe_attack_right : Array[String] = ["move_left", "move_right","w_punch"]
+var two_kinfe_attack_left : Array[String] = ["move_right", "move_left","w_punch"]
 
 var Anastasia : Dictionary = {
 	
@@ -78,10 +79,15 @@ var Anastasia : Dictionary = {
 	"molotov_right_startup" : 8,
 	"molotov_right_cost" : 200,
 	
-	"2knife_attack" : two_kinfe_attack,
-	"2knife_attack_lag" : 10,
-	"2knife_attack_startup" : 5,
-	"2knife_attack_cost" : 200,
+	"2knife_attack_right" : two_kinfe_attack_right,
+	"2knife_attack_right_lag" : 15,
+	"2knife_attack_right_startup" : 5,
+	"2knife_attack_right_cost" : 0,
+	
+	"2knife_attack_left" : two_kinfe_attack_left,
+	"2knife_attack_left_lag" : 15,
+	"2knife_attack_left_startup" : 5,
+	"2knife_attack_left_cost" : 0,
 	
 	#"ritsu_ulti" : ritsu_ulti,
 	#"ritsu_ulti_lag" : 0,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://1v0odfkmjeau"]
+[gd_scene load_steps=137 format=3 uid="uid://1v0odfkmjeau"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_0vdnb"]
 [ext_resource type="Texture2D" uid="uid://cyb27s8pjujx6" path="res://Assets/characters/Anastasia/Anastasia FullSpriteSheet Lineart.png" id="2_cmqs0"]
@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a3hgm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkyts"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.25641
+shader_parameter/tex_anim_offset = 0.128205
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_swv5f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_biqk4"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.25641
+shader_parameter/tex_anim_offset = 0.128205
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -148,6 +148,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(30, -53)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("hit_boxes/strong_box/strong_attack:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(177, -339)]
 }
 
 [sub_resource type="Animation" id="Animation_mk0os"]
@@ -871,8 +883,50 @@ tracks/0/keys = {
 "values": [55, 56, 55]
 }
 
+[sub_resource type="Animation" id="Animation_akhy2"]
+resource_name = "2knife_attack"
+length = 0.400002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0499995, 0.116667, 0.183333, 0.233334, 0.283333, 0.35, 0.416666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 28, 25, 26, 27, 28]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hit_boxes/strong_box/strong_attack:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.2, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hit_boxes/strong_box/strong_attack:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0833335, 0.133334, 0.2, 0.266667, 0.283334, 0.350001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(177, -339), Vector2(213, -303), Vector2(76, -281), Vector2(76, -281), Vector2(189, -358), Vector2(209, -306)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj6tu"]
 _data = {
+"2knife_attack": SubResource("Animation_akhy2"),
 "RESET": SubResource("Animation_s4nyy"),
 "air_s_kick": SubResource("Animation_mk0os"),
 "air_s_punch": SubResource("Animation_vc7wq"),
@@ -895,6 +949,12 @@ _data = {
 "w_punch": SubResource("Animation_nwele"),
 "walk": SubResource("Animation_7lkco")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g2b0u"]
+animation = &"2knife_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lb7qn"]
+animation = &"2knife_attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tcpvf"]
 animation = &"air_s_kick"
@@ -1148,7 +1208,43 @@ advance_condition = &"land"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0o5br"]
+advance_mode = 2
+advance_condition = &"2knife_attack_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tadbr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgabk"]
+advance_mode = 2
+advance_condition = &"2knife_attack_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4f8be"]
+advance_mode = 2
+advance_condition = &"2knife_attack_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dc2wn"]
+advance_mode = 2
+advance_condition = &"2kinfe_attack_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m0id5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jan0s"]
+advance_mode = 2
+advance_condition = &"2knife_attack_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qcot0"]
+advance_mode = 2
+advance_condition = &"2kinfe_attack_left"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ukk8n"]
+states/2knife_attack/node = SubResource("AnimationNodeAnimation_lb7qn")
+states/2knife_attack/position = Vector2(-249.813, 244)
+"states/2knife_attack 2/node" = SubResource("AnimationNodeAnimation_g2b0u")
+"states/2knife_attack 2/position" = Vector2(-330.813, 191)
 states/Start/position = Vector2(266, 11)
 states/air_s_kick/node = SubResource("AnimationNodeAnimation_tcpvf")
 states/air_s_kick/position = Vector2(744, 358)
@@ -1177,19 +1273,19 @@ states/jump/position = Vector2(465, 419)
 states/land/node = SubResource("AnimationNodeAnimation_xdnet")
 states/land/position = Vector2(272, 345)
 states/move_backward/node = SubResource("AnimationNodeAnimation_5tuk7")
-states/move_backward/position = Vector2(-179, 110)
+states/move_backward/position = Vector2(-197, 112)
 states/move_forward/node = SubResource("AnimationNodeAnimation_nowo0")
 states/move_forward/position = Vector2(-305, 396)
 states/s_kick/node = SubResource("AnimationNodeAnimation_jrex2")
 states/s_kick/position = Vector2(106, 318)
 states/s_punch/node = SubResource("AnimationNodeAnimation_uc101")
-states/s_punch/position = Vector2(639, 474)
+states/s_punch/position = Vector2(528, 530)
 states/w_kick/node = SubResource("AnimationNodeAnimation_apyy6")
 states/w_kick/position = Vector2(106, 115)
 states/w_punch/node = SubResource("AnimationNodeAnimation_ncdqd")
 states/w_punch/position = Vector2(478, 115)
-transitions = ["crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "jump", "in_air", SubResource("AnimationNodeStateMachineTransition_wh10h"), "in_air", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_v6023"), "in_air", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_kvsvy"), "in_air", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_duujg"), "in_air", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_ipw6q"), "air_s_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_m3xc6"), "air_s_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_spjx6"), "air_w_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_syu4n"), "air_w_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_btxuy"), "move_backward", "jump", SubResource("AnimationNodeStateMachineTransition_j0pg8"), "move_forward", "jump", SubResource("AnimationNodeStateMachineTransition_xa7ef"), "move_forward", "s_kick", SubResource("AnimationNodeStateMachineTransition_6geba"), "move_forward", "s_punch", SubResource("AnimationNodeStateMachineTransition_1px32"), "move_forward", "w_kick", SubResource("AnimationNodeStateMachineTransition_wpgqb"), "move_forward", "w_punch", SubResource("AnimationNodeStateMachineTransition_de3vn"), "move_backward", "w_kick", SubResource("AnimationNodeStateMachineTransition_57ejk"), "move_backward", "w_punch", SubResource("AnimationNodeStateMachineTransition_xhoh1"), "move_backward", "s_punch", SubResource("AnimationNodeStateMachineTransition_uw4bi"), "move_backward", "s_kick", SubResource("AnimationNodeStateMachineTransition_o1085"), "Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "jump", SubResource("AnimationNodeStateMachineTransition_jbma8"), "in_air", "idle_anim", SubResource("AnimationNodeStateMachineTransition_kdq1c"), "idle_anim", "move_forward", SubResource("AnimationNodeStateMachineTransition_ofcr2"), "move_forward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_wa1kf"), "move_backward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_6a8ks"), "idle_anim", "move_backward", SubResource("AnimationNodeStateMachineTransition_cmgjt"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_13hnv"), "idle_anim", "crouching", SubResource("AnimationNodeStateMachineTransition_jn5ud"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_v0lk2"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_t32fp"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_n114p"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_4pkss"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav")]
-graph_offset = Vector2(-114.933, 104)
+transitions = ["crouching", "crouch_w_punch", SubResource("AnimationNodeStateMachineTransition_x4ea0"), "crouch_w_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_phdud"), "crouching", "crouch_s_punch", SubResource("AnimationNodeStateMachineTransition_v2o6q"), "crouch_s_punch", "crouching", SubResource("AnimationNodeStateMachineTransition_wvxc8"), "crouching", "crouch_w_kick", SubResource("AnimationNodeStateMachineTransition_k1nos"), "crouch_w_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_gtc2f"), "crouching", "crouch_s_kick", SubResource("AnimationNodeStateMachineTransition_axcer"), "crouch_s_kick", "crouching", SubResource("AnimationNodeStateMachineTransition_8m15g"), "jump", "in_air", SubResource("AnimationNodeStateMachineTransition_wh10h"), "in_air", "air_w_punch", SubResource("AnimationNodeStateMachineTransition_v6023"), "in_air", "air_w_kick", SubResource("AnimationNodeStateMachineTransition_kvsvy"), "in_air", "air_s_kick", SubResource("AnimationNodeStateMachineTransition_duujg"), "in_air", "air_s_punch", SubResource("AnimationNodeStateMachineTransition_ipw6q"), "air_s_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_m3xc6"), "air_s_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_spjx6"), "air_w_punch", "in_air", SubResource("AnimationNodeStateMachineTransition_syu4n"), "air_w_kick", "in_air", SubResource("AnimationNodeStateMachineTransition_btxuy"), "move_backward", "jump", SubResource("AnimationNodeStateMachineTransition_j0pg8"), "move_forward", "jump", SubResource("AnimationNodeStateMachineTransition_xa7ef"), "move_forward", "s_kick", SubResource("AnimationNodeStateMachineTransition_6geba"), "move_forward", "s_punch", SubResource("AnimationNodeStateMachineTransition_1px32"), "move_forward", "w_kick", SubResource("AnimationNodeStateMachineTransition_wpgqb"), "move_forward", "w_punch", SubResource("AnimationNodeStateMachineTransition_de3vn"), "move_backward", "w_kick", SubResource("AnimationNodeStateMachineTransition_57ejk"), "move_backward", "w_punch", SubResource("AnimationNodeStateMachineTransition_xhoh1"), "move_backward", "s_punch", SubResource("AnimationNodeStateMachineTransition_uw4bi"), "move_backward", "s_kick", SubResource("AnimationNodeStateMachineTransition_o1085"), "Start", "idle_anim", SubResource("AnimationNodeStateMachineTransition_uvmsb"), "idle_anim", "s_punch", SubResource("AnimationNodeStateMachineTransition_vudja"), "s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_q7nuo"), "idle_anim", "s_kick", SubResource("AnimationNodeStateMachineTransition_kvaag"), "s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_el16t"), "w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_cth84"), "idle_anim", "w_kick", SubResource("AnimationNodeStateMachineTransition_ml785"), "idle_anim", "w_punch", SubResource("AnimationNodeStateMachineTransition_ddbdw"), "w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_8dljj"), "idle_anim", "jump", SubResource("AnimationNodeStateMachineTransition_jbma8"), "in_air", "idle_anim", SubResource("AnimationNodeStateMachineTransition_kdq1c"), "idle_anim", "move_forward", SubResource("AnimationNodeStateMachineTransition_ofcr2"), "move_forward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_wa1kf"), "move_backward", "idle_anim", SubResource("AnimationNodeStateMachineTransition_6a8ks"), "idle_anim", "move_backward", SubResource("AnimationNodeStateMachineTransition_cmgjt"), "crouching", "idle_anim", SubResource("AnimationNodeStateMachineTransition_13hnv"), "idle_anim", "crouching", SubResource("AnimationNodeStateMachineTransition_jn5ud"), "air_s_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_v0lk2"), "air_s_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_t32fp"), "air_w_punch", "idle_anim", SubResource("AnimationNodeStateMachineTransition_n114p"), "air_w_kick", "idle_anim", SubResource("AnimationNodeStateMachineTransition_4pkss"), "land", "idle_anim", SubResource("AnimationNodeStateMachineTransition_amfav"), "idle_anim", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_0o5br"), "2knife_attack", "idle_anim", SubResource("AnimationNodeStateMachineTransition_tadbr"), "move_forward", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_jgabk"), "move_backward", "2knife_attack", SubResource("AnimationNodeStateMachineTransition_4f8be"), "idle_anim", "2knife_attack 2", SubResource("AnimationNodeStateMachineTransition_dc2wn"), "2knife_attack 2", "idle_anim", SubResource("AnimationNodeStateMachineTransition_m0id5"), "move_backward", "2knife_attack 2", SubResource("AnimationNodeStateMachineTransition_jan0s"), "move_forward", "2knife_attack 2", SubResource("AnimationNodeStateMachineTransition_qcot0")]
+graph_offset = Vector2(-475.813, 174.631)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12cjw"]
 size = Vector2(77, 23)
@@ -1218,6 +1314,22 @@ modulate = Color(0.2072, 0.74, 0.62456, 1)
 script = ExtResource("1_0vdnb")
 fly = false
 character_name = "Anastasia"
+move_vulnerable_on_shield = {
+"2knife_attack_left": 22,
+"2knife_attack_right": 22,
+"air_s_kick": 30,
+"air_s_punch": 30,
+"air_w_kick": 15,
+"air_w_punch": 15,
+"crouch_s_kick": 30,
+"crouch_s_punch": 30,
+"crouch_w_kick": 15,
+"crouch_w_punch": 15,
+"s_kick": 30,
+"s_punch": 30,
+"w_kick": 15,
+"w_punch": 14
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
@@ -1227,7 +1339,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_cmqs0")
 hframes = 5
 vframes = 14
-frame = 40
+frame = 15
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1235,7 +1347,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_a3hgm")
+process_material = SubResource("ShaderMaterial_kkyts")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1246,7 +1358,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_swv5f")
+process_material = SubResource("ShaderMaterial_biqk4")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1260,6 +1372,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_ukk8n")
 advance_expression_base_node = NodePath("")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/2kinfe_attack_left = false
+parameters/conditions/2knife_attack_left = false
+parameters/conditions/2knife_attack_right = false
 parameters/conditions/air_s_kick = false
 parameters/conditions/air_s_punch = false
 parameters/conditions/air_w_kick = false
@@ -1294,7 +1409,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="strong_attack" type="CollisionShape2D" parent="hit_boxes/strong_box"]
-position = Vector2(67, -150)
+position = Vector2(177, -339)
 scale = Vector2(1e-05, 1e-05)
 shape = SubResource("CircleShape2D_0ymps")
 disabled = true

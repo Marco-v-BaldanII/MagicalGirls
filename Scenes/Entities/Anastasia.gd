@@ -100,7 +100,7 @@ func perform_move():
 
 							return
 					elif  enough_mp(moveset[specials + "_cost"]) : #if you have enough mp
-						if true:
+						if ResourceLoader.exists("res://Scenes/projectiles/"+specials+".tscn", "PackedScene"):
 							
 							
 								var special_scene : PackedScene = load("res://Scenes/projectiles/"+specials+".tscn")
@@ -124,8 +124,8 @@ func perform_move():
 						else:
 							#this means that the special is a melee attack
 							last_used_move =  specials
-							can_move = false #Can't move while ground attacks
-							$AnimationTree["paramjeters/conditions/" + specials] = true
+							#can_move = false #Can't move while ground attacks
+							$AnimationTree["parameters/conditions/" + specials] = true
 							await get_tree().create_timer(0.017 * 6).timeout
 							$AnimationTree["parameters/conditions/" + specials] = false
 							clear_buffer()
