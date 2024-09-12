@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://doexbpq4lt4f1"]
+[gd_scene load_steps=127 format=3 uid="uid://doexbpq4lt4f1"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
 [ext_resource type="Texture2D" uid="uid://c2e7agx5nkwdr" path="res://Assets/characters/Ellie/spritesheetlaeli.png" id="2_ca8wd"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://cadi7wx13ei3l" path="res://Assets/SFX/placeholder.wav" id="22_11jdn"]
 [ext_resource type="AudioStream" uid="uid://d0nt2a6qsnu3m" path="res://Assets/SFX/swing.wav" id="23_t2qer"]
 [ext_resource type="AudioStream" uid="uid://bdyxwxrw7s45i" path="res://Assets/SFX/swing 2.wav" id="24_4kwnx"]
+[ext_resource type="Texture2D" uid="uid://dewbqxdtjw33s" path="res://Scenes/Entities/floating_book.png" id="25_rhevm"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ffac"]
 particles_animation = true
@@ -31,7 +32,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hiv1u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgeof"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +40,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.75
+shader_parameter/tex_anim_offset = 0.837963
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3i2r6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6bs3"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +50,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.75
+shader_parameter/tex_anim_offset = 0.837963
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -149,6 +150,42 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FloatingBook:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(21, 132)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprite2D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3, -12)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FloatingBook:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_mk0os"]
 resource_name = "air_s_kick"
@@ -166,6 +203,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [144, 145, 146, 147, 148, 149, 150, 150, 150, 150, 150, 150]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_vc7wq"]
 resource_name = "air_s_punch"
@@ -182,6 +231,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ul345"]
@@ -224,6 +285,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_no61m"]
 resource_name = "air_w_punch"
@@ -265,6 +338,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_etjdn"]
 resource_name = "crouch"
@@ -294,6 +379,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(20, -40), Vector2(20, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FloatingBook:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_fn8m6"]
@@ -348,6 +445,18 @@ tracks/3/keys = {
 "update": 0,
 "values": []
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FloatingBook:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_aa86y"]
 resource_name = "crouch_s_punch"
@@ -376,6 +485,47 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(21, -221), Vector2(29, -23), Vector2(29, -23), Vector2(21, -221)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FloatingBook:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qp0oa"]
+resource_name = "crouch_w_kick"
+length = 0.166669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [162]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurt_box/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, -40), Vector2(20, -40)]
 }
 
 [sub_resource type="Animation" id="Animation_c2qpf"]
@@ -454,6 +604,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FloatingBook:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_oy3v6"]
 resource_name = "crouching"
@@ -495,6 +657,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(30, 31)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ebury"]
@@ -562,6 +736,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(30, -49)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FloatingBook:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_240tv"]
 resource_name = "in_air"
@@ -580,6 +766,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [117, 118]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_tibj1"]
 resource_name = "jump"
@@ -596,6 +794,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [112, 113, 114, 115, 116, 117]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_mjy0h"]
@@ -615,23 +825,41 @@ tracks/0/keys = {
 "update": 1,
 "values": [191, 190, 189, 188, 187, 186, 185, 184, 183, 182, 181]
 }
-
-[sub_resource type="Animation" id="Animation_xf1pg"]
-resource_name = "move_forward"
-length = 1.38334
-loop_mode = 1
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-7.00355e-07, 0.133333, 0.266666, 0.4, 0.533333, 0.666667, 0.800001, 0.933334, 1.06667, 1.2, 1.33334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 1.225, 1.35, 1.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(21, 132), Vector2(21, 143), Vector2(21, 132), Vector2(21, 132), Vector2(21, 132)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.783333, 1.225, 1.35, 1.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-3, -12), Vector2(-3, 1), Vector2(-3, -20), Vector2(-3, -10), Vector2(-3, -12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_gmgtv"]
@@ -674,6 +902,18 @@ tracks/2/keys = {
 "update": 1,
 "values": []
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_gibsl"]
 resource_name = "s_punch"
@@ -690,6 +930,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [54, 55, 56, 57, 58, 59]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_a1feo"]
@@ -755,6 +1007,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FloatingBook:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nwele"]
 resource_name = "w_punch"
@@ -796,6 +1060,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_7lkco"]
 resource_name = "walk"
@@ -815,9 +1091,10 @@ tracks/0/keys = {
 "values": [181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191]
 }
 
-[sub_resource type="Animation" id="Animation_qp0oa"]
-resource_name = "crouch_w_kick"
-length = 0.166669
+[sub_resource type="Animation" id="Animation_18bf1"]
+resource_name = "move_forward"
+length = 1.18334
+loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -826,22 +1103,46 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.106672, 0.213336, 0.320004, 0.42667, 0.533338, 0.640005, 0.746671, 0.853336, 0.960008, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [162]
+"values": [191, 190, 189, 188, 187, 186, 185, 184, 183, 182, 181]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hurt_box/CollisionShape2D:position")
-tracks/1/interp = 1
+tracks/1/path = NodePath("FloatingBook:position")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.506666, 0.98, 1.08, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(20, -40), Vector2(20, -40)]
+"values": [Vector2(21, 132), Vector2(21, 143), Vector2(21, 132), Vector2(21, 132), Vector2(21, 132)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.626667, 0.98, 1.08, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-3, -12), Vector2(-3, 1), Vector2(-3, -20), Vector2(-3, -10), Vector2(-3, -12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj6tu"]
@@ -861,7 +1162,7 @@ _data = {
 "in_air": SubResource("Animation_240tv"),
 "jump": SubResource("Animation_tibj1"),
 "move_backward": SubResource("Animation_mjy0h"),
-"move_forward": SubResource("Animation_xf1pg"),
+"move_forward": SubResource("Animation_18bf1"),
 "s_kick": SubResource("Animation_gmgtv"),
 "s_punch": SubResource("Animation_gibsl"),
 "w_kick": SubResource("Animation_a1feo"),
@@ -1212,7 +1513,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
-frame = 162
+frame = 181
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1220,7 +1521,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_hiv1u")
+process_material = SubResource("ShaderMaterial_vgeof")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1232,7 +1533,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_3i2r6")
+process_material = SubResource("ShaderMaterial_j6bs3")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1471,6 +1772,11 @@ volume_db = 5.0
 [node name="blockSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("24_4kwnx")
 volume_db = 5.0
+
+[node name="FloatingBook" type="Sprite2D" parent="."]
+position = Vector2(21, 132)
+texture = ExtResource("25_rhevm")
+hframes = 2
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

@@ -197,7 +197,7 @@ func _physics_process(delta: float) -> void:
 
 		
 
-		if not ai_player and is_mapped_action_pressed("s_kick") :
+		if not ai_player and input_buffer.size() > 0 and input_buffer.back() == "s_kick" :
 
 					if crouching and book_fire_time <= 0.0 and enough_mp(fire_cost):
 						var fire_projectile = instanciate_fire(global_position + Vector2(0,-200))
