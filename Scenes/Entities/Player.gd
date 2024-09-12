@@ -291,7 +291,7 @@ func _process(delta):
 	
 		if buffer_time <= 0 and (input_buffer.size() > 0 and (input_buffer.back().contains("punch") or input_buffer.back().contains("kick") or input_buffer.back().contains("jump"))):
 			if input_buffer.size() > 0: perform_move()
-			if not input_buffer.back().contains("jump") : clear_buffer()
+			if input_buffer.size() > 0 and not input_buffer.back().contains("jump") : clear_buffer()
 		elif buffer_time <= -(0.0167 * INPUT_EXTRA_BUFFER):
 			if input_buffer.size() > 0: perform_move()
 			clear_buffer()

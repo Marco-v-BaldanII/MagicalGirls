@@ -121,7 +121,7 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			$SelectCharacter.play()
 			move_selection(1,character_id,second_onlineP) 
 			GDSync.call_func(move_selection,[1,character_id,second_onlineP])
-		elif is_joy_button_just_pressed("accept", input_methods[character_id]):
+		elif Controls.is_ui_action_pressed("accept"):
 			$MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)
 			GDSync.call_func(_select_fighter,[character_id,second_onlineP])

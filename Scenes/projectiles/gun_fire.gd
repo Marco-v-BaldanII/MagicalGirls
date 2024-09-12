@@ -73,6 +73,7 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	global_position = my_player.position
 	if dir == "right":
 		speed *= -1
+		scale.x -= 1
 	if player:
 		player.add_lag(lag_frames)
 

@@ -406,4 +406,4 @@ func flash_charge():
 		flash_frames = 12
 
 func online_tint_sprite(color : Color):
-	sprite_2d.color = color
+	sprite_2d.modulate = color

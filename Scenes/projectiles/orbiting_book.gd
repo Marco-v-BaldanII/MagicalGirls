@@ -49,6 +49,7 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	assign_phys_layer(layer, mask)
 	if dir == "right":
 		speed *= -1
+		scale.x -= 1
 	if player:
 		my_player = player
 		global_position = player.global_position
