@@ -17,10 +17,10 @@ path = "settings"
 show_mode = 0
 force_type = 0
 
-[sub_resource type="Gradient" id="Gradient_jw3ws"]
+[sub_resource type="Gradient" id="Gradient_flhni"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_0u0eg"]
-gradient = SubResource("Gradient_jw3ws")
+gradient = SubResource("Gradient_flhni")
 
 [node name="Retry" type="Node2D"]
 script = ExtResource("1_gci3x")
@@ -86,4 +86,4 @@ scale = Vector2(4.48703, 2039.78)
 texture = SubResource("GradientTexture1D_0u0eg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.25614, 0.260047, 0.220691, 1)
+color = Color(0.779728, 0.784983, 0.73669, 1)

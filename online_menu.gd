@@ -1,8 +1,8 @@
 extends Node2D
 class_name OnlineMenu
 
-@onready var canvas_layer = $CanvasLayer
-@onready var connect_menu : Node2D = $CanvasLayer/connect_menu
+@onready var canvas_layer = $Camera2D/CanvasLayer
+@onready var connect_menu : Node2D = $Camera2D/CanvasLayer/connect_menu
 
 @onready var CHARACTER_SELECTION_SCREEN = preload("res://Scenes/menu_scenes/CharacterSelectionScreen.tscn")
 
@@ -42,9 +42,9 @@ func lobby_created(lobby_name : String):
 	print("Succesfully created lobby "+lobby_name)
 	var password : String = "Password123"
 	
-	if $CanvasLayer/LobbyCreator/CheckButton.button_pressed: #If the lobby is marked as private
+	if $Camera2D/CanvasLayer/LobbyCreator/CheckButton.button_pressed: #If the lobby is marked as private
 		#Get the written password
-		password = $CanvasLayer/LobbyCreator/LobbyPassword.text
+		password = $Camera2D/CanvasLayer/LobbyCreator/LobbyPassword.text
 		
 	GDSync.join_lobby(lobby_name, password)
 #	Now you can join the lobby!
@@ -88,9 +88,9 @@ func lobby_join_failed(lobby_name : String, error : int):
 		ENUMS.LOBBY_JOIN_ERROR.DUPLICATE_USERNAME:
 			push_error("The lobby "+lobby_name+" already contains your username.")
 	  
-@onready var lobby_selection: Node2D = $CanvasLayer/LobbySelection
-@onready var lobby_creator: LobbyCreator = $CanvasLayer/LobbyCreator
-@onready var p1_lobby_selection: ScrollMenu = $CanvasLayer/LobbySelection/P1_control_selection
+@onready var lobby_selection: Node2D = $Camera2D/CanvasLayer/LobbySelection
+@onready var lobby_creator: LobbyCreator = $Camera2D/CanvasLayer/LobbyCreator
+@onready var p1_lobby_selection: ScrollMenu = $Camera2D/CanvasLayer/LobbySelection/P1_control_selection
 
 
 func _on_host_button_button_down():
@@ -119,7 +119,7 @@ func _on_join_button_button_down():
 	if online:
 		#GDSync.join_lobby("Lobby Name", "Password123")
 		#v_box_container.hide()
-		$CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
+		$Camera2D/CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1._ready()
 		connect_menu.hide()
 		lobby_selection.show()
 		#node_instantiator.instantiate_node()
