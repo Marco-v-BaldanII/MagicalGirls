@@ -99,9 +99,9 @@ func perform_move():
 						move_dmg[key] *= 2 #double damage on all moves
 					
 					await get_tree().create_timer(0.5).timeout
-					$Sprite2D/GPUParticles_ulti.show()
+					$Sprite2D/GPUParticles2D_ulti.show()
 					await get_tree().create_timer(6.24).timeout
-					$Sprite2D/GPUParticles_ulti.hide()
+					$Sprite2D/GPUParticles2D_ulti.hide()
 					for key in  move_dmg.keys():
 						
 						move_dmg[key] /= 2 #return to normal damage
@@ -166,7 +166,7 @@ func perform_move():
 var book_fire_time : float = 0.0
 
 func _physics_process(delta: float) -> void:
-	mp = 600
+	
 	super._physics_process(delta)
 	
 	if not GDSync.is_gdsync_owner(self) or lag: return
@@ -406,4 +406,4 @@ func flash_charge():
 		flash_frames = 12
 
 func online_tint_sprite(color : Color):
-	sprite_2d.color = color
+	sprite_2d.modulate = color

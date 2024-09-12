@@ -166,7 +166,7 @@ R_trigger={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/test.dialogue", "res://Dialogues/Anastasia.dialogue", "res://Dialogues/Ritsu.dialogue", "res://Dialogues/EllieQuinn.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/test.dialogue", "res://Dialogues/Anastasia.dialogue", "res://Dialogues/Ritsu.dialogue", "res://Dialogues/Ellie Quinn.dialogue")
 
 [layer_names]
 

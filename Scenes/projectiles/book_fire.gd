@@ -42,6 +42,7 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 
 	if dir == "right":
 		speed *= -1
+		scale.x -= 1
 	else:
 		pass
 	if player:

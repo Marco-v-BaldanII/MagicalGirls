@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://c5f57xwcwnv5l"
+path="res://.godot/imported/Ellie Quinn.dialogue-b511e57954ffc268a78a0ec238d582d9.tres"
+
+[deps]
+
+source_file="res://Dialogues/Ellie Quinn.dialogue"
+dest_files=["res://.godot/imported/Ellie Quinn.dialogue-b511e57954ffc268a78a0ec238d582d9.tres"]
+
+[params]
+
+defaults=true
