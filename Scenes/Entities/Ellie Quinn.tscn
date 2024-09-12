@@ -32,7 +32,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4v82"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ay6o"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -40,9 +40,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.837963
+shader_parameter/tex_anim_offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ew5io"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eu8ih"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -50,7 +50,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.837963
+shader_parameter/tex_anim_offset = 0.0
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1502,7 +1502,7 @@ move_dmg = {
 "s_kick": 13,
 "s_punch": 13,
 "w_kick": 9,
-"w_punch": 4
+"w_punch": 5
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -1513,7 +1513,6 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
-frame = 181
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1521,7 +1520,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_s4v82")
+process_material = SubResource("ShaderMaterial_2ay6o")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1533,7 +1532,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_ew5io")
+process_material = SubResource("ShaderMaterial_eu8ih")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")

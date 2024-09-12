@@ -15,7 +15,7 @@ texture = ExtResource("1_wa7e6")
 script = ExtResource("2_u0asw")
 lag_frames = 35
 speed = 800
-dmg = 5.0
+dmg = 3.0
 
 [node name="Area2D" type="Area2D" parent="." groups=["projectile", "strong"]]
 collision_layer = 0
