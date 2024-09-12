@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=20 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
@@ -16,11 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
-[ext_resource type="Script" path="res://Scenes/menu_scenes/fadin_backgrounds.gd" id="17_8mgq6"]
-[ext_resource type="PackedScene" uid="uid://bh58ivkbsm6kl" path="res://Scenes/Stages/parallax/Anastasia.tscn" id="17_xpbvb"]
-[ext_resource type="PackedScene" uid="uid://y386gryjkvww" path="res://Scenes/Stages/parallax/Ritsu.tscn" id="19_n3wxp"]
-[ext_resource type="PackedScene" uid="uid://b2nlief7kyebf" path="res://Scenes/Stages/parallax/Larissa.tscn" id="20_4ervh"]
-[ext_resource type="PackedScene" uid="uid://bpmopv12racrh" path="res://Scenes/Stages/parallax/Ellie Quinn.tscn" id="21_xnevo"]
+[ext_resource type="PackedScene" uid="uid://cgmkfq74q5rty" path="res://Scenes/menu_scenes/fading_stages.tscn" id="17_jonlc"]
 
 [sub_resource type="Texture2D" id="Texture2D_1vj16"]
 resource_local_to_scene = false
@@ -37,9 +33,6 @@ script = ExtResource("11_nw28w")
 path = "select"
 show_mode = 0
 force_type = 0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5yve"]
-bg_color = Color(1, 1, 1, 1)
 
 [node name="CharacterSelectionScreen" type="Control"]
 layout_mode = 3
@@ -281,42 +274,7 @@ text = "Player 2
 [node name="goBack" parent="Camera2D" instance=ExtResource("15_x5w14")]
 position = Vector2(-1948.33, -1135)
 
-[node name="Node2D" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("backgrounds")]
-position = Vector2(53.3333, 48.3333)
-script = ExtResource("17_8mgq6")
-backgrounds = [NodePath("AnastasiaBG"), NodePath("RitsuBG"), NodePath("LarissaBG"), NodePath("EllieBG")]
-
-[node name="AnastasiaBG" parent="Camera2D/Node2D" instance=ExtResource("17_xpbvb")]
-visible = false
-
-[node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/AnastasiaBG" index="6"]
-autoplay = false
-max_distance = 2000.0
-
-[node name="RitsuBG" parent="Camera2D/Node2D" instance=ExtResource("19_n3wxp")]
-
-[node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/RitsuBG" index="4"]
-autoplay = false
-max_distance = 2000.0
-
-[node name="LarissaBG" parent="Camera2D/Node2D" instance=ExtResource("20_4ervh")]
-visible = false
-
-[node name="EllieBG" parent="Camera2D/Node2D" instance=ExtResource("21_xnevo")]
-visible = false
-
-[node name="AudioStreamPlayer2D" parent="Camera2D/Node2D/EllieBG" index="8"]
-autoplay = false
-max_distance = 2000.0
-
-[node name="Panel" type="Panel" parent="Camera2D/Node2D"]
-modulate = Color(0.286, 0.115, 0.264, 0.4)
-z_index = -3
-offset_left = -1742.0
-offset_top = -978.0
-offset_right = 1575.0
-offset_bottom = 913.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_u5yve")
+[node name="fading_stages" parent="Camera2D" instance=ExtResource("17_jonlc")]
 
 [connection signal="button_down" from="Camera2D/StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_down" from="Camera2D/ControlSelection2/Button" to="Camera2D/ControlSelection2/P2_control_selection" method="_on_button_button_down"]
@@ -324,7 +282,3 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_u5yve")
 
 [editable path="Camera2D/ControlSelection"]
 [editable path="Camera2D/goBack"]
-[editable path="Camera2D/Node2D/AnastasiaBG"]
-[editable path="Camera2D/Node2D/RitsuBG"]
-[editable path="Camera2D/Node2D/LarissaBG"]
-[editable path="Camera2D/Node2D/EllieBG"]

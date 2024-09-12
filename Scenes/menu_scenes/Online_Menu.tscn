@@ -3,47 +3,59 @@
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="2_1hqwr"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="2_561r3"]
+[ext_resource type="StyleBox" uid="uid://cthtxkxjw05gg" path="res://Scenes/menu_scenes/button_stylebox.tres" id="3_aevaa"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_menu.gd" id="3_hbw2o"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_creator.gd" id="4_3ldkt"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/v_box_menu.gd" id="4_6a1dq"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="4_v2qc8"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/input_field_option.gd" id="5_jqadj"]
-[ext_resource type="PackedScene" uid="uid://k1lv633wv3h4" path="res://Scenes/menu_scenes/options/lobby_option.tscn" id="6_38mf0"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/my_lobby.gd" id="7_8vq33"]
 [ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="9_fgoy1"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="11_fj6tj"]
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="12_7nucy"]
-
-[sub_resource type="Gradient" id="Gradient_fwpbm"]
-colors = PackedColorArray(1, 0.458824, 0.627451, 1, 1, 0.588235, 0.701961, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_lygcx"]
-gradient = SubResource("Gradient_fwpbm")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbkfl"]
-texture = SubResource("GradientTexture1D_lygcx")
-
-[sub_resource type="Gradient" id="Gradient_0y7gk"]
-offsets = PackedFloat32Array(0.0203046, 1)
-colors = PackedColorArray(1, 0.588235, 0.701961, 1, 1, 0.458824, 0.627451, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ex3ec"]
-gradient = SubResource("Gradient_0y7gk")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qi6ro"]
-texture = SubResource("GradientTexture1D_ex3ec")
+[ext_resource type="PackedScene" uid="uid://cgmkfq74q5rty" path="res://Scenes/menu_scenes/fading_stages.tscn" id="14_2cd3v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qdoj3"]
 shader = ExtResource("11_fj6tj")
 
+[sub_resource type="Gradient" id="Gradient_jw3ws"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8obbh"]
+gradient = SubResource("Gradient_jw3ws")
+
+[sub_resource type="Gradient" id="Gradient_tojef"]
+offsets = PackedFloat32Array(0, 0.580645, 1)
+colors = PackedColorArray(0.209898, 0.032143, 0.277826, 1, 0.522109, 0.347544, 0.551405, 0.637653, 0.969, 0.799, 0.943, 0.119)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k06u3"]
+gradient = SubResource("Gradient_tojef")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4j656"]
+texture = SubResource("GradientTexture2D_k06u3")
+
 [node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="goBack" parent="CanvasLayer" instance=ExtResource("2_1hqwr")]
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="OnlineButton" type="CheckButton" parent="CanvasLayer"]
+[node name="goBack" parent="Camera2D/CanvasLayer" instance=ExtResource("2_1hqwr")]
+
+[node name="go_back" parent="Camera2D/CanvasLayer/goBack" index="0"]
+theme_override_styles/focus = ExtResource("3_aevaa")
+theme_override_styles/disabled_mirrored = ExtResource("3_aevaa")
+theme_override_styles/disabled = ExtResource("3_aevaa")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_aevaa")
+theme_override_styles/hover_pressed = ExtResource("3_aevaa")
+theme_override_styles/hover_mirrored = ExtResource("3_aevaa")
+theme_override_styles/hover = ExtResource("3_aevaa")
+theme_override_styles/pressed_mirrored = ExtResource("3_aevaa")
+theme_override_styles/pressed = ExtResource("3_aevaa")
+theme_override_styles/normal_mirrored = ExtResource("3_aevaa")
+theme_override_styles/normal = ExtResource("3_aevaa")
+
+[node name="OnlineButton" type="CheckButton" parent="Camera2D/CanvasLayer"]
 visible = false
 offset_left = 818.0
 offset_top = 271.0
@@ -53,25 +65,22 @@ scale = Vector2(2.52, 2.52)
 theme_override_font_sizes/font_size = 18
 text = "Online"
 
-[node name="LobbySelection" parent="CanvasLayer" instance=ExtResource("2_561r3")]
+[node name="LobbySelection" parent="Camera2D/CanvasLayer" instance=ExtResource("2_561r3")]
 visible = false
 position = Vector2(2165, 993)
 
-[node name="cursor" parent="CanvasLayer/LobbySelection" index="0"]
+[node name="cursor" parent="Camera2D/CanvasLayer/LobbySelection" index="0"]
 texture = ExtResource("9_fgoy1")
 
-[node name="P1_control_selection" parent="CanvasLayer/LobbySelection" index="1" node_paths=PackedStringArray("lobby_selection", "connect")]
+[node name="P1_control_selection" parent="Camera2D/CanvasLayer/LobbySelection" index="1" node_paths=PackedStringArray("lobby_selection", "connect")]
 _is_active = true
 lobby_selection = NodePath("..")
 connect = NodePath("../../connect_menu")
 
-[node name="ControlerMenu1" parent="CanvasLayer/LobbySelection/P1_control_selection" index="0"]
+[node name="ControlerMenu1" parent="Camera2D/CanvasLayer/LobbySelection/P1_control_selection" index="0"]
 script = ExtResource("3_hbw2o")
 
-[node name="ColorRect" parent="CanvasLayer/LobbySelection/P1_control_selection/ControlerMenu1" index="0" instance=ExtResource("6_38mf0")]
-layout_mode = 2
-
-[node name="password_edit" type="TextEdit" parent="CanvasLayer/LobbySelection"]
+[node name="password_edit" type="TextEdit" parent="Camera2D/CanvasLayer/LobbySelection"]
 offset_left = -1405.0
 offset_top = -700.0
 offset_right = -1019.0
@@ -79,18 +88,18 @@ offset_bottom = -652.0
 theme_override_font_sizes/font_size = 25
 placeholder_text = "              Type Password"
 
-[node name="cursor" type="Sprite2D" parent="CanvasLayer"]
+[node name="cursor" type="Sprite2D" parent="Camera2D/CanvasLayer"]
 visible = false
 position = Vector2(165, 299)
 texture = ExtResource("4_v2qc8")
 
-[node name="LobbyCreator" type="Node2D" parent="CanvasLayer"]
+[node name="LobbyCreator" type="Node2D" parent="Camera2D/CanvasLayer"]
 visible = false
 position = Vector2(34, -488)
 scale = Vector2(1.88, 1.88)
 script = ExtResource("4_3ldkt")
 
-[node name="LobbyName" type="TextEdit" parent="CanvasLayer/LobbyCreator"]
+[node name="LobbyName" type="TextEdit" parent="Camera2D/CanvasLayer/LobbyCreator"]
 offset_left = 75.0
 offset_top = 422.0
 offset_right = 679.0
@@ -99,7 +108,7 @@ theme_override_font_sizes/font_size = 30
 placeholder_text = "                     Type Lobby name"
 script = ExtResource("5_jqadj")
 
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/LobbyCreator"]
+[node name="CheckButton" type="CheckButton" parent="Camera2D/CanvasLayer/LobbyCreator"]
 offset_left = 690.0
 offset_top = 406.0
 offset_right = 795.0
@@ -107,7 +116,7 @@ offset_bottom = 445.0
 scale = Vector2(2.12, 2.12)
 text = "Private"
 
-[node name="Button" type="Button" parent="CanvasLayer/LobbyCreator"]
+[node name="Button" type="Button" parent="Camera2D/CanvasLayer/LobbyCreator"]
 offset_left = 75.0
 offset_top = 519.0
 offset_right = 457.0
@@ -115,7 +124,7 @@ offset_bottom = 577.0
 theme_override_font_sizes/font_size = 28
 text = "Create Lobby"
 
-[node name="LobbyPassword" type="TextEdit" parent="CanvasLayer/LobbyCreator"]
+[node name="LobbyPassword" type="TextEdit" parent="Camera2D/CanvasLayer/LobbyCreator"]
 offset_left = 483.0
 offset_top = 519.0
 offset_right = 908.0
@@ -124,11 +133,11 @@ theme_override_font_sizes/font_size = 30
 placeholder_text = "              Type password"
 script = ExtResource("5_jqadj")
 
-[node name="my_lobby" type="Node2D" parent="CanvasLayer"]
+[node name="my_lobby" type="Node2D" parent="Camera2D/CanvasLayer"]
 visible = false
 script = ExtResource("7_8vq33")
 
-[node name="Label" type="Label" parent="CanvasLayer/my_lobby"]
+[node name="Label" type="Label" parent="Camera2D/CanvasLayer/my_lobby"]
 offset_right = 1922.0
 offset_bottom = 166.0
 size_flags_horizontal = 6
@@ -137,7 +146,7 @@ text = "My super lobby"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/my_lobby"]
+[node name="Label2" type="Label" parent="Camera2D/CanvasLayer/my_lobby"]
 offset_top = 272.0
 offset_right = 1922.0
 offset_bottom = 438.0
@@ -147,14 +156,13 @@ text = "waiting for oponent..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="connect_menu" type="Node2D" parent="CanvasLayer"]
-visible = false
+[node name="connect_menu" type="Node2D" parent="Camera2D/CanvasLayer"]
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/connect_menu"]
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/CanvasLayer/connect_menu"]
 position = Vector2(117, 317)
 texture = ExtResource("9_fgoy1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/connect_menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/connect_menu"]
 offset_left = 199.0
 offset_top = 267.0
 offset_right = 901.0
@@ -163,19 +171,40 @@ scale = Vector2(2.2, 2.2)
 theme_override_constants/separation = 50
 script = ExtResource("4_6a1dq")
 
-[node name="host_button" type="Button" parent="CanvasLayer/connect_menu/VBoxContainer"]
+[node name="host_button" type="Button" parent="Camera2D/CanvasLayer/connect_menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_tbkfl")
+theme_override_styles/focus = ExtResource("3_aevaa")
+theme_override_styles/disabled_mirrored = ExtResource("3_aevaa")
+theme_override_styles/disabled = ExtResource("3_aevaa")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_aevaa")
+theme_override_styles/hover_pressed = ExtResource("3_aevaa")
+theme_override_styles/hover_mirrored = ExtResource("3_aevaa")
+theme_override_styles/hover = ExtResource("3_aevaa")
+theme_override_styles/pressed_mirrored = ExtResource("3_aevaa")
+theme_override_styles/pressed = ExtResource("3_aevaa")
+theme_override_styles/normal_mirrored = ExtResource("3_aevaa")
+theme_override_styles/normal = ExtResource("3_aevaa")
 text = "Host"
 
-[node name="join_button" type="Button" parent="CanvasLayer/connect_menu/VBoxContainer"]
+[node name="join_button" type="Button" parent="Camera2D/CanvasLayer/connect_menu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_qi6ro")
+theme_override_styles/focus = ExtResource("3_aevaa")
+theme_override_styles/disabled_mirrored = ExtResource("3_aevaa")
+theme_override_styles/disabled = ExtResource("3_aevaa")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_aevaa")
+theme_override_styles/hover_pressed = ExtResource("3_aevaa")
+theme_override_styles/hover_mirrored = ExtResource("3_aevaa")
+theme_override_styles/hover = ExtResource("3_aevaa")
+theme_override_styles/pressed_mirrored = ExtResource("3_aevaa")
+theme_override_styles/pressed = ExtResource("3_aevaa")
+theme_override_styles/normal_mirrored = ExtResource("3_aevaa")
+theme_override_styles/normal = ExtResource("3_aevaa")
 text = "Join"
 
-[node name="TextureRect4" type="TextureRect" parent="."]
+[node name="TextureRect4" type="TextureRect" parent="Camera2D"]
+visible = false
 z_index = -9
 texture_repeat = 2
 material = SubResource("ShaderMaterial_qdoj3")
@@ -186,13 +215,42 @@ offset_bottom = 1030.0
 scale = Vector2(1.08867, 1.09458)
 texture = ExtResource("12_7nucy")
 
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/goBack/go_back" to="CanvasLayer/my_lobby" method="_on_go_back_pressed"]
-[connection signal="button_down" from="CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/LobbyCreator/Button" to="CanvasLayer/LobbyCreator" method="_on_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/connect_menu/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/connect_menu/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
+[node name="fading_stages" parent="Camera2D" instance=ExtResource("14_2cd3v")]
 
-[editable path="CanvasLayer/goBack"]
-[editable path="CanvasLayer/LobbySelection"]
+[node name="CanvasLayer2" type="CanvasLayer" parent="Camera2D/fading_stages"]
+
+[node name="PointLight2D" type="PointLight2D" parent="Camera2D/fading_stages/CanvasLayer2"]
+position = Vector2(1037, 590.776)
+rotation = -1.5708
+scale = Vector2(5.97936, 2758.05)
+texture = SubResource("GradientTexture1D_8obbh")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Camera2D/fading_stages/CanvasLayer2"]
+z_index = 200
+scale = Vector2(101.479, 101.479)
+color = Color(0, 0, 0, 1)
+
+[node name="Panel" parent="Camera2D/fading_stages" index="5"]
+modulate = Color(1, 1, 1, 0.4)
+offset_left = -1334.33
+offset_top = 578.667
+offset_right = 151.667
+offset_bottom = 3323.67
+rotation = -1.56815
+theme_override_styles/panel = SubResource("StyleBoxTexture_4j656")
+
+[connection signal="pressed" from="Camera2D/CanvasLayer/goBack/go_back" to="Camera2D/CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/goBack/go_back" to="Camera2D/CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/goBack/go_back" to="Camera2D/CanvasLayer/my_lobby" method="_on_go_back_pressed"]
+[connection signal="button_down" from="Camera2D/CanvasLayer/OnlineButton" to="." method="_on_online_button_button_down"]
+[connection signal="button_down" from="Camera2D/CanvasLayer/LobbyCreator/Button" to="Camera2D/CanvasLayer/LobbyCreator" method="_on_button_button_down"]
+[connection signal="button_down" from="Camera2D/CanvasLayer/connect_menu/VBoxContainer/host_button" to="." method="_on_host_button_button_down"]
+[connection signal="button_down" from="Camera2D/CanvasLayer/connect_menu/VBoxContainer/join_button" to="." method="_on_join_button_button_down"]
+
+[editable path="Camera2D/CanvasLayer/goBack"]
+[editable path="Camera2D/CanvasLayer/LobbySelection"]
+[editable path="Camera2D/fading_stages"]
+[editable path="Camera2D/fading_stages/AnastasiaBG"]
+[editable path="Camera2D/fading_stages/RitsuBG"]
+[editable path="Camera2D/fading_stages/LarissaBG"]
+[editable path="Camera2D/fading_stages/EllieBG"]

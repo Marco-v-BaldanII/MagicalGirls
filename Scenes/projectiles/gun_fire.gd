@@ -55,12 +55,12 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	GDSync.call_func(called_shoot,[layer, mask, dir, player, startup])
 
 func called_shoot(layer : int , mask : int, dir : String, player : Player = null, startup : int = 0):
-	
-	if startup != 0:
-		player.add_lag(startup)
-		await get_tree().create_timer(0.01667 * startup).timeout
-	else:
-		player.lag_finished.emit() #No startup lag, so start end_lag
+	if player:
+		if startup != 0:
+			player.add_lag(startup)
+			await get_tree().create_timer(0.01667 * startup).timeout
+		else:
+			player.lag_finished.emit() #No startup lag, so start end_lag
 
 	_layer = layer; _mask = mask
 	set_physics_process(true)
