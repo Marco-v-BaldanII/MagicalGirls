@@ -6,6 +6,7 @@ const STAR_RIGHT = preload("res://Scenes/projectiles/book_laser.tscn")
 const BOOK_FIRE = preload("res://Scenes/projectiles/book_fire.tscn")
 
 const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
+const BOOK_PROJECTILE = preload("res://Scenes/projectiles/book_projectile.tscn")
 
 var fire_cost = 150
 
@@ -49,6 +50,15 @@ func instanciate_fire():
 	get_tree().root.add_child(projectile)
 	
 	return projectile
+	
+func instanciate_book_projectile(glob_pos : Vector2 = global_position):
+	var book_proj = BOOK_PROJECTILE.instantiate()
+	
+	book_proj.global_position = glob_pos
+	get_tree().root.add_child(book_proj)
+	
+	return book_proj
+	
 	
 var charging_laser : bool:
 	set(value):
@@ -149,13 +159,15 @@ func perform_move():
 		
 	jump_code()
 
-
+var book_fire_time : float = 0.0
 
 func _physics_process(delta: float) -> void:
 	
 	super._physics_process(delta)
 	
 	if not GDSync.is_gdsync_owner(self) or lag: return
+	
+	book_fire_time -= delta
 	
 	if is_on_floor() and charging_laser and not (is_mapped_action_pressed("move_right") or is_mapped_action_pressed("move_left")) and not (is_input_pressed("move_right") or is_input_pressed("move_left")):
 		if current_start_projectile != null and charging_laser:
@@ -170,23 +182,65 @@ func _physics_process(delta: float) -> void:
 		if not ai_player: book_laser()
 		else: ai_book_laser()
 		
+	
 		
-	elif is_on_floor() and crouching:
-		if enough_mp(fire_cost):
-			if not ai_player and is_mapped_action_pressed("s_kick") and current_start_projectile == null:
-				var fire_projectile = instanciate_fire()
-				GDSync.call_func(instanciate_fire)
-				fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
-				add_lag(30)
-				pass
+	elif is_on_floor() and crouching and book_fire_time <= 0.0:
+			if not ai_player and is_mapped_action_pressed("s_kick") :
+				if enough_mp(fire_cost):
+					var fire_projectile = instanciate_fire()
+					GDSync.call_func(instanciate_fire)
+					fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+					add_lag(30)
+					book_fire_time = 1.5
 			
-			elif ai_player and is_input_pressed("s_kick"):
+			elif ai_player and is_joy_button_just_pressed("s_kick"):
 				
+				if enough_mp(fire_cost):
+					var fire_projectile = instanciate_fire()
+					GDSync.call_func(instanciate_fire)
+					fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+					add_lag(30)
+					book_fire_time = 1.5
+	
+	
+	
+
+	if not ai_player and input_buffer.size() > 0 and input_buffer.back().contains("s_punch"):
+				if enough_mp(fire_cost):
+					
+					var pos_offset : Vector2 = Vector2(40, -160)
+					if crouching: pos_offset = Vector2(40,60)
+					if not is_on_floor(): pos_offset = Vector2(0,160)
+					
+					var book_proj = instanciate_book_projectile(global_position + pos_offset)
+					GDSync.call_func(instanciate_book_projectile, [global_position + pos_offset])
+					
+					book_proj.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,null)
+					
+					if not is_on_floor():
+						book_proj.speed = 0
+						book_proj.speedY = 800
+					
+					add_lag(20)
+			
+	elif ai_player and input_buffer.size() > 0 and input_buffer.back().contains("s_punch"):
 				
-				var fire_projectile = instanciate_fire()
-				GDSync.call_func(instanciate_fire)
-				fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
-				add_lag(30)
+				if enough_mp(fire_cost):
+					
+					var pos_offset : Vector2 = Vector2(40, -160)
+					if crouching: pos_offset = Vector2(40,60)
+					if not is_on_floor(): pos_offset = Vector2(0,160)
+					
+					var book_proj = instanciate_book_projectile(global_position + pos_offset)
+					GDSync.call_func(instanciate_book_projectile,[global_position + pos_offset])
+					
+					book_proj.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,null)
+					
+					if not is_on_floor():
+						book_proj.speed = 0
+						book_proj.speedY = 800
+					
+					add_lag(20)
 	
 	#if not input_buffer.is_empty() and input_buffer.back().contains("s_punch"):
 		#instanciate_projectile("res://Scenes/projectiles/orbiting_book.tscn","", Vector2(200,0), self)

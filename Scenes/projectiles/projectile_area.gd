@@ -3,7 +3,7 @@ extends Area2D
 
 
 func get_dmg() -> int:
-	return floori(star.dmg) 
+	return floori( $"..".dmg) 
 	
 func get_projectile() ->Projectile:
-	return star
+	return $".."

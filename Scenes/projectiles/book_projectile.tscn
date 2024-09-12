@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://otf77qqn35bu"]
+
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_wa7e6"]
+[ext_resource type="Script" path="res://Scenes/projectiles/book_projectile.gd" id="2_u0asw"]
+[ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_mmsvt"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_bt58g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
+radius = 167.966
+
+[node name="book_projectile" type="Sprite2D"]
+position = Vector2(113, 57)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_wa7e6")
+script = ExtResource("2_u0asw")
+speed = 700
+
+[node name="Area2D" type="Area2D" parent="." groups=["projectile", "strong"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_mmsvt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40, 0)
+shape = SubResource("CircleShape2D_xfwv1")
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("4_bt58g")
+broadcast = 1
+node_path = NodePath("..")
+property_name = "scale"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer3" type="Node" parent="."]
+script = ExtResource("4_bt58g")
+broadcast = 1
+node_path = NodePath("..")
+property_name = "_visible"
+interpolation = null
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("4_bt58g")
+broadcast = 1
+refresh_rate = 200
+node_path = NodePath("..")
+property_name = "position"
+interpolated = false
+interpolation_speed = 1.0
+
+[node name="PropertySynchronizer4" type="Node" parent="."]
+script = ExtResource("4_bt58g")
+broadcast = 1
+refresh_rate = 200
+node_path = NodePath("..")
+property_name = "dmg"
+interpolated = false
+interpolation_speed = 1.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

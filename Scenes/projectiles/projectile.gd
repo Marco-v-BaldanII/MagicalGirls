@@ -76,11 +76,11 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	show()
 	active = true
 	assign_phys_layer(layer, mask)
+	if dir == "right":
+		speed *= -1
 	my_player = player
 	if player:
 		global_position = my_player.position
-		if dir == "right":
-			speed *= -1
 		if player:
 			player.add_lag(lag_frames)
 
