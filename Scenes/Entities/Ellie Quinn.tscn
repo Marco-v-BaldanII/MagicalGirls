@@ -31,7 +31,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_053wu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufhh4"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0576923
+shader_parameter/tex_anim_offset = 0.0448718
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p8ccw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0k3b"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0576923
+shader_parameter/tex_anim_offset = 0.0448718
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -152,7 +152,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_mk0os"]
 resource_name = "air_s_kick"
-length = 0.500003
+length = 0.450003
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -161,10 +161,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0416667, 0.0833335, 0.125, 0.166667, 0.208334, 0.25, 0.291667, 0.333334, 0.375001, 0.416667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.016666, 0.0499994, 0.0833328, 0.116666, 0.15, 0.183333, 0.216666, 0.25, 0.283333, 0.316667, 0.35, 0.866668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136]
+"values": [144, 145, 146, 147, 148, 149, 150, 150, 150, 150, 150, 150]
 }
 
 [sub_resource type="Animation" id="Animation_vc7wq"]
@@ -178,10 +178,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333334, 0.0666668, 0.1, 0.133334, 0.166667, 0.2, 0.233334, 0.266667, 0.300001, 0.333334, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0416667, 0.0833335, 0.125, 0.166667, 0.208334, 0.25, 0.291667, 0.333334, 0.375001, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [144, 145, 146, 147, 148, 149, 150, 150, 150, 150, 150, 150]
+"values": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136]
 }
 
 [sub_resource type="Animation" id="Animation_ul345"]
@@ -457,7 +457,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_c2qpf"]
 resource_name = "crouch_w_punch"
-length = 0.283336
+length = 0.66667
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -466,10 +466,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.0333334, 0.0666668, 0.1, 0.133334, 0.166667, 0.2, 0.233334, 0.266667, 0.300001, 0.333334, 0.366667, 0.400001, 0.433334, 0.466668, 0.500001, 0.533334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": []
+"values": [163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -478,10 +478,10 @@ tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.116667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.366667, 0.550001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(30, -119), Vector2(149, -32)]
+"values": [Vector2(30, 23), Vector2(523, 23), Vector2(523, 23), Vector2(30, 23)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -490,7 +490,7 @@ tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.1, 0.283333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -502,10 +502,34 @@ tracks/3/path = NodePath("hurt_box/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0166667, 0.266667, 0.283334),
+"times": PackedFloat32Array(0, 0.0166667, 0.633333, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(21, -221), Vector2(29, -23), Vector2(29, -23), Vector2(21, -221)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hit_boxes/special_box/barrido_attack:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.366667, 0.550001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30, 23), Vector2(523, 23), Vector2(523, 23), Vector2(30, 23)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("hit_boxes/special_box/barrido_attack:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.283333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_oy3v6"]
@@ -835,7 +859,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(30, -111), Vector2(344, -111), Vector2(344, -111), Vector2(14, -111)]
+"values": [Vector2(30, -111), Vector2(320, -111), Vector2(320, -111), Vector2(14, -111)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1214,18 +1238,18 @@ process_mode = 1
 script = ExtResource("1_r7jln")
 character_name = "Ellie Quinn"
 move_dmg = {
-"air_s_kick": 15,
-"air_s_punch": 15,
-"air_w_kick": 8,
-"air_w_punch": 6,
-"crouch_s_kick": 15,
-"crouch_s_punch": 15,
-"crouch_w_kick": 8,
-"crouch_w_punch": 8,
-"s_kick": 15,
-"s_punch": 15,
-"w_kick": 8,
-"w_punch": 6
+"air_s_kick": 14,
+"air_s_punch": 14,
+"air_w_kick": 9,
+"air_w_punch": 7,
+"crouch_s_kick": 14,
+"crouch_s_punch": 14,
+"crouch_w_kick": 9,
+"crouch_w_punch": 7,
+"s_kick": 13,
+"s_punch": 13,
+"w_kick": 9,
+"w_punch": 4
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -1236,7 +1260,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
-frame = 9
+frame = 7
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1244,7 +1268,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_053wu")
+process_material = SubResource("ShaderMaterial_ufhh4")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1255,7 +1279,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_p8ccw")
+process_material = SubResource("ShaderMaterial_c0k3b")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")

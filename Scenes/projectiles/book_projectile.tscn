@@ -10,10 +10,12 @@ radius = 167.966
 
 [node name="book_projectile" type="Sprite2D"]
 position = Vector2(113, 57)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.222482, 0.222482)
 texture = ExtResource("1_wa7e6")
 script = ExtResource("2_u0asw")
-speed = 700
+lag_frames = 35
+speed = 800
+dmg = 5.0
 
 [node name="Area2D" type="Area2D" parent="." groups=["projectile", "strong"]]
 collision_layer = 0

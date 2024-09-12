@@ -9,6 +9,7 @@ const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
 const BOOK_PROJECTILE = preload("res://Scenes/projectiles/book_projectile.tscn")
 
 var fire_cost = 150
+var projectile_cost = 26
 
 func _ready() -> void:
 	super()
@@ -206,7 +207,7 @@ func _physics_process(delta: float) -> void:
 	
 
 	if not ai_player and input_buffer.size() > 0 and input_buffer.back().contains("s_punch"):
-				if enough_mp(fire_cost):
+				if enough_mp(projectile_cost):
 					
 					var pos_offset : Vector2 = Vector2(40, -160)
 					if crouching: pos_offset = Vector2(40,60)
@@ -225,7 +226,7 @@ func _physics_process(delta: float) -> void:
 			
 	elif ai_player and input_buffer.size() > 0 and input_buffer.back().contains("s_punch"):
 				
-				if enough_mp(fire_cost):
+				if enough_mp(projectile_cost):
 					
 					var pos_offset : Vector2 = Vector2(40, -160)
 					if crouching: pos_offset = Vector2(40,60)
