@@ -117,9 +117,9 @@ var Ellie : Dictionary = {
 	"book_shield_left_cost" : 600,
 	
 	"ellie_ulti" : ellie_ulti,
-	"ellie_ulti_lag" : 0,
+	"ellie_ulti_lag" : 600,
 	"ellie_ulti_startup" : 20,
-	"ellie_ulti_cost": 0
+	"ellie_ulti_cost": 600
 }
 
 var movesets : Dictionary = {

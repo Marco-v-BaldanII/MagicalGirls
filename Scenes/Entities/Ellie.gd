@@ -71,7 +71,10 @@ var charging_laser : bool:
 		if current_start_projectile is Book_Laser:
 			if value == false and current_start_projectile:
 				current_start_projectile.deactivate()
+				charging_mp = true
+				
 			elif value == true and current_start_projectile.fully_charged:
+				charging_mp = true
 				shoot_laser()
 
 
@@ -195,8 +198,8 @@ func _physics_process(delta: float) -> void:
 		
 
 		if not ai_player and is_mapped_action_pressed("s_kick") :
-				if enough_mp(fire_cost):
-					if crouching and book_fire_time <= 0.0:
+
+					if crouching and book_fire_time <= 0.0 and enough_mp(fire_cost):
 						var fire_projectile = instanciate_fire(global_position + Vector2(0,-200))
 						GDSync.call_func(instanciate_fire)
 						fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
@@ -207,7 +210,7 @@ func _physics_process(delta: float) -> void:
 						else:  fire_projectile.speed = -900
 						fire_projectile.speedY = 500
 						
-					elif not is_on_floor():
+					elif not is_on_floor() and enough_mp(fire_cost):
 						var fire_projectile = instanciate_fire()
 						GDSync.call_func(instanciate_fire)
 						fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
@@ -300,10 +303,24 @@ func _physics_process(delta: float) -> void:
 					
 					add_lag(20)
 	
-	#if not input_buffer.is_empty() and input_buffer.back().contains("s_punch"):
-		#instanciate_projectile("res://Scenes/projectiles/orbiting_book.tscn","", Vector2(200,0), self)
-		#input_buffer.clear()
-	#
+	
+	#w_kick mp charge
+	
+	if not ai_player  and is_mapped_action_pressed("w_kick"):
+			
+			if crouching:
+				mp += 1
+				flash_charge()
+			
+			while is_mapped_action_pressed("w_kick"):
+				await get_tree().create_timer(0.017).timeout
+			sprite_2d.modulate = Color.WHITE
+				
+	else:
+		pass
+		#sprite_2d.modulate = Color.WHITE
+	
+	
 	return	
 
 
@@ -327,12 +344,15 @@ func book_laser():
 			
 
 func shoot_laser():
-	current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-	sprite_2d.modulate = Color.WHITE
-	if GameManager.online: GDSync.call_func(online_tint_sprite, [Color.WHITE])
-	current_start_projectile = null
-	charging_laser = false
-	add_lag(10)
+	if enough_mp(current_start_projectile.dmg * 10):
+	
+		current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+		sprite_2d.modulate = Color.WHITE
+		if GameManager.online: GDSync.call_func(online_tint_sprite, [Color.WHITE])
+		current_start_projectile = null
+		charging_laser = false
+		add_lag(10)
+		var i = 0
 
 func ai_book_laser():
 		if is_input_pressed("s_kick") and current_start_projectile == null and  is_on_floor() and not charging_laser:

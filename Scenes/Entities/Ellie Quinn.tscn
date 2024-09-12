@@ -31,7 +31,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajs0x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hiv1u"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.037037
+shader_parameter/tex_anim_offset = 0.75
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_my70l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3i2r6"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.037037
+shader_parameter/tex_anim_offset = 0.75
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -373,83 +373,6 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0166667, 0.2, 0.216667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(21, -221), Vector2(29, -23), Vector2(29, -23), Vector2(21, -221)]
-}
-
-[sub_resource type="Animation" id="Animation_os8hj"]
-resource_name = "crouch_w_kick"
-length = 0.66667
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333334, 0.0666668, 0.1, 0.133334, 0.166667, 0.2, 0.233334, 0.266667, 0.300001, 0.333334, 0.366667, 0.400001, 0.433334, 0.466668, 0.500001, 0.533334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("hit_boxes/weak_box/weak_attack:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.366667, 0.550001),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(30, 23), Vector2(523, 23), Vector2(523, 23), Vector2(30, 23)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("hit_boxes/weak_box/weak_attack:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.283333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("hit_boxes/special_box/barrido_attack:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.366667, 0.550001),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(30, 23), Vector2(523, 23), Vector2(523, 23), Vector2(30, 23)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("hit_boxes/special_box/barrido_attack:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.283333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("hurt_box/CollisionShape2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.0166667, 0.633333, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(21, -221), Vector2(29, -23), Vector2(29, -23), Vector2(21, -221)]
@@ -892,6 +815,35 @@ tracks/0/keys = {
 "values": [181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191]
 }
 
+[sub_resource type="Animation" id="Animation_qp0oa"]
+resource_name = "crouch_w_kick"
+length = 0.166669
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [162]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hurt_box/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(20, -40), Vector2(20, -40)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj6tu"]
 _data = {
 "RESET": SubResource("Animation_s4nyy"),
@@ -902,7 +854,7 @@ _data = {
 "crouch": SubResource("Animation_etjdn"),
 "crouch_s_kick": SubResource("Animation_fn8m6"),
 "crouch_s_punch": SubResource("Animation_aa86y"),
-"crouch_w_kick": SubResource("Animation_os8hj"),
+"crouch_w_kick": SubResource("Animation_qp0oa"),
 "crouch_w_punch": SubResource("Animation_c2qpf"),
 "crouching": SubResource("Animation_oy3v6"),
 "idle_anim": SubResource("Animation_ebury"),
@@ -1260,7 +1212,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
-frame = 8
+frame = 162
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1268,7 +1220,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_ajs0x")
+process_material = SubResource("ShaderMaterial_hiv1u")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1280,7 +1232,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_my70l")
+process_material = SubResource("ShaderMaterial_3i2r6")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")

@@ -52,7 +52,6 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 		player.add_lag(clamp(lag,30,50))
 
 func destroy_projectile():
-	#my_player.oponent.add_lag(4)
 
 	if current_frame < 20 and my_player and is_instance_valid(my_player): my_player.oponent.weak_knock = true
 	await  get_tree().create_timer(0.017).timeout

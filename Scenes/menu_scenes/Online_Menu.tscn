@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="9_fgoy1"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="11_fj6tj"]
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="12_7nucy"]
-[ext_resource type="PackedScene" path="res://Scenes/menu_scenes/fading_stages.tscn" id="14_2cd3v"]
+[ext_resource type="PackedScene" uid="uid://cgmkfq74q5rty" path="res://Scenes/menu_scenes/fading_stages.tscn" id="14_2cd3v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qdoj3"]
 shader = ExtResource("11_fj6tj")

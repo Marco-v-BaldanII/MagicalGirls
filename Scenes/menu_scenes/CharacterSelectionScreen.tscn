@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
-[ext_resource type="PackedScene" path="res://Scenes/menu_scenes/fading_stages.tscn" id="17_jonlc"]
+[ext_resource type="PackedScene" uid="uid://cgmkfq74q5rty" path="res://Scenes/menu_scenes/fading_stages.tscn" id="17_jonlc"]
 
 [sub_resource type="Texture2D" id="Texture2D_1vj16"]
 resource_local_to_scene = false
