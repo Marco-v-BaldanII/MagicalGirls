@@ -32,7 +32,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgeof"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aj2kl"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -42,7 +42,7 @@ shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
 shader_parameter/tex_anim_offset = 0.837963
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6bs3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkbcy"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -862,6 +862,60 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_18bf1"]
+resource_name = "move_forward"
+length = 1.18334
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.106672, 0.213336, 0.320004, 0.42667, 0.533338, 0.640005, 0.746671, 0.853336, 0.960008, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [191, 190, 189, 188, 187, 186, 185, 184, 183, 182, 181]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FloatingBook:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.506666, 0.98, 1.08, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(21, 132), Vector2(21, 143), Vector2(21, 132), Vector2(21, 132), Vector2(21, 132)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.626667, 0.98, 1.08, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-3, -12), Vector2(-3, 1), Vector2(-3, -20), Vector2(-3, -10), Vector2(-3, -12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FloatingBook:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_gmgtv"]
 resource_name = "s_kick"
 length = 0.500003
@@ -1089,60 +1143,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191]
-}
-
-[sub_resource type="Animation" id="Animation_18bf1"]
-resource_name = "move_forward"
-length = 1.18334
-loop_mode = 1
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.106672, 0.213336, 0.320004, 0.42667, 0.533338, 0.640005, 0.746671, 0.853336, 0.960008, 1.06667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [191, 190, 189, 188, 187, 186, 185, 184, 183, 182, 181]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FloatingBook:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.506666, 0.98, 1.08, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(21, 132), Vector2(21, 143), Vector2(21, 132), Vector2(21, 132), Vector2(21, 132)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.626667, 0.98, 1.08, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-3, -12), Vector2(-3, 1), Vector2(-3, -20), Vector2(-3, -10), Vector2(-3, -12)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FloatingBook:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj6tu"]
@@ -1521,7 +1521,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_vgeof")
+process_material = SubResource("ShaderMaterial_aj2kl")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1533,7 +1533,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_j6bs3")
+process_material = SubResource("ShaderMaterial_jkbcy")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")

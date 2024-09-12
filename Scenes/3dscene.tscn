@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgaek8k5rtho4"]
+
+[ext_resource type="ArrayMesh" path="res://Scenes/projectiles/projectile_mesh.obj" id="1_lrlxh"]
+
+[node name="3Dscene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.999895, 0, 0.0144683, 0, 1, 0, -0.0144683, 0, -0.999895, 0, 0, -1.56442)
+near = 0.001
+
+[node name="ProjectileMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.130496, 0, 0, 0, 0.130496, 0, 0, 0, 0.130496, -0.0299167, 0.0322777, -0.883696)
+mesh = ExtResource("1_lrlxh")

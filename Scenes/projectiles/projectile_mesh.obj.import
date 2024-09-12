@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://donrvwup35vma"
+path="res://.godot/imported/projectile_mesh.obj-b504bd83554953504ac50a2e41df52ca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/projectile_mesh.obj-b504bd83554953504ac50a2e41df52ca.mesh"]
+
+source_file="res://Scenes/projectiles/projectile_mesh.obj"
+dest_files=["res://.godot/imported/projectile_mesh.obj-b504bd83554953504ac50a2e41df52ca.mesh", "res://.godot/imported/projectile_mesh.obj-b504bd83554953504ac50a2e41df52ca.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

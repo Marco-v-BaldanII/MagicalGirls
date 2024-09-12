@@ -1,3 +1,4 @@
+
 extends Projectile
 class_name BookFire
 
@@ -8,6 +9,8 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	
+	#texture = $SubViewport.get_texture()
 	
 
 	if alive_time < 0:

@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjwkdtb7g77pm"]
+[gd_scene load_steps=6 format=3 uid="uid://bjwkdtb7g77pm"]
 
 [ext_resource type="PackedScene" uid="uid://c6klg87wrxfhg" path="res://Scenes/projectiles/star_diagonal.tscn" id="1_3ylvx"]
 [ext_resource type="Script" path="res://Scenes/projectiles/compound_rpojectile.gd" id="1_htwqo"]
 [ext_resource type="PackedScene" uid="uid://cemjbrd2i1i0t" path="res://Scenes/projectiles/hadoken_left.tscn" id="2_kv8c6"]
+[ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_ipso6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oov1h"]
+shader = ExtResource("3_ipso6")
+shader_parameter/fadeCont = true
+shader_parameter/fadeStep = 8.775
+shader_parameter/scale = 1.0
+shader_parameter/red = 0.175
+shader_parameter/green = 0.105
+shader_parameter/blue = 0.025
+shader_parameter/tex_anim_offset = 0.0
 
 [node name="TripleShot" type="Node2D"]
 script = ExtResource("1_htwqo")
@@ -12,6 +23,9 @@ position = Vector2(114, -151.6)
 lag_frames = 0
 speedY = 300
 dmg = 6.0
+
+[node name="GPUParticles2D" parent="Star3" index="3"]
+process_material = SubResource("ShaderMaterial_oov1h")
 
 [node name="Hadoken" parent="." instance=ExtResource("2_kv8c6")]
 position = Vector2(113, -151.6)

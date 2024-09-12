@@ -20,10 +20,12 @@ func _ready() -> void:
 	else: $PositionSynchronizer.broadcast = 1
 		
 
-func instanciate_star():
+func instanciate_star(glob_pos : Vector2 = global_position):
 	current_start_projectile = STAR_RIGHT.instantiate()
 	current_start_projectile.online_synch(player_num)
 	get_tree().root.add_child(current_start_projectile)
+	
+	current_start_projectile.global_position = glob_pos
 	return current_start_projectile
 	
 	
@@ -142,8 +144,11 @@ func perform_move():
 			$AnimationTree["parameters/conditions/" + move] = true
 			
 			GDSync.call_func(_sync_move,[move])
+			var off_set = Vector2(100,-700)
 			
-			var star = instanciate_star()
+			if direction == "right" : off_set.x *= -1
+			
+			var star = instanciate_star(global_position + off_set)
 			GDSync.set_gdsync_owner(star,GDSync.get_client_id())
 			GDSync.call_func(instanciate_star)
 			while is_mapped_action_pressed("s_punch"):
@@ -193,26 +198,44 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
 		if current_start_projectile != null and (is_mapped_action_pressed("s_punch") or is_input_pressed("s_punch")) and enough_mp(1):
-			current_start_projectile.charge(global_position)
+			var off_set = Vector2(190,-200)
+			
+			
+			
 			charging_mp = false
 			
 			var move : String = "s_punch"
-			if crouching: move = "crouch_s_punch"
+			if crouching: 
+				move = "crouch_s_punch"
+				off_set.y = -120; off_set.x = 135
+			if direction == "right" : off_set.x *= -1
+			current_start_projectile.charge(global_position + off_set)
 			
 			$AnimationTree["parameters/conditions/" + move] = true
 			GDSync.call_func(_sync_move,[move])
 			pass
 		elif current_start_projectile != null:
 			charging_mp = true
-			
+			var off_set = Vector2(190,-200)
 			var move : String = "s_punch"
-			if crouching: move = "crouch_s_punch"
+			if crouching: 
+				move = "crouch_s_punch"
+				off_set.y = -120; off_set.x = 135
 			
 			$AnimationTree["parameters/conditions/" + move] = false
 			GDSync.call_func(_sync_move,["not_"+ move])
 			_sync_move("not_"+ move)
-			if oponent : current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-			else : current_start_projectile.shoot((player_num-1) + 2, 0 ,direction, self)
+			if oponent : 
+				
+			
+				if direction == "right" : off_set.x *= -1
+				current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
+				current_start_projectile.global_position = global_position + off_set
+			else : 
+				current_start_projectile.shoot((player_num-1) + 2, 0 ,direction, self)
+			
+			
+			
 			velocity.x = 0
 			
 			if crouching: 
