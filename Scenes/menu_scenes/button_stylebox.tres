@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://cthtxkxjw05gg"]
+[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://c4j27w7muuv24"]
 
 [sub_resource type="Gradient" id="Gradient_fwpbm"]
 colors = PackedColorArray(0.674129, 8.18223e-06, 0.328198, 1, 1, 0.588235, 0.701961, 1)

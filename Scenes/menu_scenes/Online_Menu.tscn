@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://online_menu.gd" id="1_wibys"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="2_1hqwr"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="2_561r3"]
-[ext_resource type="StyleBox" uid="uid://cthtxkxjw05gg" path="res://Scenes/menu_scenes/button_stylebox.tres" id="3_aevaa"]
+[ext_resource type="StyleBox" uid="uid://c4j27w7muuv24" path="res://Scenes/menu_scenes/button_stylebox.tres" id="3_aevaa"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_menu.gd" id="3_hbw2o"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/lobby_creator.gd" id="4_3ldkt"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/v_box_menu.gd" id="4_6a1dq"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://y4s6tfdcy6cq" path="res://Assets/UI/Menus/Pointer.png" id="9_fgoy1"]
 [ext_resource type="Shader" path="res://Scenes/menu_scenes/scroll.gdshader" id="11_fj6tj"]
 [ext_resource type="Texture2D" uid="uid://bxoq6x374yllu" path="res://Assets/UI/Menus/selectionscreen(1).png" id="12_7nucy"]
-[ext_resource type="PackedScene" uid="uid://cgmkfq74q5rty" path="res://Scenes/menu_scenes/fading_stages.tscn" id="14_2cd3v"]
+[ext_resource type="PackedScene" path="res://Scenes/menu_scenes/fading_stages.tscn" id="14_2cd3v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qdoj3"]
 shader = ExtResource("11_fj6tj")

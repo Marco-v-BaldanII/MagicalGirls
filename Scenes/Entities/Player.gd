@@ -77,6 +77,15 @@ signal player_died(player_id : int)
 			mp = 600
 			return #no damagein training mode
 		mp = clamp(value,0,600)
+		
+		#super ghosting
+		if mp > 580:
+			$Sprite2D/GPUParticles2D_ulti.show()
+			$Sprite2D/GPUParticles2D.hide()
+		else:
+			$Sprite2D/GPUParticles2D_ulti.hide()
+			$Sprite2D/GPUParticles2D.show()
+		
 		if GDSync.is_gdsync_owner(self) : GDSync.call_func(change_mp,[value])
 		if mp_bar:
 			mp_bar.value = mp
@@ -1007,10 +1016,14 @@ func special_effect_wrapper(glob_pos : Vector2, dir : String):
 	
 	play_sfx("l_trigger")
 	
+	$Sprite2D/GPUParticles2D_ulti.show()
+	
 	if GameManager.online and  GDSync.is_gdsync_owner(self):
 		await get_tree().create_timer(0.1).timeout
 	sprite_2d.modulate = Color(0,0.39,0.95,1)
 	match_setting.inverted_effect(glob_pos, dir, character_name)
 	await get_tree().create_timer(0.4).timeout
 	sprite_2d.modulate = Color.WHITE
+	if not character_name == "Ellie Quinn": #she keeps the aura till the end of her special
+		$Sprite2D/GPUParticles2D_ulti.hide()
 	

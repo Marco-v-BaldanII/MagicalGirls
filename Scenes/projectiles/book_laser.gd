@@ -56,8 +56,9 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	my_player = player
 	if dir == "right":
 		speed *= -1
-		scale.x -= 1
+		flip_h = true
 	if player:
+		global_position = player.global_position
 		var lag = current_frame*0.7
 		player.add_lag(clamp(lag,30,50))
 
