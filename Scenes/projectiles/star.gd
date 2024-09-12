@@ -9,11 +9,12 @@ var power_multiply : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AnimationPlayer.play("star")
 	GDSync.expose_node(self)
 	dmg = 4
 	speed = 800
 	power_multiply = dmg/(frame_charge_time/4) #max charge is 3 times stronger
-	scale = Vector2(0.2,0.2)
+	scale = Vector2(0.4,0.4)
 	set_physics_process(false)
 	
 	instanciated.emit()

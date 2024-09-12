@@ -1,27 +1,113 @@
-[gd_scene load_steps=6 format=3 uid="uid://brgsiywi2g3y7"]
+[gd_scene load_steps=20 format=3 uid="uid://brgsiywi2g3y7"]
 
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_7dw7g"]
+[ext_resource type="Texture2D" uid="uid://beaheo8dx6ued" path="res://Assets/UI/star_.png" id="1_jmvnw"]
 [ext_resource type="Script" path="res://Scenes/projectiles/star.gd" id="2_tetoh"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_1lr3o"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_g1hxu"]
+[ext_resource type="Texture2D" uid="uid://bmt6i4goh8g8k" path="res://Assets/UI/star.png" id="5_l66ob"]
+[ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="6_sspea"]
+[ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="7_7vxy2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
-radius = 167.966
+radius = 98.0459
+
+[sub_resource type="Animation" id="Animation_n51cf"]
+resource_name = "star"
+length = 1.0
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_sm0ks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5lm1o"]
+_data = {
+"RESET": SubResource("Animation_sm0ks"),
+"star": SubResource("Animation_n51cf")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kepys"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_8d14s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mvn60"]
+curve = SubResource("Curve_8d14s")
+
+[sub_resource type="Curve" id="Curve_s0xgo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.967105, 0.340659), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2gc07"]
+curve = SubResource("Curve_s0xgo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_35yyg"]
+particle_flag_disable_z = true
+angle_min = -467.2
+angle_max = 1.07288e-05
+angular_velocity_min = -421.27
+angular_velocity_max = 390.64
+gravity = Vector3(-98, 0, 0)
+scale_min = 0.3
+scale_max = 0.9
+scale_curve = SubResource("CurveTexture_2gc07")
+alpha_curve = SubResource("CurveTexture_mvn60")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_myu2k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20ud8"]
+shader = ExtResource("6_sspea")
+shader_parameter/fadeCont = true
+shader_parameter/fadeStep = 8.775
+shader_parameter/scale = 1.0
+shader_parameter/red = 0.175
+shader_parameter/green = 0.105
+shader_parameter/blue = 0.025
+shader_parameter/tex_anim_offset = 0.0
 
 [node name="Star" type="Sprite2D"]
 position = Vector2(113, 57)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_7dw7g")
+texture = ExtResource("1_jmvnw")
+offset = Vector2(0, -8)
 script = ExtResource("2_tetoh")
 dmg = 4.0
 
 [node name="Area2D" type="Area2D" parent="." groups=["projectile", "weak"]]
+visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_g1hxu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(40, 0)
+position = Vector2(-5, 3)
 shape = SubResource("CircleShape2D_xfwv1")
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
@@ -58,5 +144,28 @@ node_path = NodePath("..")
 property_name = "dmg"
 interpolated = false
 interpolation_speed = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5lm1o")
+}
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_kepys")
+process_material = SubResource("ParticleProcessMaterial_35yyg")
+texture = ExtResource("5_l66ob")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.324)
+z_index = -1
+material = SubResource("CanvasItemMaterial_myu2k")
+position = Vector2(-0.740739, 0)
+amount = 4
+process_material = SubResource("ShaderMaterial_20ud8")
+texture = ExtResource("1_jmvnw")
+lifetime = 0.35
+script = ExtResource("7_7vxy2")
+total_frames = 168
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
