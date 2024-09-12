@@ -8,6 +8,9 @@ const BOOK_FIRE = preload("res://Scenes/projectiles/book_fire.tscn")
 const ORBITING_BOOK = preload("res://Scenes/projectiles/orbiting_book.tscn")
 const BOOK_PROJECTILE = preload("res://Scenes/projectiles/book_projectile.tscn")
 
+
+const BOOK_PROJECTILE_STARTUP : int = 14
+
 var fire_cost = 150
 var projectile_cost = 26
 
@@ -43,11 +46,11 @@ func instanciate_star():
 	return current_start_projectile
 	
 	
-func instanciate_fire():
+func instanciate_fire(glob_pos : Vector2 = global_position):
 	var projectile = BOOK_FIRE.instantiate()
 	#current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-	projectile.global_position = global_position
-	projectile.global_position.y -= 200
+	projectile.global_position = glob_pos
+	#projectile.global_position.y -= 200
 	get_tree().root.add_child(projectile)
 	
 	return projectile
@@ -123,7 +126,7 @@ func perform_move():
 
 			return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") :
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick")):#and not  input_buffer.back().contains("s_kick") :
 		
 		velocity.x = 0
 		
@@ -163,7 +166,7 @@ func perform_move():
 var book_fire_time : float = 0.0
 
 func _physics_process(delta: float) -> void:
-	
+	mp = 600
 	super._physics_process(delta)
 	
 	if not GDSync.is_gdsync_owner(self) or lag: return
@@ -185,33 +188,80 @@ func _physics_process(delta: float) -> void:
 		
 	
 		
-	elif is_on_floor() and crouching and book_fire_time <= 0.0:
-			if not ai_player and is_mapped_action_pressed("s_kick") :
+
+		if not ai_player and is_mapped_action_pressed("s_kick") :
 				if enough_mp(fire_cost):
-					var fire_projectile = instanciate_fire()
-					GDSync.call_func(instanciate_fire)
-					fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
-					add_lag(30)
-					book_fire_time = 1.5
+					if crouching and book_fire_time <= 0.0:
+						var fire_projectile = instanciate_fire(global_position + Vector2(0,-200))
+						GDSync.call_func(instanciate_fire)
+						fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+						add_lag(30)
+						book_fire_time = 1.5
+						
+						if direction == "left": fire_projectile.speed = 900
+						else:  fire_projectile.speed = -900
+						fire_projectile.speedY = 500
+						
+					elif not is_on_floor():
+						var fire_projectile = instanciate_fire()
+						GDSync.call_func(instanciate_fire)
+						fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+						
+						#air impulse
+						if velocity.y > 400:
+							velocity.y -= 1800
+						else:
+							velocity.y -= 400
+						
+						fire_projectile.speed = 0
+						fire_projectile.speedY = 550
+						fire_projectile.acceleration.y = 20
+						
+						add_lag(30)
 			
-			elif ai_player and is_joy_button_just_pressed("s_kick"):
+		elif ai_player and is_joy_button_just_pressed("s_kick"):
 				
 				if enough_mp(fire_cost):
-					var fire_projectile = instanciate_fire()
-					GDSync.call_func(instanciate_fire)
-					fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
-					add_lag(30)
-					book_fire_time = 1.5
+					if crouching and book_fire_time <= 0.0:
+						var fire_projectile = instanciate_fire(global_position + Vector2(0,-200))
+						GDSync.call_func(instanciate_fire)
+						fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+						add_lag(30)
+						book_fire_time = 1.5
+						
+						if direction == "left": fire_projectile.speed = 900
+						else:  fire_projectile.speed = -900
+						fire_projectile.speedY = 500
+						
+					elif not is_on_floor():
+						var fire_projectile = instanciate_fire()
+						GDSync.call_func(instanciate_fire)
+						fire_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,self)
+						
+						#air impulse
+						if velocity.y > 400:
+							velocity.y -= 1800
+						else:
+							velocity.y -= 400
+						
+						fire_projectile.speed = 0
+						fire_projectile.speedY = 550
+						fire_projectile.acceleration.y = 20
+						
+						add_lag(30)
 	
 	
 	
 
 	if not ai_player and input_buffer.size() > 0 and input_buffer.back().contains("s_punch"):
+				clear_buffer()
+				await get_tree().create_timer(0.01667 * BOOK_PROJECTILE_STARTUP).timeout
+		
 				if enough_mp(projectile_cost):
 					
-					var pos_offset : Vector2 = Vector2(40, -160)
-					if crouching: pos_offset = Vector2(40,60)
-					if not is_on_floor(): pos_offset = Vector2(0,160)
+					var pos_offset : Vector2 = Vector2(180, -160)
+					if crouching: pos_offset = Vector2(200,60)
+					if not is_on_floor(): pos_offset = Vector2(150,110)
 					
 					var book_proj = instanciate_book_projectile(global_position + pos_offset)
 					GDSync.call_func(instanciate_book_projectile, [global_position + pos_offset])
@@ -219,18 +269,20 @@ func _physics_process(delta: float) -> void:
 					book_proj.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,null)
 					
 					if not is_on_floor():
-						book_proj.speed = 0
+						book_proj.speed = 1000
 						book_proj.speedY = 800
 					
 					add_lag(20)
 			
 	elif ai_player and input_buffer.size() > 0 and input_buffer.back().contains("s_punch"):
+				clear_buffer()
+				await get_tree().create_timer(0.01667 * BOOK_PROJECTILE_STARTUP).timeout
 				
 				if enough_mp(projectile_cost):
 					
-					var pos_offset : Vector2 = Vector2(40, -160)
-					if crouching: pos_offset = Vector2(40,60)
-					if not is_on_floor(): pos_offset = Vector2(0,160)
+					var pos_offset : Vector2 = Vector2(180, -160)
+					if crouching: pos_offset = Vector2(200,60)
+					if not is_on_floor(): pos_offset = Vector2(150,110)
 					
 					var book_proj = instanciate_book_projectile(global_position + pos_offset)
 					GDSync.call_func(instanciate_book_projectile,[global_position + pos_offset])
@@ -238,7 +290,7 @@ func _physics_process(delta: float) -> void:
 					book_proj.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction,null)
 					
 					if not is_on_floor():
-						book_proj.speed = 0
+						book_proj.speed = 1000
 						book_proj.speedY = 800
 					
 					add_lag(20)

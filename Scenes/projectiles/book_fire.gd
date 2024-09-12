@@ -2,10 +2,10 @@ extends Projectile
 class_name BookFire
 
 var moving : bool = true
-var speed_y
+var acceleration : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	speed_y = speed*0.7
+	pass
 
 func _physics_process(delta: float) -> void:
 	
@@ -15,7 +15,10 @@ func _physics_process(delta: float) -> void:
 		
 	if moving:
 		position.x += speed * delta
-		position.y += speed_y * delta
+		position.y += speedY * delta
+		
+		speed += acceleration.x
+		speedY += acceleration.y
 	else:
 		alive_time -= delta
 

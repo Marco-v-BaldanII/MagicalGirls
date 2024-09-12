@@ -18,11 +18,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qdoj3"]
 shader = ExtResource("11_fj6tj")
 
-[sub_resource type="Gradient" id="Gradient_jw3ws"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8obbh"]
-gradient = SubResource("Gradient_jw3ws")
-
 [sub_resource type="Gradient" id="Gradient_tojef"]
 offsets = PackedFloat32Array(0, 0.580645, 1)
 colors = PackedColorArray(0.209898, 0.032143, 0.277826, 1, 0.522109, 0.347544, 0.551405, 0.637653, 0.969, 0.799, 0.943, 0.119)
@@ -32,6 +27,11 @@ gradient = SubResource("Gradient_tojef")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4j656"]
 texture = SubResource("GradientTexture2D_k06u3")
+
+[sub_resource type="Gradient" id="Gradient_jw3ws"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8obbh"]
+gradient = SubResource("Gradient_jw3ws")
 
 [node name="OnlineMenu" type="Node2D"]
 script = ExtResource("1_wibys")
@@ -217,6 +217,15 @@ texture = ExtResource("12_7nucy")
 
 [node name="fading_stages" parent="Camera2D" instance=ExtResource("14_2cd3v")]
 
+[node name="Panel" parent="Camera2D/fading_stages" index="4"]
+modulate = Color(1, 1, 1, 0.4)
+offset_left = -1334.33
+offset_top = 578.667
+offset_right = 151.667
+offset_bottom = 3323.67
+rotation = -1.56815
+theme_override_styles/panel = SubResource("StyleBoxTexture_4j656")
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="Camera2D/fading_stages"]
 
 [node name="PointLight2D" type="PointLight2D" parent="Camera2D/fading_stages/CanvasLayer2"]
@@ -229,15 +238,6 @@ texture = SubResource("GradientTexture1D_8obbh")
 z_index = 200
 scale = Vector2(101.479, 101.479)
 color = Color(0, 0, 0, 1)
-
-[node name="Panel" parent="Camera2D/fading_stages" index="5"]
-modulate = Color(1, 1, 1, 0.4)
-offset_left = -1334.33
-offset_top = 578.667
-offset_right = 151.667
-offset_bottom = 3323.67
-rotation = -1.56815
-theme_override_styles/panel = SubResource("StyleBoxTexture_4j656")
 
 [connection signal="pressed" from="Camera2D/CanvasLayer/goBack/go_back" to="Camera2D/CanvasLayer/LobbySelection/P1_control_selection" method="_on_go_back_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/goBack/go_back" to="Camera2D/CanvasLayer/LobbyCreator" method="_on_go_back_pressed"]
