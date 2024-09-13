@@ -42,6 +42,8 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Audiomanager="*res://Scenes/audiomanager.tscn"
 Pause="*res://Scenes/menu_scenes/pause.tscn"
 MenuMusic="*res://Autoloads/MenuMusic.tscn"
+DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
+Discordmanagerr="*res://discordmanagerr.tscn"
 
 [dialogue_manager]
 
@@ -62,7 +64,7 @@ project/assembly_name="test_jam2"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [global_group]
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://br2j5mo2sci6y"]
+
+[ext_resource type="Script" path="res://addons/discord-rpc-gd/discordmanager.gd" id="1_auanl"]
+
+[node name="Discordmanagerr" type="Node2D"]
+
+[node name="discord manager" type="Node" parent="."]
+script = ExtResource("1_auanl")
