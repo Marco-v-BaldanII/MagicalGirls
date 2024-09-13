@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wr3va"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6otm"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.214286
+shader_parameter/tex_anim_offset = 0.242857
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5ned"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqdob"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.214286
+shader_parameter/tex_anim_offset = 0.242857
 
 [sub_resource type="Animation" id="Animation_akhy2"]
 resource_name = "2knife_attack"
@@ -1338,7 +1338,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_cmqs0")
 hframes = 5
 vframes = 14
-frame = 16
+frame = 17
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1346,7 +1346,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_wr3va")
+process_material = SubResource("ShaderMaterial_h6otm")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1358,7 +1358,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_x5ned")
+process_material = SubResource("ShaderMaterial_tqdob")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1459,7 +1459,6 @@ script = ExtResource("6_tdwux")
 script = ExtResource("7_ubm5j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UI" type="Node2D" parent="CanvasLayer"]
 z_index = -1
