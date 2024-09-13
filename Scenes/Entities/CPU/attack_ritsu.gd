@@ -1,6 +1,9 @@
 extends AtkState
 class_name AtkRitsu
 
+func _ready() -> void:
+	chance_not_camp = 4
+
 func first_atk_option():
 	player.ai_press_input("s_punch")
 	

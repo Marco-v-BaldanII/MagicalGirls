@@ -10,7 +10,7 @@ var direction_chosen : bool = true
 var current_direction : String = "none"
 
 @export var atk_distance : int = 380
-
+var chance_not_camp : int = 1
 
 func enter():
 	if not player:
@@ -114,11 +114,12 @@ func move() :
 	
 	
 	if "move_" + player.direction == current_direction:
-		var camp_id = randi_range(0,1)
+		var camp_id = randi_range(0,chance_not_camp)
 		if camp_id == 0: 
 			Transitioned.emit(self, "camp")
 	
 	pass
+
 
 
 func first_atk_option():

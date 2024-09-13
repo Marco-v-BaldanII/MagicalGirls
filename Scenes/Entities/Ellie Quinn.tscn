@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://doexbpq4lt4f1"]
+[gd_scene load_steps=128 format=3 uid="uid://doexbpq4lt4f1"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
 [ext_resource type="Texture2D" uid="uid://c2e7agx5nkwdr" path="res://Assets/characters/Ellie/spritesheetlaeli.png" id="2_ca8wd"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_4mixf"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_r3xtr"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ivl1b"]
+[ext_resource type="Texture2D" uid="uid://bri4438gvie1f" path="res://addons/controller_icons/assets/ps5/circle.png" id="5_n6k3v"]
+[ext_resource type="Script" path="res://Scenes/Entities/shadow.gd" id="6_7ggrh"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_8hb6d"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ynsb0"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_11ku0"]
@@ -24,7 +26,6 @@
 [ext_resource type="AudioStream" uid="uid://cadi7wx13ei3l" path="res://Assets/SFX/placeholder.wav" id="22_11jdn"]
 [ext_resource type="AudioStream" uid="uid://d0nt2a6qsnu3m" path="res://Assets/SFX/swing.wav" id="23_t2qer"]
 [ext_resource type="AudioStream" uid="uid://bdyxwxrw7s45i" path="res://Assets/SFX/swing 2.wav" id="24_4kwnx"]
-[ext_resource type="Texture2D" uid="uid://dewbqxdtjw33s" path="res://Scenes/Entities/floating_book.png" id="25_rhevm"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ffac"]
 particles_animation = true
@@ -32,7 +33,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_grrbb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4s44k"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -40,9 +41,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0
+shader_parameter/tex_anim_offset = 0.0324074
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dvfj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oriop"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -50,7 +51,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0
+shader_parameter/tex_anim_offset = 0.0324074
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1513,6 +1514,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
+frame = 9
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1520,7 +1522,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_grrbb")
+process_material = SubResource("ShaderMaterial_4s44k")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1532,7 +1534,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_1dvfj")
+process_material = SubResource("ShaderMaterial_oriop")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1568,9 +1570,17 @@ parameters/conditions/w_kick = false
 parameters/conditions/w_punch = false
 
 [node name="Feet" type="CollisionShape2D" parent="."]
-position = Vector2(-7, 200)
+position = Vector2(-7, 261)
 shape = SubResource("RectangleShape2D_12cjw")
 debug_color = Color(0.560753, 0.461845, 0.825999, 0.42)
+
+[node name="shadow" type="Sprite2D" parent="Feet"]
+modulate = Color(0.001, 0.001, 0.001, 0.46)
+self_modulate = Color(0.00197449, 0.135955, 0.243057, 1)
+position = Vector2(10, -16)
+scale = Vector2(0.651565, 0.155497)
+texture = ExtResource("5_n6k3v")
+script = ExtResource("6_7ggrh")
 
 [node name="hit_boxes" type="Node2D" parent="."]
 position = Vector2(-28, 67)
@@ -1774,7 +1784,6 @@ volume_db = 5.0
 
 [node name="FloatingBook" type="Sprite2D" parent="."]
 position = Vector2(21, 132)
-texture = ExtResource("25_rhevm")
 hframes = 2
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

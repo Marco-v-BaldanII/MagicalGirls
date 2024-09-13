@@ -1,6 +1,7 @@
 extends CampState
 class_name CampRitsu
 
+
 func retreating_projectile():
 	var id = randi_range(0,1)
 	var not_direction : String = ""
