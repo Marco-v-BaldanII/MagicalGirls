@@ -14,6 +14,7 @@ func _ready():
 
 func _on_timer_timeout():
 	finish_cutscene.emit()
+	GameManager.finish_cutscene.emit()
 	finished = true
 	print(finished)
 	pass # Replace with function body.

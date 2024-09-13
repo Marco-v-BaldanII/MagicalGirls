@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cf18ypury8705"]
+[gd_scene load_steps=23 format=3 uid="uid://cf18ypury8705"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/match.gd" id="1_to0e0"]
 [ext_resource type="Script" path="res://Scenes/Stages/camera.gd" id="2_3djuc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d3gl7n0d1u206" path="res://Assets/Ulti/Ritsu.png" id="8_lmgve"]
 [ext_resource type="Script" path="res://Scenes/Stages/ritsu_frame.gd" id="9_fc4pr"]
 [ext_resource type="Texture2D" uid="uid://bt55iwjc5eike" path="res://Scenes/Entities/action_lines.png" id="10_niy4a"]
+[ext_resource type="AudioStream" uid="uid://3u4nqe13p1p1" path="res://Assets/SFX/Characters/123Vanquish.mp3" id="11_t3wc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cj0l7"]
 size = Vector2(116, 1024)
@@ -311,6 +312,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [Color(1.41986e-06, 0.334384, 0.445514, 1), Color(0.809118, 0.338369, 0.186941, 1), Color(0.159675, 0.441952, 0.448434, 1), Color(0.549674, 0.148092, 0.453265, 1)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0166667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r6lye"]
 _data = {
@@ -520,3 +535,6 @@ visible = false
 position = Vector2(526, 635)
 scale = Vector2(9.26477, 9.26477)
 texture = ExtResource("10_niy4a")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_t3wc4")

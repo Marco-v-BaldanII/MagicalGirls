@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnnbj83e3key6"]
+[gd_scene load_steps=3 format=3 uid="uid://bnnbj83e3key6"]
 
+[ext_resource type="Script" path="res://Cutscenes/cutscene3.gd" id="1_nubd0"]
 [ext_resource type="VideoStream" path="res://Cutscenes/Untitled-video-Made-with-Clipchamp-_22_.ogv" id="2_p57ka"]
 
 [node name="Ritsu" type="Node2D"]
+script = ExtResource("1_nubd0")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 offset_left = -14.0
