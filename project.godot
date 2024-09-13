@@ -32,7 +32,6 @@ GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 MovesetManager="*res://Autoloads/MovesetManager.gd"
 Controls="*res://Autoloads/Controls.gd"
 DebugUi="*res://Autoloads/DebugUI.tscn"
-GameManager="*res://Autoloads/GameManager.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 InputViewer="*res://Scenes/menu_scenes/Input_Viewer.tscn"
 Scene_Manager="*res://addons/scene_manager/autoload/scene_manager.tscn"
@@ -44,6 +43,7 @@ Pause="*res://Scenes/menu_scenes/pause.tscn"
 MenuMusic="*res://Autoloads/MenuMusic.tscn"
 DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 Discordmanagerr="*res://discordmanagerr.tscn"
+GameManager="*res://Autoloads/GameManager.tscn"
 
 [dialogue_manager]
 

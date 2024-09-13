@@ -117,8 +117,8 @@ func match_results(winner_id : int):
 			arcade_index += 1
 			if true:
 				
-				p2 = load("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn")
-				SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
+				load_arcade_battle()
+				
 			pass
 		
 		pass
@@ -144,9 +144,12 @@ func back_to_character_selection():
 
 
 signal finish_cutscene
+@export var ENDING : PackedScene
 
 func load_arcade_battle():
 	MenuMusic.stop()
+	
+	
 	
 	if arcade_index == 0:
 		
@@ -157,12 +160,15 @@ func load_arcade_battle():
 		await finish_cutscene
 	
 	if arcade_index == 2:
-		SceneWrapper.change_scene(load("res://Cutscenes/Ending.tscn"))
+		SceneWrapper.change_scene(ENDING)
 		await finish_cutscene
 	
+	if arcade_index == 3:
+		SceneWrapper.change_scene(load("res://Scenes/menu_scenes/menu.tscn" ))
+		return
+	
 	if true:
-				
-				
+
 				
 				p2 = load("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn")
 				SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))

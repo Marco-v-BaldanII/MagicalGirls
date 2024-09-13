@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bme7os3d8rma0"]
+
+[ext_resource type="Script" path="res://Autoloads/GameManager.gd" id="1_km05s"]
+[ext_resource type="PackedScene" uid="uid://c0cdgopysf3fq" path="res://Cutscenes/Ending.tscn" id="2_cay83"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_km05s")
+ENDING = ExtResource("2_cay83")
