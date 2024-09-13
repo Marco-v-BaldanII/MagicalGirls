@@ -1,17 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://otf77qqn35bu"]
+[gd_scene load_steps=8 format=3 uid="uid://otf77qqn35bu"]
 
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_wa7e6"]
 [ext_resource type="Script" path="res://Scenes/projectiles/book_projectile.gd" id="2_u0asw"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_mmsvt"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_bt58g"]
+[ext_resource type="Material" uid="uid://bwq4f6ao1mybv" path="res://Scenes/projectiles/book_laser_small.tres" id="5_c3vao"]
+[ext_resource type="Texture2D" uid="uid://d3p2kqho42qho" path="res://Scenes/projectiles/flame.png" id="6_pxswe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 167.966
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v1b3x"]
+blend_mode = 1
+
 [node name="book_projectile" type="Sprite2D"]
-position = Vector2(113, 57)
+position = Vector2(113, 36)
 scale = Vector2(0.222482, 0.222482)
-texture = ExtResource("1_wa7e6")
 script = ExtResource("2_u0asw")
 lag_frames = 35
 speed = 800
@@ -60,5 +63,14 @@ node_path = NodePath("..")
 property_name = "dmg"
 interpolated = false
 interpolation_speed = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_v1b3x")
+position = Vector2(55, -7.5)
+amount = 30
+process_material = ExtResource("5_c3vao")
+texture = ExtResource("6_pxswe")
+lifetime = 0.2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

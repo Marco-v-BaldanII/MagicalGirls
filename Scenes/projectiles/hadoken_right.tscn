@@ -1,17 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://btaxewrgndcqd"]
+[gd_scene load_steps=13 format=3 uid="uid://btaxewrgndcqd"]
 
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_bfalx"]
+[ext_resource type="Texture2D" uid="uid://beaheo8dx6ued" path="res://Assets/UI/star_.png" id="1_6dayp"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile.gd" id="2_jyryr"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_bgkeb"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="3_kj5qp"]
+[ext_resource type="Texture2D" uid="uid://bmt6i4goh8g8k" path="res://Assets/UI/star.png" id="4_34xue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 167.966
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gh5xl"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_cv8vh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mvn60"]
+curve = SubResource("Curve_cv8vh")
+
+[sub_resource type="Curve" id="Curve_8wvfx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.967105, 0.340659), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2gc07"]
+curve = SubResource("Curve_8wvfx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4llpc"]
+particle_flag_disable_z = true
+angle_min = -467.2
+angle_max = 1.07288e-05
+angular_velocity_min = -421.27
+angular_velocity_max = 390.64
+gravity = Vector3(-98, 0, 0)
+scale_min = 0.3
+scale_max = 0.9
+scale_curve = SubResource("CurveTexture_2gc07")
+alpha_curve = SubResource("CurveTexture_mvn60")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
 [node name="Hadoken" type="Sprite2D"]
 position = Vector2(113, 57)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_bfalx")
+texture = ExtResource("1_6dayp")
 script = ExtResource("2_jyryr")
 speed = 500
 
@@ -31,3 +63,9 @@ node_path = NodePath("..")
 property_name = "position"
 interpolated = false
 interpolation_speed = 1.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_gh5xl")
+process_material = SubResource("ParticleProcessMaterial_4llpc")
+texture = ExtResource("4_34xue")

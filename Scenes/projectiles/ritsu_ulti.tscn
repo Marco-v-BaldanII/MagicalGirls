@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dh6gh7w3jmhdn"]
 
-[ext_resource type="Texture2D" uid="uid://dumwi1fvk4s57" path="res://star.webp" id="1_6mqy7"]
+[ext_resource type="Texture2D" uid="uid://beaheo8dx6ued" path="res://Assets/UI/star_.png" id="1_1wcte"]
 [ext_resource type="Script" path="res://Scenes/projectiles/ritsu_ulti.gd" id="2_b0vdv"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_ckwlw"]
 
 [node name="RitsuUlti" type="Sprite2D" node_paths=PackedStringArray("points")]
-position = Vector2(133, 124)
-scale = Vector2(0.255102, 0.255102)
-texture = ExtResource("1_6mqy7")
+position = Vector2(133, 118)
+scale = Vector2(0.95086, 0.95086)
+texture = ExtResource("1_1wcte")
 script = ExtResource("2_b0vdv")
 points = [NodePath("Node2D"), NodePath("Node2D4"), NodePath("Node2D2"), NodePath("Node2D5"), NodePath("Node2D3")]
 dmg = 30.0
@@ -16,8 +16,8 @@ dmg = 30.0
 position = Vector2(0, -1097.6)
 
 [node name="Area2D" type="Area2D" parent="." groups=["projectile", "special"]]
-position = Vector2(-101.92, 19.6)
-scale = Vector2(2.48611, 2.48611)
+position = Vector2(-23.52, 7.84012)
+scale = Vector2(0.663487, 0.663487)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_ckwlw")

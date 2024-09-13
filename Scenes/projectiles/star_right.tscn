@@ -56,14 +56,14 @@ blend_mode = 1
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_mvn60"]
+[sub_resource type="CurveTexture" id="CurveTexture_i4jos"]
 curve = SubResource("Curve_8d14s")
 
 [sub_resource type="Curve" id="Curve_s0xgo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.967105, 0.340659), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_2gc07"]
+[sub_resource type="CurveTexture" id="CurveTexture_qjwms"]
 curve = SubResource("Curve_s0xgo")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_35yyg"]
@@ -75,8 +75,8 @@ angular_velocity_max = 390.64
 gravity = Vector3(-98, 0, 0)
 scale_min = 0.3
 scale_max = 0.9
-scale_curve = SubResource("CurveTexture_2gc07")
-alpha_curve = SubResource("CurveTexture_mvn60")
+scale_curve = SubResource("CurveTexture_qjwms")
+alpha_curve = SubResource("CurveTexture_i4jos")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
 

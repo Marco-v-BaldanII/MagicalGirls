@@ -1,18 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy4skm66vjb23"]
+[gd_scene load_steps=8 format=3 uid="uid://cy4skm66vjb23"]
 
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_0jpp2"]
 [ext_resource type="Script" path="res://Scenes/projectiles/fire_shot.gd" id="2_excbd"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_isww1"]
+[ext_resource type="Material" uid="uid://cq0tx4yrrloac" path="res://Scenes/projectiles/pink_flame.tres" id="4_bk4bp"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_mee6n"]
+[ext_resource type="Texture2D" uid="uid://dtrmcrqiuuj1x" path="res://Scenes/projectiles/pink_flame.png" id="5_gnsci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
 radius = 167.966
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_clcmu"]
+blend_mode = 1
+
 [node name="FireShot" type="Sprite2D"]
-position = Vector2(113, 57)
+position = Vector2(346, -103)
 rotation = 1.57004
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_0jpp2")
 script = ExtResource("2_excbd")
 alive_time = 4.0
 speed = 550
@@ -48,5 +51,13 @@ node_path = NodePath("..")
 property_name = "dmg"
 interpolated = false
 interpolation_speed = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_clcmu")
+position = Vector2(329.449, 727.749)
+process_material = ExtResource("4_bk4bp")
+texture = ExtResource("5_gnsci")
+lifetime = 0.2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

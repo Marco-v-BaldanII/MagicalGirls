@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjwkdtb7g77pm"]
+[gd_scene load_steps=7 format=3 uid="uid://bjwkdtb7g77pm"]
 
 [ext_resource type="PackedScene" uid="uid://c6klg87wrxfhg" path="res://Scenes/projectiles/star_diagonal.tscn" id="1_3ylvx"]
 [ext_resource type="Script" path="res://Scenes/projectiles/compound_rpojectile.gd" id="1_htwqo"]
 [ext_resource type="PackedScene" uid="uid://cemjbrd2i1i0t" path="res://Scenes/projectiles/hadoken_left.tscn" id="2_kv8c6"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_ipso6"]
+[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="5_au4up"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oeph7"]
 shader = ExtResource("3_ipso6")
@@ -29,6 +30,7 @@ process_material = SubResource("ShaderMaterial_oeph7")
 
 [node name="Hadoken" parent="." instance=ExtResource("2_kv8c6")]
 position = Vector2(113, -151.6)
+texture = ExtResource("5_au4up")
 lag_frames = 0
 speed = 600
 dmg = 6.0
