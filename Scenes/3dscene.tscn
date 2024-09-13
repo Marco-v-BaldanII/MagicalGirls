@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgaek8k5rtho4"]
 
-[ext_resource type="ArrayMesh" path="res://Scenes/projectiles/projectile_mesh.obj" id="1_lrlxh"]
+[ext_resource type="ArrayMesh" uid="uid://donrvwup35vma" path="res://Scenes/projectiles/projectile_mesh.obj" id="1_lrlxh"]
 
 [node name="3Dscene" type="Node3D"]
 

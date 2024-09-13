@@ -23,6 +23,9 @@ var launch_forceX : int = 350
 var speedY = launch_forceY
 var gravity = 30
 
+func _ready() -> void:
+	GDSync.expose_node(self)
+
 func enter():
 	if not player:
 			var e = get_parent()
@@ -109,6 +112,18 @@ func physics_update(delta : float):
 func exit():
 	player.can_move = true
 	player.velocity.x = 0
+	
+	if player.character_name == "Ritsu":
+		ritsu_synch_anim()
+		GDSync.call_func(ritsu_synch_anim)
+	
+	
 	#player.lag = false
 	pass
 	
+
+func ritsu_synch_anim():
+		player.animation_tree["parameters/conditions/s_punch"] = false
+		player.animation_tree["parameters/conditions/not_s_punch"] = true
+		await get_tree().create_timer(0.017).timeout
+		player.animation_tree["parameters/conditions/not_s_punch"] = false

@@ -32,7 +32,7 @@ func charge(position : Vector2):
 			stage += 1
 			dmg *= 2
 			speed -= 300
-			scale += Vector2(0.2,0.2)
+			scale += Vector2(0.5,0.5)
 		
 		#dmg += power_multiply
 		#scale += Vector2(0.005,0.005)
