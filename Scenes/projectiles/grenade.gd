@@ -70,7 +70,7 @@ func shoot(layer : int , mask : int, dir : String, player : Player = null, start
 	if dir == "right":
 		pass
 		speed *= -1
-		scale.x -= 1
+		scale.x *=  -1
 	else:
 		pass
 		#og_speedX *= -1

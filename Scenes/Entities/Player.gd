@@ -45,8 +45,6 @@ const DOWN_HIT_POS_THRESHOLD : int = 860
 
 signal player_died(player_id : int)
 
-var died : bool = false
-
 @export var hp : int = 100:
 	set(value ):
 		if GameManager.character_selection_mode == 4:
@@ -71,10 +69,7 @@ var died : bool = false
 			can_move = false; oponent.can_move = false
 			add_lag(60); oponent.add_lag(60)
 			await get_tree().create_timer(0.8).timeout
-			if oponent.hp != 0 and not died:
-				died = true
-				player_died.emit(oponent.player_num)
-				var i = 9
+			player_died.emit(oponent.player_num)
 			
 @export var mp : int = 200:
 	set(value):
