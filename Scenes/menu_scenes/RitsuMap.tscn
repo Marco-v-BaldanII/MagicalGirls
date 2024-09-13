@@ -154,9 +154,9 @@ s kick - 180 degree sweep
 z_index = 5
 layout_mode = 0
 offset_left = 1004.0
-offset_top = 739.0
+offset_top = 707.0
 offset_right = 30150.0
-offset_bottom = 2043.0
+offset_bottom = 2011.0
 scale = Vector2(0.696023, 0.696023)
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
 theme_override_constants/line_spacing = -50
@@ -164,7 +164,8 @@ theme_override_fonts/font = ExtResource("9_aceli")
 theme_override_font_sizes/font_size = 70
 text = "Special Attacks:
 down, forward - Triple shoot
-down, back, s punch - Fire shoot"
+down, back, s punch - Fire shoot
+Special (requires full mana) - SpaceBar/Button Triggers"
 
 [node name="FlagOfJapan_svg" type="Sprite2D" parent="."]
 z_index = 1
