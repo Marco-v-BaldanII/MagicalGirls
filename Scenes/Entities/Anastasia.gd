@@ -134,7 +134,7 @@ func perform_move():
 							
 							return
 			
-	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") and not input_buffer.back().contains("s_punch"):
+	if (input_buffer.back().contains("punch") or input_buffer.back().contains("kick"))and not  input_buffer.back().contains("s_kick") :
 		var move : String = input_buffer.back()
 		if is_on_floor() and not crouching:
 			last_used_move =  move
@@ -206,7 +206,10 @@ func _physics_process(delta: float) -> void:
 
 		elif current_start_projectile != null and oponent:
 			current_start_projectile.shoot((player_num-1) + 2, oponent.hurt_box_layer,direction, self)
-
+			if not crouching: 
+				$AnimationTree["parameters/conditions/s_kick"] = true
+				await get_tree().create_timer(0.017 * 6).timeout
+				$AnimationTree["parameters/conditions/s_kick"] = false
 			if crouching: 
 				#The crouching grenade get's thrown at a more horizontal lower angle
 				current_start_projectile.speed *= 2

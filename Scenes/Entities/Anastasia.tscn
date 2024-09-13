@@ -35,7 +35,7 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 14
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7g16w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00cqf"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -43,9 +43,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.357143
+shader_parameter/tex_anim_offset = 0.257143
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1oq63"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0b3o"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -53,7 +53,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.357143
+shader_parameter/tex_anim_offset = 0.257143
 
 [sub_resource type="Animation" id="Animation_akhy2"]
 resource_name = "2knife_attack"
@@ -1356,7 +1356,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_kk8ba")
 hframes = 5
 vframes = 14
-frame = 25
+frame = 18
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1364,7 +1364,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_7g16w")
+process_material = SubResource("ShaderMaterial_00cqf")
 texture = ExtResource("2_kk8ba")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1376,7 +1376,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_1oq63")
+process_material = SubResource("ShaderMaterial_a0b3o")
 texture = ExtResource("2_kk8ba")
 lifetime = 0.35
 script = ExtResource("4_nib11")

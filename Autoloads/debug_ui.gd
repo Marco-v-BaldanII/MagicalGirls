@@ -9,6 +9,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var i : int =  1.0 / delta
-	i = floori(i)
-	label.text = str(i) + "fps"
+	pass
