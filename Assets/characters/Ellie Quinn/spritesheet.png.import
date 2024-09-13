@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb60dwkjvle4"
-path="res://.godot/imported/spritesheet.png-21d75bfc6573ca084102deb6ca6c4353.ctex"
+path="res://.godot/imported/spritesheet.png-bd6917089aacb913a5b9a0acc2926805.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/characters/Ellie/spritesheet.png"
-dest_files=["res://.godot/imported/spritesheet.png-21d75bfc6573ca084102deb6ca6c4353.ctex"]
+source_file="res://Assets/characters/Ellie Quinn/spritesheet.png"
+dest_files=["res://.godot/imported/spritesheet.png-bd6917089aacb913a5b9a0acc2926805.ctex"]
 
 [params]
 

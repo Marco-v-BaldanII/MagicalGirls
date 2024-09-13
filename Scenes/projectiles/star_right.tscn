@@ -82,7 +82,7 @@ hue_variation_max = 1.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_myu2k"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2aw2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yidk8"]
 shader = ExtResource("6_sspea")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -161,7 +161,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_myu2k")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_c2aw2")
+process_material = SubResource("ShaderMaterial_yidk8")
 texture = ExtResource("1_jmvnw")
 lifetime = 0.35
 script = ExtResource("7_7vxy2")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dhtkrdigh6gpd"]
 
-[ext_resource type="Texture2D" uid="uid://dcqd5o3l2onf7" path="res://Assets/characters/Ellie/book_sprite_sheet.png" id="1_kgvcl"]
+[ext_resource type="Texture2D" uid="uid://dcqd5o3l2onf7" path="res://Assets/characters/Ellie Quinn/book_sprite_sheet.png" id="1_kgvcl"]
 [ext_resource type="Script" path="res://Scenes/projectiles/orbiting_book.gd" id="2_jbq4n"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_e4mr2"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_qkrg5"]
