@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_ipso6"]
 [ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="5_au4up"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5sp2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcvbe"]
 shader = ExtResource("3_ipso6")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -26,7 +26,7 @@ speedY = 300
 dmg = 6.0
 
 [node name="GPUParticles2D" parent="Star3" index="3"]
-process_material = SubResource("ShaderMaterial_k5sp2")
+process_material = SubResource("ShaderMaterial_gcvbe")
 
 [node name="Hadoken" parent="." instance=ExtResource("2_kv8c6")]
 position = Vector2(113, -151.6)
