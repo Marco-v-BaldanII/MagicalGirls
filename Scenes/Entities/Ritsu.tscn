@@ -1,12 +1,16 @@
-[gd_scene load_steps=125 format=3 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=130 format=4 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
+[ext_resource type="AudioStream" uid="uid://ba2t4vlb4hjg8" path="res://Assets/SFX/Characters/RitsuJump.mp3" id="2_fb2ff"]
 [ext_resource type="Texture2D" uid="uid://d3nqxiva7h3t7" path="res://Assets/characters/Ritsu/Animations/awdsawd.png" id="2_l7n0g"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_3uh4q"]
+[ext_resource type="AudioStream" uid="uid://bnw1sk1fa1bvr" path="res://Assets/SFX/Characters/RitsuNormalAttack.mp3" id="3_hhqmi"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_uh0qa"]
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_gkyms"]
+[ext_resource type="AudioStream" uid="uid://b48csm78auhqv" path="res://Assets/SFX/Characters/RitsuSpecialAttack.mp3" id="4_qaar5"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ujalq"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ohqq7"]
+[ext_resource type="AudioStream" uid="uid://d24ys82wab5lr" path="res://Assets/SFX/Characters/RitsuDamage.mp3" id="6_41ah7"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_ib67o"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_qmnh1"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_wgxbo"]
@@ -24,13 +28,16 @@
 [ext_resource type="AudioStream" uid="uid://cadi7wx13ei3l" path="res://Assets/SFX/placeholder.wav" id="22_n70dd"]
 [ext_resource type="AudioStream" uid="uid://bdyxwxrw7s45i" path="res://Assets/SFX/swing 2.wav" id="24_qwxhj"]
 
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_oqvvf"]
+data = PackedByteArray("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")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_taivp"]
 particles_animation = true
 particles_anim_h_frames = 12
 particles_anim_v_frames = 14
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uji8r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25ek3"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -38,9 +45,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0357143
+shader_parameter/tex_anim_offset = 0.0178571
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cv1pf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klcf2"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -48,7 +55,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0357143
+shader_parameter/tex_anim_offset = 0.0178571
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1297,6 +1304,20 @@ height = 376.0
 [node name="NewRitsu" type="CharacterBody2D"]
 process_mode = 1
 script = ExtResource("1_h8qxx")
+sfx = {
+"block": ExtResource("22_n70dd"),
+"crouch": false,
+"hit": ExtResource("6_41ah7"),
+"jump": ExtResource("2_fb2ff"),
+"l_trigger": ExtResource("22_n70dd"),
+"move_left": false,
+"move_right": false,
+"r_trigger": ExtResource("22_n70dd"),
+"s_kick": ExtResource("4_qaar5"),
+"s_punch": ExtResource("4_qaar5"),
+"w_kick": SubResource("AudioStreamMP3_oqvvf"),
+"w_punch": ExtResource("3_hhqmi")
+}
 move_dmg = {
 "air_s_kick": 15,
 "air_s_punch": 15,
@@ -1320,7 +1341,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_l7n0g")
 hframes = 12
 vframes = 14
-frame = 6
+frame = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1328,7 +1349,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_uji8r")
+process_material = SubResource("ShaderMaterial_25ek3")
 texture = ExtResource("2_l7n0g")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
@@ -1340,7 +1361,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_cv1pf")
+process_material = SubResource("ShaderMaterial_klcf2")
 texture = ExtResource("2_l7n0g")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
