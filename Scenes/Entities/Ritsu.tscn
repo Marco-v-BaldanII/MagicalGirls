@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=4 uid="uid://c4xoe1y860pj5"]
+[gd_scene load_steps=131 format=4 uid="uid://c4xoe1y860pj5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ritsu.gd" id="1_h8qxx"]
 [ext_resource type="AudioStream" uid="uid://ba2t4vlb4hjg8" path="res://Assets/SFX/Characters/RitsuJump.mp3" id="2_fb2ff"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_gkyms"]
 [ext_resource type="AudioStream" uid="uid://b48csm78auhqv" path="res://Assets/SFX/Characters/RitsuSpecialAttack.mp3" id="4_qaar5"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_ujalq"]
+[ext_resource type="AudioStream" uid="uid://dw2gdg8pfy0oc" path="res://Assets/SFX/462095__matrixxx__sparkling-star-01(2).wav" id="5_nno2g"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ohqq7"]
 [ext_resource type="AudioStream" uid="uid://d24ys82wab5lr" path="res://Assets/SFX/Characters/RitsuDamage.mp3" id="6_41ah7"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_ib67o"]
@@ -37,7 +38,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 14
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3stt3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylpqv"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -45,9 +46,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0238095
+shader_parameter/tex_anim_offset = 0.0178571
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2i0cc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_etc0t"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -55,7 +56,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0238095
+shader_parameter/tex_anim_offset = 0.0178571
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1309,10 +1310,10 @@ sfx = {
 "crouch": false,
 "hit": ExtResource("6_41ah7"),
 "jump": ExtResource("2_fb2ff"),
-"l_trigger": ExtResource("22_n70dd"),
+"l_trigger": ExtResource("5_nno2g"),
 "move_left": false,
 "move_right": false,
-"r_trigger": ExtResource("22_n70dd"),
+"r_trigger": ExtResource("5_nno2g"),
 "s_kick": ExtResource("4_qaar5"),
 "s_punch": ExtResource("4_qaar5"),
 "w_kick": SubResource("AudioStreamMP3_oqvvf"),
@@ -1341,7 +1342,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_l7n0g")
 hframes = 12
 vframes = 14
-frame = 4
+frame = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1349,7 +1350,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_3stt3")
+process_material = SubResource("ShaderMaterial_ylpqv")
 texture = ExtResource("2_l7n0g")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
@@ -1361,7 +1362,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_2i0cc")
+process_material = SubResource("ShaderMaterial_etc0t")
 texture = ExtResource("2_l7n0g")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
