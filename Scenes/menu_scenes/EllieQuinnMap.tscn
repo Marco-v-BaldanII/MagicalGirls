@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="5_3igfw"]
 [ext_resource type="Texture2D" uid="uid://bftj60upd6ucc" path="res://Assets/UI/Menus/flag-of-british-free-vector.jpg" id="6_aedsw"]
 [ext_resource type="Texture2D" uid="uid://c4jq4bqccmeg3" path="res://japan unlocked(1).png" id="7_sxnvs"]
-[ext_resource type="Texture2D" uid="uid://fxm85mgv65hk" path="res://Assets/characters/concepts/EllieQuinnConcept.png" id="8_0des3"]
+[ext_resource type="Texture2D" uid="uid://ddxw3l71hluvr" path="res://Assets/characters/concepts/EllieQuinnConcept(1).png" id="8_n0yr1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfooj"]
 shader = ExtResource("1_4yemq")
@@ -39,10 +39,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.33333, 5.16667),
+"times": PackedFloat32Array(-0.0166667, 2.31667, 5.16667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(437, 37), Vector2(437, -20), Vector2(437, 37)]
+"values": [Vector2(454, 141), Vector2(454, 86), Vector2(454, 141)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xqdb8"]
@@ -181,8 +181,8 @@ offset_left = 361.0
 offset_top = 37.0
 offset_right = 3861.0
 offset_bottom = 5037.0
-scale = Vector2(0.203894, 0.203894)
-texture = ExtResource("8_0des3")
+scale = Vector2(0.167544, 0.147077)
+texture = ExtResource("8_n0yr1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
 libraries = {

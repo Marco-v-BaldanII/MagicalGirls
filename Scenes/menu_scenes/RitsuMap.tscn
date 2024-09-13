@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cejggquq2osia" path="res://Assets/UI/Menus/Flag_of_Japan.svg.png" id="7_dkj87"]
 [ext_resource type="Texture2D" uid="uid://b8lv0qe1acvwl" path="res://Assets/UI/Menus/dialogue.png" id="7_vdw78"]
 [ext_resource type="Texture2D" uid="uid://c4jq4bqccmeg3" path="res://japan unlocked(1).png" id="8_3bq35"]
-[ext_resource type="Texture2D" uid="uid://d2ry206yui2an" path="res://Assets/characters/concepts/RitsuConcept.png" id="8_pjeo7"]
+[ext_resource type="Texture2D" uid="uid://bcdbv7acgcqdd" path="res://Assets/characters/concepts/RitsuConcept(1).png" id="8_tttkk"]
 [ext_resource type="FontFile" uid="uid://fv6dgtjeh7k3" path="res://Assets/UI/Dongle-Regular.ttf" id="9_aceli"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfooj"]
@@ -41,7 +41,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 3.9, 7.73333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(436, 37), Vector2(436, -20), Vector2(436, 37)]
+"values": [Vector2(624, 37), Vector2(624, -20), Vector2(624, 37)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bpane"]
@@ -183,8 +183,8 @@ offset_left = 482.0
 offset_top = 25.0
 offset_right = 3982.0
 offset_bottom = 5025.0
-scale = Vector2(0.203894, 0.203894)
-texture = ExtResource("8_pjeo7")
+scale = Vector2(0.141142, 0.215327)
+texture = ExtResource("8_tttkk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
 libraries = {

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnnbj83e3key6"]
+
+[ext_resource type="VideoStream" path="res://Cutscenes/Untitled-video-Made-with-Clipchamp-_22_.ogv" id="2_p57ka"]
+
+[node name="Ritsu" type="Node2D"]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -14.0
+offset_top = -9.0
+offset_right = 26.0
+offset_bottom = 31.0
+scale = Vector2(48.6613, 27.4023)
+stream = ExtResource("2_p57ka")
+autoplay = true
+expand = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
