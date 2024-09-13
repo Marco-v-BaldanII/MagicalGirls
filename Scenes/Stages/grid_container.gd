@@ -54,10 +54,10 @@ var selected_fighter : String = ""
 var selected_fighter2 : String = ""
 
 var character_banners = {
-	"Ritsu": preload("res://Assets/characters/concepts/RitsuConcept.png"),
-	"Anastasia": preload("res://Assets/characters/concepts/Magical_Girl_Game_Jam_Anastasia_concept-ezgif.com-crop.png"),
-	"Ellie Quinn": preload("res://Assets/characters/concepts/EllieQuinnConcept.png"),
-	"Random": preload("res://Assets/PlaceHolders/goku_spsheet.png"),
+	"Ritsu": preload("res://Assets/characters/concepts/RitsuConcept(1).png"),
+	"Anastasia": preload("res://Assets/characters/concepts/Magical Girl Game Jam Anastasia concept.png"),
+	"Ellie Quinn": preload("res://Assets/characters/concepts/EllieQuinnConcept(1).png"),
+	"Random": preload("res://Scenes/menu_scenes/options/question.png"),
 
 }
 

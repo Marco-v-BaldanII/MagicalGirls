@@ -3,14 +3,14 @@
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
 [ext_resource type="AudioStream" uid="uid://bpd5gi4qu02yk" path="res://Assets/SFX/UI/SelectCharacter.mp3" id="3_gyvyi"]
-[ext_resource type="Texture2D" uid="uid://d2ry206yui2an" path="res://Assets/characters/concepts/RitsuConcept.png" id="3_hp4ll"]
 [ext_resource type="Texture2D" uid="uid://df8g0yxsec1nb" path="res://Assets/portraits/Ritsu.png" id="3_q1jj1"]
 [ext_resource type="AudioStream" uid="uid://cpue4qlh3n0r0" path="res://Assets/SFX/UI/MenuSelect.mp3" id="4_8ix2s"]
 [ext_resource type="Texture2D" uid="uid://dabpluqqm3tfa" path="res://Assets/UI/anastasia portrait(1).png" id="4_e7lsl"]
 [ext_resource type="Texture2D" uid="uid://oi674s6pvdsw" path="res://Assets/portraits/Ellie Quinn.png" id="5_dti1v"]
-[ext_resource type="Texture2D" uid="uid://dvflxfhpwmq36" path="res://Scenes/menu_scenes/options/question.png" id="6_82r14"]
+[ext_resource type="Texture2D" uid="uid://cfdgmukn8h016" path="res://Cutscenes/inte.png" id="5_hcutk"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/controler_menu.gd" id="7_5016i"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="7_hiedg"]
+[ext_resource type="Texture2D" uid="uid://dhyp7et338mm6" path="res://Assets/characters/concepts/Magical Girl Game Jam Anastasia concept.png" id="8_4hkse"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="8_l0m68"]
 [ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
 [ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
@@ -74,13 +74,14 @@ size_flags_vertical = 6
 texture = ExtResource("4_e7lsl")
 
 [node name="Random" type="TextureRect" parent="Camera2D/characters"]
-offset_left = -257.667
-offset_top = 96.6666
-offset_right = 254.333
-offset_bottom = 728.667
+offset_left = -201.667
+offset_top = 186.667
+offset_right = 310.333
+offset_bottom = 818.667
+scale = Vector2(0.768737, 0.768737)
 size_flags_horizontal = 6
 size_flags_vertical = 6
-texture = ExtResource("6_82r14")
+texture = ExtResource("5_hcutk")
 expand_mode = 1
 
 [node name="Ellie Quinn" type="TextureRect" parent="Camera2D/characters"]
@@ -96,14 +97,14 @@ texture = ExtResource("5_dti1v")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2280.0
-offset_top = 81.6666
-offset_right = 1220.0
-offset_bottom = 5081.67
+offset_left = -1578.33
+offset_top = 610.0
+offset_right = 1921.67
+offset_bottom = 5610.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.376963, 0.376963)
-texture = ExtResource("3_hp4ll")
+scale = Vector2(0.234973, 0.383426)
+texture = ExtResource("8_4hkse")
 
 [node name="Position" type="TextureRect" parent="Camera2D"]
 offset_left = -1883.33
@@ -121,14 +122,14 @@ offset_bottom = 603.333
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -13.3334
-offset_top = 81.6666
-offset_right = 3486.67
-offset_bottom = 5081.67
+offset_left = 641.667
+offset_top = 558.333
+offset_right = 4141.67
+offset_bottom = 5558.34
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.376963, 0.376963)
-texture = ExtResource("3_hp4ll")
+scale = Vector2(0.223495, 0.336201)
+texture = ExtResource("8_4hkse")
 
 [node name="Position2" type="TextureRect" parent="Camera2D"]
 offset_left = 390.0

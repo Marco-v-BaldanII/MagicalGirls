@@ -7,6 +7,7 @@ func _ready():
 	DiscordRPC.state = "Playing"
 	DiscordRPC.details = "Fighting magical girls as a magical girl"
 	DiscordRPC.large_image = "title_big"
+	DiscordRPC.start_timestamp = 1507665886;
 	DiscordRPC.refresh()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
