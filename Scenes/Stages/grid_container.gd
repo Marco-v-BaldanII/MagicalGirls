@@ -146,9 +146,8 @@ func input_movement(character_id : int, second_onlineP : bool = false):
 			select_character.play()
 			move_selection(2,character_id,second_onlineP) 
 			GDSync.call_func(move_selection,[2,character_id,second_onlineP])
-		elif Controls.is_ui_action_pressed("accept"):
-			while Controls.is_ui_action_pressed("accept"):
-				await get_tree().create_timer(0.017).timeout
+		elif is_joy_button_just_pressed("accept", input_methods[character_id]):
+
 			
 			$Camera2D/MenuSelect.play()
 			_select_fighter(character_id, second_onlineP)

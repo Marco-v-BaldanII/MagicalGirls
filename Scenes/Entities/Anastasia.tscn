@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpt3w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7744"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.357143
+shader_parameter/tex_anim_offset = 0.115385
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_st5l3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eh1gn"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.357143
+shader_parameter/tex_anim_offset = 0.115385
 
 [sub_resource type="Animation" id="Animation_akhy2"]
 resource_name = "2knife_attack"
@@ -1338,7 +1338,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_cmqs0")
 hframes = 5
 vframes = 14
-frame = 25
+frame = 19
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1346,22 +1346,21 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_tpt3w")
+process_material = SubResource("ShaderMaterial_b7744")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
-total_frames = 70
 
-[node name="GPUParticles2D_ulti" type="GPUParticles2D" parent="Sprite2D"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Sprite2D"]
+visible = false
 z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_st5l3")
+process_material = SubResource("ShaderMaterial_eh1gn")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
-total_frames = 70
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

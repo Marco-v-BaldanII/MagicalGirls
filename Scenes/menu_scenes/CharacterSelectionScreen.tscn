@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://h5dbpywiwktr"]
+[gd_scene load_steps=19 format=3 uid="uid://h5dbpywiwktr"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/grid_container.gd" id="1_iyl6b"]
 [ext_resource type="PackedScene" uid="uid://cf18ypury8705" path="res://Scenes/Stages/test_map2_deprecated.tscn" id="2_514jg"]
@@ -12,9 +12,8 @@
 [ext_resource type="Script" path="res://Scenes/menu_scenes/scroll_container.gd" id="7_hiedg"]
 [ext_resource type="Texture2D" uid="uid://dhyp7et338mm6" path="res://Assets/characters/concepts/Magical Girl Game Jam Anastasia concept.png" id="8_4hkse"]
 [ext_resource type="PackedScene" uid="uid://mdyttijryjf1" path="res://Scenes/menu_scenes/scroll_container.tscn" id="8_l0m68"]
-[ext_resource type="PackedScene" uid="uid://d2g1yiwv2udal" path="res://Scenes/menu_scenes/controler_option.tscn" id="8_ll86b"]
-[ext_resource type="Texture2D" uid="uid://3taes8esvydg" path="res://icon.svg" id="9_n26ix"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="11_nw28w"]
+[ext_resource type="Texture2D" uid="uid://beaheo8dx6ued" path="res://Assets/UI/star_.png" id="12_e8as0"]
 [ext_resource type="PackedScene" uid="uid://dn8baxe5jwlvy" path="res://Scenes/menu_scenes/go_back_btn.tscn" id="15_x5w14"]
 [ext_resource type="PackedScene" uid="uid://cgmkfq74q5rty" path="res://Scenes/menu_scenes/fading_stages.tscn" id="17_jonlc"]
 
@@ -97,9 +96,22 @@ texture = ExtResource("5_dti1v")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1578.33
+offset_left = -1578.0
 offset_top = 610.0
-offset_right = 1921.67
+offset_right = 3075.0
+offset_bottom = 5610.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.234973, 0.383426)
+texture = ExtResource("8_4hkse")
+
+[node name="TextureRect2" type="TextureRect" parent="Camera2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 501.667
+offset_top = 610.0
+offset_right = 5154.67
 offset_bottom = 5610.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -107,40 +119,27 @@ scale = Vector2(0.234973, 0.383426)
 texture = ExtResource("8_4hkse")
 
 [node name="Position" type="TextureRect" parent="Camera2D"]
-offset_left = -1883.33
+offset_left = -1575.0
 offset_top = -883.333
-offset_right = -1843.33
+offset_right = -1535.0
 offset_bottom = -843.333
 
-[node name="PositionDown" type="TextureRect" parent="Camera2D"]
-offset_left = -1883.33
-offset_top = 563.333
-offset_right = -1843.33
-offset_bottom = 603.333
-
-[node name="TextureRect2" type="TextureRect" parent="Camera2D"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 641.667
-offset_top = 558.333
-offset_right = 4141.67
-offset_bottom = 5558.34
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.223495, 0.336201)
-texture = ExtResource("8_4hkse")
-
 [node name="Position2" type="TextureRect" parent="Camera2D"]
-offset_left = 390.0
+offset_left = 491.667
 offset_top = -883.333
-offset_right = 430.0
+offset_right = 531.667
 offset_bottom = -843.333
 
 [node name="PositionDown2" type="TextureRect" parent="Camera2D"]
-offset_left = 390.0
+offset_left = 496.667
 offset_top = 563.333
-offset_right = 430.0
+offset_right = 536.667
+offset_bottom = 603.333
+
+[node name="PositionDown" type="TextureRect" parent="Camera2D"]
+offset_left = -1570.0
+offset_top = 563.333
+offset_right = -1530.0
 offset_bottom = 603.333
 
 [node name="GridContainer" type="GridContainer" parent="Camera2D"]
@@ -192,6 +191,10 @@ texture = SubResource("Texture2D_dtlya")
 
 [node name="ControlSelection" parent="Camera2D" instance=ExtResource("8_l0m68")]
 
+[node name="cursor" parent="Camera2D/ControlSelection" index="0"]
+scale = Vector2(0.469739, 0.469739)
+texture = ExtResource("12_e8as0")
+
 [node name="Button" type="Button" parent="Camera2D/ControlSelection"]
 offset_left = -1547.0
 offset_top = -863.0
@@ -219,7 +222,8 @@ position = Vector2(2230, 0)
 
 [node name="cursor" type="Sprite2D" parent="Camera2D/ControlSelection2"]
 position = Vector2(-926.667, -522.667)
-texture = ExtResource("9_n26ix")
+scale = Vector2(0.469739, 0.469739)
+texture = ExtResource("12_e8as0")
 
 [node name="P2_control_selection" type="ScrollContainer" parent="Camera2D/ControlSelection2"]
 offset_left = -1502.0
@@ -238,9 +242,6 @@ custom_minimum_size = Vector2(500, 1000)
 layout_mode = 2
 theme_override_constants/v_separation = 20
 script = ExtResource("7_5016i")
-
-[node name="Controler_Option" parent="Camera2D/ControlSelection2/P2_control_selection/ControlerMenu1" instance=ExtResource("8_ll86b")]
-layout_mode = 2
 
 [node name="Button" type="Button" parent="Camera2D/ControlSelection2"]
 offset_left = -1547.0

@@ -556,9 +556,12 @@ var hit_position : String
 
 var body : bool = false
 const HIT_VFX = preload("res://Assets/VFX/HitVFX.tscn")
-
-func instanciate_particle(glob_pos : Vector2):
-	var particle = HIT_VFX.instantiate()
+const HIT_VFX_STRONG = preload("res://Assets/VFX/HitVFX_strong.tscn")
+func instanciate_particle(glob_pos : Vector2, strong : bool = false):
+	var particle 
+	if not strong: particle = HIT_VFX.instantiate()
+	else: particle = HIT_VFX_STRONG.instantiate()
+	
 	add_child(particle)
 	particle.global_position = glob_pos
 	particle.z_index = 200
@@ -568,10 +571,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if GameManager.online and not GDSync.is_gdsync_owner(self) and area.get_parent() is Projectile:
 		return
 	
-	if area.get_child(0) != null:
-		var pos : Vector2 = area.get_child(0).global_position
-		instanciate_particle(pos)
-		GDSync.call_func(instanciate_particle, [pos])
+
 	
 
 	print("hit on " + str(area.global_position.y))
@@ -699,6 +699,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if  area.is_in_group("super_weak"):
 		pass
 	elif area.is_in_group("weak"):
+		
+		if area.get_child(0) != null:
+			var pos : Vector2 = area.get_child(0).global_position
+			instanciate_particle(pos)
+			GDSync.call_func(instanciate_particle, [pos])
+			
 		if not blocked : GameManager.camera_shake()
 		GameManager.hit_stop_short()
 		if (area.has_method("get_dmg") or oponent.last_used_move.contains("w_kick")) or atk_buffer < 2:
@@ -708,6 +714,12 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 			remove_atk_buffer()
 			
 	elif area.is_in_group("strong") or area.is_in_group("special"):
+		
+		if area.get_child(0) != null:
+			var pos : Vector2 = area.get_child(0).global_position
+			instanciate_particle(pos,true)
+			GDSync.call_func(instanciate_particle, [pos,true])
+		
 		if not blocked : GameManager.camera_shake()
 		GameManager.hit_stop_long()
 		state_machine.on_child_transition(state_machine.current_state, "knocked")
