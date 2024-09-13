@@ -152,17 +152,18 @@ s kick - Shoot 90 degrees
 [node name="Special attacks + combos" type="Label" parent="."]
 z_index = 4
 layout_mode = 0
-offset_left = 1067.0
-offset_top = 707.0
-offset_right = 30213.0
-offset_bottom = 2011.0
+offset_left = 1065.0
+offset_top = 694.0
+offset_right = 30211.0
+offset_bottom = 1998.0
 scale = Vector2(0.696023, 0.696023)
 theme_override_colors/font_color = Color(0.466667, 0, 0.309804, 1)
 theme_override_constants/line_spacing = -50
 theme_override_fonts/font = ExtResource("5_3igfw")
 theme_override_font_sizes/font_size = 70
 text = "Special Attacks:
-down, forward, s kick - Spinning book"
+down, forward, s kick - Spinning book
+Special (requires full mana) - SpaceBar/Button Triggers"
 
 [node name="FlagOfJapan_svg" type="Sprite2D" parent="."]
 z_index = 1
@@ -177,11 +178,11 @@ texture = ExtResource("7_sxnvs")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 361.0
-offset_top = 37.0
-offset_right = 3861.0
-offset_bottom = 5037.0
-scale = Vector2(0.167544, 0.147077)
+offset_left = 540.0
+offset_top = 124.0
+offset_right = 4040.0
+offset_bottom = 5124.0
+scale = Vector2(0.110044, 0.126897)
 texture = ExtResource("8_n0yr1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]

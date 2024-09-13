@@ -35,7 +35,7 @@ func physics_update(delta : float):
 	
 	if move_performed:
 		move_performed = false
-		await get_tree().create_timer(randf_range(0.9,1.8)).timeout
+		await get_tree().create_timer(randf_range(0.3,0.8)).timeout
 		perform_attack()
 		var d =  abs(player.oponent.global_position.x - player.global_position.x)
 

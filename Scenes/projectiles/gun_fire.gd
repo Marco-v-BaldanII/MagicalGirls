@@ -26,7 +26,7 @@ func _ready() -> void:
 	GDSync.expose_node(self)
 	dmg = 1
 	speed = 1200
-	scale = Vector2(0.2,0.2)
+	#scale = Vector2(0.2,0.2)
 	set_physics_process(false)	
 	#$Area2D.monitoring = false
 	#$Area2D.monitorable = false
@@ -73,7 +73,7 @@ func called_shoot(layer : int , mask : int, dir : String, player : Player = null
 	global_position = my_player.position
 	if dir == "right":
 		speed *= -1
-		scale.x -= 1
+		scale.x *= - 1
 	if player:
 		player.add_lag(lag_frames)
 

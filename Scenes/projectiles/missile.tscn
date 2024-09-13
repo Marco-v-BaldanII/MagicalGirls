@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://bf235quwldrpk"]
 
-[ext_resource type="Texture2D" uid="uid://dkiexskwwtt2d" path="res://Assets/PlaceHolders/hadoken.png" id="1_1iv18"]
+[ext_resource type="Texture2D" uid="uid://cbg5ai25ple45" path="res://Scenes/projectiles/Misil.png" id="1_tnnaw"]
 [ext_resource type="Script" path="res://Scenes/projectiles/missile.gd" id="2_a2bo6"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_qn0vp"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_aehqw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
-radius = 167.966
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3g3j"]
+size = Vector2(158.07, 2708.18)
 
 [node name="missile" type="Sprite2D"]
 position = Vector2(113, 57)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_1iv18")
+scale = Vector2(0.379578, 0.139577)
+texture = ExtResource("1_tnnaw")
 script = ExtResource("2_a2bo6")
 
 [node name="Area2D" type="Area2D" parent="." groups=["projectile", "special"]]
@@ -20,8 +20,8 @@ collision_mask = 0
 script = ExtResource("3_qn0vp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(40, 0)
-shape = SubResource("CircleShape2D_xfwv1")
+position = Vector2(7.9035, -50.1516)
+shape = SubResource("RectangleShape2D_l3g3j")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("4_aehqw")

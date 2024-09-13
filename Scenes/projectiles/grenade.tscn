@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://bhpmpkmwt4wad"]
 
-[ext_resource type="Texture2D" uid="uid://ha77xb584t5b" path="res://Assets/PlaceHolders/bomb.png" id="1_wf1yj"]
+[ext_resource type="Texture2D" uid="uid://b44hsj6k05eb4" path="res://Scenes/projectiles/Grenade.png" id="1_rpxt0"]
 [ext_resource type="Script" path="res://Scenes/projectiles/grenade.gd" id="2_vrj3o"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_sb1y7"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_fhs8o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfwv1"]
-radius = 373.363
+radius = 110.0
 
 [sub_resource type="Animation" id="Animation_7w5es"]
 length = 0.001
@@ -85,8 +85,8 @@ transitions = ["Start", "explode", SubResource("AnimationNodeStateMachineTransit
 
 [node name="Grenade" type="Sprite2D" groups=["projectile"]]
 position = Vector2(113, 57)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_wf1yj")
+scale = Vector2(0.729977, 0.729977)
+texture = ExtResource("1_rpxt0")
 script = ExtResource("2_vrj3o")
 alive_time = 3.0
 lag_frames = 35
@@ -94,12 +94,13 @@ speed = 600
 speedY = -400
 
 [node name="Area2D" type="Area2D" parent="." groups=["weak"]]
+position = Vector2(9.57342, -19.1468)
 collision_layer = 0
 collision_mask = 25
 script = ExtResource("3_sb1y7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(100, 130)
+position = Vector2(-9.99999, 20)
 shape = SubResource("CircleShape2D_xfwv1")
 
 [node name="PropertySynchronizer2" type="Node" parent="."]
