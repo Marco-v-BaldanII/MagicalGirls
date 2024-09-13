@@ -555,12 +555,25 @@ var blocked : bool = false
 var hit_position : String 
 
 var body : bool = false
+const HIT_VFX = preload("res://Assets/VFX/HitVFX.tscn")
+
+func instanciate_particle(glob_pos : Vector2):
+	var particle = HIT_VFX.instantiate()
+	add_child(particle)
+	particle.global_position = glob_pos
+	particle.z_index = 200
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	
 	if GameManager.online and not GDSync.is_gdsync_owner(self) and area.get_parent() is Projectile:
 		return
 	
+	if area.get_child(0) != null:
+		var pos : Vector2 = area.get_child(0).global_position
+		instanciate_particle(pos)
+		GDSync.call_func(instanciate_particle, [pos])
+	
+
 	print("hit on " + str(area.global_position.y))
 	
 	hit_position = "none"
