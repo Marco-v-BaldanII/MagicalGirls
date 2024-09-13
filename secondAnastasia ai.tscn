@@ -7,4 +7,7 @@
 ai_player = true
 fly = false
 
+[node name="Sprite2D" parent="." index="0"]
+frame = 1
+
 [node name="AI_StateMachine" parent="." index="11" instance=ExtResource("2_epch1")]
