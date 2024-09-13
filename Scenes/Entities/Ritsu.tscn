@@ -37,7 +37,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 14
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_25ek3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vn8rb"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -45,9 +45,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0178571
+shader_parameter/tex_anim_offset = 0.00595238
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_klcf2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btky2"]
 shader = ExtResource("3_3uh4q")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -55,7 +55,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0178571
+shader_parameter/tex_anim_offset = 0.00595238
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1341,7 +1341,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_l7n0g")
 hframes = 12
 vframes = 14
-frame = 3
+frame = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1349,7 +1349,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_25ek3")
+process_material = SubResource("ShaderMaterial_vn8rb")
 texture = ExtResource("2_l7n0g")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
@@ -1361,7 +1361,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_klcf2")
+process_material = SubResource("ShaderMaterial_btky2")
 texture = ExtResource("2_l7n0g")
 lifetime = 0.35
 script = ExtResource("4_gkyms")
