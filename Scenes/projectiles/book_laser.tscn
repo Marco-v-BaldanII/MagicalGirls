@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbw8iuyppab1u"]
+[gd_scene load_steps=9 format=3 uid="uid://dbw8iuyppab1u"]
 
 [ext_resource type="Texture2D" uid="uid://e0f3uqlt2gqr" path="res://Assets/characters/laser.png" id="1_v6kav"]
 [ext_resource type="Script" path="res://Scenes/projectiles/book_laser.gd" id="2_lj28k"]
 [ext_resource type="Script" path="res://Scenes/projectiles/projectile_area.gd" id="3_seovh"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="4_8ruoc"]
-[ext_resource type="Texture2D" uid="uid://cxtf6nlwocsxa" path="res://Assets/UI/circle_particle.png" id="5_pe7sk"]
+[ext_resource type="Material" uid="uid://bwq4f6ao1mybv" path="res://Scenes/projectiles/book_laser_small.tres" id="4_awuqs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_27p3x"]
 
@@ -14,57 +14,16 @@ height = 611.45
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_utw3q"]
 blend_mode = 1
-particles_animation = true
-particles_anim_h_frames = 7
-particles_anim_v_frames = 7
-particles_anim_loop = true
-
-[sub_resource type="Curve" id="Curve_pbpe0"]
-_data = [Vector2(0, 0.945055), 0.0, 0.0, 0, 0, Vector2(0.947368, 0.263736), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_ql586"]
-curve = SubResource("Curve_pbpe0")
-
-[sub_resource type="Curve" id="Curve_5als3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.993421, 0.32967), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_25qcn"]
-curve = SubResource("Curve_5als3")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h4wdb"]
-particle_flag_disable_z = true
-angle_min = -168.5
-angle_max = 46.0
-angular_velocity_min = -214.47
-angular_velocity_max = 107.23
-orbit_velocity_min = -0.787
-orbit_velocity_max = 0.426
-radial_velocity_min = -234.04
-radial_velocity_max = 85.11
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -13.83
-radial_accel_max = 26.6
-tangential_accel_min = -23.4
-tangential_accel_max = 21.28
-damping_max = 20.213
-scale_min = 0.0
-scale_max = 5.32
-scale_curve = SubResource("CurveTexture_25qcn")
-color = Color(0.523755, 0.695945, 1, 1)
-alpha_curve = SubResource("CurveTexture_ql586")
 
 [node name="Laser" type="Sprite2D" groups=["projectile"]]
-self_modulate = Color(0.649966, 0.74151, 1, 1)
 material = SubResource("CanvasItemMaterial_27p3x")
 position = Vector2(-84, 57)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_v6kav")
 script = ExtResource("2_lj28k")
 speed = 2200
 
 [node name="Area2D" type="Area2D" parent="." groups=["strong"]]
+position = Vector2(-315, 30)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_seovh")
@@ -101,9 +60,9 @@ interpolation_speed = 1.0
 z_index = -1
 material = SubResource("CanvasItemMaterial_utw3q")
 position = Vector2(55, -7.5)
-amount = 40
-process_material = SubResource("ParticleProcessMaterial_h4wdb")
-texture = ExtResource("5_pe7sk")
+amount = 30
+process_material = ExtResource("4_awuqs")
+texture = ExtResource("1_v6kav")
 lifetime = 0.2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	if current_frame > frame_charge_time and current_growth_segment < growth_segments:
 
 		var tween : Tween = create_tween()
-		tween.tween_property(self,"scale",scale+Vector2(0.16,0.16),(1.0/60.0) * (frame_charge_time*0.6))
+		tween.tween_property(self,"scale",scale+Vector2(0.42,0.42),(1.0/60.0) * (frame_charge_time*0.6))
 		tween.set_ease(Tween.EASE_IN_OUT)
 		var tween2 : Tween = create_tween()
 		tween2.tween_property(self,"rotation",rotation + 1.5 ,(1.0/60.0) * (frame_charge_time*0.6))

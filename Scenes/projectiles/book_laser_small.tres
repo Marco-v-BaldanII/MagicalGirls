@@ -1,0 +1,37 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://bwq4f6ao1mybv"]
+
+[sub_resource type="Curve" id="Curve_pbpe0"]
+_data = [Vector2(0, 0.945055), 0.0, 0.0, 0, 0, Vector2(0.947368, 0.263736), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ql586"]
+curve = SubResource("Curve_pbpe0")
+
+[sub_resource type="Curve" id="Curve_5als3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.993421, 0.32967), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_25qcn"]
+curve = SubResource("Curve_5als3")
+
+[resource]
+particle_flag_disable_z = true
+angle_min = -168.5
+angle_max = 46.0
+angular_velocity_min = -214.47
+angular_velocity_max = 107.23
+orbit_velocity_min = -0.787
+orbit_velocity_max = 0.426
+radial_velocity_min = -234.04
+radial_velocity_max = 85.11
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -13.83
+radial_accel_max = 26.6
+tangential_accel_min = -23.4
+tangential_accel_max = 21.28
+damping_max = 20.213
+scale_min = 0.1
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_25qcn")
+color = Color(1.1792e-05, 0.173766, 0.494084, 1)
+alpha_curve = SubResource("CurveTexture_ql586")

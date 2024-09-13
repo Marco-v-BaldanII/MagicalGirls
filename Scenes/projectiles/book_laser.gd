@@ -21,6 +21,8 @@ func _ready() -> void:
 
 var stage : int = 1
 
+const BOOK_LASER_BIG = preload("res://Scenes/projectiles/book_laser_big.tres")
+const BOOK_LASER_MEDIUM = preload("res://Scenes/projectiles/book_laser_medium.tres")
 func charge(position : Vector2):
 	#GDSync.call_func(charge,[position])
 	hide()
@@ -33,6 +35,8 @@ func charge(position : Vector2):
 			dmg *= 2
 			speed -= 300
 			scale += Vector2(0.5,0.5)
+			if stage == 2:$GPUParticles2D.process_material = BOOK_LASER_MEDIUM
+			else: $GPUParticles2D.process_material = BOOK_LASER_BIG
 		
 		#dmg += power_multiply
 		#scale += Vector2(0.005,0.005)

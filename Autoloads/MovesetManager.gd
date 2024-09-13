@@ -12,11 +12,11 @@ var Ritsu : Dictionary = {
 	"triple_shot_right" : hadoken_input_r,
 	"triple_shot_right_lag" : 40,
 	"triple_shot_right_startup" : 5,
-	"triple_shot_right_cost" : 300,
+	"triple_shot_right_cost" : 0,
 	"triple_shot_left" : hadoken_input_l,
 	"triple_shot_left_lag" : 40,
 	"triple_shot_left_startup" : 5,
-	"triple_shot_left_cost" : 300,
+	"triple_shot_left_cost" : 200,
 	
 	"fire_shot_right" : fire_shot_r,
 	"fire_shot_left" : fire_shot_l,
