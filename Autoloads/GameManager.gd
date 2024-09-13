@@ -113,8 +113,9 @@ func match_results(winner_id : int):
 		elif character_selection_mode ==  1: #online
 			back_to_character_selection(); GDSync.call_func(back_to_character_selection)
 		elif character_selection_mode == 3 : #Arcade
+			
 			arcade_index += 1
-			if FileAccess.file_exists("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn"):
+			if true:
 				
 				p2 = load("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn")
 				SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))
@@ -141,8 +142,27 @@ func back_to_character_selection():
 
 	SceneWrapper.change_scene(load( "res://Scenes/menu_scenes/CharacterSelectionScreen.tscn"))
 
+
+signal finish_cutscene
+
 func load_arcade_battle():
-	if FileAccess.file_exists("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn"):
+	MenuMusic.stop()
+	
+	if arcade_index == 0:
+		
+		SceneWrapper.change_scene(load("res://Cutscenes/Intro.tscn" ))
+		await finish_cutscene
+		
+		SceneWrapper.change_scene(load("res://Cutscenes/" + arcade_route.my_name+ ".tscn" ))
+		await finish_cutscene
+	
+	if arcade_index == 2:
+		SceneWrapper.change_scene(load("res://Cutscenes/Ending.tscn"))
+		await finish_cutscene
+	
+	if true:
+				
+				
 				
 				p2 = load("res://Scenes/Entities/CPU/" + arcade_route.oponents[arcade_index] + "_AI.tscn")
 				SceneWrapper.change_scene(load("res://Scenes/Stages/test_map2_deprecated.tscn"))

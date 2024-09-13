@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_p0u5r")
 oponents = Array[String](["Anastasia", "Ritsu", "Ellie"])
+my_name = "Ellie Quinn"

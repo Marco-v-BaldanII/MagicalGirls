@@ -46,7 +46,7 @@ move_dmg = {
 }
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 4
+frame = 5
 
 [node name="GPUParticles2D" parent="Sprite2D" index="0"]
 modulate = Color(1, 1, 1, 0.368627)
