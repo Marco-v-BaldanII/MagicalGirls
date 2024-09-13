@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://c8rwlilk5x1kw" path="res://Assets/SFX/UI/life bar contour(1) REAL.png" id="15_mefry"]
 [ext_resource type="Texture2D" uid="uid://c61vcdee5msr5" path="res://Assets/SFX/UI/life bar(1) REAL.png" id="16_pewso"]
 [ext_resource type="Texture2D" uid="uid://cr52rj3wjkwf2" path="res://Assets/UI/char portrait.png" id="17_vkb5o"]
-[ext_resource type="Texture2D" uid="uid://bj4qnxpq1namf" path="res://Assets/UI/ritsu portrait.png" id="18_eca01"]
+[ext_resource type="Texture2D" uid="uid://dabpluqqm3tfa" path="res://Assets/UI/anastasia portrait(1).png" id="18_7svcc"]
 [ext_resource type="Texture2D" uid="uid://cmdcqnhnrg701" path="res://Assets/UI/Menus/active_round.png" id="19_p5ch7"]
 [ext_resource type="Texture2D" uid="uid://c1xosg6um4l7k" path="res://Assets/UI/Menus/inactive_round.png" id="20_x4io8"]
 [ext_resource type="AudioStream" uid="uid://cadi7wx13ei3l" path="res://Assets/SFX/placeholder.wav" id="22_ladtl"]
@@ -31,7 +31,7 @@ particles_anim_h_frames = 12
 particles_anim_v_frames = 13
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6otm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixdjl"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -39,9 +39,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.242857
+shader_parameter/tex_anim_offset = 0.271429
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqdob"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uy0cu"]
 shader = ExtResource("3_brlms")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -49,7 +49,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.242857
+shader_parameter/tex_anim_offset = 0.271429
 
 [sub_resource type="Animation" id="Animation_akhy2"]
 resource_name = "2knife_attack"
@@ -1338,7 +1338,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_cmqs0")
 hframes = 5
 vframes = 14
-frame = 17
+frame = 19
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
@@ -1346,7 +1346,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_h6otm")
+process_material = SubResource("ShaderMaterial_ixdjl")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1358,7 +1358,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_taivp")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_tqdob")
+process_material = SubResource("ShaderMaterial_uy0cu")
 texture = ExtResource("2_cmqs0")
 lifetime = 0.35
 script = ExtResource("4_nib11")
@@ -1497,10 +1497,13 @@ value = 100.0
 texture_under = ExtResource("14_nuwy4")
 texture_over = ExtResource("15_mefry")
 texture_progress = ExtResource("16_pewso")
+tint_under = Color(0.419608, 0.392157, 0.364706, 1)
+tint_progress = Color(0.662745, 0.0509804, 0.137255, 1)
 script = ExtResource("13_5f0g3")
 player = NodePath("../../..")
 
 [node name="portrait" type="TextureRect" parent="CanvasLayer/UI/hpBar_"]
+self_modulate = Color(1, 0.458824, 0.364706, 1)
 layout_mode = 0
 offset_left = -345.0
 offset_top = -18.75
@@ -1513,11 +1516,13 @@ z_index = 1
 layout_mode = 0
 offset_left = 45.0
 offset_top = -13.0
-offset_right = 295.0
-offset_bottom = 295.0
-texture = ExtResource("18_eca01")
+offset_right = 557.0
+offset_bottom = 619.0
+scale = Vector2(0.513691, 0.513691)
+texture = ExtResource("18_7svcc")
 
 [node name="TextureRect3" type="TextureRect" parent="CanvasLayer/UI/hpBar_/portrait"]
+self_modulate = Color(0.662745, 0.0509804, 0.137255, 1)
 layout_mode = 0
 offset_left = 211.25
 offset_top = 245.0
@@ -1538,6 +1543,7 @@ scale = Vector2(1.30662, 1.30662)
 texture = ExtResource("20_x4io8")
 
 [node name="TextureRect4" type="TextureRect" parent="CanvasLayer/UI/hpBar_/portrait"]
+self_modulate = Color(0.662745, 0.0509804, 0.137255, 1)
 layout_mode = 0
 offset_left = 272.5
 offset_top = 186.25

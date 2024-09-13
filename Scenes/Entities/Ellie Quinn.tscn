@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://doexbpq4lt4f1"]
+[gd_scene load_steps=129 format=3 uid="uid://doexbpq4lt4f1"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
 [ext_resource type="Texture2D" uid="uid://c2e7agx5nkwdr" path="res://Assets/characters/Ellie/spritesheetlaeli.png" id="2_ca8wd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_xjk2c"]
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_4mixf"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_r3xtr"]
+[ext_resource type="AudioStream" uid="uid://dnig4g1mjct5b" path="res://Assets/SFX/395442__plasterbrain__danny-phantom-transform_1_.wav" id="4_re4a2"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_ivl1b"]
 [ext_resource type="Texture2D" uid="uid://bri4438gvie1f" path="res://addons/controller_icons/assets/ps5/circle.png" id="5_n6k3v"]
 [ext_resource type="Script" path="res://Scenes/Entities/shadow.gd" id="6_7ggrh"]
@@ -33,7 +34,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8t1l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdn3n"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -41,9 +42,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0231481
+shader_parameter/tex_anim_offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_guggh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ffhbm"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -51,7 +52,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0231481
+shader_parameter/tex_anim_offset = 0.0
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1490,6 +1491,20 @@ height = 376.0
 [node name="Ellie Quinn" type="CharacterBody2D"]
 process_mode = 1
 script = ExtResource("1_r7jln")
+sfx = {
+"block": ExtResource("22_11jdn"),
+"crouch": false,
+"hit": ExtResource("23_t2qer"),
+"jump": ExtResource("22_11jdn"),
+"l_trigger": ExtResource("4_re4a2"),
+"move_left": false,
+"move_right": false,
+"r_trigger": ExtResource("4_re4a2"),
+"s_kick": ExtResource("24_4kwnx"),
+"s_punch": ExtResource("24_4kwnx"),
+"w_kick": ExtResource("24_4kwnx"),
+"w_punch": ExtResource("24_4kwnx")
+}
 character_name = "Ellie Quinn"
 move_dmg = {
 "air_s_kick": 14,
@@ -1514,14 +1529,13 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_ca8wd")
 hframes = 18
 vframes = 12
-frame = 6
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_a8t1l")
+process_material = SubResource("ShaderMaterial_qdn3n")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
@@ -1533,7 +1547,7 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_guggh")
+process_material = SubResource("ShaderMaterial_ffhbm")
 texture = ExtResource("2_ca8wd")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
