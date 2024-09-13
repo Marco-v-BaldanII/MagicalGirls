@@ -1,13 +1,17 @@
-[gd_scene load_steps=137 format=3 uid="uid://1v0odfkmjeau"]
+[gd_scene load_steps=141 format=3 uid="uid://1v0odfkmjeau"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Anastasia.gd" id="1_0vdnb"]
 [ext_resource type="Texture2D" uid="uid://baapnxmo10vel" path="res://Assets/characters/Anastasia/Anastasiafinalsheet.png" id="2_kk8ba"]
+[ext_resource type="AudioStream" uid="uid://d12sb5gsjtjoo" path="res://Scenes/Entities/AnastasiaJump.wav" id="2_r8i0j"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_brlms"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_dfxhb"]
+[ext_resource type="AudioStream" uid="uid://sfcmnlagd4o1" path="res://Scenes/Entities/AnastasiaNormalAttack.wav" id="3_pn41f"]
 [ext_resource type="Script" path="res://states/knocked_state.gd" id="4_5k66o"]
+[ext_resource type="AudioStream" uid="uid://csw4jksnhic8v" path="res://Scenes/Entities/AnastasiaSpecialAttack.wav" id="4_kog4b"]
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_nib11"]
 [ext_resource type="Script" path="res://states/ground_move_state.gd" id="5_o26tm"]
 [ext_resource type="Script" path="res://states/air_move_state.gd" id="6_tdwux"]
+[ext_resource type="AudioStream" uid="uid://p7hfc8o1uajf" path="res://Scenes/Entities/AnastasiaDamage.wav" id="6_ua1ul"]
 [ext_resource type="Script" path="res://states/crouch_state.gd" id="7_ubm5j"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="9_2s2cp"]
 [ext_resource type="Script" path="res://Scenes/menu_scenes/player_ui.gd" id="10_1o28e"]
@@ -27,8 +31,8 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_taivp"]
 particles_animation = true
-particles_anim_h_frames = 12
-particles_anim_v_frames = 13
+particles_anim_h_frames = 5
+particles_anim_v_frames = 14
 particles_anim_loop = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7g16w"]
@@ -39,7 +43,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0
+shader_parameter/tex_anim_offset = 0.357143
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1oq63"]
 shader = ExtResource("3_brlms")
@@ -49,7 +53,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0
+shader_parameter/tex_anim_offset = 0.357143
 
 [sub_resource type="Animation" id="Animation_akhy2"]
 resource_name = "2knife_attack"
@@ -1311,6 +1315,20 @@ height = 376.0
 [node name="Anastasia" type="CharacterBody2D"]
 process_mode = 1
 script = ExtResource("1_0vdnb")
+sfx = {
+"block": ExtResource("22_ladtl"),
+"crouch": false,
+"hit": ExtResource("6_ua1ul"),
+"jump": ExtResource("2_r8i0j"),
+"l_trigger": ExtResource("22_ladtl"),
+"move_left": false,
+"move_right": false,
+"r_trigger": ExtResource("22_ladtl"),
+"s_kick": ExtResource("4_kog4b"),
+"s_punch": ExtResource("4_kog4b"),
+"w_kick": ExtResource("3_pn41f"),
+"w_punch": ExtResource("3_pn41f")
+}
 fly = false
 character_name = "Anastasia"
 move_vulnerable_on_shield = {
@@ -1338,6 +1356,7 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("2_kk8ba")
 hframes = 5
 vframes = 14
+frame = 25
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 modulate = Color(1, 1, 1, 0.0901961)
