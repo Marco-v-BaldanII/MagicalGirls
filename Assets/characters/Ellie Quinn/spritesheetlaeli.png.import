@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cogoxts5j525e"
-path="res://.godot/imported/llaser.png-6daf9712e3fb5aa687a6e8f85d270b40.ctex"
+uid="uid://c2e7agx5nkwdr"
+path="res://.godot/imported/spritesheetlaeli.png-d7453ed593459d41c12792f718bb350e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/characters/Ellie/llaser.png"
-dest_files=["res://.godot/imported/llaser.png-6daf9712e3fb5aa687a6e8f85d270b40.ctex"]
+source_file="res://Assets/characters/Ellie Quinn/spritesheetlaeli.png"
+dest_files=["res://.godot/imported/spritesheetlaeli.png-d7453ed593459d41c12792f718bb350e.ctex"]
 
 [params]
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=130 format=3 uid="uid://doexbpq4lt4f1"]
+[gd_scene load_steps=129 format=3 uid="uid://doexbpq4lt4f1"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Ellie.gd" id="1_r7jln"]
-[ext_resource type="Texture2D" uid="uid://c2e7agx5nkwdr" path="res://Assets/characters/Ellie/spritesheetlaeli.png" id="2_ca8wd"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_lmxlw"]
 [ext_resource type="Shader" path="res://Scenes/Entities/ghosting.gdshader" id="3_xjk2c"]
 [ext_resource type="Script" path="res://Scenes/Entities/gpu_particles_2d.gd" id="4_4mixf"]
@@ -35,7 +34,7 @@ particles_anim_h_frames = 18
 particles_anim_v_frames = 12
 particles_anim_loop = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdn3n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_clxxb"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -43,9 +42,9 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.0
 shader_parameter/green = 0.0
 shader_parameter/blue = 0.0
-shader_parameter/tex_anim_offset = 0.0231481
+shader_parameter/tex_anim_offset = 0.00925926
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ffhbm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gtp4s"]
 shader = ExtResource("3_xjk2c")
 shader_parameter/fadeCont = true
 shader_parameter/fadeStep = 8.775
@@ -53,7 +52,7 @@ shader_parameter/scale = 1.0
 shader_parameter/red = 0.05
 shader_parameter/green = 0.2
 shader_parameter/blue = 0.2
-shader_parameter/tex_anim_offset = 0.0231481
+shader_parameter/tex_anim_offset = 0.00925926
 
 [sub_resource type="Animation" id="Animation_s4nyy"]
 step = 0.0166667
@@ -1530,15 +1529,16 @@ scale = Vector2(1.35, 1.35)
 texture = ExtResource("6_y5u0f")
 hframes = 18
 vframes = 12
-frame = 6
+frame = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+modulate = Color(1, 1, 1, 0.184)
 z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_qdn3n")
-texture = ExtResource("2_ca8wd")
+process_material = SubResource("ShaderMaterial_clxxb")
+texture = ExtResource("6_y5u0f")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
 total_frames = 216
@@ -1549,8 +1549,8 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_4ffac")
 position = Vector2(-0.740739, 0)
 amount = 4
-process_material = SubResource("ShaderMaterial_ffhbm")
-texture = ExtResource("2_ca8wd")
+process_material = SubResource("ShaderMaterial_gtp4s")
+texture = ExtResource("6_y5u0f")
 lifetime = 0.35
 script = ExtResource("4_4mixf")
 total_frames = 216

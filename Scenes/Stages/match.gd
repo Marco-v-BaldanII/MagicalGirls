@@ -49,7 +49,7 @@ func _ready():
 	
 	#color variant
 	if p1.character_name == p2.character_name:
-		p2.sprite_2d.texture = load("res://Assets/characters/" + p2.character_name + "/Animations/spritesheet_alt.png")
+		p2.sprite_2d.texture = load("res://Assets/characters/" + p2.character_name + "/spritesheet_alt.png")
 	
 	var parallax : PackedScene
 
