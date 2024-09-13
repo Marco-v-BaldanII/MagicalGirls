@@ -12,6 +12,8 @@ func _ready() -> void:
 	var winner : String = GameManager.winner_name;
 	var looser : String = GameManager.looser_name;
 	
+	$portrait.texture = load( "res://Assets/portraits/" + winner)
+	
 	if winner == "Ritsu" and looser == "Ellie Quinn":
 		label.text = "Looks like you didn't study enough for this fight !"
 	elif winner == "Ritsu" and looser == "Anastasia":
